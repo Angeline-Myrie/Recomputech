@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Navegación dinámica
+// Navegación dinámica
   const mainContent = document.getElementById('mainContent');
   const navLinks = document.querySelectorAll('.sidebar .nav-link');
   navLinks.forEach(link => {
@@ -67,6 +67,42 @@ document.addEventListener('DOMContentLoaded', function() {
   navLinks.forEach(l => l.classList.remove('active'));
   const overviewLink = document.querySelector('.sidebar .nav-link[data-section="overview"]');
   if (overviewLink) overviewLink.classList.add('active');
+
+  // Evento para abrir el modal de detalle de orden
+  document.body.addEventListener('click', function(e) {
+    if (e.target.closest('.btn-outline-primary') && e.target.closest('table')) {
+      // Obtener el ID de la orden desde la fila
+      const row = e.target.closest('tr');
+      const orderId = row ? row.querySelector('td').textContent.trim() : null;
+      const order = orders.find(o => o.id === orderId);
+      if (order) {
+        // Rellenar los campos del modal
+        document.getElementById('orderDetailId').textContent = order.id;
+        document.getElementById('orderDetailEntryDate').textContent = order.entryDate;
+        document.getElementById('orderDetailStatus').textContent = order.status;
+        document.getElementById('orderDetailPriority').textContent = order.priority;
+        document.getElementById('orderDetailClientName').textContent = order.client.name;
+        document.getElementById('orderDetailClientPhone').textContent = order.client.phone;
+        document.getElementById('orderDetailClientEmail').textContent = order.client.email;
+        document.getElementById('orderDetailClientAddress').textContent = order.client.address;
+        document.getElementById('orderDetailDeviceType').textContent = order.device.type;
+        document.getElementById('orderDetailDeviceBrand').textContent = order.device.brand;
+        document.getElementById('orderDetailDeviceSerial').textContent = order.device.serial;
+        document.getElementById('orderDetailDevicePurchase').textContent = order.device.purchase;
+        document.getElementById('orderDetailDeviceAccessories').textContent = order.device.accessories;
+        document.getElementById('orderDetailReportedProblem').value = order.reportedProblem;
+        document.getElementById('orderDetailDiagnosis').value = order.diagnosis;
+        document.getElementById('orderDetailParts').value = order.parts;
+        document.getElementById('orderDetailSolution').value = order.solution;
+        document.getElementById('orderDetailNotes').value = order.notes;
+        document.getElementById('orderDetailDeliveryDate').value = order.deliveryDate;
+        document.getElementById('orderDetailDeliveryStatus').value = order.deliveryStatus;
+        document.getElementById('orderDetailClientConfirm').value = order.clientConfirm;
+      }
+      const modal = new bootstrap.Modal(document.getElementById('orderDetailModal'));
+      modal.show();
+    }
+  });
 });
 
 // Función para cargar secciones
@@ -83,59 +119,109 @@ function loadSection(section) {
         <h2 class="mb-4"><i class="fas fa-chart-bar me-2"></i>Overview</h2>
         <div class="row g-4 mb-4">
           <div class="col-md-3">
-            <div class="card p-3 text-center">
-              <div class="fs-2 fw-bold text-primary">12</div>
-              <div class="mt-2">Total Sales</div>
+            <div class="card p-3 text-center" style="background: var(--primary-color); color: #fff;">
+              <div class="fs-2 mb-2"><i class="fas fa-wrench"></i></div>
+              <div class="summary-label">Assigned Orders</div>
+              <div class="summary-value fs-4 fw-bold">18</div>
             </div>
           </div>
           <div class="col-md-3">
-            <div class="card p-3 text-center">
-              <div class="fs-2 fw-bold text-primary">$2,400</div>
-              <div class="mt-2">Earnings</div>
+            <div class="card p-3 text-center" style="background: var(--accent-color); color: #fff;">
+              <div class="fs-2 mb-2"><i class="fas fa-sync"></i></div>
+              <div class="summary-label">Repairs in Progress</div>
+              <div class="summary-value fs-4 fw-bold">7</div>
             </div>
           </div>
           <div class="col-md-3">
-            <div class="card p-3 text-center">
-              <div class="fs-2 fw-bold text-primary">5</div>
-              <div class="mt-2">Active Products</div>
+            <div class="card p-3 text-center" style="background: var(--secondary-color); color: #fff;">
+              <div class="fs-2 mb-2"><i class="fas fa-check-circle"></i></div>
+              <div class="summary-label">Delivered Devices</div>
+              <div class="summary-value fs-4 fw-bold">22</div>
             </div>
           </div>
           <div class="col-md-3">
-            <div class="card p-3 text-center">
-              <div class="fs-2 fw-bold text-primary">HP EliteBook</div>
-              <div class="mt-2">Best Seller</div>
+            <div class="card p-3 text-center" style="background: var(--bg-light); color: var(--text-color);">
+              <div class="fs-2 mb-2"><i class="fas fa-hourglass-half"></i></div>
+              <div class="summary-label">Pending Review</div>
+              <div class="summary-value fs-4 fw-bold">3</div>
             </div>
           </div>
         </div>
         <div class="row g-4 mb-4">
-          <div class="col-12">
-            <div class="card p-4 h-100">
-              <h5 class="mb-3">Yearly Sales</h5>
-              <canvas id="salesChart" height="180"></canvas>
+          <div class="col-lg-6">
+            <div class="card p-4 h-100" style="background: var(--card-bg);">
+              <h5 class="mb-3"><i class="fas fa-chart-line me-2"></i>Repairs per Week</h5>
+              <canvas id="repairsPerWeekChart" height="180"></canvas>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="card p-4 h-100" style="background: var(--card-bg);">
+              <h5 class="mb-3"><i class="fas fa-chart-pie me-2"></i>Order Status</h5>
+              <canvas id="orderStatusChart" height="180"></canvas>
+            </div>
+          </div>
+          <div class="col-lg-3">
+            <div class="card p-4 h-100" style="background: var(--card-bg);">
+              <h5 class="mb-3"><i class="fas fa-layer-group me-2"></i>Device Types</h5>
+              <canvas id="deviceTypesChart" height="180"></canvas>
             </div>
           </div>
         </div>
-        <div class="row g-4">
-          <div class="col-lg-4">
-            <div class="card p-4 h-100">
-              <h5 class="mb-3">Recent Activity</h5>
-              <canvas id="activityChart" height="180"></canvas>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="card p-4 h-100">
-              <h5 class="mb-3">Top Viewed Products</h5>
-              <canvas id="topViewedChart" height="180"></canvas>
-            </div>
-          </div>
-          <div class="col-lg-4">
-            <div class="card p-4 h-100 mb-4">
-              <h5 class="mb-3">Top Sold Products</h5>
-              <canvas id="topSoldChart" height="180"></canvas>
-            </div>
+        <div class="card p-4 mb-4" style="background: var(--card-bg);">
+          <h5 class="mb-3"><i class="fas fa-list me-2"></i>Latest Assigned Orders</h5>
+          <div class="table-responsive">
+            <table class="table table-hover align-middle">
+              <thead>
+                <tr>
+                  <th>Order ID</th>
+                  <th>Client</th>
+                  <th>Device Type</th>
+                  <th>Status</th>
+                  <th>Entry Date</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>#1001</td>
+                  <td>John Smith</td>
+                  <td>Laptop</td>
+                  <td><span class="badge" style="background: var(--accent-color); color: #fff;">In Progress</span></td>
+                  <td>2024-06-01</td>
+                  <td><button class="btn btn-sm btn-outline-primary">View More</button></td>
+                </tr>
+                <tr>
+                  <td>#1002</td>
+                  <td>Mary Johnson</td>
+                  <td>CPU</td>
+                  <td><span class="badge" style="background: var(--secondary-color); color: #fff;">Delivered</span></td>
+                  <td>2024-05-29</td>
+                  <td><button class="btn btn-sm btn-outline-primary">View More</button></td>
+                </tr>
+                <tr>
+                  <td>#1003</td>
+                  <td>Michael Lee</td>
+                  <td>Printer</td>
+                  <td><span class="badge" style="background: var(--bg-light); color: var(--text-color);">Pending</span></td>
+                  <td>2024-05-28</td>
+                  <td><button class="btn btn-sm btn-outline-primary">View More</button></td>
+                </tr>
+                <tr>
+                  <td>#1004</td>
+                  <td>Anna Brown</td>
+                  <td>Other</td>
+                  <td><span class="badge" style="background: var(--accent-color); color: #fff;">In Progress</span></td>
+                  <td>2024-05-27</td>
+                  <td><button class="btn btn-sm btn-outline-primary">View More</button></td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
       `;
+      setTimeout(() => {
+        waitForCanvasesAndRenderCharts();
+      }, 50);
       break;
     case 'profile':
       mainContent.innerHTML = `
@@ -279,7 +365,7 @@ function loadSection(section) {
       break;
     case 'sales':
       mainContent.innerHTML = `
-        <h2 class="mb-4"><i class="fas fa-shopping-cart me-2"></i>My Sales</h2>
+        <h2 class="mb-4"><i class="fas fa-shopping-cart me-2"></i>My Services</h2>
         <div class="card p-3">
           <div class="table-responsive">
             <table class="table table-hover align-middle">
@@ -478,4 +564,95 @@ function renderTopSoldChart() {
       animation: { duration: 1200, easing: 'easeOutQuart' }
     }
   });
+} 
+
+// Nueva gráfica: Reparaciones por semana
+function renderRepairsPerWeekChart() {
+  const ctx = document.getElementById('repairsPerWeekChart');
+  if (!ctx) return;
+  const primary = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim() || '#218da6';
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5'],
+      datasets: [{
+        label: 'Repairs',
+        data: [5, 8, 6, 10, 7],
+        backgroundColor: primary,
+        borderRadius: 8
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      animation: { duration: 1200, easing: 'easeOutQuart' },
+      scales: { x: { grid: { display: false } }, y: { grid: { color: 'rgba(75,107,138,0.08)' } } }
+    }
+  });
+}
+
+// Nueva gráfica: Estados de órdenes
+function renderOrderStatusChart() {
+  const ctx = document.getElementById('orderStatusChart');
+  if (!ctx) return;
+  const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim() || '#3b82f6';
+  const secondary = getComputedStyle(document.documentElement).getPropertyValue('--secondary-color').trim() || '#1e40af';
+  const bgLight = getComputedStyle(document.documentElement).getPropertyValue('--bg-light').trim() || '#f3f4f6';
+  new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ['In Progress', 'Completed', 'Pending'],
+      datasets: [{
+        label: 'Order Status',
+        data: [40, 45, 15],
+        backgroundColor: [accent, secondary, bgLight]
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom' } },
+      animation: { duration: 1200, easing: 'easeOutQuart' }
+    }
+  });
+}
+
+// Nueva gráfica: Tipos de equipos reparados
+function renderDeviceTypesChart() {
+  const ctx = document.getElementById('deviceTypesChart');
+  if (!ctx) return;
+  const primary = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim() || '#218da6';
+  const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent-color').trim() || '#3b82f6';
+  const secondary = getComputedStyle(document.documentElement).getPropertyValue('--secondary-color').trim() || '#1e40af';
+  const text = getComputedStyle(document.documentElement).getPropertyValue('--text-color').trim() || '#1f2937';
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Laptops', 'CPUs', 'Printers', 'Others'],
+      datasets: [{
+        label: 'Device Types',
+        data: [40, 25, 20, 15],
+        backgroundColor: [primary, accent, secondary, text]
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      animation: { duration: 1200, easing: 'easeOutQuart' },
+      scales: { x: { grid: { display: false } }, y: { grid: { color: 'rgba(75,107,138,0.08)' } } }
+    }
+  });
+} 
+
+// Espera a que los canvas existan y luego renderiza las gráficas
+function waitForCanvasesAndRenderCharts(attempt = 0) {
+  const repairs = document.getElementById('repairsPerWeekChart');
+  const status = document.getElementById('orderStatusChart');
+  const types = document.getElementById('deviceTypesChart');
+  if (repairs && status && types) {
+    renderRepairsPerWeekChart();
+    renderOrderStatusChart();
+    renderDeviceTypesChart();
+  } else if (attempt < 10) {
+    setTimeout(() => waitForCanvasesAndRenderCharts(attempt + 1), 100);
+  }
 } 

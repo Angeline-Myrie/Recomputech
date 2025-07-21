@@ -131,8 +131,10 @@ body.dark-mode .form-control:focus {
 .header {
   background: var(--sidebar);
   color: var(--text);
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
   z-index: 1050;
   display: flex;
   align-items: center;
@@ -217,12 +219,13 @@ body.dark-mode .form-control:focus {
 .main-content {
   margin-left: 240px;
   padding: 2rem 2rem 0 2rem;
+  padding-top: 90px; /* Espacio para el header fijo */
   transition: margin-left 0.3s;
   min-height: 90vh;
 }
 /* Sidebar colapsado: solo íconos visibles */
 .sidebar.collapsed {
-  width: 60px; /* o el ancho que prefieras para solo íconos */
+  width: 50px; /* o el ancho que prefieras para solo íconos */
   transition: width 0.3s;
 }
 .sidebar.collapsed .sidebar-text {
@@ -326,7 +329,7 @@ body.dark-mode .form-control:focus {
 }
 
 .sidebar.collapsed .nav-link i {
-  font-size: 2rem; /* Íconos aún más grandes en colapsado */
+  font-size: 1.3rem; /* Íconos más pequeños en colapsado */
 }
 
 .sidebar .nav-link.active,
