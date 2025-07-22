@@ -98,12 +98,41 @@ function loadSection(section) {
             </div>
           </div>
         </div>
-        <div class="card p-4">
-          <h5 class="mb-3">Ventas del año</h5>
-          <canvas id="salesChart" height="80"></canvas>
+        <div class="row g-4 mb-4">
+          <div class="col-12">
+            <div class="card p-4 h-100">
+              <h5 class="mb-3">Ventas del año</h5>
+              <canvas id="salesChart" height="180"></canvas>
+            </div>
+          </div>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="card p-4 h-100">
+              <h5 class="mb-3">Actividad reciente</h5>
+              <canvas id="activityChart" height="180"></canvas>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card p-4 h-100">
+              <h5 class="mb-3">Top productos más vistos</h5>
+              <canvas id="topViewedChart" height="180"></canvas>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card p-4 h-100 mb-4">
+              <h5 class="mb-3">Productos más vendidos</h5>
+              <canvas id="topSoldChart" height="180"></canvas>
+            </div>
+          </div>
         </div>
       `;
-      setTimeout(renderChart, 100); // Espera a que el canvas esté en el DOM
+      setTimeout(() => {
+        renderChart();
+        renderActivityChart();
+        renderTopViewedChart();
+        renderTopSoldChart();
+      }, 100);
       break;
     case 'profile':
       mainContent.innerHTML = `
@@ -340,12 +369,12 @@ function renderChart() {
       datasets: [{
         label: 'Ventas',
         data: [2, 3, 4, 5, 6, 7, 8, 9],
-        borderColor: '#3b82f6',
-        backgroundColor: 'rgba(59,130,246,0.1)',
+        borderColor: '#4b6b8a',
+        backgroundColor: 'rgba(94,198,230,0.15)',
         tension: 0.4,
         fill: true,
         pointRadius: 4,
-        pointBackgroundColor: '#3b82f6'
+        pointBackgroundColor: '#3b8bbd'
       }]
     },
     options: {
@@ -358,9 +387,92 @@ function renderChart() {
         easing: 'easeOutQuart'
       },
       scales: {
-        x: { grid: { color: 'rgba(59,130,246,0.1)' } },
-        y: { grid: { color: 'rgba(59,130,246,0.1)' } }
+        x: { grid: { color: 'rgba(75,107,138,0.08)' } },
+        y: { grid: { color: 'rgba(75,107,138,0.08)' } }
       }
+    }
+  });
+} 
+
+// Agregar funciones para las nuevas gráficas
+function renderActivityChart() {
+  const ctx = document.getElementById('activityChart');
+  if (!ctx) return;
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: ['Login', 'Publicación', 'Venta', 'Comentario', 'Logout'],
+      datasets: [{
+        label: 'Actividades',
+        data: [12, 7, 5, 9, 3],
+        backgroundColor: [
+          '#4b6b8a',
+          '#3b8bbd',
+          '#5ec6e6',
+          '#7ff6fa',
+          '#5a6b99'
+        ],
+        borderRadius: 8
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      animation: { duration: 1200, easing: 'easeOutQuart' },
+      scales: { x: { grid: { display: false } }, y: { grid: { color: 'rgba(75,107,138,0.08)' } } }
+    }
+  });
+}
+function renderTopViewedChart() {
+  const ctx = document.getElementById('topViewedChart');
+  if (!ctx) return;
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Laptop HP', 'iPad Pro', 'Mouse Logitech', 'Monitor LG', 'Otro'],
+      datasets: [{
+        label: 'Vistas',
+        data: [120, 90, 70, 50, 30],
+        backgroundColor: [
+          '#4b6b8a',
+          '#3b8bbd',
+          '#5ec6e6',
+          '#7ff6fa',
+          '#5a6b99'
+        ]
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom' } },
+      cutout: '70%',
+      animation: { duration: 1200, easing: 'easeOutQuart' }
+    }
+  });
+}
+function renderTopSoldChart() {
+  const ctx = document.getElementById('topSoldChart');
+  if (!ctx) return;
+  new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ['HP EliteBook', 'iPad Pro', 'Mouse Logitech', 'Monitor LG', 'Otro'],
+      datasets: [{
+        label: 'Ventas',
+        data: [8, 5, 3, 2, 1],
+        backgroundColor: [
+          '#4b6b8a',
+          '#3b8bbd',
+          '#5ec6e6',
+          '#7ff6fa',
+          '#5a6b99'
+        ]
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'bottom' } },
+      animation: { duration: 1200, easing: 'easeOutQuart' }
     }
   });
 } 

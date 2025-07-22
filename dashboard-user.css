@@ -11,6 +11,19 @@ body {
   --text: #fff;
   --card: #232b39;
   --footer: #232b39;
+  --primary-color: #218da6;
+  --secondary-color: #1e40af;
+  --accent-color: #3b82f6;
+  --text-color: #1f2937;
+  --text-light: #4b5563;
+  --bg-color: #ffffff;
+  --bg-light: #f3f4f6;
+  --card-bg: #ffffff;
+  --footer-bg: #111827;
+  --border-color: #e5e7eb;
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
 }
 body.light-mode {
   --bg: #f4f6fa;
@@ -19,6 +32,101 @@ body.light-mode {
   --text: #232b39;
   --card: #fff;
   --footer: #e9ecef;
+}
+body.dark-mode, [data-theme="dark"] {
+  --primary-color: #218da6;
+  --secondary-color: #1e40af;
+  --accent-color: #3b8bbd;
+  --text-color: #f3f4f6;
+  --text-light: #d1d5db;
+  --bg-color: #181c24;
+  --bg-light: #232b39;
+  --card-bg: #232b39;
+  --footer-bg: #111827;
+  --border-color: #374151;
+}
+
+body.dark-mode, [data-theme="dark"] {
+  background: var(--bg-color) !important;
+  color: var(--text-color) !important;
+}
+
+body.dark-mode .card,
+body.dark-mode .summary-card,
+body.dark-mode .profile-modern,
+body.dark-mode .service-card,
+body.dark-mode .stat-card {
+  background: var(--card-bg) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+
+body.dark-mode .sidebar,
+body.dark-mode .sidebar.collapsed {
+  background: var(--bg-light) !important;
+  color: var(--text-color) !important;
+}
+
+body.dark-mode .sidebar .nav-link,
+body.dark-mode .sidebar .nav-link.active,
+body.dark-mode .sidebar .nav-link[data-section="overview"] {
+  color: var(--text-color) !important;
+  background: transparent !important;
+}
+body.dark-mode .sidebar .nav-link.active,
+body.dark-mode .sidebar .nav-link[data-section="overview"] {
+  background: rgba(33, 141, 166, 0.12) !important;
+  color: var(--primary-color) !important;
+}
+
+body.dark-mode .btn,
+body.dark-mode .btn-primary,
+body.dark-mode .btn-outline-primary {
+  background: var(--primary-color) !important;
+  color: #fff !important;
+  border-color: var(--primary-color) !important;
+}
+body.dark-mode .btn-outline-primary {
+  background: transparent !important;
+  color: var(--primary-color) !important;
+}
+body.dark-mode .btn-outline-primary:hover {
+  background: var(--primary-color) !important;
+  color: #fff !important;
+}
+
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select {
+  background: var(--bg-light) !important;
+  color: var(--text-color) !important;
+  border-color: var(--border-color) !important;
+}
+body.dark-mode input::placeholder,
+body.dark-mode textarea::placeholder {
+  color: var(--text-light) !important;
+  opacity: 1;
+}
+
+body.dark-mode .footer {
+  background: var(--footer-bg) !important;
+  color: var(--text-color) !important;
+}
+body.dark-mode .footer a {
+  color: var(--primary-color) !important;
+}
+
+body.dark-mode .profile-photo {
+  border-color: var(--primary-color) !important;
+}
+
+body.dark-mode .form-check-label {
+  color: var(--text-color) !important;
+}
+
+body.dark-mode .form-control:focus {
+  border-color: var(--primary-color) !important;
+  box-shadow: 0 0 0 2px #218da666;
 }
 .header {
   background: var(--sidebar);
@@ -289,4 +397,77 @@ body.light-mode {
     width: 100px;
     height: 100px;
   }
+}
+
+/* Botones y enlaces activos */
+.btn-primary, .sidebar .nav-link.active, .sidebar .nav-link[data-section="overview"] {
+  background-color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+  color: #fff !important;
+}
+.btn-primary:hover, .sidebar .nav-link.active:hover, .sidebar .nav-link[data-section="overview"]:hover {
+  background-color: var(--secondary-color) !important;
+  border-color: var(--secondary-color) !important;
+}
+.btn-outline-primary {
+  color: var(--primary-color) !important;
+  border-color: var(--primary-color) !important;
+}
+.btn-outline-primary:hover {
+  background-color: var(--primary-color) !important;
+  color: #fff !important;
+}
+
+/* Tarjetas y animaciones */
+.card, .summary-card, .profile-modern, .service-card, .stat-card {
+  border-radius: 16px;
+  box-shadow: var(--shadow-md);
+  background: var(--card-bg);
+  transition: box-shadow 0.3s, transform 0.3s;
+  animation: fadeIn 0.7s ease;
+}
+.card:hover, .summary-card:hover, .service-card:hover, .stat-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-6px) scale(1.03);
+}
+
+/* Iconos principales */
+.sidebar .nav-link i, .summary-card i, .stat-icon, .profile-photo {
+  color: var(--primary-color) !important;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in { animation: fadeIn 0.7s ease; }
+
+body.dark-mode h1,
+body.dark-mode h2,
+body.dark-mode h3,
+body.dark-mode h4,
+body.dark-mode h5,
+body.dark-mode h6,
+body.dark-mode .card-title,
+body.dark-mode .summary-label,
+body.dark-mode .summary-value {
+  color: var(--text-color) !important;
+}
+
+body.dark-mode .card-title,
+body.dark-mode .summary-label {
+  font-weight: 600;
+}
+
+body.dark-mode .summary-value {
+  color: var(--primary-color) !important;
+}
+
+body.dark-mode .chartjs-render-monitor,
+body.dark-mode .chart-legend,
+body.dark-mode .chartjs-legend,
+body.dark-mode .legend,
+body.dark-mode .chart-legend-label {
+  color: var(--text-color) !important;
 }
