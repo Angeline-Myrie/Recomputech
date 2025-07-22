@@ -140,35 +140,6 @@
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
 }
 
-.aboutus-mission-icon,
-.aboutus-vision-icon {
-    width: 80px;
-    height: 80px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 2rem;
-    font-size: 2rem;
-    color: white;
-    transition: all 0.3s ease;
-}
-
-.aboutus-mission-icon {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    box-shadow: 0 8px 25px rgba(33, 145, 166, 0.3);
-}
-
-.aboutus-vision-icon {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-}
-
-.aboutus-mission-card:hover .aboutus-mission-icon,
-.aboutus-vision-card:hover .aboutus-vision-icon {
-    transform: scale(1.1) rotate(5deg);
-}
-
 .aboutus-mission-title,
 .aboutus-vision-title {
     font-size: 2rem;
@@ -222,13 +193,6 @@
         padding: 2rem;
     }
     
-    .aboutus-mission-icon,
-    .aboutus-vision-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 1.5rem;
-    }
-    
     .aboutus-mission-title,
     .aboutus-vision-title {
         font-size: 1.5rem;
@@ -277,13 +241,6 @@
     .aboutus-mission-card,
     .aboutus-vision-card {
         padding: 1.5rem;
-    }
-    
-    .aboutus-mission-icon,
-    .aboutus-vision-icon {
-        width: 50px;
-        height: 50px;
-        font-size: 1.25rem;
     }
     
     .aboutus-mission-title,
