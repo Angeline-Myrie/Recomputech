@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cart Demo - Recomputech</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f8fafc;
+            margin: 0;
+            padding: 0;
+        }
+
+        .demo-content {
+            margin-top: 100px;
+            padding: 2rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .demo-section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .demo-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1rem;
+        }
+
+        .demo-subtitle {
+            color: #64748b;
+            margin-bottom: 2rem;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border: 1px solid #e5e7eb;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+        }
+
+        .product-image {
+            height: 200px;
+            background: linear-gradient(135deg, #218DA6, #1b6e82);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-title {
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+        }
+
+        .product-description {
+            color: #64748b;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .product-price {
+            color: #218DA6;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart-btn {
+            background: linear-gradient(135deg, #16a34a, #15803d);
+            color: white;
+            border: none;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .add-to-cart-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(22, 163, 74, 0.3);
+        }
+
+        .test-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .test-btn {
+            background: linear-gradient(135deg, #218DA6, #1b6e82);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .test-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 141, 166, 0.3);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <!-- Dynamic Header based on authentication status -->
+    <div id="headerContainer">
+        <!-- Header will be loaded dynamically -->
+    </div>
+    
+    <!-- Demo Content -->
+    <div class="demo-content">
+        <div class="demo-section" data-aos="fade-up">
+            <h1 class="demo-title">Carrito de Compras Demo</h1>
+            <p class="demo-subtitle">
+                Prueba la funcionalidad del carrito de compras. Haz clic en "Agregar al Carrito" para ver los productos en la sidebar.
+            </p>
+            
+            <div class="test-buttons">
+                <button class="test-btn" onclick="testCart()">
+                    <i class="fas fa-shopping-cart"></i>
+                    Abrir Carrito
+                </button>
+                <button class="test-btn" onclick="clearCart()">
+                    <i class="fas fa-trash"></i>
+                    Limpiar Carrito
+                </button>
+                <button class="test-btn" onclick="addSampleItems()">
+                    <i class="fas fa-plus"></i>
+                    Agregar Productos de Prueba
+                </button>
+            </div>
+        </div>
+
+        <div class="demo-section" data-aos="fade-up">
+            <h2 class="demo-title">Productos de Ejemplo</h2>
+            <p class="demo-subtitle">
+                Haz clic en "Agregar al Carrito" para probar la funcionalidad
+            </p>
+            
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">DELL OptiPlex 3070</h3>
+                        <p class="product-description">PC de escritorio reacondicionado con procesador Intel i5, 8GB RAM, 256GB SSD</p>
+                        <div class="product-price">B/. 239.99</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('dell-3070', 'DELL OptiPlex 3070', 239.99, '/assets/images/pcs refurbished/DELL 3070.png')">
+                            <i class="fas fa-shopping-cart"></i>
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Galaxy S21 5G</h3>
+                        <p class="product-description">Smartphone Samsung con 5G, cámara profesional de 64MP, 128GB de almacenamiento</p>
+                        <div class="product-price">B/. 399.99</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('galaxy-s21', 'Galaxy S21 5G', 399.99, '/assets/images/smartphones refurbished/Galaxy S21 5G 128GB - Gray.png')">
+                            <i class="fas fa-shopping-cart"></i>
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-tablet-alt"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">iPad Pro 11"</h3>
+                        <p class="product-description">Tablet profesional con Apple Pencil, Magic Keyboard, 256GB de almacenamiento</p>
+                        <div class="product-price">B/. 699.99</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('ipad-pro', 'iPad Pro 11&quot;', 699.99, '/assets/images/tablet.png')">
+                            <i class="fas fa-shopping-cart"></i>
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">HP EliteDesk 800 G3</h3>
+                        <p class="product-description">PC empresarial reacondicionado con Intel i7, 16GB RAM, 512GB SSD</p>
+                        <div class="product-price">B/. 349.99</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('hp-elitedesk', 'HP EliteDesk 800 G3', 349.99, '/assets/images/pcs refurbished/HP ELITEDESK 800 G3 MT.png')">
+                            <i class="fas fa-shopping-cart"></i>
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">iPhone 13 128GB</h3>
+                        <p class="product-description">iPhone 13 con cámara dual, 128GB de almacenamiento, color Pink</p>
+                        <div class="product-price">B/. 599.99</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('iphone-13', 'iPhone 13 128GB', 599.99, '/assets/images/smartphones refurbished/iPhone 13 128GB - Pink.png')">
+                            <i class="fas fa-shopping-cart"></i>
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Lenovo M920q Mini PC</h3>
+                        <p class="product-description">Mini PC compacto con Intel i5, 8GB RAM, 256GB SSD, ideal para oficina</p>
+                        <div class="product-price">B/. 199.99</div>
+                        <button class="add-to-cart-btn" onclick="addToCart('lenovo-m920q', 'Lenovo M920q Mini PC', 199.99, '/assets/images/pcs refurbished/Lenovo M920q Mini PC.png')">
+                            <i class="fas fa-shopping-cart"></i>
+                            Agregar al Carrito
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Web Components -->
+    <script src="components/header-component.js"></script>
+    <script src="components/header-auth-component.js"></script>
+    
+    <!-- Header Manager -->
+    <script src="js/header-manager.js"></script>
+    
+    <!-- Demo Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize AOS
+            AOS.init({
+                duration: 800,
+                easing: 'ease-in-out',
+                once: true
+            });
+            
+            console.log('Cart Demo initialized');
+        });
+
+        function addToCart(id, name, price, image) {
+            const header = document.querySelector('recomputech-header') || document.querySelector('recomputech-header-auth');
+            if (header) {
+                const product = {
+                    id: id,
+                    name: name,
+                    price: price,
+                    image: image
+                };
+                
+                header.addToCart(product);
+                
+                // Open cart after a short delay
+                setTimeout(() => {
+                    if (window.innerWidth <= 767) {
+                        header.openMobileCart();
+                    } else {
+                        header.openCart();
+                    }
+                }, 500);
+            }
+        }
+
+        function testCart() {
+            const header = document.querySelector('recomputech-header') || document.querySelector('recomputech-header-auth');
+            if (header) {
+                if (window.innerWidth <= 767) {
+                    header.openMobileCart();
+                } else {
+                    header.openCart();
+                }
+            }
+        }
+
+        function clearCart() {
+            const header = document.querySelector('recomputech-header') || document.querySelector('recomputech-header-auth');
+            if (header) {
+                header.cartItems = [];
+                header.updateCartBadge();
+                header.saveCartToStorage();
+                header.renderCartItems();
+                header.renderMobileCartItems();
+                header.showNotification('Cart cleared', 'success');
+            }
+        }
+
+        function addSampleItems() {
+            const sampleProducts = [
+                {
+                    id: 'sample-1',
+                    name: 'DELL OptiPlex 3070',
+                    price: 239.99,
+                    image: '/assets/images/pcs refurbished/DELL 3070.png'
+                },
+                {
+                    id: 'sample-2',
+                    name: 'Galaxy S21 5G',
+                    price: 399.99,
+                    image: '/assets/images/smartphones refurbished/Galaxy S21 5G 128GB - Gray.png'
+                },
+                {
+                    id: 'sample-3',
+                    name: 'iPad Pro 11"',
+                    price: 699.99,
+                    image: '/assets/images/tablet.png'
+                }
+            ];
+
+            const header = document.querySelector('recomputech-header') || document.querySelector('recomputech-header-auth');
+            if (header) {
+                sampleProducts.forEach(product => {
+                    header.addToCart(product);
+                });
+                
+                header.showNotification('Sample products added to cart', 'success');
+            }
+        }
+    </script>
+</body>
+</html> 

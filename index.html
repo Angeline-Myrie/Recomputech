@@ -15,19 +15,19 @@
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="login.css">
-    <link rel="stylesheet" href="register.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/homepage.css">
 </head>
 <body class="light-mode">
-    <!-- Header Component cc-->
+    <!-- Header Component -->
     <link rel="stylesheet" href="styles.css" >
-    <link rel="stylesheet" href="stylesHeader.css">
-    <link rel="stylesheet" href="styleFooter.css">
 </head>
 <body class="light-mode">
 
-    <div id="header-component"></div>
+    <!-- Dynamic Header based on authentication status -->
+    <div id="headerContainer">
+        <!-- Header will be loaded dynamically -->
+    </div>
     <!-- Nop, I´m a toast" -->
     <!-- Hero Section -->
 
@@ -119,49 +119,170 @@
                 <p class="section-subtitle">Refurbished products with warranty and quality certification</p>
             </div>
             
-            <div class="products-filter mb-5" data-aos="fade-up">
-                <div class="filter-categories d-flex flex-wrap flex-md-nowrap gap-2 overflow-auto pb-2 justify-content-center" style="scrollbar-width: thin;">
-                    <button class="btn btn-outline-primary active" data-filter="all">
-                        <i class="fas fa-border-all"></i> All
-                    </button>
-                    <button class="btn btn-outline-primary" data-filter="laptops">
-                        <i class="fas fa-laptop"></i> Laptops
-                    </button>
-                    <button class="btn btn-outline-primary" data-filter="desktops">
-                        <i class="fas fa-desktop"></i> PCs
-                    </button>
-                    <button class="btn btn-outline-primary" data-filter="phones">
-                        <i class="fas fa-mobile-alt"></i> Smartphones
-                    </button>
-                    <button class="btn btn-outline-primary" data-filter="tablets">
-                        <i class="fas fa-tablet-alt"></i> Tablets
-                    </button>
-                    <button class="btn btn-outline-primary" data-filter="accessories">
-                        <i class="fas fa-headphones"></i> Accessories
-                    </button>
-                </div>
-                <div class="d-flex flex-row flex-wrap justify-content-center align-items-center gap-3 mt-3 filter-actions-bar">
-                    <div class="filter-sort">
-                        <select class="form-select">
-                            <option>Most Recent</option>
-                            <option>Lowest Price</option>
-                            <option>Highest Price</option>
-                            <option>Most Rated</option>
-                        </select>
+            <!-- Modern Search and Filter Section -->
+            <div class="search-filter-container mb-5" data-aos="fade-up">
+                <!-- Categories Filter -->
+                <div class="filters-section">
+                    <div class="categories-filter mb-4">
+                        <h6 class="filter-label">Categories</h6>
+                        <div class="categories-grid">
+                            <button class="category-btn active" data-category="all">
+                                <i class="fas fa-border-all"></i>
+                                <span>All Products</span>
+                            </button>
+                            <button class="category-btn" data-category="laptops">
+                                <i class="fas fa-laptop"></i>
+                                <span>Laptops</span>
+                            </button>
+                            <button class="category-btn" data-category="desktops">
+                                <i class="fas fa-desktop"></i>
+                                <span>Desktop PCs</span>
+                            </button>
+                            <button class="category-btn" data-category="phones">
+                                <i class="fas fa-mobile-alt"></i>
+                                <span>Smartphones</span>
+                            </button>
+                            <button class="category-btn" data-category="tablets">
+                                <i class="fas fa-tablet-alt"></i>
+                                <span>Tablets</span>
+                            </button>
+                            <button class="category-btn" data-category="accessories">
+                                <i class="fas fa-headphones"></i>
+                                <span>Accessories</span>
+                            </button>
+                        </div>
                     </div>
-                    <a href="pages/products.html" class="btn btn-primary">
-                        <i class="fas fa-arrow-right"></i> View All
-                    </a>
+                    
+                    <div class="view-all-section text-center">
+                        <a href="pages/products.html" class="btn btn-primary btn-lg filter-view-all">
+                            <i class="fas fa-arrow-right"></i>
+                            <span>View All Products</span>
+                        </a>
+                    </div>
                 </div>
             </div>
 
-            <div class="swiper product-slider" data-aos="fade-up">
-                <div id="product-cards-container" class="swiper-wrapper">
-                    <!-- Las tarjetas de productos se renderizarán aquí dinámicamente -->
+            <div class="row g-4" data-aos="fade-up">
+                <div class="col-lg-3 col-md-6">
+                    <div class="product-card" data-category="desktops">
+                        <div class="product-image">
+                            <img src="assets/images/pcs refurbished/DELL 3070.png" alt="DELL 3070" class="img-fluid">
+                            <div class="product-badge">Refurbished</div>
+                        </div>
+                        <div class="product-content">
+                            <h5 class="product-title">DELL 3070</h5>
+                            <p class="product-description">High-performance desktop computer with warranty</p>
+                            <div class="product-price">
+                                <span class="current-price">B/. 239.99</span>
+                                <span class="original-price">B/. 399.99</span>
+                            </div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>4.8</span>
+                            </div>
+                            <div class="product-actions d-flex gap-2">
+                                <a href="pages/products/product-detail.html?id=dell-3070" class="btn btn-primary flex-grow-1">View Details</a>
+                                <button class="btn btn-light" onclick="addToCart('dell-3070')" style="border: 2px solid #16a34a; background: white;">
+                                    <i class="fas fa-shopping-cart" style="color: #16a34a;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="swiper-pagination"></div>
-                <div class="swiper-button-next" id="product-next-btn"></div>
-                <div class="swiper-button-prev" id="product-prev-btn"></div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="product-card" data-category="phones">
+                        <div class="product-image">
+                            <img src="assets/images/smartphones refurbished/iPhone 13 128GB - Pink.png" alt="iPhone 13" class="img-fluid">
+                            <div class="product-badge">Refurbished</div>
+                        </div>
+                        <div class="product-content">
+                            <h5 class="product-title">iPhone 13 128GB</h5>
+                            <p class="product-description">Premium smartphone with excellent performance</p>
+                            <div class="product-price">
+                                <span class="current-price">B/. 599.99</span>
+                                <span class="original-price">B/. 899.99</span>
+                            </div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>4.9</span>
+                            </div>
+                            <div class="product-actions d-flex gap-2">
+                                <a href="pages/products/product-detail.html?id=iphone-13" class="btn btn-primary flex-grow-1">View Details</a>
+                                <button class="btn btn-light" onclick="addToCart('iphone-13')" style="border: 2px solid #16a34a; background: white;">
+                                    <i class="fas fa-shopping-cart" style="color: #16a34a;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="product-card" data-category="laptops">
+                        <div class="product-image">
+                            <img src="assets/images/laptop.avif" alt="Gaming Laptop" class="img-fluid">
+                            <div class="product-badge">Refurbished</div>
+                        </div>
+                        <div class="product-content">
+                            <h5 class="product-title">iPad Pro 11"</h5>
+                            <p class="product-description">Professional tablet with Apple M1 chip</p>
+                            <div class="product-price">
+                                <span class="current-price">B/. 699.99</span>
+                                <span class="original-price">B/. 999.99</span>
+                            </div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>4.8</span>
+                            </div>
+                            <div class="product-actions d-flex gap-2">
+                                <a href="pages/products/product-detail.html?id=ipad-pro-11" class="btn btn-primary flex-grow-1">View Details</a>
+                                <button class="btn btn-light" onclick="addToCart('ipad-pro-11')" style="border: 2px solid #16a34a; background: white;">
+                                    <i class="fas fa-shopping-cart" style="color: #16a34a;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="product-card" data-category="tablets">
+                        <div class="product-image">
+                            <img src="assets/images/tablet.png" alt="Pro Tablet" class="img-fluid">
+                            <div class="product-badge">Refurbished</div>
+                        </div>
+                        <div class="product-content">
+                            <h5 class="product-title">Galaxy S21 5G</h5>
+                            <p class="product-description">Flagship Samsung smartphone with 5G capability</p>
+                            <div class="product-price">
+                                <span class="current-price">B/. 399.99</span>
+                                <span class="original-price">B/. 699.99</span>
+                            </div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <span>4.8</span>
+                            </div>
+                            <div class="product-actions d-flex gap-2">
+                                <a href="pages/products/product-detail.html?id=galaxy-s21" class="btn btn-primary flex-grow-1">View Details</a>
+                                <button class="btn btn-light" onclick="addToCart('galaxy-s21')" style="border: 2px solid #16a34a; background: white;">
+                                    <i class="fas fa-shopping-cart" style="color: #16a34a;"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -183,32 +304,26 @@
                     <span class="section-badge mb-2">About Us</span>
                     <h2 class="section-title mb-3">Our Story</h2>
                     <p class="lead mb-4">We believe in a future where technology and sustainability go hand in hand. Our mission is to reduce the environmental impact of the tech industry while offering high-quality products at affordable prices.</p>
+                    
                     <div class="about-features-grid mb-4">
-                      <div class="about-feature-card">
-                        <div class="about-feature-icon"><i class="fas fa-shield-alt"></i></div>
-                        <div class="about-feature-desc">Guaranteed products</div>
-                      </div>
-                      <div class="about-feature-card">
-                        <div class="about-feature-icon"><i class="fas fa-tools"></i></div>
-                        <div class="about-feature-desc">Technical experts</div>
-                      </div>
-                      <div class="about-feature-card">
-                        <div class="about-feature-icon"><i class="fas fa-leaf"></i></div>
-                        <div class="about-feature-desc">Sustainability</div>
-                      </div>
+                        <div class="about-feature-card">
+                            <div class="about-feature-icon"><i class="fas fa-shield-alt"></i></div>
+                            <div class="about-feature-desc">Guaranteed products</div>
+                        </div>
+                        <div class="about-feature-card">
+                            <div class="about-feature-icon"><i class="fas fa-tools"></i></div>
+                            <div class="about-feature-desc">Technical experts</div>
+                        </div>
+                        <div class="about-feature-card">
+                            <div class="about-feature-icon"><i class="fas fa-leaf"></i></div>
+                            <div class="about-feature-desc">Sustainability</div>
+                        </div>
                     </div>
-                    <a href="#contact" class="btn btn-primary btn-lg px-4 animate-fade-in" data-aos="zoom-in" data-aos-delay="400">
-                        <i class="fas fa-envelope me-2"></i>Contact Us
+                    
+                    <a href="pages/Aboutus.html" class="btn btn-primary btn-lg px-4 animate-fade-in" data-aos="zoom-in" data-aos-delay="400">
+                        <i class="fas fa-arrow-right me-2"></i>Learn More
                     </a>
-                    <script>
-                      // Change About section Contact button to go to contact.html
-                      document.addEventListener('DOMContentLoaded', function() {
-                        var aboutContactBtn = document.querySelector('.about-section-row .btn-primary');
-                        if (aboutContactBtn) {
-                          aboutContactBtn.setAttribute('href', 'contact.html');
-                        }
-                      });
-                    </script>
+
                 </div>
             </div>
         </div>
@@ -382,27 +497,7 @@
         </div>
     </section>
 
-    <!-- Newsletter -->
-    <section class="newsletter-section py-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-8 text-center" data-aos="fade-up">
-                    <div class="newsletter-content">
-                        <h2 class="mb-4">Stay Informed</h2>
-                        <p class="mb-4">Subscribe to our newsletter to receive the latest offers and news about sustainable technology</p>
-                        <form class="newsletter-form" onsubmit="return false;">
-                            <div class="newsletter-input-wrapper position-relative">
-                                <input type="email" class="form-control" placeholder="Your email address" id="newsletter-email">
-                                <span id="newsletter-send" class="newsletter-send-icon-inside">
-                                    <i class="fas fa-paper-plane"></i>
-                                </span>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+
 
     <!-- Contact -->
     <section id="contact" class="py-5 contact-section">
@@ -478,8 +573,11 @@
         </div>
     </section>
 
+    <!-- CTA Component -->
+    <recomputech-cta></recomputech-cta>
+
     <!-- Footer Component -->
-    <div id="footer-component"></div>
+    <recomputech-footer></recomputech-footer>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -488,14 +586,60 @@
     <script src="js/theme.js"></script>
     <script src="js/components.js"></script>
     <script src="main.js"></script>
+    <script src="js/homepage.js"></script>
+    <script src="components/header-component.js"></script>
+    <script src="components/footer-component.js"></script>
+    <script src="components/cta-component.js"></script>
 
     <script src="js/auth.js"></script>
+    <script src="js/header-manager.js"></script>
+    <script src="components/header-auth-component.js"></script>
+    <script src="components/header-auth-technician-component.js"></script>
 
     <script>
       window.addEventListener('DOMContentLoaded', function() {
         const heroImg = document.querySelector('.hero-image');
         heroImg.classList.add('animate-slide-in');
       });
+
+      // Add to Cart functionality
+      function addToCart(productId) {
+        const header = document.querySelector('recomputech-header') || document.querySelector('recomputech-header-auth');
+        if (header) {
+          // Get product data from our database
+          const productData = {
+            'dell-3070': {
+              id: 'dell-3070',
+              name: 'DELL OptiPlex 3070',
+              price: 239.99,
+              image: '/assets/images/pcs refurbished/DELL 3070.png'
+            },
+            'iphone-13': {
+              id: 'iphone-13',
+              name: 'iPhone 13 128GB',
+              price: 599.99,
+              image: '/assets/images/smartphones refurbished/iPhone 13 128GB - Pink.png'
+            },
+            'ipad-pro-11': {
+              id: 'ipad-pro-11',
+              name: 'iPad Pro 11"',
+              price: 699.99,
+              image: '/assets/images/tablet.png'
+            },
+            'galaxy-s21': {
+              id: 'galaxy-s21',
+              name: 'Galaxy S21 5G',
+              price: 399.99,
+              image: '/assets/images/smartphones refurbished/Galaxy S21 5G 128GB - Gray.png'
+            }
+          };
+
+          const product = productData[productId];
+          if (product) {
+            header.addToCart(product);
+          }
+        }
+      }
     </script>
  
 </body>

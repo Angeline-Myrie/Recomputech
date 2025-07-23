@@ -15,44 +15,48 @@
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../styles.css" >
-    <link rel="stylesheet" href="../stylesHeader.css">
-    <link rel="stylesheet" href="../styleFooter.css">
+    <link rel="stylesheet" href="../css/styles.css" >
+    <link rel="stylesheet" href="../css/about.css">
 </head>
 <body class="light-mode">
 
-    <div id="header-component"></div>
+    <!-- Dynamic Header based on authentication status -->
+    <div id="headerContainer">
+        <!-- Header will be loaded dynamically -->
+    </div>
 
-    <section class="about-hero py-5" style="background: linear-gradient(90deg, #e3f2fd 0%, #fff 100%); margin-top: 90px;">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6" data-aos="fade-right">
-                    <h1 class="display-4 fw-bold mb-3">We are Recomputech</h1>
-                    <p class="lead mb-4" style="text-align: justify;">Recomputech was founded with a clear mission: to provide consumers with high-quality products at affordable prices, without compromising on performance or reliability.</p>
-                    <a href="../index.html" class="btn btn-primary btn-lg">
-                        <i class="fas fa-arrow-left me-2"></i>Back to Home
+    <section class="aboutus-hero-section py-5" style="background: linear-gradient(135deg, #e3f2fd 0%, #fff 100%); margin-top: 90px;">
+        <div class="aboutus-hero-container">
+            <div class="aboutus-hero-content">
+                <div class="aboutus-hero-text" data-aos="fade-right">
+                    <h1 class="aboutus-hero-title">We are Recomputech</h1>
+                    <p class="aboutus-hero-description">Recomputech was founded with a clear mission: to provide consumers with high-quality products at affordable prices, without compromising on performance or reliability.</p>
+                    <a href="../index.html" class="aboutus-hero-btn">
+                        <i class="fas fa-arrow-left"></i>
+                        <span>Back to Home</span>
                     </a>
                 </div>
-                <div class="col-lg-6 text-center" data-aos="fade-left">
-                    <img src="../assets/images/teamphoto2.jpg" alt="Recomputech Team Photo" class="img-fluid rounded-4 shadow-lg" style="max-height:350px;">
+                <div class="aboutus-hero-image" data-aos="fade-left">
+                    <img src="../assets/images/teamphoto2.jpg" alt="Recomputech Team Photo" class="aboutus-hero-img">
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="about-details py-5">
-        <div class="container">
-            <div class="row g-5">
-                <div class="col-lg-6" data-aos="fade-up">
-                    <div class="card shadow-lg border-0 rounded-4 p-4 h-100">
-                        <div class="about-section-badge mb-3 text-center"><span>Our Mission</span></div>
-                        <p class="mb-0" style="text-align: justify;">We extend the life of electronics, reduce e-waste, and support a circular economy by delivering accessible, sustainable, and high-quality tech solutions. Through innovation and responsibility, we help people and businesses make smarter, greener choices.</p>
+    <!-- Mission & Vision Section -->
+    <section class="aboutus-mission-vision-section py-5">
+        <div class="aboutus-mission-vision-container">
+            <div class="aboutus-mission-vision-content">
+                <div class="aboutus-mission-card" data-aos="fade-up">
+                    <div class="aboutus-mission-content">
+                        <h3 class="aboutus-mission-title">Our Mission</h3>
+                        <p class="aboutus-mission-text">We extend the life of electronics, reduce e-waste, and support a circular economy by delivering accessible, sustainable, and high-quality tech solutions. Through innovation and responsibility, we help people and businesses make smarter, greener choices.</p>
                     </div>
                 </div>
-                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card shadow-lg border-0 rounded-4 p-4 h-100">
-                        <div class="about-section-badge mb-3 text-center"><span>Our Vision</span></div>
-                        <p class="mb-0">To become the leading provider of sustainable technology solutions in Latin America, inspiring individuals and businesses to make eco-friendly choices for a better future.</p>
+                <div class="aboutus-vision-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="aboutus-vision-content">
+                        <h3 class="aboutus-vision-title">Our Vision</h3>
+                        <p class="aboutus-vision-text">To become the leading provider of sustainable technology solutions in Latin America, inspiring individuals and businesses to make eco-friendly choices for a better future.</p>
                     </div>
                 </div>
             </div>
@@ -72,92 +76,304 @@
                 <h4 class="fw-bold mb-3" style="margin-top:-10px; font-size:2rem;">Behind Recomputech</h4>
                 <p class="section-subtitle">We are Recomputech — a passionate team driven by technology and sustainability.</p>
             </div>
-            <div class="row g-4 justify-content-center">
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="tech-card text-center p-4 shadow rounded-4 bg-white">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="David Martez" class="tech-avatar-img mb-3" style="width:80px;">
-                        <h4>David Martez</h4>
-                        <p class="mb-2">Laptop & PC Specialist</p>
-                        <div class="tech-rating mb-2">
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
+            
+            <!-- Team Carousel -->
+            <div class="team-carousel-container">
+                <div class="swiper team-carousel">
+                    <div class="swiper-wrapper">
+                        <!-- Navigation Arrows -->
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
+                        <!-- Pagination Dots -->
+                        <div class="swiper-pagination"></div>
+                        <!-- Team Member 1 -->
+                        <div class="swiper-slide">
+                            <div class="team-card">
+                                <div class="team-avatar">
+                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Arianne Aspedilla">
+                                </div>
+                                <div class="team-info">
+                                    <h4 class="team-name">Arianne Aspedilla</h4>
+                                    <p class="team-role">Lead Technician</p>
+                                    <div class="team-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span>5.0</span>
+                                    </div>
+                                    <div class="team-stats">
+                                        <span class="stat-badge">200+ Repairs</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Team Member 2 -->
+                        <div class="swiper-slide">
+                            <div class="team-card">
+                                <div class="team-avatar">
+                                    <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="Gladys González">
+                                </div>
+                                <div class="team-info">
+                                    <h4 class="team-name">Gladys González</h4>
+                                    <p class="team-role">IT Support</p>
+                                    <div class="team-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
+                                        <span>4.8</span>
+                                    </div>
+                                    <div class="team-stats">
+                                        <span class="stat-badge">150+ Services</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Team Member 3 -->
+                        <div class="swiper-slide">
+                            <div class="team-card">
+                                <div class="team-avatar">
+                                    <img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Celisbeth Herrera">
+                                </div>
+                                <div class="team-info">
+                                    <h4 class="team-name">Celisbeth Herrera</h4>
+                                    <p class="team-role">Sales Manager</p>
+                                    <div class="team-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span>4.9</span>
+                                    </div>
+                                    <div class="team-stats">
+                                        <span class="stat-badge">300+ Sales</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Team Member 4 -->
+                        <div class="swiper-slide">
+                            <div class="team-card">
+                                <div class="team-avatar">
+                                    <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="David Martez">
+                                </div>
+                                <div class="team-info">
+                                    <h4 class="team-name">David Martez</h4>
+                                    <p class="team-role">Marketing Specialist</p>
+                                    <div class="team-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span>4.7</span>
+                                    </div>
+                                    <div class="team-stats">
+                                        <span class="stat-badge">100+ Campaigns</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Team Member 5 -->
+                        <div class="swiper-slide">
+                            <div class="team-card">
+                                <div class="team-avatar">
+                                    <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Stefany Martínez">
+                                </div>
+                                <div class="team-info">
+                                    <h4 class="team-name">Stefany Martínez</h4>
+                                    <p class="team-role">Designer</p>
+                                    <div class="team-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
                             <span>4.9</span>
+                                    </div>
+                                    <div class="team-stats">
+                                        <span class="stat-badge">80+ Designs</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <span class="badge bg-primary">150+ Repairs</span>
+                        
+                        <!-- Team Member 6 -->
+                        <div class="swiper-slide">
+                            <div class="team-card">
+                                <div class="team-avatar">
+                                    <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Angeline Myrie">
+                                </div>
+                                <div class="team-info">
+                                    <h4 class="team-name">Angeline Myrie</h4>
+                                    <p class="team-role">Web Developer</p>
+                                    <div class="team-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span>5.0</span>
+                                    </div>
+                                    <div class="team-stats">
+                                        <span class="stat-badge">50+ Projects</span>
+                                    </div>
+                                </div>
                     </div>
                 </div>
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="tech-card text-center p-4 shadow rounded-4 bg-white">
-                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Ana Martinez" class="tech-avatar-img mb-3" style="width:80px;">
-                        <h4>Ana Martinez</h4>
-                        <p class="mb-2">System Optimization Expert</p>
-                        <div class="tech-rating mb-2">
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star-half-alt text-warning"></i>
+                        
+                        <!-- Team Member 7 -->
+                        <div class="swiper-slide">
+                            <div class="team-card">
+                                <div class="team-avatar">
+                                    <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="Johan Rodríguez">
+                                </div>
+                                <div class="team-info">
+                                    <h4 class="team-name">Johan Rodríguez</h4>
+                                    <p class="team-role">Network Engineer</p>
+                                    <div class="team-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star-half-alt"></i>
                             <span>4.8</span>
+                                    </div>
+                                    <div class="team-stats">
+                                        <span class="stat-badge">120+ Networks</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <span class="badge bg-info">200+ Services</span>
+                        
+                        <!-- Team Member 8 -->
+                        <div class="swiper-slide">
+                            <div class="team-card">
+                                <div class="team-avatar">
+                                    <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Victoria Villalobos">
+                                </div>
+                                <div class="team-info">
+                                    <h4 class="team-name">Victoria Villalobos</h4>
+                                    <p class="team-role">Customer Service</p>
+                                    <div class="team-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span>4.9</span>
+                                    </div>
+                                    <div class="team-stats">
+                                        <span class="stat-badge">500+ Support</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Team Member 9 -->
+                        <div class="swiper-slide">
+                            <div class="team-card">
+                                <div class="team-avatar">
+                                    <img src="https://randomuser.me/api/portraits/men/23.jpg" alt="Daryelis Willians">
+                                </div>
+                                <div class="team-info">
+                                    <h4 class="team-name">Daryelis Willians</h4>
+                                    <p class="team-role">QA Specialist</p>
+                                    <div class="team-rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <span>4.7</span>
+                                    </div>
+                                    <div class="team-stats">
+                                        <span class="stat-badge">200+ Tests</span>
+                                    </div>
                     </div>
                 </div>
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="tech-card text-center p-4 shadow rounded-4 bg-white">
-                        <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="John Perez" class="tech-avatar-img mb-3" style="width:80px;">
-                        <h4>John Perez</h4>
-                        <p class="mb-2">Data Recovery Specialist</p>
-                        <div class="tech-rating mb-2">
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <i class="fas fa-star text-warning"></i>
-                            <span>5.0</span>
                         </div>
-                        <span class="badge bg-success">180+ Recoveries</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="about-values py-5 bg-light">
-        <div class="container">
-            <div class="section-header text-center mb-5" data-aos="fade-up">
-                <span class="section-badge">Our Values</span>
-                <h2 class="section-title">What Drives Us</h2>
+    <section class="aboutus-values-section py-5">
+        <div class="aboutus-values-container">
+            <div class="aboutus-values-header text-center mb-5" data-aos="fade-up">
+                <span class="aboutus-values-badge">Our Values</span>
+                <h2 class="aboutus-values-title">What Drives Us</h2>
+                <p class="aboutus-values-subtitle">The principles that guide our every decision and action</p>
             </div>
-            <div class="row g-4 justify-content-center">
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-                    <div class="card border-0 shadow rounded-4 p-4 text-center">
-                        <i class="fas fa-leaf fa-2x text-success mb-3"></i>
-                        <h5>Sustainability</h5>
-                        <p>We are committed to protecting the environment by extending the life of technology and minimizing waste.</p>
+            <div class="aboutus-values-grid">
+                <div class="aboutus-value-card sustainability" data-aos="fade-up" data-aos-delay="100">
+                    <div class="aboutus-value-card-header">
+                        <div class="aboutus-value-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="aboutus-value-badge">Core Value</div>
+                    </div>
+                    <div class="aboutus-value-content">
+                        <h5 class="aboutus-value-title">Sustainability</h5>
+                        <p class="aboutus-value-description">We are committed to protecting the environment by extending the life of technology and minimizing waste. Our eco-friendly approach helps reduce e-waste and promotes a circular economy.</p>
+                        <div class="aboutus-value-features">
+                            <span class="aboutus-feature-tag">Eco-Friendly</span>
+                            <span class="aboutus-feature-tag">Waste Reduction</span>
+                            <span class="aboutus-feature-tag">Green Tech</span>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-                    <div class="card border-0 shadow rounded-4 p-4 text-center">
-                        <i class="fas fa-shield-alt fa-2x text-primary mb-3"></i>
-                        <h5>Quality</h5>
-                        <p>Every product and service meets strict standards for reliability, safety, and performance.</p>
+                <div class="aboutus-value-card quality" data-aos="fade-up" data-aos-delay="200">
+                    <div class="aboutus-value-card-header">
+                        <div class="aboutus-value-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="aboutus-value-badge">Core Value</div>
+                    </div>
+                    <div class="aboutus-value-content">
+                        <h5 class="aboutus-value-title">Quality Assurance</h5>
+                        <p class="aboutus-value-description">Every product and service meets strict standards for reliability, safety, and performance. We ensure excellence in every detail of our work.</p>
+                        <div class="aboutus-value-features">
+                            <span class="aboutus-feature-tag">Certified</span>
+                            <span class="aboutus-feature-tag">Tested</span>
+                            <span class="aboutus-feature-tag">Guaranteed</span>
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-                    <div class="card border-0 shadow rounded-4 p-4 text-center">
-                        <i class="fas fa-users fa-2x text-info mb-3"></i>
-                        <h5>Community</h5>
-                        <p>We foster a culture of collaboration, inclusion, and support for our customers and partners.</p>
+                <div class="aboutus-value-card community" data-aos="fade-up" data-aos-delay="300">
+                    <div class="aboutus-value-card-header">
+                        <div class="aboutus-value-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="aboutus-value-badge">Core Value</div>
+                    </div>
+                    <div class="aboutus-value-content">
+                        <h5 class="aboutus-value-title">Community First</h5>
+                        <p class="aboutus-value-description">We foster a culture of collaboration, inclusion, and support for our customers and partners. Building strong relationships is at the heart of everything we do.</p>
+                        <div class="aboutus-value-features">
+                            <span class="aboutus-feature-tag">Support</span>
+                            <span class="aboutus-feature-tag">Collaboration</span>
+                            <span class="aboutus-feature-tag">Inclusion</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <div id="footer-component"></div>
+    <!-- CTA Component -->
+    <recomputech-cta></recomputech-cta>
+
+    <recomputech-footer></recomputech-footer>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -165,8 +381,64 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="../js/theme.js"></script>
     <script src="../js/components.js"></script>
+    <script src="../components/header-component.js"></script>
+    <script src="../components/header-auth-component.js"></script>
+    <script src="../components/header-auth-technician-component.js"></script>
+    <script src="../components/footer-component.js"></script>
+    
+    <!-- Header Manager -->
+    <script src="../js/header-manager.js"></script>
+    <script src="../components/cta-component.js"></script>
     <script>
       AOS.init();
+      
+      // Initialize Team Carousel
+      const teamCarousel = new Swiper('.team-carousel', {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
+        speed: 800,
+        effect: 'slide',
+        grabCursor: true,
+        breakpoints: {
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 3,
+            spaceBetween: 30,
+          },
+          1024: {
+            slidesPerView: 4,
+            spaceBetween: 30,
+          },
+          1200: {
+            slidesPerView: 5,
+            spaceBetween: 30,
+          }
+        },
+        // Optional: Add navigation arrows
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        // Optional: Add pagination dots
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true,
+        }
+      });
+
+      // Oculta el header si está dentro de un iframe (dashboard)
+      if (window.self !== window.top) {
+        const header = document.getElementById('headerContainer') || document.querySelector('header') || document.querySelector('recomputech-header') || document.querySelector('recomputech-header-auth');
+        if (header) header.style.display = 'none';
+      }
     </script>
 </body>
 </html>

@@ -1,0 +1,501 @@
+/* Technician Page Styles */
+
+/* Hero Section */
+.technician-hero {
+    background: linear-gradient(135deg, #218DA6, #1b6e82);
+    color: white;
+    padding: 6rem 2rem 4rem 2rem;
+    margin-top: 80px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Search Section */
+.search-section {
+    padding: 2rem 2rem;
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.search-container {
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+}
+
+.search-input {
+    width: 100%;
+    padding: 1.25rem 1.25rem 1.25rem 3.5rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+    background: white;
+    color: #333;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #218DA6;
+    box-shadow: 0 4px 15px rgba(33, 141, 166, 0.1);
+    transform: translateY(-1px);
+    background: white;
+}
+
+.search-icon {
+    position: absolute;
+    left: 1.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #64748b;
+    transition: color 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.search-input:focus + .search-icon {
+    color: #218DA6;
+}
+
+.technician-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-badge {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 2rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 1rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+.hero-stats {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.stat-item i {
+    font-size: 2rem;
+    color: #FFD700;
+}
+
+.stat-item h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.stat-item span {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.hero-image img {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    border: 4px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Categories Section */
+.categories-section {
+    padding: 2rem 2rem;
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.categories-header h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+}
+
+.categories-simple {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.category-btn {
+    padding: 0.75rem 1.5rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 25px;
+    background: white;
+    color: #64748b;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+.category-btn:hover {
+    border-color: #218DA6;
+    color: #218DA6;
+    transform: translateY(-1px);
+}
+
+.category-btn.active {
+    background: #218DA6;
+    color: white;
+    border-color: #218DA6;
+    box-shadow: 0 2px 8px rgba(33, 141, 166, 0.3);
+}
+
+/* Technicians Section */
+.technicians-section {
+    padding: 5rem 2rem;
+    background: white;
+}
+
+.technicians-header {
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 1rem;
+}
+
+.results-info {
+    font-size: 1.1rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.results-info span {
+    color: #218DA6;
+    font-weight: 700;
+}
+
+.sort-options .form-select {
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    color: #374151;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.sort-options .form-select:focus {
+    border-color: #218DA6;
+    box-shadow: 0 0 0 3px rgba(33, 141, 166, 0.1);
+}
+
+/* Technician Cards */
+.technician-card {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    border: 1px solid #e5e7eb;
+    height: 100%;
+}
+
+.technician-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.tech-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.tech-avatar {
+    position: relative;
+}
+
+.tech-avatar img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #e5e7eb;
+}
+
+.tech-status {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 3px solid white;
+}
+
+.tech-status.online {
+    background: #10b981;
+}
+
+.tech-status.offline {
+    background: #6b7280;
+}
+
+.tech-status.busy {
+    background: #f59e0b;
+}
+
+.tech-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #f59e0b;
+    font-size: 0.9rem;
+}
+
+.tech-rating span {
+    color: #64748b;
+    font-weight: 600;
+}
+
+.tech-info h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+}
+
+.tech-specialty {
+    color: #218DA6;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.tech-experience {
+    color: #64748b;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.tech-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.skill-tag {
+    background: #f1f5f9;
+    color: #475569;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.tech-stats {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.stat i {
+    color: #218DA6;
+}
+
+.tech-actions {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.tech-actions .btn {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+/* Registration CTA */
+.registration-cta {
+    background: linear-gradient(135deg, #1e293b, #334155);
+    color: white;
+    padding: 5rem 2rem;
+    text-align: center;
+}
+
+.cta-icon {
+    width: 100px;
+    height: 100px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 2rem;
+    font-size: 2.5rem;
+    color: #FFD700;
+}
+
+.registration-cta h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.registration-cta p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-benefits {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.benefit-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #10b981;
+    font-weight: 500;
+}
+
+.benefit-item i {
+    font-size: 1.2rem;
+}
+
+.cta-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.cta-buttons .btn {
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.cta-buttons .btn:hover {
+    transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .stat-item {
+        justify-content: center;
+    }
+    
+    .categories-simple {
+        gap: 0.75rem;
+    }
+    
+    .category-btn {
+        padding: 0.6rem 1.25rem;
+        font-size: 0.9rem;
+    }
+    
+    .technicians-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+    
+    .technician-card {
+        padding: 1.5rem;
+    }
+    
+    .tech-actions {
+        flex-direction: column;
+    }
+    
+    .cta-benefits {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-buttons .btn {
+        width: 100%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 576px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+    
+    .section-header h2 {
+        font-size: 2rem;
+    }
+    
+    .registration-cta h2 {
+        font-size: 2rem;
+    }
+} 
