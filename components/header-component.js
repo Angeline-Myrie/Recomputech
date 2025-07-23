@@ -877,8 +877,7 @@ class HeaderComponent extends HTMLElement {
                             </button>
 
                                             <!-- Auth Buttons -->
-                            <a href="/auth/auth.html" class="recomputech-btn-outline-primary">Login</a>
-                            <a href="/auth/auth.html" class="recomputech-btn-primary">Register</a>
+                            <a href="/auth/auth.html" class="recomputech-btn-primary">Login & Register</a>
 
                             <!-- Cart Icon -->
                             <button class="recomputech-cart-icon" id="recomputech-cart-icon" title="Shopping Cart">
@@ -924,11 +923,7 @@ class HeaderComponent extends HTMLElement {
                             <i class="fas fa-shopping-cart recomputech-mobile-cart-icon"></i>
                             <span class="recomputech-mobile-cart-text">Shopping Cart (0)</span>
                         </div>
-                        
-                        <div style="display: flex; gap: 1rem;">
-                                            <a href="/auth/auth.html" class="recomputech-btn-outline-primary" style="flex: 1; text-align: center;">Login</a>
-                <a href="/auth/auth.html" class="recomputech-btn-primary" style="flex: 1; text-align: center;">Register</a>
-                        </div>
+                        <a href="/auth/auth.html" class="recomputech-btn-primary" style="width: 100%; text-align: center;">Login & Register</a>
                     </div>
                 </div>
             </div>
