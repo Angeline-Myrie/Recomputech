@@ -1116,6 +1116,7 @@ class HeaderComponent extends HTMLElement {
         } else {
             this.cartItems.push({
                 ...product,
+                image: product.images[1],
                 quantity: 1
             });
         }
@@ -1363,4 +1364,4 @@ class HeaderComponent extends HTMLElement {
     }
 }
 
-customElements.define('recomputech-header', HeaderComponent); 
+customElements.define('recomputech-header', HeaderComponent);

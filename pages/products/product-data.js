@@ -10,8 +10,8 @@ const PRODUCTS_DATABASE = {
         discount: 40,
         images: [
             '/assets/images/pcs refurbished/DELL 3070.png',
-            '/assets/images/pcs refurbished/DELL 3070.png',
-            '/assets/images/pcs refurbished/DELL 3070.png'
+            '/assets/images/pcs refurbished/DELL 3070.2.png',
+            '/assets/images/pcs refurbished/DELL 3070.3.png'
         ],
         specs: {
             processor: 'Intel Core i5-8500 (6th Gen)',
@@ -52,9 +52,9 @@ const PRODUCTS_DATABASE = {
         originalPrice: 499.99,
         discount: 40,
         images: [
-            '/assets/images/pcs refurbished/DELL 7060.png',
-            '/assets/images/pcs refurbished/DELL 7060.png',
-            '/assets/images/pcs refurbished/DELL 7060.png'
+            '/assets/images/pcs refurbished/DELL 7060.1.png',
+            '/assets/images/pcs refurbished/DELL 7060.2.png',
+            '/assets/images/pcs refurbished/DELL 7060.3.png'
         ],
         specs: {
             processor: 'Intel Core i7-8700 (8th Gen)',
@@ -95,9 +95,9 @@ const PRODUCTS_DATABASE = {
         originalPrice: 599.99,
         discount: 42,
         images: [
-            '/assets/images/pcs refurbished/HP ELITEDESK 800 G3 MT.png',
-            '/assets/images/pcs refurbished/HP ELITEDESK 800 G3 MT.png',
-            '/assets/images/pcs refurbished/HP ELITEDESK 800 G3 MT.png'
+            '/assets/images/pcs refurbished/HP ELITEDESK 800 G3 MT..png',
+            '/assets/images/pcs refurbished/HP ELITEDESK 800 G3 MT..2.png',
+            '/assets/images/pcs refurbished/HP ELITEDESK 800 G3 MT.3.png'
         ],
         specs: {
             processor: 'Intel Core i7-7700 (7th Gen)',
@@ -140,8 +140,8 @@ const PRODUCTS_DATABASE = {
         discount: 43,
         images: [
             '/assets/images/smartphones refurbished/Galaxy S21 5G 128GB - Gray.png',
-            '/assets/images/smartphones refurbished/Galaxy S21 5G 128GB - Gray.png',
-            '/assets/images/smartphones refurbished/Galaxy S21 5G 128GB - Gray.png'
+            '/assets/images/smartphones refurbished/Galaxy S21 5G 128GB.3.png',
+            '/assets/images/smartphones refurbished/Galaxy S21 5G 128GB.2.png'
         ],
         specs: {
             processor: 'Exynos 2100 / Snapdragon 888',
@@ -183,9 +183,9 @@ const PRODUCTS_DATABASE = {
         originalPrice: 899.99,
         discount: 33,
         images: [
-            '/assets/images/smartphones refurbished/iPhone 13 128GB - Pink.png',
-            '/assets/images/smartphones refurbished/iPhone 13 128GB - Pink.png',
-            '/assets/images/smartphones refurbished/iPhone 13 128GB - Pink.png'
+            '/assets/images/smartphones refurbished/iphone-13-pink.png',
+            '/assets/images/smartphones refurbished/iPhone 13 128GB.2.png',
+            '/assets/images/smartphones refurbished/iPhone 13 128GB.3.png'
         ],
         specs: {
             processor: 'Apple A15 Bionic',
@@ -229,8 +229,8 @@ const PRODUCTS_DATABASE = {
         discount: 30,
         images: [
             '/assets/images/tablet.png',
-            '/assets/images/tablet.png',
-            '/assets/images/tablet.png'
+            '/assets/images/iPad 11 pro max.jpg',
+            '/assets/images/Tablet 11 Pro.png'
         ],
         specs: {
             processor: 'Apple M1 chip',
