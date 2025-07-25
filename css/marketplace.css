@@ -591,35 +591,25 @@
   }
   
   .product-image {
-      background: #fff;
+      height: 200px;
+      background: linear-gradient(135deg, #218DA6, #1b6e82);
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 150px;
-      min-height: 150px;
-      max-height: 150px;
-      padding: 0;
-      width: 100%;
-      overflow: hidden;
+      color: white;
+      font-size: 3rem;
       position: relative;
-      border-top-left-radius: 18px;
-      border-top-right-radius: 18px;
+      /* Añade fondo blanco para mejor visibilidad */
+      background: #fff;
   }
   .product-image img {
-      width: 90%;
-      height: 90%;
-      object-fit: contain;
-      margin: 0 auto;
-      display: block;
-      background: transparent;
-      border-radius: 12px;
-      box-shadow: 0 2px 8px rgba(25, 118, 210, 0.07);
-      transition: transform 0.35s cubic-bezier(.4,2,.6,1), box-shadow 0.25s;
-  }
-  .product-card:hover .product-image img {
-      transform: scale(1.07);
-      box-shadow: 0 6px 24px rgba(25, 118, 210, 0.13);
-  }
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Cambia cover por contain */
+    background: #fff;    /* Fondo blanco detrás de la imagen */
+    padding: 10px;       /* Opcional: agrega espacio alrededor */
+    border-radius: 10px; /* Opcional: bordes redondeados */
+}
   @media (max-width: 991px) {
       .product-image {
           height: 110px;
@@ -830,15 +820,86 @@ body {
 
 /* Sidebar */
 .sidebar {
-    background: white;
-    border-radius: 20px;
-    padding: 2rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    height: 600px;
-    width: 100%;
-    overflow-y: auto;
-    position: relative;
+     background: white;
+     border-radius: 20px;
+     padding: 2rem;
+     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+     height: 600px;
+     width: 320px;
+     min-width: 80px;
+     max-width: 320px;
+     overflow-y: auto;
+     position: relative;
+     transition: width 0.3s cubic-bezier(.4,2,.6,1);
+     z-index: 10;
 }
+.sidebar.collapsed {
+     width: 80px;
+     min-width: 80px;
+     max-width: 80px;
+     padding: 2rem 0.5rem;
+}
+.sidebar.collapsed .filter-section,
+.sidebar.collapsed .sidebar-title,
+.sidebar.collapsed .price-range,
+.sidebar.collapsed .brand-filters,
+.sidebar.collapsed .condition-filters,
+.sidebar.collapsed .apply-filters {
+     display: none !important;
+}
+.sidebar.collapsed .category-filters {
+     flex-direction: column;
+     align-items: center;
+     gap: 1rem;
+}
+.sidebar.collapsed .category-item span {
+     display: none;
+}
+.sidebar.collapsed .category-icon {
+     font-size: 2rem;
+     margin: 0 auto;
+     display: block;
+}
+
+/* Flecha central para ajustar el tamaño del sidebar */
+
+
+.sidebar-resize-handle {
+    position: absolute;
+    top: 0;
+    right: -18px;
+    height: 100%;
+    width: 36px;
+    background: transparent;
+    z-index: 100;
+    cursor: ew-resize;
+    pointer-events: auto;
+    /* El área es invisible, solo cambia el cursor */
+    /* Sin contenido visual */
+    display: block;
+    border: none;
+    box-shadow: none;
+    /* Elimino cualquier pseudo-elemento que pueda mostrar una flecha */
+}
+
+.sidebar-resize-handle::before,
+.sidebar-resize-handle::after {
+    content: none !important;
+    display: none !important;
+}
+
+/* Elimino cualquier estilo de contenido visual en el handle */
+/* El handle no tiene logo ni color, solo cursor de resize */
+@media (max-width: 768px) {
+    .sidebar-resize-handle {
+        right: -12px;
+        width: 28px;
+        height: 28px;
+        font-size: 1.2rem;
+    }
+}
+/* Elimino el bracket extra que causa error de lint */
+
 
 .sidebar::-webkit-scrollbar {
     width: 6px;
@@ -855,36 +916,20 @@ body {
 }
 
 .sidebar::-webkit-scrollbar-thumb:hover {
-    background: #a8a8a8;
+    background: transparent;
+    z-index: 100;
+    cursor: ew-resize;
+    transition: background 0.2s;
+    pointer-events: auto;
+    width: 16px;
+    min-width: 16px;
+    max-width: 16px;
+    right: -8px;
+    top: 0;
+    height: 100%;
 }
+/* El handle no tiene logo, solo área interactiva */
 
-.sidebar-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #1e293b;
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.filter-section {
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid #e5e7eb;
-}
-
-.filter-section:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
-}
-
-.filter-label {
-    font-weight: 600;
-    color: #374151;
-    margin-bottom: 1rem;
-    display: block;
-}
 
 /* Category Filters */
 .category-filters {
@@ -1110,31 +1155,32 @@ body {
     color: white;
     font-size: 3rem;
     position: relative;
+    /* Añade fondo blanco para mejor visibilidad */
+    background: #fff;
 }
 
 .product-image img {
     width: 100%;
     height: 100%;
-    object-fit: contain !important;
-    object-position: center;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(25, 118, 210, 0.07);
-    transition: transform 0.35s cubic-bezier(.4,2,.6,1), box-shadow 0.25s;
-    margin: 0 auto;
-    display: block;
+    object-fit: contain; /* Cambia cover por contain */
+    background: #fff;    /* Fondo blanco detrás de la imagen */
+    padding: 10px;       /* Opcional: agrega espacio alrededor */
+    border-radius: 10px; /* Opcional: bordes redondeados */
 }
-
 .product-discount {
     position: absolute;
     top: 1rem;
     right: 1rem;
     background: #ef4444;
-    color: white;
+    /* Elimino cualquier pseudo-elemento que pueda mostrar una flecha */
+    font-size: 0 !important;
+    line-height: 0 !important;
+    color: transparent !important;
+    background-image: none !important;
+    background: transparent !important;
+    /* Si por error hay contenido, lo oculto */
+    overflow: hidden;
     padding: 0.25rem 0.75rem;
-    border-radius: 20px;
-    font-size: 0.875rem;
-    font-weight: 600;
 }
 
 .product-info {
