@@ -1231,6 +1231,330 @@ const PRODUCTS_DATABASE = {
         stock: 20,
         sku: 'LENOVO-M920Q-REF',
         tags: ['mini-pc', 'compact', 'intel', 'windows', 'refurbished']
+    },
+
+    // Accessories Refurbished
+    'wireless-headphones-mic-nc': {
+        id: 'wireless-headphones-mic-nc',
+        name: 'Wireless Headphones with Microphone & Noise Cancelling',
+        category: 'Accessories Refurbished',
+        price: 59.99,
+        originalPrice: 89.99,
+        discount: 33,
+        images: [
+            '/assets/images/accessories refurbished/Audífonos inalámbricos con micrófono y noise cancelling.png'
+        ],
+        specs: {
+            type: 'Over-ear',
+            connectivity: 'Bluetooth 5.0',
+            microphone: 'Built-in',
+            noiseCancelling: 'Active',
+            battery: '30 hours',
+            warranty: '6 months'
+        },
+        description: 'Enjoy immersive sound and clear calls with these wireless headphones featuring active noise cancelling and a built-in microphone.',
+        features: [
+            'Active noise cancelling',
+            'Built-in microphone',
+            'Bluetooth 5.0 wireless',
+            'Up to 30 hours battery life',
+            'Comfortable over-ear design',
+            '6-month warranty'
+        ],
+        condition: 'Refurbished - Excellent',
+        seller: {
+            name: 'Recomputech Panama',
+            rating: 4.8,
+            reviews: 127,
+            verified: true,
+            location: 'Panama City, Panama'
+        },
+        stock: 10,
+        sku: 'ACC-WH-NC-REF',
+        tags: ['headphones', 'wireless', 'noise-cancelling', 'accessory', 'refurbished']
+    },
+    'wireless-headphones-nc': {
+        id: 'wireless-headphones-nc',
+        name: 'Wireless Headphones with Noise Cancelling',
+        category: 'Accessories Refurbished',
+        price: 49.99,
+        originalPrice: 79.99,
+        discount: 37,
+        images: [
+            '/assets/images/accessories refurbished/Audífonos inalámbricos con noise cancelling.png'
+        ],
+        specs: {
+            type: 'Over-ear',
+            connectivity: 'Bluetooth',
+            noiseCancelling: 'Active',
+            battery: '25 hours',
+            warranty: '6 months'
+        },
+        description: 'Wireless over-ear headphones with active noise cancelling for a distraction-free listening experience.',
+        features: [
+            'Active noise cancelling',
+            'Bluetooth wireless',
+            '25 hours battery life',
+            'Comfortable fit',
+            '6-month warranty'
+        ],
+        condition: 'Refurbished - Excellent',
+        seller: {
+            name: 'Recomputech Panama',
+            rating: 4.8,
+            reviews: 127,
+            verified: true,
+            location: 'Panama City, Panama'
+        },
+        stock: 12,
+        sku: 'ACC-WH-NC2-REF',
+        tags: ['headphones', 'wireless', 'noise-cancelling', 'accessory', 'refurbished']
+    },
+    'sony-wireless-headphones': {
+        id: 'sony-wireless-headphones',
+        name: 'Sony Wireless Headphones',
+        category: 'Accessories Refurbished',
+        price: 69.99,
+        originalPrice: 109.99,
+        discount: 36,
+        images: [
+            '/assets/images/accessories refurbished/Audífonos inalámbricos Sony.png'
+        ],
+        specs: {
+            type: 'Over-ear',
+            connectivity: 'Bluetooth',
+            brand: 'Sony',
+            battery: '35 hours',
+            warranty: '6 months'
+        },
+        description: 'Sony wireless headphones deliver high-fidelity sound and long battery life for music lovers on the go.',
+        features: [
+            'Sony quality sound',
+            'Bluetooth wireless',
+            '35 hours battery life',
+            'Comfortable over-ear design',
+            '6-month warranty'
+        ],
+        condition: 'Refurbished - Excellent',
+        seller: {
+            name: 'Recomputech Panama',
+            rating: 4.8,
+            reviews: 127,
+            verified: true,
+            location: 'Panama City, Panama'
+        },
+        stock: 8,
+        sku: 'ACC-SONY-WH-REF',
+        tags: ['headphones', 'sony', 'wireless', 'accessory', 'refurbished']
+    },
+    'hp-ku-0316-keyboard': {
+        id: 'hp-ku-0316-keyboard',
+        name: 'HP KU-0316 Wired Keyboard',
+        category: 'Accessories Refurbished',
+        price: 19.99,
+        originalPrice: 29.99,
+        discount: 33,
+        images: [
+            '/assets/images/accessories refurbished/Teclado HP KU-0316 434821-001.jpg'
+        ],
+        specs: {
+            type: 'Wired',
+            brand: 'HP',
+            layout: 'QWERTY',
+            warranty: '6 months'
+        },
+        description: 'Reliable HP wired keyboard with QWERTY layout, perfect for office and home use.',
+        features: [
+            'HP original keyboard',
+            'Wired USB connection',
+            'QWERTY layout',
+            '6-month warranty'
+        ],
+        condition: 'Refurbished - Excellent',
+        seller: {
+            name: 'Recomputech Panama',
+            rating: 4.8,
+            reviews: 127,
+            verified: true,
+            location: 'Panama City, Panama'
+        },
+        stock: 15,
+        sku: 'ACC-HP-KU0316-REF',
+        tags: ['keyboard', 'hp', 'wired', 'accessory', 'refurbished']
+    },
+    'hp-gk400f-mechanical-keyboard': {
+        id: 'hp-gk400f-mechanical-keyboard',
+        name: 'HP GK400F Wired Mechanical Keyboard',
+        category: 'Accessories Refurbished',
+        price: 39.99,
+        originalPrice: 59.99,
+        discount: 33,
+        images: [
+            '/assets/images/accessories refurbished/Teclado mecánico con cable HP GK400F.jpg'
+        ],
+        specs: {
+            type: 'Mechanical',
+            brand: 'HP',
+            connectivity: 'Wired',
+            warranty: '6 months'
+        },
+        description: 'HP mechanical keyboard with tactile feedback and durable build, ideal for gaming and productivity.',
+        features: [
+            'Mechanical switches',
+            'Wired USB connection',
+            'HP build quality',
+            '6-month warranty'
+        ],
+        condition: 'Refurbished - Excellent',
+        seller: {
+            name: 'Recomputech Panama',
+            rating: 4.8,
+            reviews: 127,
+            verified: true,
+            location: 'Panama City, Panama'
+        },
+        stock: 10,
+        sku: 'ACC-HP-GK400F-REF',
+        tags: ['keyboard', 'hp', 'mechanical', 'accessory', 'refurbished']
+    },
+    'rapoo-wireless-keyboard': {
+        id: 'rapoo-wireless-keyboard',
+        name: 'Rapoo Wireless Keyboard',
+        category: 'Accessories Refurbished',
+        price: 24.99,
+        originalPrice: 39.99,
+        discount: 38,
+        images: [
+            '/assets/images/accessories refurbished/Rapoo Teclado inalámbrico.jpg'
+        ],
+        specs: {
+            type: 'Wireless',
+            brand: 'Rapoo',
+            layout: 'QWERTY',
+            warranty: '6 months'
+        },
+        description: 'Compact and reliable wireless keyboard from Rapoo, perfect for work and travel.',
+        features: [
+            'Wireless connection',
+            'QWERTY layout',
+            'Compact design',
+            '6-month warranty'
+        ],
+        condition: 'Refurbished - Excellent',
+        seller: {
+            name: 'Recomputech Panama',
+            rating: 4.8,
+            reviews: 127,
+            verified: true,
+            location: 'Panama City, Panama'
+        },
+        stock: 12,
+        sku: 'ACC-RAPOO-WK-REF',
+        tags: ['keyboard', 'rapoo', 'wireless', 'accessory', 'refurbished']
+    },
+    'sr-mini-keyboard': {
+        id: 'sr-mini-keyboard',
+        name: 'SR Mini Wireless Keyboard',
+        category: 'Accessories Refurbished',
+        price: 17.99,
+        originalPrice: 27.99,
+        discount: 36,
+        images: [
+            '/assets/images/accessories refurbished/SR Mini teclado.jpg'
+        ],
+        specs: {
+            type: 'Mini',
+            connectivity: 'Wireless',
+            warranty: '6 months'
+        },
+        description: 'Ultra-compact mini wireless keyboard, ideal for smart TVs, tablets, and portable use.',
+        features: [
+            'Mini size',
+            'Wireless connection',
+            'Portable and lightweight',
+            '6-month warranty'
+        ],
+        condition: 'Refurbished - Excellent',
+        seller: {
+            name: 'Recomputech Panama',
+            rating: 4.8,
+            reviews: 127,
+            verified: true,
+            location: 'Panama City, Panama'
+        },
+        stock: 18,
+        sku: 'ACC-SR-MINI-REF',
+        tags: ['keyboard', 'mini', 'wireless', 'accessory', 'refurbished']
+    },
+    'logitech-g502-hero': {
+        id: 'logitech-g502-hero',
+        name: 'Logitech G502 HERO Gaming Mouse',
+        category: 'Accessories Refurbished',
+        price: 39.99,
+        originalPrice: 69.99,
+        discount: 43,
+        images: [
+            '/assets/images/accessories refurbished/Logitech G502 HERO.jpg'
+        ],
+        specs: {
+            type: 'Gaming Mouse',
+            brand: 'Logitech',
+            dpi: 'Up to 16,000',
+            buttons: '11 programmable',
+            warranty: '6 months'
+        },
+        description: 'High-performance gaming mouse with HERO sensor, customizable DPI, and 11 programmable buttons.',
+        features: [
+            'HERO sensor up to 16,000 DPI',
+            '11 programmable buttons',
+            'Customizable weight system',
+            '6-month warranty'
+        ],
+        condition: 'Refurbished - Excellent',
+        seller: {
+            name: 'Recomputech Panama',
+            rating: 4.8,
+            reviews: 127,
+            verified: true,
+            location: 'Panama City, Panama'
+        },
+        stock: 9,
+        sku: 'ACC-LOGI-G502-REF',
+        tags: ['mouse', 'logitech', 'gaming', 'accessory', 'refurbished']
+    },
+    'virtusx-ai-mouse': {
+        id: 'virtusx-ai-mouse',
+        name: 'Virtusx AI Wireless Mouse',
+        category: 'Accessories Refurbished',
+        price: 21.99,
+        originalPrice: 34.99,
+        discount: 37,
+        images: [
+            '/assets/images/accessories refurbished/Virtusx Ratón AI.jpg'
+        ],
+        specs: {
+            type: 'Wireless Mouse',
+            brand: 'Virtusx',
+            warranty: '6 months'
+        },
+        description: 'Smart wireless mouse with AI features for enhanced productivity and comfort.',
+        features: [
+            'AI-powered features',
+            'Wireless connection',
+            'Ergonomic design',
+            '6-month warranty'
+        ],
+        condition: 'Refurbished - Excellent',
+        seller: {
+            name: 'Recomputech Panama',
+            rating: 4.8,
+            reviews: 127,
+            verified: true,
+            location: 'Panama City, Panama'
+        },
+        stock: 14,
+        sku: 'ACC-VIRTUSX-AI-REF',
+        tags: ['mouse', 'virtusx', 'ai', 'wireless', 'accessory', 'refurbished']
     }
 };
 
