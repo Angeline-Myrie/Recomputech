@@ -3,6 +3,10 @@ class DashboardContentComponent extends HTMLElement {
         super();
         this.currentSection = 'overview';
         this.userData = null;
+<<<<<<< HEAD
+=======
+        this.externalPageUrl = null;
+>>>>>>> 097daefb445ed062edae3034be82f68f5a076d1e
     }
 
     connectedCallback() {
@@ -491,6 +495,20 @@ class DashboardContentComponent extends HTMLElement {
         `;
     }
 
+<<<<<<< HEAD
+=======
+    loadExternalPage(url) {
+        this.externalPageUrl = url;
+        if (url) {
+            this.innerHTML = `
+                <iframe src="${url}" style="width:100vw;height:100vh;border:none;display:block;"></iframe>
+            `;
+        } else {
+            this.loadSection();
+        }
+    }
+
+>>>>>>> 097daefb445ed062edae3034be82f68f5a076d1e
     setupEventListeners() {
         // Quick action buttons
         this.addEventListener('click', (e) => {
