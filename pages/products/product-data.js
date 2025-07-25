@@ -714,6 +714,436 @@ const PRODUCTS_DATABASE = {
         tags: ['smartphone', 'apple', 'ios', 'camera', 'refurbished']
     },
 
+    'galaxy-s23-fe': {
+        id: 'galaxy-s23-fe',
+        name: 'Galaxy S23 FE 128GB',
+        category: 'Smartphones Refurbished',
+        price: 499.99,
+        originalPrice: 799.99,
+        discount: 38,
+        images: [
+            '/assets/images/smartphones refurbished/Galaxy S23 FE 128GB - Gray.png',
+            '/assets/images/smartphones refurbished/Galaxy S23 FE 128GB - Gray.png',
+            '/assets/images/smartphones refurbished/Galaxy S23 FE 128GB - Gray.png'
+        ],
+        specs: {
+            processor: 'Exynos 2200 / Snapdragon 8 Gen 1',
+            ram: '8GB',
+            storage: '128GB',
+            display: '6.4\" Dynamic AMOLED 2X',
+            camera: '50MP + 12MP + 8MP',
+            battery: '4500mAh',
+            os: 'Android 13, One UI 5.1',
+            warranty: '6 months'
+        },
+        description: 'The Galaxy S23 FE brings fan-favorite features to a new flagship, with a pro-grade camera and powerful performance.',
+        features: [
+            'Pro-grade camera',
+            'Vibrant AMOLED display',
+            'All-day battery',
+            'Powerful performance',
+            '6-month warranty'
+        ],
+        condition: 'Refurbished - Excellent',
+        seller: {
+            name: 'Recomputech Panama',
+            rating: 4.8,
+            reviews: 127,
+            verified: true,
+            location: 'Panama City, Panama'
+        },
+        stock: 15,
+        sku: 'SAMSUNG-S23FE-REF',
+        tags: ['smartphone', 'samsung', 'android', 'camera', 'refurbished']
+    },
+
+    'galaxy-s23-ultra': {
+        id: 'galaxy-s23-ultra',
+        name: 'Galaxy S23 Ultra 256GB',
+        category: 'Smartphones Refurbished',
+        price: 899.99,
+        originalPrice: 1299.99,
+        discount: 31,
+        images: [
+            '/assets/images/smartphones refurbished/Galaxy S23 Ultra 256GB - Black.png',
+            '/assets/images/smartphones refurbished/Galaxy S23 Ultra 256GB - Black.png',
+            '/assets/images/smartphones refurbished/Galaxy S23 Ultra 256GB - Black.png'
+        ],
+        specs: {
+            processor: 'Snapdragon 8 Gen 2 for Galaxy',
+            ram: '12GB',
+            storage: '256GB',
+            display: '6.8\" Dynamic AMOLED 2X',
+            camera: '200MP + 12MP + 10MP + 10MP',
+            battery: '5000mAh',
+            os: 'Android 13, One UI 5.1',
+            warranty: '6 months'
+        },
+        description: 'The ultimate flagship experience with a groundbreaking 200MP camera, built-in S Pen, and unparalleled performance.',
+        features: [
+            '200MP camera system',
+            'Built-in S Pen',
+            'Dynamic AMOLED 2X display',
+            'Next-gen gaming performance',
+            '6-month warranty'
+        ],
+        condition: 'Refurbished - Excellent',
+        seller: {
+            name: 'Recomputech Panama',
+            rating: 4.9,
+            reviews: 210,
+            verified: true,
+            location: 'Panama City, Panama'
+        },
+        stock: 10,
+        sku: 'SAMSUNG-S23ULTRA-REF',
+        tags: ['smartphone', 'samsung', 'android', 's-pen', 'camera', 'refurbished']
+    },
+
+    'galaxy-z-flip6': {
+        id: 'galaxy-z-flip6',
+        name: 'Galaxy Z Flip6 256GB',
+        category: 'Smartphones Refurbished',
+        price: 799.99,
+        originalPrice: 1099.99,
+        discount: 27,
+        images: [
+            '/assets/images/smartphones refurbished/Galaxy Z Flip6 256GB - Green.png',
+            '/assets/images/smartphones refurbished/Galaxy Z Flip6 256GB - Green.png',
+            '/assets/images/smartphones refurbished/Galaxy Z Flip6 256GB - Green.png'
+        ],
+        specs: {
+            processor: 'Snapdragon 8 Gen 3 for Galaxy',
+            ram: '8GB',
+            storage: '256GB',
+            display: '6.7\" Foldable Dynamic AMOLED 2X',
+            camera: '50MP + 12MP',
+            battery: '4000mAh',
+            os: 'Android 14, One UI 6.1',
+            warranty: '6 months'
+        },
+        description: 'A stylish and compact foldable phone that fits in your pocket. The large cover screen offers new ways to interact and create.',
+        features: [
+            'Foldable design',
+            'Large cover screen',
+            'FlexCam for hands-free photos',
+            'Powerful performance',
+            '6-month warranty'
+        ],
+        condition: 'Refurbished - Excellent',
+        seller: {
+            name: 'Recomputech Panama',
+            rating: 4.7,
+            reviews: 95,
+            verified: true,
+            location: 'Panama City, Panama'
+        },
+        stock: 12,
+        sku: 'SAMSUNG-ZFLIP6-REF',
+        tags: ['smartphone', 'foldable', 'samsung', 'android', 'refurbished']
+    },
+
+    'google-pixel-6a': {
+        id: 'google-pixel-6a',
+        name: 'Google Pixel 6a 128GB',
+        category: 'Smartphones Refurbished',
+        price: 349.99,
+        originalPrice: 449.99,
+        discount: 22,
+        images: [
+            '/assets/images/smartphones refurbished/Google Pixel 6a 128GB - Green.png',
+            '/assets/images/smartphones refurbished/Google Pixel 6a 128GB - Green.png',
+            '/assets/images/smartphones refurbished/Google Pixel 6a 128GB - Green.png'
+        ],
+        specs: {
+            processor: 'Google Tensor',
+            ram: '6GB',
+            storage: '128GB',
+            display: '6.1\" OLED',
+            camera: '12.2MP + 12MP',
+            battery: '4410mAh',
+            os: 'Android 12',
+            warranty: '6 months'
+        },
+        description: 'The smarts of Google in a powerful and affordable package. Features the Google Tensor chip and an amazing camera.',
+        features: [
+            'Google Tensor chip',
+            'Incredible camera quality',
+            'All-day battery',
+            'Clean Android experience',
+            '6-month warranty'
+        ],
+        condition: 'Refurbished - Excellent',
+        seller: {
+            name: 'Recomputech Panama',
+            rating: 4.6,
+            reviews: 88,
+            verified: true,
+            location: 'Panama City, Panama'
+        },
+        stock: 20,
+        sku: 'GOOGLE-PIXEL6A-REF',
+        tags: ['smartphone', 'google', 'pixel', 'android', 'camera', 'refurbished']
+    },
+
+    'google-pixel-7': {
+        id: 'google-pixel-7',
+        name: 'Google Pixel 7 128GB',
+        category: 'Smartphones Refurbished',
+        price: 499.99,
+        originalPrice: 599.99,
+        discount: 17,
+        images: [
+            '/assets/images/smartphones refurbished/Google Pixel 7 128GB - Black.png',
+            '/assets/images/smartphones refurbished/Google Pixel 7 128GB - Black.png',
+            '/assets/images/smartphones refurbished/Google Pixel 7 128GB - Black.png'
+        ],
+        specs: {
+            processor: 'Google Tensor G2',
+            ram: '8GB',
+            storage: '128GB',
+            display: '6.3\" OLED, 90Hz',
+            camera: '50MP + 12MP',
+            battery: '4355mAh',
+            os: 'Android 13',
+            warranty: '6 months'
+        },
+        description: 'The helpful Google phone, with the powerful Tensor G2 chip, an advanced camera, and amazing AI features.',
+        features: [
+            'Google Tensor G2 chip',
+            'Advanced camera with Real Tone',
+            'Smooth 90Hz display',
+            'VPN by Google One included',
+            '6-month warranty'
+        ],
+        condition: 'Refurbished - Excellent',
+        seller: {
+            name: 'Recomputech Panama',
+            rating: 4.7,
+            reviews: 150,
+            verified: true,
+            location: 'Panama City, Panama'
+        },
+        stock: 18,
+        sku: 'GOOGLE-PIXEL7-REF',
+        tags: ['smartphone', 'google', 'pixel', 'android', 'camera', 'refurbished']
+    },
+
+    'google-pixel-8': {
+        id: 'google-pixel-8',
+        name: 'Google Pixel 8 128GB',
+        category: 'Smartphones Refurbished',
+        price: 649.99,
+        originalPrice: 799.99,
+        discount: 19,
+        images: [
+            '/assets/images/smartphones refurbished/Google Pixel 8 128GB - Rose Gold.png',
+            '/assets/images/smartphones refurbished/Google Pixel 8 128GB - Rose Gold.png',
+            '/assets/images/smartphones refurbished/Google Pixel 8 128GB - Rose Gold.png'
+        ],
+        specs: {
+            processor: 'Google Tensor G3',
+            ram: '8GB',
+            storage: '128GB',
+            display: '6.2\" Actua OLED, 120Hz',
+            camera: '50MP + 12MP',
+            battery: '4575mAh',
+            os: 'Android 14',
+            warranty: '6 months'
+        },
+        description: 'The Google Pixel 8, engineered by Google with the powerful Tensor G3 chip and cutting-edge AI for a more helpful and personal experience.',
+        features: [
+            'Google Tensor G3 chip',
+            'Best Take and Magic Editor',
+            'Super bright 120Hz display',
+            '7 years of OS updates',
+            '6-month warranty'
+        ],
+        condition: 'Refurbished - Excellent',
+        seller: {
+            name: 'Recomputech Panama',
+            rating: 4.8,
+            reviews: 190,
+            verified: true,
+            location: 'Panama City, Panama'
+        },
+        stock: 14,
+        sku: 'GOOGLE-PIXEL8-REF',
+        tags: ['smartphone', 'google', 'pixel', 'android', 'ai', 'camera', 'refurbished']
+    },
+
+    'google-pixel-9-pro-xl': {
+        id: 'google-pixel-9-pro-xl',
+        name: 'Google Pixel 9 Pro XL 512GB',
+        category: 'Smartphones Refurbished',
+        price: 999.99,
+        originalPrice: 1399.99,
+        discount: 29,
+        images: [
+            '/assets/images/smartphones refurbished/Google Pixel 9 Pro XL 512GB - Black.png',
+            '/assets/images/smartphones refurbished/Google Pixel 9 Pro XL 512GB - Black.png',
+            '/assets/images/smartphones refurbished/Google Pixel 9 Pro XL 512GB - Black.png'
+        ],
+        specs: {
+            processor: 'Google Tensor G4',
+            ram: '16GB',
+            storage: '512GB',
+            display: '6.8\" Super Actua LTPO OLED, 120Hz',
+            camera: '50MP + 50MP + 50MP',
+            battery: '5100mAh',
+            os: 'Android 15',
+            warranty: '6 months'
+        },
+        description: 'The ultimate Pixel experience with the most advanced camera system, a pro-level display, and the powerful Google Tensor G4 chip.',
+        features: [
+            'Google Tensor G4 chip',
+            'Pro camera system with manual controls',
+            'Largest Pixel display ever',
+            'AI-powered features',
+            '6-month warranty'
+        ],
+        condition: 'Refurbished - Excellent',
+        seller: {
+            name: 'Recomputech Panama',
+            rating: 4.9,
+            reviews: 250,
+            verified: true,
+            location: 'Panama City, Panama'
+        },
+        stock: 8,
+        sku: 'GOOGLE-PIXEL9PROXL-REF',
+        tags: ['smartphone', 'google', 'pixel', 'pro', 'android', 'camera', 'refurbished']
+    },
+
+    'iphone-13-mini': {
+        id: 'iphone-13-mini',
+        name: 'iPhone 13 mini 256GB',
+        category: 'Smartphones Refurbished',
+        price: 549.99,
+        originalPrice: 799.99,
+        discount: 31,
+        images: [
+            '/assets/images/smartphones refurbished/iPhone 13 mini 256GB – Blue.png',
+            '/assets/images/smartphones refurbished/iPhone 13 mini 256GB – Blue.png',
+            '/assets/images/smartphones refurbished/iPhone 13 mini 256GB – Blue.png'
+        ],
+        specs: {
+            processor: 'Apple A15 Bionic',
+            ram: '4GB',
+            storage: '256GB',
+            display: '5.4\" Super Retina XDR',
+            camera: '12MP + 12MP',
+            battery: '2438mAh',
+            os: 'iOS 15',
+            warranty: '6 months'
+        },
+        description: 'A compact powerhouse with the A15 Bionic chip, advanced dual-camera system, and a bright Super Retina XDR display.',
+        features: [
+            'A15 Bionic chip',
+            'Compact 5.4-inch display',
+            'Advanced dual-camera system',
+            'Ceramic Shield front',
+            '6-month warranty'
+        ],
+        condition: 'Refurbished - Excellent',
+        seller: {
+            name: 'Recomputech Panama',
+            rating: 4.7,
+            reviews: 110,
+            verified: true,
+            location: 'Panama City, Panama'
+        },
+        stock: 16,
+        sku: 'APPLE-IPHONE13MINI-REF',
+        tags: ['smartphone', 'apple', 'ios', 'compact', 'refurbished']
+    },
+
+    'iphone-14': {
+        id: 'iphone-14',
+        name: 'iPhone 14 128GB',
+        category: 'Smartphones Refurbished',
+        price: 699.99,
+        originalPrice: 999.99,
+        discount: 30,
+        images: [
+            '/assets/images/smartphones refurbished/iPhone 14 128GB - Midnight.png',
+            '/assets/images/smartphones refurbished/iPhone 14 128GB - Midnight.png',
+            '/assets/images/smartphones refurbished/iPhone 14 128GB - Midnight.png'
+        ],
+        specs: {
+            processor: 'Apple A15 Bionic',
+            ram: '6GB',
+            storage: '128GB',
+            display: '6.1\" Super Retina XDR',
+            camera: '12MP + 12MP',
+            battery: '3279mAh',
+            os: 'iOS 16',
+            warranty: '6 months'
+        },
+        description: 'The iPhone 14 features an impressive dual-camera system, the powerful A15 Bionic chip, and vital new safety features.',
+        features: [
+            'A15 Bionic chip',
+            'Crash Detection and Emergency SOS',
+            'Impressive dual-camera system',
+            'All-day battery life',
+            '6-month warranty'
+        ],
+        condition: 'Refurbished - Excellent',
+        seller: {
+            name: 'Recomputech Panama',
+            rating: 4.8,
+            reviews: 180,
+            verified: true,
+            location: 'Panama City, Panama'
+        },
+        stock: 22,
+        sku: 'APPLE-IPHONE14-REF',
+        tags: ['smartphone', 'apple', 'ios', 'camera', 'refurbished']
+    },
+
+    'iphone-se-2022': {
+        id: 'iphone-se-2022',
+        name: 'iPhone SE (2022) 64GB',
+        category: 'Smartphones Refurbished',
+        price: 329.99,
+        originalPrice: 429.99,
+        discount: 23,
+        images: [
+            '/assets/images/smartphones refurbished/iPhone SE (2022) 64GB – Midnight.png',
+            '/assets/images/smartphones refurbished/iPhone SE (2022) 64GB – Midnight.png',
+            '/assets/images/smartphones refurbished/iPhone SE (2022) 64GB – Midnight.png'
+        ],
+        specs: {
+            processor: 'Apple A15 Bionic',
+            ram: '4GB',
+            storage: '64GB',
+            display: '4.7\" Retina HD',
+            camera: '12MP',
+            battery: '2018mAh',
+            os: 'iOS 15',
+            warranty: '6 months'
+        },
+        description: 'A powerful smartphone in a classic design. Features the A15 Bionic chip, 5G, and a great camera, all at an incredible price.',
+        features: [
+            'A15 Bionic chip',
+            '5G connectivity',
+            'Classic design with Home button',
+            'Durable design and water resistance',
+            '6-month warranty'
+        ],
+        condition: 'Refurbished - Excellent',
+        seller: {
+            name: 'Recomputech Panama',
+            rating: 4.6,
+            reviews: 99,
+            verified: true,
+            location: 'Panama City, Panama'
+        },
+        stock: 30,
+        sku: 'APPLE-IPHONESE2022-REF',
+        tags: ['smartphone', 'apple', 'ios', 'compact', 'refurbished']
+    },
+
     // Tablets
     'ipad-pro-11': {
         id: 'ipad-pro-11',

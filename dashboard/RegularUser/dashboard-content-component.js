@@ -3,6 +3,7 @@ class DashboardContentComponent extends HTMLElement {
         super();
         this.currentSection = 'overview';
         this.userData = null;
+        this.externalPageUrl = null;
     }
 
     connectedCallback() {
@@ -489,6 +490,17 @@ class DashboardContentComponent extends HTMLElement {
                 </div>
             </div>
         `;
+    }
+
+    loadExternalPage(url) {
+        this.externalPageUrl = url;
+        if (url) {
+            this.innerHTML = `
+                <iframe src="${url}" style="width:100vw;height:100vh;border:none;display:block;"></iframe>
+            `;
+        } else {
+            this.loadSection();
+        }
     }
 
     setupEventListeners() {
