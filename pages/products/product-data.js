@@ -9,9 +9,9 @@ const PRODUCTS_DATABASE = {
         originalPrice: 399.99,
         discount: 40,
         images: [
-            '/assets/images/pcs refurbished/DELL 3070.png',
-            '/assets/images/pcs refurbished/DELL 3070.png',
-            '/assets/images/pcs refurbished/DELL 3070.png'
+            '/assets/images/pcs%20refurbished/DELL%203070.png',
+            '/assets/images/pcs%20refurbished/DELL%203070.png',
+            '/assets/images/pcs%20refurbished/DELL%203070.png'
         ],
         specs: {
             processor: 'Intel Core i5-8500 (6th Gen)',
