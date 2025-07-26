@@ -848,7 +848,7 @@ class HeaderComponent extends HTMLElement {
                     <div class="recomputech-navbar-container">
                         <!-- Logo Section -->
                         <a class="recomputech-navbar-brand" href="index.html">
-                            <img src="/assets/logos/logo-.png" alt="Logo" class="recomputech-logo recomputech-logo-small">
+                            <img src="../assets/logos/logo-.png" alt="Logo" class="recomputech-logo recomputech-logo-small">
                             <div class="recomputech-brand-text">
                                 <span class="recomputech-brand-name">Recomputech</span>
                                 <span class="recomputech-brand-tagline">Sustainable Technology</span>
@@ -858,10 +858,10 @@ class HeaderComponent extends HTMLElement {
                         <!-- Navigation Section -->
                         <ul class="recomputech-navbar-nav">
                             <li><a class="recomputech-nav-link" href="/index.html">Home</a></li>
-                            <li><a class="recomputech-nav-link" href="/pages/marketplace.html">Marketplace</a></li>
-                            <li><a class="recomputech-nav-link" href="/pages/Aboutus.html">About Us</a></li>
-                            <li><a class="recomputech-nav-link" href="/pages/services.html">Services</a></li>
-                            <li><a class="recomputech-nav-link" href="/pages/contact.html">Contact</a></li>
+                            <li><a class="recomputech-nav-link" href="../pages/marketplace.html">Marketplace</a></li>
+                            <li><a class="recomputech-nav-link" href="../pages/Aboutus.html">About Us</a></li>
+                            <li><a class="recomputech-nav-link" href="../pages/services.html">Services</a></li>
+                            <li><a class="recomputech-nav-link" href="../pages/contact.html">Contact</a></li>
                         </ul>
 
                         <!-- Actions Section -->
