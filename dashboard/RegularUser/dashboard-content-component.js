@@ -48,28 +48,24 @@ class DashboardContentComponent extends HTMLElement {
     }
 
     isValidSection(section) {
-        const validSections = ['overview', 'sell', 'purchases', 'my-products', 'cart', 'settings'];
+        const validSections = ['overview', 'my-products', 'add-product', 'purchases', 'settings'];
         return validSections.includes(section);
     }
 
     loadSection() {
         console.log('Loading section:', this.currentSection);
-        
         switch (this.currentSection) {
             case 'overview':
                 this.loadOverview();
                 break;
-            case 'sell':
-                this.loadSell();
-                break;
-            case 'purchases':
-                this.loadPurchases();
-                break;
             case 'my-products':
                 this.loadMyProducts();
                 break;
-            case 'cart':
-                this.loadCart();
+            case 'add-product':
+                this.loadSell(); // Reutiliza el formulario de venta
+                break;
+            case 'purchases':
+                this.loadPurchases();
                 break;
             case 'settings':
                 this.loadSettings();
@@ -316,73 +312,11 @@ class DashboardContentComponent extends HTMLElement {
     }
 
     loadPurchases() {
-        this.innerHTML = `
-            <div class="dashboard-section" data-aos="fade-up">
-                <!-- Section Header -->
-                <section class="section-header">
-                    <div class="header-content">
-                        <h1>My Purchases</h1>
-                        <p>Track your orders and purchase history</p>
-                    </div>
-                </section>
-
-                <div class="content-container">
-                    <div class="dashboard-card">
-                        <div class="card-header">
-                            <h3><i class="fas fa-shopping-bag"></i> Purchase History</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="purchase-list" id="purchaseList">
-                                <div class="activity-item">
-                                    <div class="activity-icon">
-                                        <i class="fas fa-box"></i>
-                                    </div>
-                                    <div class="activity-content">
-                                        <h5>No purchases yet</h5>
-                                        <p>Start shopping to see your purchase history here</p>
-                                        <span class="activity-time">Ready to shop</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
+        this.innerHTML = `<my-purchases-component></my-purchases-component>`;
     }
 
     loadMyProducts() {
-        this.innerHTML = `
-            <div class="dashboard-section" data-aos="fade-up">
-                <!-- Section Header -->
-                <section class="section-header">
-                    <div class="header-content">
-                        <h1>My Products</h1>
-                        <p>Manage your listed products and track their performance</p>
-                    </div>
-                </section>
-
-                <div class="content-container">
-                    <div class="dashboard-card">
-                        <div class="card-header">
-                            <h3><i class="fas fa-box"></i> Listed Products</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="product-grid" id="myProductsGrid">
-                                <div class="text-center py-5">
-                                    <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
-                                    <h5 class="text-muted">No products listed yet</h5>
-                                    <p class="text-muted">Start selling to see your products here</p>
-                                    <button class="btn btn-primary" data-section="sell">
-                                        <i class="fas fa-plus-circle"></i> List Your First Product
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
+        this.innerHTML = `<my-products-component></my-products-component>`;
     }
 
     loadCart() {
