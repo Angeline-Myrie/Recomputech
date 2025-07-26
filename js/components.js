@@ -1,4 +1,6 @@
 <<<<<<< HEAD
+=======
+<<<<<<< HEAD
 // Función para cargar componentes
 async function loadComponent(elementId, componentPath) {
     try {
@@ -30,6 +32,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadComponent('header-component', '../components/header.html');
     loadComponent('footer-component', '../components/footer.html');
 =======
+>>>>>>> 097daefb445ed062edae3034be82f68f5a076d1e
 // Función para cargar componentes
 async function loadComponent(elementId, componentPath) {
     try {
@@ -84,5 +87,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (footerComponent && !footerComponent.querySelector('rc-footer')) {
         loadComponent('footer-component', '../components/footer.html');
     }
+<<<<<<< HEAD
+=======
 >>>>>>> fa617b30c97b8936e5024d86394dc1b7f7c7110d
+>>>>>>> 097daefb445ed062edae3034be82f68f5a076d1e
 }); 

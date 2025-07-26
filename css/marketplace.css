@@ -591,6 +591,37 @@
   }
   
   .product-image {
+<<<<<<< HEAD
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 150px;
+      min-height: 150px;
+      max-height: 150px;
+      padding: 0;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+      border-top-left-radius: 18px;
+      border-top-right-radius: 18px;
+  }
+  .product-image img {
+      width: 90%;
+      height: 90%;
+      object-fit: contain;
+      margin: 0 auto;
+      display: block;
+      background: transparent;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(25, 118, 210, 0.07);
+      transition: transform 0.35s cubic-bezier(.4,2,.6,1), box-shadow 0.25s;
+  }
+  .product-card:hover .product-image img {
+      transform: scale(1.07);
+      box-shadow: 0 6px 24px rgba(25, 118, 210, 0.13);
+  }
+=======
       height: 200px;
       background: linear-gradient(135deg, #218DA6, #1b6e82);
       display: flex;
@@ -610,6 +641,7 @@
     padding: 10px;       /* Opcional: agrega espacio alrededor */
     border-radius: 10px; /* Opcional: bordes redondeados */
 }
+>>>>>>> 097daefb445ed062edae3034be82f68f5a076d1e
   @media (max-width: 991px) {
       .product-image {
           height: 110px;
@@ -820,6 +852,17 @@ body {
 
 /* Sidebar */
 .sidebar {
+<<<<<<< HEAD
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    height: 600px;
+    width: 100%;
+    overflow-y: auto;
+    position: relative;
+}
+=======
      background: white;
      border-radius: 20px;
      padding: 2rem;
@@ -900,6 +943,7 @@ body {
 }
 /* Elimino el bracket extra que causa error de lint */
 
+>>>>>>> 097daefb445ed062edae3034be82f68f5a076d1e
 
 .sidebar::-webkit-scrollbar {
     width: 6px;
@@ -916,6 +960,38 @@ body {
 }
 
 .sidebar::-webkit-scrollbar-thumb:hover {
+<<<<<<< HEAD
+    background: #a8a8a8;
+}
+
+.sidebar-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter-section {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.filter-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.filter-label {
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 1rem;
+    display: block;
+}
+=======
     background: transparent;
     z-index: 100;
     cursor: ew-resize;
@@ -930,6 +1006,7 @@ body {
 }
 /* El handle no tiene logo, solo área interactiva */
 
+>>>>>>> 097daefb445ed062edae3034be82f68f5a076d1e
 
 /* Category Filters */
 .category-filters {
@@ -1155,23 +1232,39 @@ body {
     color: white;
     font-size: 3rem;
     position: relative;
+<<<<<<< HEAD
+=======
     /* Añade fondo blanco para mejor visibilidad */
     background: #fff;
+>>>>>>> 097daefb445ed062edae3034be82f68f5a076d1e
 }
 
 .product-image img {
     width: 100%;
     height: 100%;
+<<<<<<< HEAD
+    object-fit: cover;
+}
+
+=======
     object-fit: contain; /* Cambia cover por contain */
     background: #fff;    /* Fondo blanco detrás de la imagen */
     padding: 10px;       /* Opcional: agrega espacio alrededor */
     border-radius: 10px; /* Opcional: bordes redondeados */
 }
+>>>>>>> 097daefb445ed062edae3034be82f68f5a076d1e
 .product-discount {
     position: absolute;
     top: 1rem;
     right: 1rem;
     background: #ef4444;
+<<<<<<< HEAD
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+=======
     /* Elimino cualquier pseudo-elemento que pueda mostrar una flecha */
     font-size: 0 !important;
     line-height: 0 !important;
@@ -1181,6 +1274,7 @@ body {
     /* Si por error hay contenido, lo oculto */
     overflow: hidden;
     padding: 0.25rem 0.75rem;
+>>>>>>> 097daefb445ed062edae3034be82f68f5a076d1e
 }
 
 .product-info {
