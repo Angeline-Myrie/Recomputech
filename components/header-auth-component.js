@@ -861,21 +861,17 @@ class RecomputechHeaderAuth extends HTMLElement {
                                         <i class="fas fa-tachometer-alt"></i>
                                         Overview
                                     </a>
-                                    <a href="#sell" class="dropdown-item" data-section="sell">
-                                        <i class="fas fa-plus-circle"></i>
-                                        Sell
-                                    </a>
-                                    <a href="#purchases" class="dropdown-item" data-section="purchases">
-                                        <i class="fas fa-shopping-bag"></i>
-                                        Purchases
-                                    </a>
                                     <a href="#my-products" class="dropdown-item" data-section="my-products">
                                         <i class="fas fa-box"></i>
                                         My Products
                                     </a>
-                                    <a href="#cart" class="dropdown-item" data-section="cart">
-                                        <i class="fas fa-shopping-cart"></i>
-                                        Cart
+                                    <a href="#add-product" class="dropdown-item" data-section="add-product">
+                                        <i class="fas fa-plus-circle"></i>
+                                        Add Product
+                                    </a>
+                                    <a href="#purchases" class="dropdown-item" data-section="purchases">
+                                        <i class="fas fa-shopping-bag"></i>
+                                        Purchases
                                     </a>
                                     <a href="#settings" class="dropdown-item" data-section="settings">
                                         <i class="fas fa-cog"></i>
@@ -1055,6 +1051,19 @@ class RecomputechHeaderAuth extends HTMLElement {
                     if (dashboardContent) {
                         dashboardContent.loadExternalPage(url);
                     }
+                }
+            });
+        });
+
+        const dropdownLinks = dropdownMenu.querySelectorAll('.dropdown-item[data-section]');
+        dropdownLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const section = link.getAttribute('data-section');
+                if (section) {
+                    dropdownMenu.classList.remove('show');
+                    // Disparar evento personalizado para navegación interna
+                    document.dispatchEvent(new CustomEvent('dashboard-navigate', { detail: { section } }));
                 }
             });
         });
