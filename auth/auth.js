@@ -227,8 +227,8 @@ document.addEventListener('DOMContentLoaded', async function() {
                 } else if (user.role === 'admin') {
                     window.location.href = '../dashboard/Admin/dashboard-admin.html';
                 } else {
-                    // Regular user - redirect to home page
-                    window.location.href = '../index.html';
+                    // Regular user - redirect to dashboard
+                    window.location.href = '../dashboard/RegularUser/dashboard.html';
                 }
             }, 1500);
         } else {
