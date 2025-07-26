@@ -825,18 +825,18 @@ class RecomputechHeaderAuth extends HTMLElement {
 
                         <!-- Navigation Section -->
                         <ul class="recomputech-navbar-nav">
-<<<<<<< HEAD
+
                             <li><a class="recomputech-nav-link" href="/pages/marketplace.html">Marketplace</a></li>
                             <li><a class="recomputech-nav-link" href="/pages/technician/info-technician.html">Technicians</a></li>
                             <li><a class="recomputech-nav-link" href="/pages/services.html">Services</a></li>
                             <li><a class="recomputech-nav-link" href="/pages/Aboutus.html">About Us</a></li>
                             <li><a class="recomputech-nav-link" href="/pages/contact.html">Contact</a></li>
-=======
+
                             <li><a class="recomputech-nav-link" href="#" data-url="/pages/marketplace.html">Marketplace</a></li>
                             <li><a class="recomputech-nav-link" href="#" data-url="/pages/contact.html">Contact</a></li>
                             <li><a class="recomputech-nav-link" href="#" data-url="/pages/Aboutus.html">About Us</a></li>
                             <li><a class="recomputech-nav-link" href="#" data-url="/pages/services.html">Services</a></li>
->>>>>>> 097daefb445ed062edae3034be82f68f5a076d1e
+
                         </ul>
 
                         <!-- Actions Section -->
@@ -865,7 +865,7 @@ class RecomputechHeaderAuth extends HTMLElement {
                                 </div>
 
                                 <div class="dropdown-menu" id="dropdownMenu">
-<<<<<<< HEAD
+
                                     <a href="/dashboard/RegularUser/dashboard.html" class="dropdown-item">
                                         <i class="fas fa-tachometer-alt"></i>
                                         Overview
@@ -887,29 +887,25 @@ class RecomputechHeaderAuth extends HTMLElement {
                                         Cart
                                     </a>
                                     <a href="/dashboard/RegularUser/dashboard.html#settings" class="dropdown-item">
-=======
+
                                     <a href="#overview" class="dropdown-item" data-section="overview">
                                         <i class="fas fa-tachometer-alt"></i>
                                         Overview
-                                    </a>
-                                    <a href="#sell" class="dropdown-item" data-section="sell">
-                                        <i class="fas fa-plus-circle"></i>
-                                        Sell
-                                    </a>
-                                    <a href="#purchases" class="dropdown-item" data-section="purchases">
-                                        <i class="fas fa-shopping-bag"></i>
-                                        Purchases
                                     </a>
                                     <a href="#my-products" class="dropdown-item" data-section="my-products">
                                         <i class="fas fa-box"></i>
                                         My Products
                                     </a>
-                                    <a href="#cart" class="dropdown-item" data-section="cart">
-                                        <i class="fas fa-shopping-cart"></i>
-                                        Cart
+                                    <a href="#add-product" class="dropdown-item" data-section="add-product">
+                                        <i class="fas fa-plus-circle"></i>
+                                        Add Product
+                                    </a>
+                                    <a href="#purchases" class="dropdown-item" data-section="purchases">
+                                        <i class="fas fa-shopping-bag"></i>
+                                        Purchases
                                     </a>
                                     <a href="#settings" class="dropdown-item" data-section="settings">
->>>>>>> 097daefb445ed062edae3034be82f68f5a076d1e
+
                                         <i class="fas fa-cog"></i>
                                         Settings
                                     </a>
@@ -1074,8 +1070,7 @@ class RecomputechHeaderAuth extends HTMLElement {
 
         // Set active nav link based on current page
         this.setActiveNavLink();
-<<<<<<< HEAD
-=======
+
 
         // Navigation links (main bar and dropdown)
         const navLinks = this.shadowRoot.querySelectorAll('.recomputech-nav-link');
@@ -1092,7 +1087,20 @@ class RecomputechHeaderAuth extends HTMLElement {
                 }
             });
         });
->>>>>>> 097daefb445ed062edae3034be82f68f5a076d1e
+
+        const dropdownLinks = dropdownMenu.querySelectorAll('.dropdown-item[data-section]');
+        dropdownLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const section = link.getAttribute('data-section');
+                if (section) {
+                    dropdownMenu.classList.remove('show');
+                    // Disparar evento personalizado para navegación interna
+                    document.dispatchEvent(new CustomEvent('dashboard-navigate', { detail: { section } }));
+                }
+            });
+        });
+ main
     }
 
     getCurrentUser() {
