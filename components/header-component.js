@@ -1269,13 +1269,18 @@ class HeaderComponent extends HTMLElement {
             this.showNotification('Your cart is empty', 'error');
             return;
         }
-        
-        // Here you can implement checkout logic
-        console.log('Proceeding to checkout with items:', this.cartItems);
-        this.showNotification('Redirecting to checkout...', 'success');
-        
-        // For demo purposes, you can redirect to a checkout page
-        // window.location.href = '/checkout.html';
+        // Guardar carrito en localStorage para el checkout
+        localStorage.setItem('cartItems', JSON.stringify(this.cartItems.map(item => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            image: item.image,
+            qty: item.quantity || 1
+        }))));
+        this.showNotification('Redirigiendo a checkout...', 'success');
+        setTimeout(() => {
+            window.location.href = '/pages/checkout.html';
+        }, 800);
     }
 
     showNotification(message, type = 'info') {

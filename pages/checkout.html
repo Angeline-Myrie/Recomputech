@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - Recomputech</title>
+    <link rel="stylesheet" href="../css/checkout.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="headerContainer">
+        <script>window.addEventListener('DOMContentLoaded',()=>{const hc=document.getElementById('headerContainer');if(hc){const h=document.createElement('script');h.src='../components/header-component.js';document.body.appendChild(h);hc.innerHTML='<recomputech-header></recomputech-header>';}});</script>
+    </div>
+    <div class="checkout-inspiration-container" style="margin-top: 110px;">
+        <h1 class="checkout-title">Finalizar Compra</h1>
+        <div class="checkout-inspiration-content">
+            <div class="checkout-card resumen-compra">
+                <h2 class="card-title">Resumen de tu compra</h2>
+                <div id="cartItemsContainer"></div>
+                <div class="cart-total-inspiration">
+                    <span>Total:</span>
+                    <span id="cartTotal" class="cart-total-green">B/. 0.00</span>
+                </div>
+            </div>
+            <div class="checkout-card datos-factura">
+                <h2 class="card-title">Datos para la Factura</h2>
+                <form id="checkoutForm" class="factura-form">
+                    <label for="email">Correo electrónico:</label>
+                    <input type="email" id="email" name="email" required>
+                    <label for="phone">Número de teléfono:</label>
+                    <input type="tel" id="phone" name="phone" required pattern="[0-9]{7,15}">
+                    <div class="payment-section payment-card-section">
+                        <div class="card-payment-header">
+                            <span class="payment-title">Pagar con tarjeta</span>
+                            <span class="card-logos">
+                                <img src="../assets/logos/visa.png" alt="Visa" class="card-logo">
+                                <img src="../assets/logos/mastercard.png" alt="Mastercard" class="card-logo">
+                                <img src="../assets/logos/maestro.png" alt="Maestro" class="card-logo">
+                            </span>
+                        </div>
+                        <div class="card-payment-content">
+                            <div class="card-payment-form">
+                                <div class="card-form-group">
+                                    <label for="cardHolder">Nombre del titular</label>
+                                    <input type="text" id="cardHolder" name="cardHolder" maxlength="32" placeholder="John Doe">
+                                </div>
+                                <div class="card-form-group">
+                                    <label for="cardNumber">Número de tarjeta</label>
+                                    <input type="text" id="cardNumber" name="cardNumber" maxlength="19" placeholder="0000 0000 0000 0000">
+                                </div>
+                                <div class="card-form-row">
+                                    <div class="card-form-group">
+                                        <label for="cardExpiry">Fecha de expiración</label>
+                                        <input type="text" id="cardExpiry" name="cardExpiry" maxlength="5" placeholder="MM/AA">
+                                    </div>
+                                    <div class="card-form-group">
+                                        <label for="cardCVC">CVV</label>
+                                        <input type="text" id="cardCVC" name="cardCVC" maxlength="4" placeholder="123">
+                                    </div>
+                                </div>
+                                <button type="submit" class="factura-btn card-submit-btn">Pagar</button>
+                                <div class="card-disclaimer">* Disclaimer. Lorem ipsum es un texto de ejemplo para la industria de impresión y diseño.</div>
+                            </div>
+                        </div>
+                        <div class="yappy-or">o</div>
+                        <button type="button" class="yappy-btn" id="yappyPayBtn">Pagar con Yappy</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="confirmationScreen" class="confirmation-screen">
+            <div class="confirmation-content">
+                <h2>¡Gracias por tu compra!</h2>
+                <p>Tu pedido ha sido procesado exitosamente.<br>Te hemos enviado la factura y recomendaciones a tu correo.</p>
+                <a href="../index.html" class="confirmation-home-btn">Volver al inicio</a>
+            </div>
+        </div>
+    </div>
+    <div id="footerContainer">
+        <script>window.addEventListener('DOMContentLoaded',()=>{const fc=document.getElementById('footerContainer');if(fc){const f=document.createElement('script');f.src='../components/footer-component.js';document.body.appendChild(f);fc.innerHTML='<recomputech-footer></recomputech-footer>';}});</script>
+    </div>
+    <script src="../js/checkout.js"></script>
+</body>
+</html> 
