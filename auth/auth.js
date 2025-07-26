@@ -98,20 +98,16 @@ document.addEventListener('DOMContentLoaded', async function() {
     toggleBtns.forEach(btn => {
         btn.addEventListener('click', function() {
             const mode = this.dataset.mode;
-            
-            if (mode === currentMode) return;
-
+            // Siempre permitir el cambio de modo
             // Update active button
             toggleBtns.forEach(b => b.classList.remove('active'));
             this.classList.add('active');
-
             // Update content based on mode
             if (mode === 'login') {
                 switchToLogin();
             } else {
                 switchToRegister();
             }
-
             currentMode = mode;
         });
     });
@@ -278,12 +274,15 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         // Simulate registration process
         showNotification('Creating account...', 'info');
-        
-        // Here you would typically make an API call
+        // Detectar si el tipo de usuario es Technician
+        const technicianBtn = document.querySelector('.user-type-btn[data-type="technician"]');
         setTimeout(() => {
             showNotification('Account created successfully!', 'success');
-            // Redirect to dashboard or home page
-            // window.location.href = '../dashboard-user.html';
+            if (technicianBtn.classList.contains('active')) {
+                window.location.href = 'welcome-technician.html';
+            } else {
+                window.location.href = '../index.html';
+            }
         }, 2000);
     });
 
@@ -477,6 +476,8 @@ function showError(input, message) {
     input.classList.add('is-invalid');
 }
 
+    // Detectar si el tipo de usuario es Technician
+    // (Eliminado: este bloque ya está dentro del setTimeout de registro y no debe estar aquí, para no interferir con el toggle)
 function removeError(input) {
     const formGroup = input.closest('.form-group');
     const errorDiv = formGroup.querySelector('.error-message');

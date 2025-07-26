@@ -433,6 +433,12 @@
           clickable: true,
         }
       });
+
+      // Oculta el header si está dentro de un iframe (dashboard)
+      if (window.self !== window.top) {
+        const header = document.getElementById('headerContainer') || document.querySelector('header') || document.querySelector('recomputech-header') || document.querySelector('recomputech-header-auth');
+        if (header) header.style.display = 'none';
+      }
     </script>
 </body>
 </html>
