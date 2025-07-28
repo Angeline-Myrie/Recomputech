@@ -55,36 +55,35 @@
             <div class="row">
                 <!-- Sidebar Filters -->
                 <div class="col-lg-3 col-md-4">
-                    <div class="sidebar">
-                        <h3 class="sidebar-title">
-                            <i class="fas fa-filter"></i>
-                            Filters
-                        </h3>
-
-                        <!-- Categories -->
-                        <div class="filter-section">
-                            <label class="filter-label">Categories</label>
-                            <div class="category-filters">
-                                <div class="category-item active" data-category="all">
-                                    <i class="fas fa-border-all category-icon"></i>
-                                    <span>All Products</span>
-                        </div>
-                                <div class="category-item" data-category="PCs Refurbished">
-                                    <i class="fas fa-desktop category-icon"></i>
-                                    <span>Desktop PCs</span>
+                    <div class="sidebar" id="sidebar">
+                        <div class="category-filters">
+                            <div class="category-item" data-category="all">
+                                <i class="fas fa-border-all category-icon"></i>
+                                <span>All Products</span>
                             </div>
-                                <div class="category-item" data-category="Smartphones Refurbished">
-                                    <i class="fas fa-mobile-alt category-icon"></i>
-                                    <span>Smartphones</span>
+                            <div class="category-item" data-category="PCs Refurbished">
+                                <i class="fas fa-desktop category-icon"></i>
+                                <span>Desktop PCs</span>
                             </div>
-                                <div class="category-item" data-category="Tablets">
-                                    <i class="fas fa-tablet-alt category-icon"></i>
-                                    <span>Tablets</span>
-                        </div>
-                                <div class="category-item" data-category="Mini PCs">
-                                    <i class="fas fa-laptop category-icon"></i>
-                                    <span>Mini PCs</span>
+                            <div class="category-item" data-category="Laptops Refurbished">
+                                <i class="fas fa-laptop category-icon"></i>
+                                <span>Laptops</span>
                             </div>
+                            <div class="category-item" data-category="Smartphones Refurbished">
+                                <i class="fas fa-mobile-alt category-icon"></i>
+                                <span>Smartphones</span>
+                            </div>
+                            <div class="category-item" data-category="Tablets">
+                                <i class="fas fa-tablet-alt category-icon"></i>
+                                <span>Tablets</span>
+                            </div>
+                            <div class="category-item" data-category="Mini PCs">
+                                <i class="fas fa-laptop category-icon"></i>
+                                <span>Mini PCs</span>
+                            </div>
+                            <div class="category-item" data-category="Accessories Refurbished">
+                                <i class="fas fa-headphones-alt category-icon"></i>
+                                <span>Accessories</span>
                             </div>
                         </div>
 
@@ -95,12 +94,12 @@
                                 <div class="price-inputs">
                                     <input type="number" class="price-input" placeholder="Min" id="minPrice">
                                     <input type="number" class="price-input" placeholder="Max" id="maxPrice">
-                    </div>
+                                </div>
                                 <input type="range" class="price-slider" min="0" max="1000" value="500" id="priceSlider">
                                 <div class="d-flex justify-content-between">
                                     <small>$ 0</small>
                                     <small>$ 1000</small>
-                            </div>
+                                </div>
                             </div>
                         </div>
 
@@ -111,23 +110,23 @@
                                 <div class="brand-item">
                                     <input type="checkbox" class="brand-checkbox" id="dell" value="DELL">
                                     <label for="dell">DELL</label>
-                    </div>
+                                </div>
                                 <div class="brand-item">
                                     <input type="checkbox" class="brand-checkbox" id="hp" value="HP">
                                     <label for="hp">HP</label>
-                </div>
+                                </div>
                                 <div class="brand-item">
                                     <input type="checkbox" class="brand-checkbox" id="lenovo" value="Lenovo">
                                     <label for="lenovo">Lenovo</label>
-                        </div>
+                                </div>
                                 <div class="brand-item">
                                     <input type="checkbox" class="brand-checkbox" id="apple" value="Apple">
                                     <label for="apple">Apple</label>
-                            </div>
+                                </div>
                                 <div class="brand-item">
                                     <input type="checkbox" class="brand-checkbox" id="samsung" value="Samsung">
                                     <label for="samsung">Samsung</label>
-                            </div>
+                                </div>
                             </div>
                         </div>
 
@@ -138,15 +137,15 @@
                                 <div class="condition-item">
                                     <input type="checkbox" class="condition-checkbox" id="refurbished" value="refurbished" checked>
                                     <label for="refurbished">Refurbished</label>
-                    </div>
+                                </div>
                                 <div class="condition-item">
                                     <input type="checkbox" class="condition-checkbox" id="excellent" value="excellent" checked>
                                     <label for="excellent">Excellent</label>
-                </div>
+                                </div>
                                 <div class="condition-item">
                                     <input type="checkbox" class="condition-checkbox" id="good" value="good">
                                     <label for="good">Good</label>
-                            </div>
+                                </div>
                             </div>
                         </div>
 
@@ -458,6 +457,12 @@
                 }
             }
         });
+
+        // Oculta el header si está dentro de un iframe (dashboard)
+        if (window.self !== window.top) {
+            const header = document.getElementById('headerContainer') || document.querySelector('header') || document.querySelector('recomputech-header') || document.querySelector('recomputech-header-auth');
+            if (header) header.style.display = 'none';
+        }
     </script>
 </body>
 </html>

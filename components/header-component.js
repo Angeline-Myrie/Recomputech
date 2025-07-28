@@ -848,7 +848,7 @@ class HeaderComponent extends HTMLElement {
                     <div class="recomputech-navbar-container">
                         <!-- Logo Section -->
                         <a class="recomputech-navbar-brand" href="index.html">
-                            <img src="/assets/logos/logo-.png" alt="Logo" class="recomputech-logo recomputech-logo-small">
+                            <img src="../assets/logos/logo-.png" alt="Logo" class="recomputech-logo recomputech-logo-small">
                             <div class="recomputech-brand-text">
                                 <span class="recomputech-brand-name">Recomputech</span>
                                 <span class="recomputech-brand-tagline">Sustainable Technology</span>
@@ -877,8 +877,9 @@ class HeaderComponent extends HTMLElement {
                             </button>
 
                                             <!-- Auth Buttons -->
-                            <a href="/auth/auth.html" class="recomputech-btn-outline-primary">Login</a>
-                            <a href="/auth/auth.html" class="recomputech-btn-primary">Register</a>
+                        
+                            <a href="/auth/auth.html" class="recomputech-btn-primary">Login & Register</a>
+
 
                             <!-- Cart Icon -->
                             <button class="recomputech-cart-icon" id="recomputech-cart-icon" title="Shopping Cart">
@@ -924,11 +925,7 @@ class HeaderComponent extends HTMLElement {
                             <i class="fas fa-shopping-cart recomputech-mobile-cart-icon"></i>
                             <span class="recomputech-mobile-cart-text">Shopping Cart (0)</span>
                         </div>
-                        
-                        <div style="display: flex; gap: 1rem;">
-                                            <a href="/auth/auth.html" class="recomputech-btn-outline-primary" style="flex: 1; text-align: center;">Login</a>
-                <a href="/auth/auth.html" class="recomputech-btn-primary" style="flex: 1; text-align: center;">Register</a>
-                        </div>
+                        <a href="/auth/auth.html" class="recomputech-btn-primary" style="width: 100%; text-align: center;">Login & Register</a>
                     </div>
                 </div>
             </div>
@@ -1274,13 +1271,18 @@ class HeaderComponent extends HTMLElement {
             this.showNotification('Your cart is empty', 'error');
             return;
         }
-        
-        // Here you can implement checkout logic
-        console.log('Proceeding to checkout with items:', this.cartItems);
-        this.showNotification('Redirecting to checkout...', 'success');
-        
-        // For demo purposes, you can redirect to a checkout page
-        // window.location.href = '/checkout.html';
+        // Guardar carrito en localStorage para el checkout
+        localStorage.setItem('cartItems', JSON.stringify(this.cartItems.map(item => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            image: item.image,
+            qty: item.quantity || 1
+        }))));
+        this.showNotification('Redirigiendo a checkout...', 'success');
+        setTimeout(() => {
+            window.location.href = '/pages/checkout.html';
+        }, 800);
     }
 
     showNotification(message, type = 'info') {
@@ -1368,4 +1370,4 @@ class HeaderComponent extends HTMLElement {
     }
 }
 
-customElements.define('recomputech-header', HeaderComponent); 
+customElements.define('recomputech-header', HeaderComponent);

@@ -510,6 +510,7 @@
 .card-icon i {
     font-size: 2rem;
     color: rgb(255, 255, 255);
+    color: white;
 }
 
 .card-title {
