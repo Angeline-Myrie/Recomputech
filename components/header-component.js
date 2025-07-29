@@ -1371,16 +1371,22 @@ class HeaderComponent extends HTMLElement {
     setLogoPath() {
         const logo = this.shadowRoot.getElementById('header-logo');
         if (logo) {
-            // Detect if we're on GitHub Pages or local
-            const isGitHubPages = window.location.hostname !== 'localhost' && 
-                                 window.location.hostname !== '127.0.0.1' &&
-                                 window.location.hostname.includes('github.io');
-            
-            if (isGitHubPages) {
-                logo.src = '/Recomputech/assets/logos/logo-.png';
-            } else {
-                logo.src = 'assets/logos/logo-.png';
-            }
+            // Use centralized logo path resolver
+            const logoPath = window.CONFIG ? window.CONFIG.getLogoPathForCurrentLocation() : this.getFallbackLogoPath();
+            logo.src = logoPath;
+        }
+    }
+    
+    getFallbackLogoPath() {
+        // Fallback method if CONFIG is not available
+        const isGitHubPages = window.location.hostname !== 'localhost' && 
+                             window.location.hostname !== '127.0.0.1' &&
+                             window.location.hostname.includes('github.io');
+        
+        if (isGitHubPages) {
+            return '/Recomputech/assets/logos/logo-.png';
+        } else {
+            return 'assets/logos/logo-.png';
         }
     }
 }

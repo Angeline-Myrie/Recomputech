@@ -8,6 +8,32 @@
     margin-top: 50px;
 }
 
+/* Custom Badge for Sustainable Technology */
+.badge.bg-brand {
+    background-color: #218DA6 !important;
+    color: white;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 8px rgba(33, 141, 166, 0.2);
+    transition: all 0.3s ease;
+}
+
+.badge.bg-brand:hover {
+    background-color: #1b6e82 !important;
+    box-shadow: 0 4px 12px rgba(33, 141, 166, 0.3);
+    transform: translateY(-1px);
+}
+
+/* Dark mode support for brand badge */
+body.dark-mode .badge.bg-brand {
+    background-color: #218DA6 !important;
+    color: white;
+}
+
 .hero-overlay {
     position: absolute;
     top: 0;

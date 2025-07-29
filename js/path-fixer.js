@@ -13,6 +13,14 @@
     // Base path for assets
     const basePath = isGitHubPages ? '/Recomputech' : '';
     
+    console.log('Path Fixer initialized:', {
+        isGitHubPages: isGitHubPages,
+        isLiveServer: isLiveServer,
+        basePath: basePath,
+        hostname: window.location.hostname,
+        pathname: window.location.pathname
+    });
+    
     // Function to fix image paths
     function fixImagePaths() {
         const images = document.querySelectorAll('img[src*="assets/"]');
@@ -71,19 +79,31 @@
                 link.href = basePath + '/' + currentHref;
             }
         });
+        
+        // Fix index.html links
+        const indexLinks = document.querySelectorAll('a[href="index.html"], a[href="/index.html"]');
+        indexLinks.forEach(link => {
+            if (isGitHubPages) {
+                link.href = '/Recomputech/';
+            }
+        });
+    }
+    
+    // Function to fix all paths
+    function fixAllPaths() {
+        console.log('Fixing all paths for environment:', isGitHubPages ? 'GitHub Pages' : 'Live Server');
+        fixImagePaths();
+        fixScriptPaths();
+        fixLinkPaths();
     }
     
     // Run fixes when DOM is loaded
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', function() {
-            fixImagePaths();
-            fixScriptPaths();
-            fixLinkPaths();
+            fixAllPaths();
         });
     } else {
-        fixImagePaths();
-        fixScriptPaths();
-        fixLinkPaths();
+        fixAllPaths();
     }
     
     // Export for use in other files
@@ -93,6 +113,7 @@
         isLiveServer: isLiveServer,
         fixImagePaths: fixImagePaths,
         fixScriptPaths: fixScriptPaths,
-        fixLinkPaths: fixLinkPaths
+        fixLinkPaths: fixLinkPaths,
+        fixAllPaths: fixAllPaths
     };
 })(); 
