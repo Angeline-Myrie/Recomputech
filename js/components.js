@@ -23,9 +23,33 @@ async function loadComponent(elementId, componentPath) {
     }
 }
 
+// Función para cargar web components
+function loadWebComponents() {
+    // Cargar header component
+    const headerScript = document.createElement('script');
+    headerScript.src = '../components/header-component.js';
+    document.head.appendChild(headerScript);
+
+    // Cargar footer component
+    const footerScript = document.createElement('script');
+    footerScript.src = '../components/footer-component.js';
+    document.head.appendChild(footerScript);
+}
+
 // Cargar componentes cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', function() {
-    // Para prueba: rutas relativas para /pages
-    loadComponent('header-component', '../components/header.html');
-    loadComponent('footer-component', '../components/footer.html');
+    // Cargar web components
+    loadWebComponents();
+    
+    // Para páginas que no usan web components, mantener la funcionalidad original
+    const headerComponent = document.getElementById('header-component');
+    const footerComponent = document.getElementById('footer-component');
+    
+    if (headerComponent && !headerComponent.querySelector('rc-header')) {
+        loadComponent('header-component', '../components/header.html');
+    }
+    
+    if (footerComponent && !footerComponent.querySelector('rc-footer')) {
+        loadComponent('footer-component', '../components/footer.html');
+    }
 }); 

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Recomputech</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/contact.css">
+</head>
+<body class="light-mode">
+    <!-- Dynamic Header based on authentication status -->
+    <div id="headerContainer">
+        <!-- Header will be loaded dynamically -->
+    </div>
+
+    <!-- Hero Section -->
+    <section class="contact-hero-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <div class="contact-hero-content">
+                        <div class="contact-hero-badge">
+                            <i class="fas fa-envelope me-2"></i>Get In Touch
+                        </div>
+                        <h1 class="contact-hero-title">Contact Us</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-header">
+                <h2 class="contact-title">Let's Start a Conversation</h2>
+            </div>
+            
+            <div class="row g-5">
+                <!-- Contact Info -->
+                <div class="col-lg-5">
+                    <div class="contact-info-section">
+                        <div class="contact-info-card">
+                            <div class="info-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h5>Our Location</h5>
+                                <p>123 Tech Street, Innovation District<br>San José, Costa Rica</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-card">
+                            <div class="info-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div>
+                                <h5>Phone Number</h5>
+                                <p>+506 (123) 456-7890<br>+506 (123) 456-7891</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-card">
+                            <div class="info-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div>
+                                <h5>Email Address</h5>
+                                <p>info@recomputech.com<br>support@recomputech.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info-card">
+                            <div class="info-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h5>Business Hours</h5>
+                                <p>Monday - Friday: 8:00 AM - 6:00 PM<br>Saturday: 9:00 AM - 2:00 PM</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-socials">
+                            <a href="#" class="social-icon facebook" title="Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="social-icon twitter" title="Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="social-icon instagram" title="Instagram">
+                                <i class="fab fa-instagram"></i>
+                            </a>
+                            <a href="#" class="social-icon linkedin" title="LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="col-lg-7">
+                    <div class="contact-form-section">
+                        <h3 class="mb-4">Send us a Message</h3>
+                        <form class="contact-form-wrapper">
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="firstName">First Name *</label>
+                                    <input type="text" class="form-control" id="firstName" placeholder="Your first name" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="lastName">Last Name *</label>
+                                    <input type="text" class="form-control" id="lastName" placeholder="Your last name" required>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="email">Email Address *</label>
+                                    <input type="email" class="form-control" id="email" placeholder="your.email@example.com" required>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phone" placeholder="+506 (123) 456-7890">
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label for="subject">Subject *</label>
+                                <select class="form-control" id="subject" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="support">Technical Support</option>
+                                    <option value="sales">Sales Question</option>
+                                    <option value="partnership">Partnership</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="mb-4">
+                                <label for="message">Message *</label>
+                                <textarea class="form-control" id="message" rows="5" placeholder="Tell us about your inquiry or how we can help you..." required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn w-100">
+                                <i class="fas fa-paper-plane me-2"></i>Send Message
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Component -->
+    <recomputech-cta></recomputech-cta>
+
+    <recomputech-footer></recomputech-footer>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/theme.js"></script>
+    <script src="../js/components.js"></script>
+    <script src="../components/header-component.js"></script>
+    <script src="../components/header-auth-component.js"></script>
+    <script src="../components/header-auth-technician-component.js"></script>
+    <script src="../components/footer-component.js"></script>
+    
+    <!-- Header Manager -->
+    <script src="../js/header-manager.js"></script>
+    <script src="../components/cta-component.js"></script>
+    <script src="../main.js"></script>
+</body>
+</html>

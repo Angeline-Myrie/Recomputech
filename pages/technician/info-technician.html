@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Expert Technicians - Recomputech</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/technician.css">
+</head>
+<body>
+    <!-- Dynamic Header based on authentication status -->
+    <div id="headerContainer">
+        <!-- Header will be loaded dynamically -->
+    </div>
+    
+    <!-- Hero Banner -->
+    <section class="technician-hero">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="hero-content">
+                        <span class="hero-badge">Expert Team</span>
+                        <h1 class="hero-title">Our Expert Technicians</h1>
+                        <p class="hero-subtitle">Find the perfect specialist for your technology needs. Our certified experts are ready to help you with any IT problem.</p>
+                        
+                        <div class="hero-stats">
+                            <div class="stat-item">
+                                <i class="fas fa-users"></i>
+                                <div>
+                                    <h4>15+</h4>
+                                    <span>Certified Technicians</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-star"></i>
+                                <div>
+                                    <h4>4.9</h4>
+                                    <span>Average Rating</span>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <i class="fas fa-clock"></i>
+                                <div>
+                                    <h4>24h</h4>
+                                    <span>Response Time</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="hero-image">
+                        <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Technicians Team" class="img-fluid rounded-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-container">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" class="search-input" placeholder="Search technicians by name, specialty, or skills..." id="searchInput">
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Filter -->
+    <section class="categories-section">
+        <div class="container">
+            <div class="categories-header text-center mb-4" data-aos="fade-up">
+                <h3>Filter by Specialty</h3>
+            </div>
+            
+            <div class="categories-simple" data-aos="fade-up" data-aos-delay="100">
+                <button class="category-btn active" data-category="all">All</button>
+                <button class="category-btn" data-category="hardware">Hardware</button>
+                <button class="category-btn" data-category="software">Software</button>
+                <button class="category-btn" data-category="data">Data Recovery</button>
+                <button class="category-btn" data-category="network">Network</button>
+                <button class="category-btn" data-category="mobile">Mobile</button>
+                <button class="category-btn" data-category="gaming">Gaming</button>
+                <button class="category-btn" data-category="enterprise">Enterprise</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technicians Grid -->
+    <section class="technicians-section">
+        <div class="container">
+            <div class="technicians-header d-flex justify-content-between align-items-center mb-4" data-aos="fade-up">
+                <div class="results-info">
+                    <span id="resultsCount">8</span> technicians found
+                </div>
+                <div class="sort-options">
+                    <select class="form-select" id="sortSelect">
+                        <option value="rating">Sort by Rating</option>
+                        <option value="experience">Sort by Experience</option>
+                        <option value="response">Sort by Response Time</option>
+                        <option value="jobs">Sort by Jobs Completed</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="row g-4" id="techniciansGrid">
+                <!-- Technicians will be loaded dynamically -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Registration CTA -->
+    <section class="registration-cta">
+        <div class="container">
+            <div class="cta-content text-center" data-aos="fade-up">
+                <div class="cta-icon">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+                <h2>Ready to Get Started?</h2>
+                <p>Register now to access our technician services and get exclusive pricing</p>
+                <div class="cta-benefits">
+                    <div class="benefit-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Access to all technicians</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Priority support</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Exclusive pricing</span>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Service tracking</span>
+                    </div>
+                </div>
+                <div class="cta-buttons">
+                    <a href="../auth/auth.html" class="btn btn-primary btn-lg">
+                        <i class="fas fa-user-plus"></i>
+                        Register Now
+                    </a>
+                    <a href="../auth/auth.html" class="btn btn-outline-primary btn-lg">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Login
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Component -->
+    <recomputech-footer></recomputech-footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Web Components -->
+    <script src="../../components/header-component.js"></script>
+    <script src="../../components/header-auth-component.js"></script>
+    <script src="../../components/footer-component.js"></script>
+    
+    <!-- Header Manager -->
+    <script src="../../js/header-manager.js"></script>
+    
+    <!-- Technician Data -->
+    <script src="technician-data.js"></script>
+    
+    <!-- Technician Script -->
+    <script>
+        let allTechnicians = [];
+        let filteredTechnicians = [];
+        let currentFilters = {
+            category: 'all',
+            searchTerm: '',
+            sortBy: 'rating'
+        };
+
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+
+        // Load technicians
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTechnicians();
+            setupEventListeners();
+        });
+
+        function loadTechnicians() {
+            allTechnicians = [...TECHNICIANS_DATA];
+            filteredTechnicians = [...allTechnicians];
+            renderTechnicians();
+        }
+
+        function renderTechnicians() {
+            const techniciansGrid = document.getElementById('techniciansGrid');
+            const resultsCount = document.getElementById('resultsCount');
+            
+            resultsCount.textContent = filteredTechnicians.length;
+            
+            if (filteredTechnicians.length === 0) {
+                techniciansGrid.innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <i class="fas fa-search" style="font-size: 3rem; color: #94a3b8;"></i>
+                        <h3 class="mt-3">No technicians found</h3>
+                        <p class="text-muted">Try adjusting your search criteria</p>
+                    </div>
+                `;
+                return;
+            }
+
+            techniciansGrid.innerHTML = filteredTechnicians.map(technician => `
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="${Math.random() * 300}">
+                    <div class="technician-card">
+                        <div class="tech-header">
+                            <div class="tech-avatar">
+                                <img src="${technician.avatar}" alt="${technician.name}" onerror="this.src='https://via.placeholder.com/150/218DA6/ffffff?text=${technician.name.charAt(0)}'">
+                                <div class="tech-status ${technician.status}">
+                                    <i class="fas fa-circle"></i>
+                                </div>
+                            </div>
+                            <div class="tech-rating">
+                                ${generateStars(technician.rating)}
+                                <span>${technician.rating}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="tech-info">
+                            <h3>${technician.name}</h3>
+                            <p class="tech-specialty">${technician.specialty}</p>
+                            <p class="tech-experience">${technician.experience} years of experience</p>
+                        </div>
+                        
+                        <div class="tech-skills">
+                            ${technician.skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
+                        </div>
+                        
+                        <div class="tech-stats">
+                            <div class="stat">
+                                <i class="fas fa-tools"></i>
+                                <span>${technician.completedJobs}+ Jobs</span>
+                            </div>
+                            <div class="stat">
+                                <i class="fas fa-clock"></i>
+                                <span>${technician.avgResponseTime} Response</span>
+                            </div>
+                        </div>
+                        
+                        <div class="tech-actions">
+                            <button class="btn btn-outline-primary" onclick="showRegistrationModal()">
+                                <i class="fas fa-eye"></i>
+                                View Profile
+                            </button>
+                            <button class="btn btn-primary" onclick="showRegistrationModal()">
+                                <i class="fas fa-phone"></i>
+                                Contact
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function generateStars(rating) {
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 !== 0;
+            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+            
+            let stars = '';
+            for (let i = 0; i < fullStars; i++) {
+                stars += '<i class="fas fa-star"></i>';
+            }
+            if (hasHalfStar) {
+                stars += '<i class="fas fa-star-half-alt"></i>';
+            }
+            for (let i = 0; i < emptyStars; i++) {
+                stars += '<i class="far fa-star"></i>';
+            }
+            return stars;
+        }
+
+        function setupEventListeners() {
+            // Search functionality
+            const searchInput = document.getElementById('searchInput');
+            searchInput.addEventListener('input', (e) => {
+                currentFilters.searchTerm = e.target.value.toLowerCase();
+                applyFilters();
+            });
+
+            // Category filters
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    currentFilters.category = btn.dataset.category;
+                    applyFilters();
+                });
+            });
+
+            // Sort functionality
+            const sortSelect = document.getElementById('sortSelect');
+            sortSelect.addEventListener('change', (e) => {
+                currentFilters.sortBy = e.target.value;
+                sortTechnicians();
+            });
+        }
+
+        function applyFilters() {
+            filteredTechnicians = allTechnicians.filter(technician => {
+                // Category filter
+                if (currentFilters.category !== 'all') {
+                    const categoryMatch = getTechnicianCategory(technician).toLowerCase() === currentFilters.category;
+                    if (!categoryMatch) return false;
+                }
+
+                // Search filter
+                if (currentFilters.searchTerm) {
+                    const searchTerm = currentFilters.searchTerm;
+                    const matchesSearch = technician.name.toLowerCase().includes(searchTerm) ||
+                                        technician.specialty.toLowerCase().includes(searchTerm) ||
+                                        technician.skills.some(skill => skill.toLowerCase().includes(searchTerm));
+                    if (!matchesSearch) return false;
+                }
+
+                return true;
+            });
+            
+            sortTechnicians();
+        }
+
+        function getTechnicianCategory(technician) {
+            const specialty = technician.specialty.toLowerCase();
+            if (specialty.includes('hardware') || specialty.includes('laptop') || specialty.includes('desktop')) return 'hardware';
+            if (specialty.includes('software') || specialty.includes('system') || specialty.includes('optimization')) return 'software';
+            if (specialty.includes('data') || specialty.includes('recovery') || specialty.includes('backup')) return 'data';
+            if (specialty.includes('network') || specialty.includes('security') || specialty.includes('wifi')) return 'network';
+            if (specialty.includes('mobile') || specialty.includes('iphone') || specialty.includes('android')) return 'mobile';
+            if (specialty.includes('gaming')) return 'gaming';
+            if (specialty.includes('server') || specialty.includes('enterprise')) return 'enterprise';
+            return 'other';
+        }
+
+        function sortTechnicians() {
+            const sortBy = currentFilters.sortBy;
+            
+            filteredTechnicians.sort((a, b) => {
+                switch (sortBy) {
+                    case 'rating':
+                        return b.rating - a.rating;
+                    case 'experience':
+                        return b.experience - a.experience;
+                    case 'response':
+                        return parseFloat(a.avgResponseTime) - parseFloat(b.avgResponseTime);
+                    case 'jobs':
+                        return b.completedJobs - a.completedJobs;
+                    default:
+                        return 0;
+                }
+            });
+            
+            renderTechnicians();
+        }
+
+        function showRegistrationModal() {
+            const modal = `
+                <div class="modal fade" id="registrationModal" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Register to Access Technician Services</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p>To contact our technicians and view detailed pricing, please register for an account.</p>
+                                <div class="text-center">
+                                    <a href="../auth/auth.html" class="btn btn-primary">
+                                        <i class="fas fa-user-plus"></i>
+                                        Register Now
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Remove existing modal if any
+            const existingModal = document.getElementById('registrationModal');
+            if (existingModal) {
+                existingModal.remove();
+            }
+            
+            // Add modal to body
+            document.body.insertAdjacentHTML('beforeend', modal);
+            
+            // Show modal
+            const modalElement = new bootstrap.Modal(document.getElementById('registrationModal'));
+            modalElement.show();
+        }
+    </script>
+</body>
+</html> 
