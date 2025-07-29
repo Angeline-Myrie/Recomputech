@@ -435,7 +435,7 @@ class FooterComponent extends HTMLElement {
                     <div class="recomputech-footer-bottom">
                         <div class="recomputech-footer-bottom-left">
                             <div class="recomputech-copyright">
-                                © 2024 Recomputech. All rights reserved.
+                                © ${new Date().getFullYear()} Recomputech. All rights reserved.
                             </div>
                             <div class="recomputech-footer-links">
                                 <a href="#">Privacy Policy</a>

@@ -22,37 +22,16 @@
         <!-- Header will be loaded dynamically -->
     </div>
 
-    <!-- Modern Hero Section -->
+    <!-- Services Hero Section -->
     <section class="services-hero-section">
-        <div class="hero-background">
-            <div class="hero-overlay"></div>
-        </div>
-        <div class="container position-relative">
-            <div class="row justify-content-center min-vh-60">
-                <div class="col-lg-8 col-md-10 text-center" data-aos="fade-up">
-                    <div class="hero-badge">
-                        <i class="fas fa-tools me-2"></i>Professional Services
-                    </div>
-                    <h1 class="hero-title">Expert Tech Solutions</h1>
-                    <p class="hero-subtitle">Get the most out of your technology with sustainable solutions and expert support from certified technicians.</p>
-                    <div class="hero-stats">
-                        <div class="stat-item">
-                            <i class="fas fa-users"></i>
-                            <span>50+ Technicians</span>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <div class="services-hero-content">
+                        <div class="services-hero-badge">
+                            <i class="fas fa-tools me-2"></i>Professional Services
                         </div>
-                        <div class="stat-item">
-                            <i class="fas fa-clock"></i>
-                            <span>24h Support</span>
-                        </div>
-                        <div class="stat-item">
-                            <i class="fas fa-shield-alt"></i>
-                            <span>100% Guaranteed</span>
-                        </div>
-                    </div>
-                    <div class="hero-cta">
-                        <a href="../pages/technicians.html" class="btn btn-light btn-lg">
-                            <i class="fas fa-search me-2"></i>Find Expert Technicians
-                        </a>
+                        <h1 class="services-hero-title">Our Services</h1>
                     </div>
                 </div>
             </div>
@@ -174,52 +153,6 @@
         </div>
     </section>
 
-    <!-- Find Technician CTA Section -->
-    <section class="find-technician-section py-5">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-10">
-                    <div class="technician-cta-card" data-aos="fade-up">
-                        <div class="cta-content">
-                            <div class="cta-icon">
-                                <i class="fas fa-search"></i>
-                            </div>
-                            <h2 class="cta-title">Find Your Perfect Technician</h2>
-                            <p class="cta-description">Connect with certified technicians in your area. Get personalized service and expert solutions for all your tech needs.</p>
-                            <div class="cta-features">
-                                <div class="feature-item">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>Certified Professionals</span>
-                                </div>
-                                <div class="feature-item">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>Verified Reviews</span>
-                                </div>
-                                <div class="feature-item">
-                                    <i class="fas fa-check-circle"></i>
-                                    <span>Secure Booking</span>
-                                </div>
-                            </div>
-                            <div class="cta-actions">
-                                <a href="../pages/technicians.html" class="btn btn-primary btn-lg">
-                                    <i class="fas fa-search me-2"></i>Find Expert Technicians
-                                </a>
-                                <a href="../register.html" class="btn btn-outline-primary btn-lg">
-                                    <i class="fas fa-user-plus me-2"></i>Become a Technician
-                                </a>
-                            </div>
-                        </div>
-                        <div class="cta-visual">
-                            <div class="technician-illustration">
-                                <i class="fas fa-user-tie"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- CTA Component -->
     <recomputech-cta></recomputech-cta>
 
@@ -228,6 +161,8 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../js/config.js"></script>
+    <script src="../js/path-fixer.js"></script>
     <script src="../js/theme.js"></script>
     <script src="../js/components.js"></script>
     <script src="../components/header-component.js"></script>
@@ -240,6 +175,13 @@
     <script src="../components/cta-component.js"></script>
     <script>
         AOS.init();
+    </script>
+    <script>
+      // Oculta el header si está dentro de un iframe (dashboard)
+      if (window.self !== window.top) {
+        const header = document.getElementById('headerContainer') || document.querySelector('header') || document.querySelector('recomputech-header') || document.querySelector('recomputech-header-auth');
+        if (header) header.style.display = 'none';
+      }
     </script>
 </body>
 </html>

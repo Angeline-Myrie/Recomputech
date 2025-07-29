@@ -10,6 +10,7 @@ class RecomputechHeaderAuth extends HTMLElement {
         this.render();
         this.setupEventListeners();
         this.loadCartFromStorage();
+        this.setLogoPath();
     }
 
     render() {
@@ -816,7 +817,7 @@ class RecomputechHeaderAuth extends HTMLElement {
                     <div class="recomputech-navbar-container">
                         <!-- Logo Section -->
                         <a class="recomputech-navbar-brand" href="index.html">
-                            <img src="/assets/logos/logo-.png" alt="Logo" class="recomputech-logo recomputech-logo-small">
+                            <img src="" alt="Logo" class="recomputech-logo recomputech-logo-small" id="header-logo">
                             <div class="recomputech-brand-text">
                                 <span class="recomputech-brand-name">Recomputech</span>
                                 <span class="recomputech-brand-tagline">Sustainable Technology</span>
@@ -825,11 +826,10 @@ class RecomputechHeaderAuth extends HTMLElement {
 
                         <!-- Navigation Section -->
                         <ul class="recomputech-navbar-nav">
-                            <li><a class="recomputech-nav-link" href="/pages/marketplace.html">Marketplace</a></li>
-                            <li><a class="recomputech-nav-link" href="/pages/technician/info-technician.html">Technicians</a></li>
-                            <li><a class="recomputech-nav-link" href="/pages/services.html">Services</a></li>
-                            <li><a class="recomputech-nav-link" href="/pages/Aboutus.html">About Us</a></li>
-                            <li><a class="recomputech-nav-link" href="/pages/contact.html">Contact</a></li>
+                            <li><a class="recomputech-nav-link" href="#" data-url="/pages/marketplace.html">Marketplace</a></li>
+                            <li><a class="recomputech-nav-link" href="#" data-url="/pages/contact.html">Contact</a></li>
+                            <li><a class="recomputech-nav-link" href="#" data-url="/pages/Aboutus.html">About Us</a></li>
+                            <li><a class="recomputech-nav-link" href="#" data-url="/pages/services.html">Services</a></li>
                         </ul>
 
                         <!-- Actions Section -->
@@ -858,27 +858,23 @@ class RecomputechHeaderAuth extends HTMLElement {
                                 </div>
 
                                 <div class="dropdown-menu" id="dropdownMenu">
-                                    <a href="/dashboard/RegularUser/dashboard.html" class="dropdown-item">
+                                    <a href="#overview" class="dropdown-item" data-section="overview">
                                         <i class="fas fa-tachometer-alt"></i>
                                         Overview
                                     </a>
-                                    <a href="/dashboard/RegularUser/dashboard.html#sell" class="dropdown-item">
-                                        <i class="fas fa-plus-circle"></i>
-                                        Sell
-                                    </a>
-                                    <a href="/dashboard/RegularUser/dashboard.html#purchases" class="dropdown-item">
-                                        <i class="fas fa-shopping-bag"></i>
-                                        Purchases
-                                    </a>
-                                    <a href="/dashboard/RegularUser/dashboard.html#my-products" class="dropdown-item">
+                                    <a href="#my-products" class="dropdown-item" data-section="my-products">
                                         <i class="fas fa-box"></i>
                                         My Products
                                     </a>
-                                    <a href="/dashboard/RegularUser/dashboard.html#cart" class="dropdown-item">
-                                        <i class="fas fa-shopping-cart"></i>
-                                        Cart
+                                    <a href="#add-product" class="dropdown-item" data-section="add-product">
+                                        <i class="fas fa-plus-circle"></i>
+                                        Add Product
                                     </a>
-                                    <a href="/dashboard/RegularUser/dashboard.html#settings" class="dropdown-item">
+                                    <a href="#purchases" class="dropdown-item" data-section="purchases">
+                                        <i class="fas fa-shopping-bag"></i>
+                                        Purchases
+                                    </a>
+                                    <a href="#settings" class="dropdown-item" data-section="settings">
                                         <i class="fas fa-cog"></i>
                                         Settings
                                     </a>
@@ -1043,6 +1039,35 @@ class RecomputechHeaderAuth extends HTMLElement {
 
         // Set active nav link based on current page
         this.setActiveNavLink();
+
+        // Navigation links (main bar and dropdown)
+        const navLinks = this.shadowRoot.querySelectorAll('.recomputech-nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const url = link.getAttribute('data-url');
+                if (url) {
+                    // Busca el iframe en el dashboard-content-component y cambia su src
+                    const dashboardContent = document.querySelector('dashboard-content-component');
+                    if (dashboardContent) {
+                        dashboardContent.loadExternalPage(url);
+                    }
+                }
+            });
+        });
+
+        const dropdownLinks = dropdownMenu.querySelectorAll('.dropdown-item[data-section]');
+        dropdownLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const section = link.getAttribute('data-section');
+                if (section) {
+                    dropdownMenu.classList.remove('show');
+                    // Disparar evento personalizado para navegación interna
+                    document.dispatchEvent(new CustomEvent('dashboard-navigate', { detail: { section } }));
+                }
+            });
+        });
     }
 
     getCurrentUser() {
@@ -1423,6 +1448,28 @@ class RecomputechHeaderAuth extends HTMLElement {
             info: '#3b82f6'
         };
         return colors[type] || '#3b82f6';
+    }
+
+    setLogoPath() {
+        const logo = this.shadowRoot.getElementById('header-logo');
+        if (logo) {
+            // Use centralized logo path resolver
+            const logoPath = window.CONFIG ? window.CONFIG.getLogoPathForCurrentLocation() : this.getFallbackLogoPath();
+            logo.src = logoPath;
+        }
+    }
+    
+    getFallbackLogoPath() {
+        // Fallback method if CONFIG is not available
+        const isGitHubPages = window.location.hostname !== 'localhost' && 
+                             window.location.hostname !== '127.0.0.1' &&
+                             window.location.hostname.includes('github.io');
+        
+        if (isGitHubPages) {
+            return '/Recomputech/assets/logos/logo-.png';
+        } else {
+            return 'assets/logos/logo-.png';
+        }
     }
 }
 

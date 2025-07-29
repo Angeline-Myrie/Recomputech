@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome Technician | Recomputech</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body class="auth-body">
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header text-center">
+                <div class="auth-logo">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <h1>Welcome Technician</h1>
+                <p class="mb-4">Complete your professional profile</p>
+            </div>
+            <form class="auth-form" id="technicianProfileForm">
+                <div class="form-group">
+                    <label for="degree">Degree</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fas fa-graduation-cap"></i>
+                        </span>
+                        <input type="text" id="degree" class="form-control" placeholder="Your degree or certification" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="specialty">Specialty</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fas fa-cogs"></i>
+                        </span>
+                        <input type="text" id="specialty" class="form-control" placeholder="Your specialty (e.g. Hardware, Networks)" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="experience">Years of Experience</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fas fa-briefcase"></i>
+                        </span>
+                        <input type="number" id="experience" class="form-control" min="0" placeholder="Years of experience" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="bio">Short Bio</label>
+                    <div class="input-group">
+                        <span class="input-group-text">
+                            <i class="fas fa-user-edit"></i>
+                        </span>
+                        <textarea id="bio" class="form-control" rows="3" placeholder="Tell us about yourself" required></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 auth-submit-btn">
+                    <i class="fas fa-save"></i>
+                    Save Profile
+                </button>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/path-fixer.js"></script>
+    <script>
+      document.getElementById('technicianProfileForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        // Puedes mostrar un mensaje si quieres
+        // alert('Profile saved!');
+        window.location.href = '../dashboard/Technician/dashboard-technician.html';
+      });
+    </script>
+</body>
+</html>
