@@ -620,65 +620,7 @@ body.dark-mode .hero-btn-outline:active,
     position: relative;
 }
 
-.service-card {
-    background: white;
-    border-radius: 25px;
-    padding: 3rem 2rem;
-    text-align: center;
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-    transition: all 0.4s ease;
-    position: relative;
-    overflow: hidden;
-    height: 100%;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.service-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 5px;
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-}
-
-.service-card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 25px 60px rgba(33, 145, 166, 0.15);
-}
-
-.service-icon {
-    width: 100px;
-    height: 100px;
-    border-radius: 25px;
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 2rem;
-    font-size: 2.5rem;
-    color: white;
-    box-shadow: 0 10px 30px rgba(33, 145, 166, 0.3);
-    transition: all 0.3s ease;
-}
-
-.service-card:hover .service-icon {
-    transform: scale(1.1) rotate(5deg);
-}
-
-.service-card h3 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--dark-color);
-    margin-bottom: 1rem;
-}
-
-.service-card p {
-    color: var(--text-color);
-    line-height: 1.7;
-    font-size: 1rem;
-}
+/* Service cards styles are now handled in styles.css with more specific selectors */
 
 /* Technicians Section */
 #technicians {
@@ -973,15 +915,7 @@ body.dark-mode .hero-btn-outline:active,
         justify-content: center;
     }
     
-    .service-card {
-        padding: 2rem 1.5rem;
-    }
-    
-    .service-icon {
-        width: 80px;
-        height: 80px;
-        font-size: 2rem;
-    }
+    /* Service card styles handled in styles.css */
     
     .about-stats-grid {
         grid-template-columns: repeat(3, 1fr);
@@ -1037,15 +971,7 @@ body.dark-mode .hero-btn-outline:active,
         font-size: 0.9rem;
     }
     
-    .service-card {
-        padding: 1.5rem 1rem;
-    }
-    
-    .service-icon {
-        width: 70px;
-        height: 70px;
-        font-size: 1.8rem;
-    }
+    /* Service card styles handled in styles.css */
     
     .tech-card {
         padding: 1.5rem;
