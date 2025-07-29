@@ -10,6 +10,7 @@ class HeaderComponent extends HTMLElement {
         this.render();
         this.setupEventListeners();
         this.loadCartFromStorage();
+        this.setLogoPath();
     }
 
     render() {
@@ -849,10 +850,14 @@ class HeaderComponent extends HTMLElement {
                         <!-- Logo Section -->
                         <a class="recomputech-navbar-brand" href="index.html">
 <<<<<<< HEAD
+<<<<<<< HEAD
                             <img src="/assets/logos/logo-.png" alt="Logo" class="recomputech-logo recomputech-logo-small">
 =======
                             <img src="../assets/logos/logo-.png" alt="Logo" class="recomputech-logo recomputech-logo-small">
 >>>>>>> 097daefb445ed062edae3034be82f68f5a076d1e
+=======
+                            <img src="" alt="Logo" class="recomputech-logo recomputech-logo-small" id="header-logo">
+>>>>>>> 97486cf7001b73f42ef1e5e78f3ed879584b8108
                             <div class="recomputech-brand-text">
                                 <span class="recomputech-brand-name">Recomputech</span>
                                 <span class="recomputech-brand-tagline">Sustainable Technology</span>
@@ -1389,6 +1394,28 @@ class HeaderComponent extends HTMLElement {
         }
         
         console.log('Theme initialized:', savedTheme);
+    }
+
+    setLogoPath() {
+        const logo = this.shadowRoot.getElementById('header-logo');
+        if (logo) {
+            // Use centralized logo path resolver
+            const logoPath = window.CONFIG ? window.CONFIG.getLogoPathForCurrentLocation() : this.getFallbackLogoPath();
+            logo.src = logoPath;
+        }
+    }
+    
+    getFallbackLogoPath() {
+        // Fallback method if CONFIG is not available
+        const isGitHubPages = window.location.hostname !== 'localhost' && 
+                             window.location.hostname !== '127.0.0.1' &&
+                             window.location.hostname.includes('github.io');
+        
+        if (isGitHubPages) {
+            return '/Recomputech/assets/logos/logo-.png';
+        } else {
+            return 'assets/logos/logo-.png';
+        }
     }
 }
 
