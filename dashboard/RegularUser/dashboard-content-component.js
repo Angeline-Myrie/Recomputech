@@ -168,7 +168,7 @@ class DashboardContentComponent extends HTMLElement {
                                 </div>
                                 <div class="card-body">
                                     <div class="quick-actions">
-                                        <button class="quick-action-btn" data-section="sell">
+                                        <button class="quick-action-btn" data-section="Add Product">
                                             <i class="fas fa-plus-circle"></i>
                                             <span>Sell a Product</span>
                                         </button>

@@ -118,7 +118,7 @@ class OverviewComponent extends HTMLElement {
                                 <div class="quick-actions">
                                     <button class="quick-action-btn" onclick="window.location.href='/dashboard/RegularUser/sell.html'">
                                         <i class="fas fa-plus-circle"></i>
-                                        <span>Sell a Product</span>
+                                        <span>Add a Product</span>
                                     </button>
                                     <button class="quick-action-btn" onclick="window.location.href='/dashboard/RegularUser/cart.html'">
                                         <i class="fas fa-shopping-cart"></i>
