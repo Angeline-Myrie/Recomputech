@@ -28,9 +28,15 @@ class HeaderManager {
         if (!headerContainer) return;
         
         if (currentUser) {
-            // User is logged in - show auth header
-            if (!headerContainer.querySelector('recomputech-header-auth')) {
-                headerContainer.innerHTML = '<recomputech-header-auth></recomputech-header-auth>';
+            // User is logged in - show appropriate auth header based on role
+            if (currentUser.role === 'technician') {
+                if (!headerContainer.querySelector('recomputech-header-auth-technician')) {
+                    headerContainer.innerHTML = '<recomputech-header-auth-technician></recomputech-header-auth-technician>';
+                }
+            } else {
+                if (!headerContainer.querySelector('recomputech-header-auth')) {
+                    headerContainer.innerHTML = '<recomputech-header-auth></recomputech-header-auth>';
+                }
             }
         } else {
             // User is not logged in - show regular header

@@ -10,6 +10,7 @@ class HeaderComponent extends HTMLElement {
         this.render();
         this.setupEventListeners();
         this.loadCartFromStorage();
+        this.setLogoPath();
     }
 
     render() {
@@ -848,7 +849,7 @@ class HeaderComponent extends HTMLElement {
                     <div class="recomputech-navbar-container">
                         <!-- Logo Section -->
                         <a class="recomputech-navbar-brand" href="index.html">
-                            <img src="/assets/logos/logo-.png" alt="Logo" class="recomputech-logo recomputech-logo-small">
+                            <img src="" alt="Logo" class="recomputech-logo recomputech-logo-small" id="header-logo">
                             <div class="recomputech-brand-text">
                                 <span class="recomputech-brand-name">Recomputech</span>
                                 <span class="recomputech-brand-tagline">Sustainable Technology</span>
@@ -858,10 +859,10 @@ class HeaderComponent extends HTMLElement {
                         <!-- Navigation Section -->
                         <ul class="recomputech-navbar-nav">
                             <li><a class="recomputech-nav-link" href="/index.html">Home</a></li>
-                            <li><a class="recomputech-nav-link" href="/pages/marketplace.html">Marketplace</a></li>
-                            <li><a class="recomputech-nav-link" href="/pages/Aboutus.html">About Us</a></li>
-                            <li><a class="recomputech-nav-link" href="/pages/services.html">Services</a></li>
-                            <li><a class="recomputech-nav-link" href="/pages/contact.html">Contact</a></li>
+                            <li><a class="recomputech-nav-link" href="../pages/marketplace.html">Marketplace</a></li>
+                            <li><a class="recomputech-nav-link" href="../pages/Aboutus.html">About Us</a></li>
+                            <li><a class="recomputech-nav-link" href="../pages/services.html">Services</a></li>
+                            <li><a class="recomputech-nav-link" href="../pages/contact.html">Contact</a></li>
                         </ul>
 
                         <!-- Actions Section -->
@@ -877,8 +878,7 @@ class HeaderComponent extends HTMLElement {
                             </button>
 
                                             <!-- Auth Buttons -->
-                            <a href="/auth/auth.html" class="recomputech-btn-outline-primary">Login</a>
-                            <a href="/auth/auth.html" class="recomputech-btn-primary">Register</a>
+                            <a href="/auth/auth.html" class="recomputech-btn-primary">Login & Register</a>
 
                             <!-- Cart Icon -->
                             <button class="recomputech-cart-icon" id="recomputech-cart-icon" title="Shopping Cart">
@@ -924,11 +924,7 @@ class HeaderComponent extends HTMLElement {
                             <i class="fas fa-shopping-cart recomputech-mobile-cart-icon"></i>
                             <span class="recomputech-mobile-cart-text">Shopping Cart (0)</span>
                         </div>
-                        
-                        <div style="display: flex; gap: 1rem;">
-                                            <a href="/auth/auth.html" class="recomputech-btn-outline-primary" style="flex: 1; text-align: center;">Login</a>
-                <a href="/auth/auth.html" class="recomputech-btn-primary" style="flex: 1; text-align: center;">Register</a>
-                        </div>
+                        <a href="/auth/auth.html" class="recomputech-btn-primary" style="width: 100%; text-align: center;">Login & Register</a>
                     </div>
                 </div>
             </div>
@@ -1274,13 +1270,18 @@ class HeaderComponent extends HTMLElement {
             this.showNotification('Your cart is empty', 'error');
             return;
         }
-        
-        // Here you can implement checkout logic
-        console.log('Proceeding to checkout with items:', this.cartItems);
-        this.showNotification('Redirecting to checkout...', 'success');
-        
-        // For demo purposes, you can redirect to a checkout page
-        // window.location.href = '/checkout.html';
+        // Guardar carrito en localStorage para el checkout
+        localStorage.setItem('cartItems', JSON.stringify(this.cartItems.map(item => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            image: item.image,
+            qty: item.quantity || 1
+        }))));
+        this.showNotification('Redirigiendo a checkout...', 'success');
+        setTimeout(() => {
+            window.location.href = '/pages/checkout.html';
+        }, 800);
     }
 
     showNotification(message, type = 'info') {
@@ -1365,6 +1366,28 @@ class HeaderComponent extends HTMLElement {
         }
         
         console.log('Theme initialized:', savedTheme);
+    }
+
+    setLogoPath() {
+        const logo = this.shadowRoot.getElementById('header-logo');
+        if (logo) {
+            // Use centralized logo path resolver
+            const logoPath = window.CONFIG ? window.CONFIG.getLogoPathForCurrentLocation() : this.getFallbackLogoPath();
+            logo.src = logoPath;
+        }
+    }
+    
+    getFallbackLogoPath() {
+        // Fallback method if CONFIG is not available
+        const isGitHubPages = window.location.hostname !== 'localhost' && 
+                             window.location.hostname !== '127.0.0.1' &&
+                             window.location.hostname.includes('github.io');
+        
+        if (isGitHubPages) {
+            return '/Recomputech/assets/logos/logo-.png';
+        } else {
+            return 'assets/logos/logo-.png';
+        }
     }
 }
 

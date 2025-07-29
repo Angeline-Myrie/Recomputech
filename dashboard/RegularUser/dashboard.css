@@ -131,6 +131,8 @@
     flex: 1;
     margin-left: 280px;
     min-height: 100vh;
+    margin-top: 0 !important;
+    padding-top: 0 !important;
 }
 
 .main-header {
@@ -161,8 +163,8 @@
 }
 
 .main-content {
-    padding-top: 120px; /* Space for fixed header */
-    min-height: calc(100vh - 200px); /* Account for header and footer */
+    margin-top: 0 !important;
+    padding-top: 0 !important;
 }
 
 /* Section Styles */
@@ -1124,6 +1126,8 @@ dashboard-content-component {
 
 /* Section Transitions */
 .dashboard-section {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
     animation: fadeIn 0.5s ease-in-out;
 }
 

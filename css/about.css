@@ -140,35 +140,6 @@
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
 }
 
-.aboutus-mission-icon,
-.aboutus-vision-icon {
-    width: 80px;
-    height: 80px;
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 2rem;
-    font-size: 2rem;
-    color: white;
-    transition: all 0.3s ease;
-}
-
-.aboutus-mission-icon {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    box-shadow: 0 8px 25px rgba(33, 145, 166, 0.3);
-}
-
-.aboutus-vision-icon {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-}
-
-.aboutus-mission-card:hover .aboutus-mission-icon,
-.aboutus-vision-card:hover .aboutus-vision-icon {
-    transform: scale(1.1) rotate(5deg);
-}
-
 .aboutus-mission-title,
 .aboutus-vision-title {
     font-size: 2rem;
@@ -222,13 +193,6 @@
         padding: 2rem;
     }
     
-    .aboutus-mission-icon,
-    .aboutus-vision-icon {
-        width: 60px;
-        height: 60px;
-        font-size: 1.5rem;
-    }
-    
     .aboutus-mission-title,
     .aboutus-vision-title {
         font-size: 1.5rem;
@@ -279,13 +243,6 @@
         padding: 1.5rem;
     }
     
-    .aboutus-mission-icon,
-    .aboutus-vision-icon {
-        width: 50px;
-        height: 50px;
-        font-size: 1.25rem;
-    }
-    
     .aboutus-mission-title,
     .aboutus-vision-title {
         font-size: 1.3rem;
@@ -325,8 +282,10 @@
 .team-carousel-container {
     position: relative;
     overflow: hidden;
-    padding: 2rem 0;
-    margin: 0 -15px;
+    padding: 2rem 60px;
+    margin: 0;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 /* Swiper Navigation Styles */
@@ -339,13 +298,26 @@
     border-radius: 50%;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.swiper-button-next {
+    right: 10px;
+}
+
+.swiper-button-prev {
+    left: 10px;
 }
 
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
     background: var(--primary-color);
     color: white;
-    transform: scale(1.1);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 8px 25px rgba(33, 145, 166, 0.3);
 }
 
 .swiper-button-next::after,
@@ -355,15 +327,22 @@
 }
 
 /* Swiper Pagination Styles */
+.swiper-pagination {
+    position: relative;
+    margin-top: 30px;
+}
+
 .swiper-pagination-bullet {
     background: var(--primary-color);
-    opacity: 0.5;
+    opacity: 0.3;
+    width: 10px;
+    height: 10px;
     transition: all 0.3s ease;
 }
 
 .swiper-pagination-bullet-active {
     opacity: 1;
-    background: var(--secondary-color);
+    background: var(--primary-color);
     transform: scale(1.2);
 }
 
@@ -383,14 +362,16 @@
 .team-card {
     background: white;
     border-radius: 20px;
-    padding: 2rem;
+    padding: 2rem 1.5rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
     width: 100%;
-    max-width: 320px;
+    max-width: 250px;
     text-align: center;
     position: relative;
     overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    margin: 0 auto;
 }
 
 .team-card::before {
@@ -401,6 +382,8 @@
     right: 0;
     height: 4px;
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
 }
 
 .team-card:hover {
@@ -408,69 +391,42 @@
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
 
+.team-card:hover::before {
+    transform: scaleX(1);
+}
+
 .team-avatar {
     margin-bottom: 1.5rem;
 }
 
 .team-avatar img {
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid var(--primary-color);
+    border: 3px solid var(--primary-color);
     transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(33, 145, 166, 0.3);
 }
 
 .team-card:hover .team-avatar img {
     transform: scale(1.1);
-    border-color: var(--secondary-color);
+    box-shadow: 0 12px 35px rgba(33, 145, 166, 0.4);
 }
 
 .team-name {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     font-weight: 700;
     color: var(--dark-color);
     margin-bottom: 0.5rem;
+    line-height: 1.2;
 }
 
 .team-role {
     color: var(--primary-color);
     font-weight: 600;
-    margin-bottom: 1rem;
-    font-size: 1rem;
-}
-
-.team-rating {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.25rem;
-    margin-bottom: 1rem;
-}
-
-.team-rating i {
-    color: #ffd700;
-    font-size: 0.9rem;
-}
-
-.team-rating span {
-    font-weight: 600;
-    color: var(--dark-color);
-    margin-left: 0.5rem;
-}
-
-.team-stats {
-    margin-top: 1rem;
-}
-
-.stat-badge {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 25px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    display: inline-block;
+    margin-bottom: 0;
+    font-size: 0.95rem;
 }
 
 /* Section Header Styles */
@@ -595,9 +551,24 @@
         font-size: 1.1rem;
     }
     
+    .team-carousel-container {
+        padding: 2rem 40px;
+    }
+    
+    .swiper-button-next,
+    .swiper-button-prev {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+        font-size: 1rem;
+    }
+    
     .team-card {
         padding: 1.5rem;
-        max-width: 280px;
+        max-width: 220px;
     }
     
     .team-avatar img {
@@ -606,7 +577,11 @@
     }
     
     .team-name {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
+    }
+    
+    .team-role {
+        font-size: 0.9rem;
     }
     
     .mission-vision-card {
@@ -655,9 +630,24 @@
         font-size: 2rem;
     }
     
+    .team-carousel-container {
+        padding: 2rem 30px;
+    }
+    
+    .swiper-button-next,
+    .swiper-button-prev {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .swiper-button-next::after,
+    .swiper-button-prev::after {
+        font-size: 0.9rem;
+    }
+    
     .team-card {
         padding: 1.25rem;
-        max-width: 260px;
+        max-width: 200px;
     }
     
     .team-avatar img {
@@ -666,7 +656,11 @@
     }
     
     .team-name {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
+    }
+    
+    .team-role {
+        font-size: 0.85rem;
     }
     
     .mission-vision-card {

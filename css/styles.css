@@ -53,15 +53,15 @@ img, video, iframe {
 
 /* Dark Mode Variables */
 [data-theme="dark"] {
-    --primary-color: #3b82f6;
-    --secondary-color: #2563eb;
+    --primary-color: #218DA6;
+    --secondary-color: #1b6e82;
     --accent-color: #60a5fa;
-    --text-color: #f3f4f6;
-    --text-light: #d1d5db;
+    --text-color: #0d0e10;
+    --text-light: #f4f4f4;
     --bg-color: #111827;
     --bg-light: #1f2937;
     --card-bg: #1f2937;
-    --footer-bg: #030712;
+    --footer-bg: #f4f4f4;
     --border-color: #374151;
     --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
     --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.3);
@@ -312,7 +312,9 @@ body {
     background-color: var(--bg-light) !important;
 }
 
-.service-card {
+/* Homepage Service Cards - More specific to avoid conflicts */
+.homepage .service-card,
+#services .service-card {
     background: var(--card-bg);
     padding: 2.5rem;
     border-radius: 20px;
@@ -328,7 +330,8 @@ body {
     overflow: hidden;
 }
 
-.service-card::before {
+.homepage .service-card::before,
+#services .service-card::before {
     content: '';
     position: absolute;
     top: 0;
@@ -338,13 +341,15 @@ body {
     background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
 }
 
-.service-card:hover {
+.homepage .service-card:hover,
+#services .service-card:hover {
     transform: translateY(-10px);
     box-shadow: var(--shadow-lg);
     border-color: var(--primary-color);
 }
 
-.service-icon {
+.homepage .service-icon,
+#services .service-icon {
     width: 90px;
     height: 90px;
     background: var(--service-icon-bg);
@@ -359,7 +364,8 @@ body {
     position: relative;
 }
 
-.service-icon::after {
+.homepage .service-icon::after,
+#services .service-icon::after {
     content: '';
     position: absolute;
     width: 100%;
@@ -370,13 +376,15 @@ body {
     animation: pulse 2s infinite;
 }
 
-.service-card:hover .service-icon {
+.homepage .service-card:hover .service-icon,
+#services .service-card:hover .service-icon {
     background: var(--primary-color);
     color: white;
     transform: scale(1.1);
 }
 
-.service-card h3 {
+.homepage .service-card h3,
+#services .service-card h3 {
     font-size: 1.5rem;
     font-weight: 600;
     color: var(--text-color);
@@ -384,7 +392,8 @@ body {
     transition: all 0.3s ease;
 }
 
-.service-card p {
+.homepage .service-card p,
+#services .service-card p {
     color: var(--text-light);
     font-size: 1rem;
     line-height: 1.6;

@@ -37,8 +37,12 @@ class AuthHandler {
         const headerContainer = document.getElementById('headerContainer');
         if (headerContainer) {
             if (currentUser) {
-                // User is logged in - show auth header
-                headerContainer.innerHTML = '<recomputech-header-auth></recomputech-header-auth>';
+                // User is logged in - show appropriate auth header based on role
+                if (currentUser.role === 'technician') {
+                    headerContainer.innerHTML = '<recomputech-header-auth-technician></recomputech-header-auth-technician>';
+                } else {
+                    headerContainer.innerHTML = '<recomputech-header-auth></recomputech-header-auth>';
+                }
             } else {
                 // User is not logged in - show regular header
                 headerContainer.innerHTML = '<recomputech-header></recomputech-header>';
