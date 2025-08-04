@@ -98,30 +98,16 @@ document.addEventListener('DOMContentLoaded', async function() {
     toggleBtns.forEach(btn => {
         btn.addEventListener('click', function() {
             const mode = this.dataset.mode;
-<<<<<<< HEAD
-            
-            if (mode === currentMode) return;
-
-            // Update active button
-            toggleBtns.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-
-=======
             // Siempre permitir el cambio de modo
             // Update active button
             toggleBtns.forEach(b => b.classList.remove('active'));
             this.classList.add('active');
->>>>>>> 097daefb445ed062edae3034be82f68f5a076d1e
             // Update content based on mode
             if (mode === 'login') {
                 switchToLogin();
             } else {
                 switchToRegister();
             }
-<<<<<<< HEAD
-
-=======
->>>>>>> 097daefb445ed062edae3034be82f68f5a076d1e
             currentMode = mode;
         });
     });
@@ -288,14 +274,6 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         // Simulate registration process
         showNotification('Creating account...', 'info');
-<<<<<<< HEAD
-        
-        // Here you would typically make an API call
-        setTimeout(() => {
-            showNotification('Account created successfully!', 'success');
-            // Redirect to dashboard or home page
-            // window.location.href = '../dashboard-user.html';
-=======
         // Detectar si el tipo de usuario es Technician
         const technicianBtn = document.querySelector('.user-type-btn[data-type="technician"]');
         setTimeout(() => {
@@ -305,7 +283,6 @@ document.addEventListener('DOMContentLoaded', async function() {
             } else {
                 window.location.href = '../index.html';
             }
->>>>>>> 097daefb445ed062edae3034be82f68f5a076d1e
         }, 2000);
     });
 
@@ -499,11 +476,8 @@ function showError(input, message) {
     input.classList.add('is-invalid');
 }
 
-<<<<<<< HEAD
-=======
     // Detectar si el tipo de usuario es Technician
     // (Eliminado: este bloque ya está dentro del setTimeout de registro y no debe estar aquí, para no interferir con el toggle)
->>>>>>> 097daefb445ed062edae3034be82f68f5a076d1e
 function removeError(input) {
     const formGroup = input.closest('.form-group');
     const errorDiv = formGroup.querySelector('.error-message');
