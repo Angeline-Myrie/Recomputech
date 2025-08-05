@@ -849,15 +849,7 @@ class HeaderComponent extends HTMLElement {
                     <div class="recomputech-navbar-container">
                         <!-- Logo Section -->
                         <a class="recomputech-navbar-brand" href="index.html">
-<<<<<<< HEAD
-<<<<<<< HEAD
-                            <img src="/assets/logos/logo-.png" alt="Logo" class="recomputech-logo recomputech-logo-small">
-=======
-                            <img src="../assets/logos/logo-.png" alt="Logo" class="recomputech-logo recomputech-logo-small">
->>>>>>> 097daefb445ed062edae3034be82f68f5a076d1e
-=======
                             <img src="" alt="Logo" class="recomputech-logo recomputech-logo-small" id="header-logo">
->>>>>>> 97486cf7001b73f42ef1e5e78f3ed879584b8108
                             <div class="recomputech-brand-text">
                                 <span class="recomputech-brand-name">Recomputech</span>
                                 <span class="recomputech-brand-tagline">Sustainable Technology</span>
@@ -867,17 +859,10 @@ class HeaderComponent extends HTMLElement {
                         <!-- Navigation Section -->
                         <ul class="recomputech-navbar-nav">
                             <li><a class="recomputech-nav-link" href="/index.html">Home</a></li>
-<<<<<<< HEAD
-                            <li><a class="recomputech-nav-link" href="/pages/marketplace.html">Marketplace</a></li>
-                            <li><a class="recomputech-nav-link" href="/pages/Aboutus.html">About Us</a></li>
-                            <li><a class="recomputech-nav-link" href="/pages/services.html">Services</a></li>
-                            <li><a class="recomputech-nav-link" href="/pages/contact.html">Contact</a></li>
-=======
                             <li><a class="recomputech-nav-link" href="../pages/marketplace.html">Marketplace</a></li>
                             <li><a class="recomputech-nav-link" href="../pages/Aboutus.html">About Us</a></li>
                             <li><a class="recomputech-nav-link" href="../pages/services.html">Services</a></li>
                             <li><a class="recomputech-nav-link" href="../pages/contact.html">Contact</a></li>
->>>>>>> 097daefb445ed062edae3034be82f68f5a076d1e
                         </ul>
 
                         <!-- Actions Section -->
@@ -893,12 +878,7 @@ class HeaderComponent extends HTMLElement {
                             </button>
 
                                             <!-- Auth Buttons -->
-<<<<<<< HEAD
-                            <a href="/auth/auth.html" class="recomputech-btn-outline-primary">Login</a>
-                            <a href="/auth/auth.html" class="recomputech-btn-primary">Register</a>
-=======
                             <a href="/auth/auth.html" class="recomputech-btn-primary">Login & Register</a>
->>>>>>> 097daefb445ed062edae3034be82f68f5a076d1e
 
                             <!-- Cart Icon -->
                             <button class="recomputech-cart-icon" id="recomputech-cart-icon" title="Shopping Cart">
@@ -944,15 +924,7 @@ class HeaderComponent extends HTMLElement {
                             <i class="fas fa-shopping-cart recomputech-mobile-cart-icon"></i>
                             <span class="recomputech-mobile-cart-text">Shopping Cart (0)</span>
                         </div>
-<<<<<<< HEAD
-                        
-                        <div style="display: flex; gap: 1rem;">
-                                            <a href="/auth/auth.html" class="recomputech-btn-outline-primary" style="flex: 1; text-align: center;">Login</a>
-                <a href="/auth/auth.html" class="recomputech-btn-primary" style="flex: 1; text-align: center;">Register</a>
-                        </div>
-=======
                         <a href="/auth/auth.html" class="recomputech-btn-primary" style="width: 100%; text-align: center;">Login & Register</a>
->>>>>>> 097daefb445ed062edae3034be82f68f5a076d1e
                     </div>
                 </div>
             </div>

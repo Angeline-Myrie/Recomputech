@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /* service.css */
 
 /* Body */
@@ -318,7 +318,7 @@ body.dark-mode .newsletter-content .btn:hover {
 }
 
 .hero-background {
-=======
+=========
 /* Modern Services Page Styles */
 
 /* Services Hero Section - Same as contact page */
@@ -334,7 +334,7 @@ body.dark-mode .newsletter-content .btn:hover {
 
 .services-hero-section::before {
     content: '';
->>>>>>> 97486cf7001b73f42ef1e5e78f3ed879584b8108
+>>>>>>>>> Temporary merge branch 2
     position: absolute;
     top: 0;
     left: 0;
@@ -345,7 +345,7 @@ body.dark-mode .newsletter-content .btn:hover {
     border-radius: 0 0 30px 30px;
 }
 
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
 .hero-overlay {
     position: absolute;
     top: 0;
@@ -539,7 +539,7 @@ body.dark-mode .newsletter-content .btn:hover {
 /* Services Main Section */
 .services-main-section {
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-=======
+=========
 .services-hero-content {
     position: relative;
     z-index: 2;
@@ -615,14 +615,14 @@ body.dark-mode .services-main-section .section-title {
 
 body.dark-mode .services-main-section .section-subtitle {
     color: #ccc;
->>>>>>> 97486cf7001b73f42ef1e5e78f3ed879584b8108
+>>>>>>>>> Temporary merge branch 2
 }
 
 /* Modern Service Cards */
 .modern-service-card {
     background: white;
     border-radius: 20px;
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
     padding: 2.5rem;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
@@ -630,7 +630,7 @@ body.dark-mode .services-main-section .section-subtitle {
     overflow: hidden;
     height: 100%;
     border: 1px solid rgba(0, 0, 0, 0.05);
-=======
+=========
     padding: 40px 30px;
     text-align: center;
     transition: all 0.3s ease;
@@ -638,7 +638,7 @@ body.dark-mode .services-main-section .section-subtitle {
     position: relative;
     overflow: hidden;
     height: 100%;
->>>>>>> 97486cf7001b73f42ef1e5e78f3ed879584b8108
+>>>>>>>>> Temporary merge branch 2
 }
 
 .modern-service-card::before {
@@ -646,7 +646,7 @@ body.dark-mode .services-main-section .section-subtitle {
     position: absolute;
     top: 0;
     left: 0;
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
     right: 0;
     height: 4px;
 }
@@ -678,7 +678,7 @@ body.dark-mode .services-main-section .section-subtitle {
 .modern-service-card:hover {
     transform: translateY(-8px);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-=======
+=========
     width: 100%;
     height: 4px;
     background: linear-gradient(135deg, #0096A7 0%, #007a87 100%);
@@ -698,21 +698,21 @@ body.dark-mode .services-main-section .section-subtitle {
 body.dark-mode .modern-service-card {
     background: #2d2d2d;
     border-color: #444;
->>>>>>> 97486cf7001b73f42ef1e5e78f3ed879584b8108
+>>>>>>>>> Temporary merge branch 2
 }
 
 .service-icon-wrapper {
     width: 80px;
     height: 80px;
-<<<<<<< HEAD
-=======
+<<<<<<<<< Temporary merge branch 1
+=========
     background: linear-gradient(135deg, #0096A7 0%, #007a87 100%);
->>>>>>> 97486cf7001b73f42ef1e5e78f3ed879584b8108
+>>>>>>>>> Temporary merge branch 2
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
     margin-bottom: 2rem;
     font-size: 2rem;
     color: white;
@@ -754,7 +754,7 @@ body.dark-mode .modern-service-card {
     color: var(--text-light);
     line-height: 1.7;
     margin-bottom: 1.5rem;
-=======
+=========
     margin: 0 auto 25px;
     color: white;
     font-size: 2rem;
@@ -786,13 +786,13 @@ body.dark-mode .service-title {
 
 body.dark-mode .service-description {
     color: #ccc;
->>>>>>> 97486cf7001b73f42ef1e5e78f3ed879584b8108
+>>>>>>>>> Temporary merge branch 2
 }
 
 .service-features {
     display: flex;
     flex-wrap: wrap;
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
     gap: 0.5rem;
 }
 
@@ -809,7 +809,7 @@ body.dark-mode .service-description {
 /* Find Technician CTA Section */
 .find-technician-section {
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-=======
+=========
     gap: 8px;
     justify-content: center;
 }
@@ -895,6 +895,68 @@ body.dark-mode .process-subtitle {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 2rem;
+    font-size: 2rem;
+    color: white;
+    position: relative;
+}
+
+.modern-service-card.diagnosis .service-icon-wrapper {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.modern-service-card.refurbishment .service-icon-wrapper {
+    background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.modern-service-card.warranty .service-icon-wrapper {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+}
+
+.modern-service-card.recovery .service-icon-wrapper {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
+.modern-service-card.optimization .service-icon-wrapper {
+    background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.modern-service-card.network .service-icon-wrapper {
+    background: linear-gradient(135deg, #06b6d4, #0891b2);
+}
+
+.service-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+}
+
+.service-description {
+    color: var(--text-light);
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+}
+
+.service-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.feature-tag {
+    background: rgba(33, 141, 166, 0.1);
+    color: var(--primary-color);
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid rgba(33, 141, 166, 0.2);
+}
+
+/* Find Technician CTA Section */
+.find-technician-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
     color: white;
     font-weight: 700;
     font-size: 1.2rem;
@@ -999,13 +1061,13 @@ body.dark-mode .step-description {
 
 body.dark-mode .find-technician-section {
     background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
->>>>>>> 97486cf7001b73f42ef1e5e78f3ed879584b8108
+>>>>>>>>> Temporary merge branch 2
 }
 
 .technician-cta-card {
     background: white;
     border-radius: 25px;
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
     padding: 3rem;
     box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
     display: flex;
@@ -1023,7 +1085,7 @@ body.dark-mode .find-technician-section {
     right: 0;
     height: 5px;
     background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
-=======
+=========
     padding: 50px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
     position: relative;
@@ -1036,7 +1098,7 @@ body.dark-mode .find-technician-section {
 body.dark-mode .technician-cta-card {
     background: #2d2d2d;
     border: 1px solid #444;
->>>>>>> 97486cf7001b73f42ef1e5e78f3ed879584b8108
+>>>>>>>>> Temporary merge branch 2
 }
 
 .cta-content {
@@ -1046,7 +1108,7 @@ body.dark-mode .technician-cta-card {
 .cta-icon {
     width: 80px;
     height: 80px;
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
     border-radius: 50%;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     display: flex;
@@ -1073,7 +1135,7 @@ body.dark-mode .technician-cta-card {
 
 .cta-features {
     margin-bottom: 2.5rem;
-=======
+=========
     background: linear-gradient(135deg, #0096A7 0%, #007a87 100%);
     border-radius: 50%;
     display: flex;
@@ -1112,13 +1174,13 @@ body.dark-mode .cta-description {
     flex-direction: column;
     gap: 15px;
     margin-bottom: 35px;
->>>>>>> 97486cf7001b73f42ef1e5e78f3ed879584b8108
+>>>>>>>>> Temporary merge branch 2
 }
 
 .feature-item {
     display: flex;
     align-items: center;
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
     gap: 0.75rem;
     margin-bottom: 1rem;
     font-weight: 600;
@@ -1127,7 +1189,7 @@ body.dark-mode .cta-description {
 
 .feature-item i {
     color: #10b981;
-=======
+=========
     gap: 12px;
     color: #333;
     font-weight: 500;
@@ -1139,13 +1201,13 @@ body.dark-mode .feature-item {
 
 .feature-item i {
     color: #28a745;
->>>>>>> 97486cf7001b73f42ef1e5e78f3ed879584b8108
+>>>>>>>>> Temporary merge branch 2
     font-size: 1.1rem;
 }
 
 .cta-actions {
     display: flex;
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
     gap: 1rem;
     flex-wrap: wrap;
 }
@@ -1155,7 +1217,7 @@ body.dark-mode .feature-item {
     display: flex;
     justify-content: center;
     align-items: center;
-=======
+=========
     gap: 15px;
     flex-wrap: wrap;
 }
@@ -1177,13 +1239,13 @@ body.dark-mode .feature-item {
     display: flex;
     align-items: center;
     justify-content: center;
->>>>>>> 97486cf7001b73f42ef1e5e78f3ed879584b8108
+>>>>>>>>> Temporary merge branch 2
 }
 
 .technician-illustration {
     width: 150px;
     height: 150px;
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
     border-radius: 50%;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     display: flex;
@@ -1285,7 +1347,7 @@ body.dark-mode .feature-tag {
     
     .cta-title {
         font-size: 2rem;
-=======
+=========
     background: linear-gradient(135deg, #0096A7 0%, #007a87 100%);
     border-radius: 50%;
     display: flex;
@@ -1358,13 +1420,13 @@ body.dark-mode .feature-tag {
     .cta-visual {
         flex: none;
         margin-top: 30px;
->>>>>>> 97486cf7001b73f42ef1e5e78f3ed879584b8108
+>>>>>>>>> Temporary merge branch 2
     }
     
     .cta-actions {
         justify-content: center;
     }
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
     
     .cta-visual {
         flex: none;
@@ -1376,13 +1438,13 @@ body.dark-mode .feature-tag {
         height: 120px;
         font-size: 3rem;
     }
-=======
->>>>>>> 97486cf7001b73f42ef1e5e78f3ed879584b8108
+=========
+>>>>>>>>> Temporary merge branch 2
 }
 
 @media (max-width: 576px) {
     .services-hero-section {
-<<<<<<< HEAD
+<<<<<<<<< Temporary merge branch 1
         border-radius: 0 0 15px 15px;
     }
     
@@ -1441,7 +1503,7 @@ body.dark-mode .feature-tag {
   }
 }
 
-=======
+=========
         padding: 3rem 0 1.5rem 0;
     }
     
@@ -1483,4 +1545,4 @@ body.dark-mode .feature-tag {
         justify-content: center;
     }
 } 
->>>>>>> 97486cf7001b73f42ef1e5e78f3ed879584b8108
+>>>>>>>>> Temporary merge branch 2

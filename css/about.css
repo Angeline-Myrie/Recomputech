@@ -374,14 +374,6 @@
     margin: 0 auto;
 }
 
-<<<<<<< HEAD
-.team-card,
-.team-card * {
-    color: var(--text-color) !important;
-}
-
-=======
->>>>>>> 097daefb445ed062edae3034be82f68f5a076d1e
 .team-card::before {
     content: '';
     position: absolute;
@@ -507,11 +499,7 @@
 
 .card-icon i {
     font-size: 2rem;
-<<<<<<< HEAD
-    color: rgb(255, 255, 255);
-=======
     color: white;
->>>>>>> 097daefb445ed062edae3034be82f68f5a076d1e
 }
 
 .card-title {
@@ -742,11 +730,7 @@
 
 .aboutus-values-badge {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-<<<<<<< HEAD
-    color: rgb(255, 255, 255);
-=======
     color: white;
->>>>>>> 097daefb445ed062edae3034be82f68f5a076d1e
     padding: 0.5rem 1.5rem;
     border-radius: 25px;
     font-size: 0.9rem;
