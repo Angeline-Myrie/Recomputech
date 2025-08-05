@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // Función para cargar componentes
 async function loadComponent(elementId, componentPath) {
     try {
@@ -29,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Para prueba: rutas relativas para /pages
     loadComponent('header-component', '../components/header.html');
     loadComponent('footer-component', '../components/footer.html');
-=======
+
 // Función para cargar componentes
 async function loadComponent(elementId, componentPath) {
     try {
@@ -84,5 +83,4 @@ document.addEventListener('DOMContentLoaded', function() {
     if (footerComponent && !footerComponent.querySelector('rc-footer')) {
         loadComponent('footer-component', '../components/footer.html');
     }
->>>>>>> fa617b30c97b8936e5024d86394dc1b7f7c7110d
 }); 
