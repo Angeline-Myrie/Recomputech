@@ -742,7 +742,7 @@
                 productCard.onclick = () => navigateToProduct(product.id);
                 productCard.innerHTML = `
                     <div class="related-image">
-                        <i class="fas fa-laptop"></i>
+                        <img src="${product.images[1]}" alt="${product.name}" class="related-product-image" style="width:100%;height:160px;object-fit:contain;background:#fff;">
                     </div>
                     <div class="related-info">
                         <div class="related-name">${product.name}</div>
