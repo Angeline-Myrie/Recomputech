@@ -826,14 +826,7 @@ class RecomputechHeaderAuth extends HTMLElement {
 
                         <!-- Navigation Section -->
                         <ul class="recomputech-navbar-nav">
-
-                            <li><a class="recomputech-nav-link" href="/pages/marketplace.html">Marketplace</a></li>
-                            <li><a class="recomputech-nav-link" href="/pages/technician/info-technician.html">Technicians</a></li>
-                            <li><a class="recomputech-nav-link" href="/pages/services.html">Services</a></li>
-                            <li><a class="recomputech-nav-link" href="/pages/Aboutus.html">About Us</a></li>
-                            <li><a class="recomputech-nav-link" href="/pages/contact.html">Contact</a></li>
-
-                            <li><a class="recomputech-nav-link" href="#" data-url="/pages/marketplace.html">Marketplace</a></li>
+                            <li><a class="recomputech-nav-link" href="#" data-url="/pages/market-user.html">Marketplace</a></li>
                             <li><a class="recomputech-nav-link" href="#" data-url="/pages/contact.html">Contact</a></li>
                             <li><a class="recomputech-nav-link" href="#" data-url="/pages/Aboutus.html">About Us</a></li>
                             <li><a class="recomputech-nav-link" href="#" data-url="/pages/services.html">Services</a></li>
@@ -866,29 +859,6 @@ class RecomputechHeaderAuth extends HTMLElement {
                                 </div>
 
                                 <div class="dropdown-menu" id="dropdownMenu">
-
-                                    <a href="/dashboard/RegularUser/dashboard.html" class="dropdown-item">
-                                        <i class="fas fa-tachometer-alt"></i>
-                                        Overview
-                                    </a>
-                                    <a href="/dashboard/RegularUser/dashboard.html#sell" class="dropdown-item">
-                                        <i class="fas fa-plus-circle"></i>
-                                        Sell
-                                    </a>
-                                    <a href="/dashboard/RegularUser/dashboard.html#purchases" class="dropdown-item">
-                                        <i class="fas fa-shopping-bag"></i>
-                                        Purchases
-                                    </a>
-                                    <a href="/dashboard/RegularUser/dashboard.html#my-products" class="dropdown-item">
-                                        <i class="fas fa-box"></i>
-                                        My Products
-                                    </a>
-                                    <a href="/dashboard/RegularUser/dashboard.html#cart" class="dropdown-item">
-                                        <i class="fas fa-shopping-cart"></i>
-                                        Cart
-                                    </a>
-                                    <a href="/dashboard/RegularUser/dashboard.html#settings" class="dropdown-item">
-
                                     <a href="#overview" class="dropdown-item" data-section="overview">
                                         <i class="fas fa-tachometer-alt"></i>
                                         Overview
