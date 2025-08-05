@@ -10,8 +10,8 @@ const PRODUCTS_DATABASE = {
         discount: 40,
         images: [
             '/assets/images/pcs refurbished/DELL 3070.png',
-            '/assets/images/pcs refurbished/DELL 3070.png',
-            '/assets/images/pcs refurbished/DELL 3070.png'
+            '/assets/images/pcs refurbished/DELL 3070.2.png',
+            '/assets/images/pcs refurbished/DELL 3070.3.png'
         ],
         specs: {
             processor: 'Intel Core i5-8500 (6th Gen)',
@@ -142,8 +142,8 @@ const PRODUCTS_DATABASE = {
         discount: 31,
         images: [
             '/assets/images/laptops refurbished/Galaxy Book4 Pro.jpg',
-            '/assets/images/laptops refurbished/Galaxy Book4 Pro.jpg',
-            '/assets/images/laptops refurbished/Galaxy Book4 Pro.jpg'
+            '/assets/images/pcs refurbished/Book4.png',
+            '/assets/images/pcs refurbished/Book42.png'
         ],
         specs: {
             processor: 'Intel Core Ultra 7 155H',
