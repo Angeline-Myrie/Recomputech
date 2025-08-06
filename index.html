@@ -37,7 +37,7 @@
         <div class="container position-relative">
             <div class="row align-items-center min-vh-100">
                 <div class="col-lg-6" data-aos="fade-right">
-                    <span class="badge bg-primary mb-3">Sustainable Technology</span>
+                    <span class="badge bg-brand mb-3">Sustainable Technology</span>
                     <h1 class="display-4 fw-bold mb-4">Give Technology a Second Life</h1>
                     <p class="lead mb-4">Discover our selection of refurbished tech devices and professional technical services. Contribute to the environment while saving money.</p>
                     <div class="d-flex gap-3">
@@ -52,6 +52,7 @@
                 <div class="col-lg-6">
                     <div class="hero-image-container">
                         <img src="/assets/logos/portrait-female-working.jpg" alt="Sustainable Technology" class="img-fluid hero-image animate-slide-in">
+                        <img src="assets/logos/portrait-female-working.jpg" alt="Sustainable Technology" class="img-fluid hero-image animate-slide-in">
                         <div class="floating-card card-1">
                             <i class="fas fa-leaf text-success"></i>
                             <span>100% Sustainable</span>
@@ -196,7 +197,7 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="product-card" data-category="phones">
                         <div class="product-image">
-                            <img src="assets/images/smartphones refurbished/iPhone 13 128GB - Pink.png" alt="iPhone 13" class="img-fluid">
+                            <img src="assets/images/smartphones refurbished/iPhone-13-pink.png" alt="iPhone 13" class="img-fluid">
                             <div class="product-badge">Refurbished</div>
                         </div>
                         <div class="product-content">
@@ -226,7 +227,7 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="product-card" data-category="laptops">
                         <div class="product-image">
-                            <img src="assets/images/laptop.avif" alt="Gaming Laptop" class="img-fluid">
+                            <img src="assets/images/iPad 11 pro max.jpg" alt="Gaming Laptop" class="img-fluid">
                             <div class="product-badge">Refurbished</div>
                         </div>
                         <div class="product-content">
@@ -256,7 +257,7 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="product-card" data-category="tablets">
                         <div class="product-image">
-                            <img src="assets/images/tablet.png" alt="Pro Tablet" class="img-fluid">
+                            <img src="assets/images/smartphones refurbished/Galaxy S21 5G 128GB - Gray.png" alt="iPad Pro 11" class="img-fluid">
                             <div class="product-badge">Refurbished</div>
                         </div>
                         <div class="product-content">
@@ -583,6 +584,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/path-fixer.js"></script>
     <script src="js/theme.js"></script>
     <script src="js/components.js"></script>
     <script src="main.js"></script>
@@ -595,6 +598,9 @@
     <script src="js/header-manager.js"></script>
     <script src="components/header-auth-component.js"></script>
     <script src="components/header-auth-technician-component.js"></script>
+
+    <!-- Deployment Check (Development Only) -->
+    <script src="js/deployment-check.js"></script>
 
     <script>
       window.addEventListener('DOMContentLoaded', function() {
@@ -618,13 +624,13 @@
               id: 'iphone-13',
               name: 'iPhone 13 128GB',
               price: 599.99,
-              image: '/assets/images/smartphones refurbished/iPhone 13 128GB - Pink.png'
+              image: '/assets/images/smartphones refurbished/iPhone-13-pink.png'
             },
             'ipad-pro-11': {
               id: 'ipad-pro-11',
               name: 'iPad Pro 11"',
               price: 699.99,
-              image: '/assets/images/tablet.png'
+              image: '/assets/images/iPad 11 pro max.jpg'
             },
             'galaxy-s21': {
               id: 'galaxy-s21',

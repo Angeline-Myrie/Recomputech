@@ -10,6 +10,7 @@ class HeaderComponent extends HTMLElement {
         this.render();
         this.setupEventListeners();
         this.loadCartFromStorage();
+        this.setLogoPath();
     }
 
     render() {
@@ -849,6 +850,7 @@ class HeaderComponent extends HTMLElement {
                         <!-- Logo Section -->
                         <a class="recomputech-navbar-brand" href="index.html">
                             <img src="../assets/logos/logo-.png" alt="Logo" class="recomputech-logo recomputech-logo-small">
+                            <img src="" alt="Logo" class="recomputech-logo recomputech-logo-small" id="header-logo">
                             <div class="recomputech-brand-text">
                                 <span class="recomputech-brand-name">Recomputech</span>
                                 <span class="recomputech-brand-tagline">Sustainable Technology</span>
@@ -862,6 +864,10 @@ class HeaderComponent extends HTMLElement {
                             <li><a class="recomputech-nav-link" href="/pages/Aboutus.html">About Us</a></li>
                             <li><a class="recomputech-nav-link" href="/pages/services.html">Services</a></li>
                             <li><a class="recomputech-nav-link" href="/pages/contact.html">Contact</a></li>
+                            <li><a class="recomputech-nav-link" href="../pages/marketplace.html">Marketplace</a></li>
+                            <li><a class="recomputech-nav-link" href="../pages/Aboutus.html">About Us</a></li>
+                            <li><a class="recomputech-nav-link" href="../pages/services.html">Services</a></li>
+                            <li><a class="recomputech-nav-link" href="../pages/contact.html">Contact</a></li>
                         </ul>
 
                         <!-- Actions Section -->
@@ -879,7 +885,7 @@ class HeaderComponent extends HTMLElement {
                                             <!-- Auth Buttons -->
                         
                             <a href="/auth/auth.html" class="recomputech-btn-primary">Login & Register</a>
-
+                            <a href="/auth/auth.html" class="recomputech-btn-primary">Login & Register</a>
 
                             <!-- Cart Icon -->
                             <button class="recomputech-cart-icon" id="recomputech-cart-icon" title="Shopping Cart">
@@ -1118,6 +1124,7 @@ class HeaderComponent extends HTMLElement {
         } else {
             this.cartItems.push({
                 ...product,
+                image: product.images[1],
                 quantity: 1
             });
         }
@@ -1367,6 +1374,28 @@ class HeaderComponent extends HTMLElement {
         }
         
         console.log('Theme initialized:', savedTheme);
+    }
+
+    setLogoPath() {
+        const logo = this.shadowRoot.getElementById('header-logo');
+        if (logo) {
+            // Use centralized logo path resolver
+            const logoPath = window.CONFIG ? window.CONFIG.getLogoPathForCurrentLocation() : this.getFallbackLogoPath();
+            logo.src = logoPath;
+        }
+    }
+    
+    getFallbackLogoPath() {
+        // Fallback method if CONFIG is not available
+        const isGitHubPages = window.location.hostname !== 'localhost' && 
+                             window.location.hostname !== '127.0.0.1' &&
+                             window.location.hostname.includes('github.io');
+        
+        if (isGitHubPages) {
+            return '/Recomputech/assets/logos/logo-.png';
+        } else {
+            return 'assets/logos/logo-.png';
+        }
     }
 }
 

@@ -14,7 +14,7 @@ function renderCartSummary() {
     const totalSpan = document.getElementById('cartTotal');
     container.innerHTML = '';
     if (cartItems.length === 0) {
-        container.innerHTML = '<p>Tu carrito está vacío.</p>';
+        container.innerHTML = '<p>Your cart is empty.</p>';
         totalSpan.textContent = 'B/. 0.00';
         return;
     }
@@ -64,15 +64,15 @@ function validateFacturaForm() {
     const email = document.getElementById('email').value.trim();
     const phone = document.getElementById('phone').value.trim();
     if (!email || !phone) {
-        alert('Por favor, completa todos los campos.');
+        alert('Fill out all the form, please.');
         return false;
     }
     if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
-        alert('Por favor, ingresa un correo electrónico válido.');
+        alert('Type a valid email.');
         return false;
     }
     if (!/^\d{7,15}$/.test(phone)) {
-        alert('Por favor, ingresa un número de teléfono válido.');
+        alert('Type a valid phone number.');
         return false;
     }
     return true;
@@ -84,19 +84,19 @@ function validateCardForm() {
     const cardExpiry = document.getElementById('cardExpiry').value;
     const cardCVC = document.getElementById('cardCVC').value;
     if (!cardHolder || !cardNumber || !cardExpiry || !cardCVC) {
-        alert('Por favor, completa todos los datos de la tarjeta.');
+        alert('Complete all your card information.');
         return false;
     }
     if (!/^\d{16}$/.test(cardNumber)) {
-        alert('Por favor, ingresa un número de tarjeta válido.');
+        alert('Type a valid card number.');
         return false;
     }
     if (!/^(0[1-9]|1[0-2])\/\d{2}$/.test(cardExpiry)) {
-        alert('Por favor, ingresa una fecha de expiración válida (MM/AA).');
+        alert('Type a valid expiration date for your card (MM/YY).');
         return false;
     }
     if (!/^\d{3,4}$/.test(cardCVC)) {
-        alert('Por favor, ingresa un CVV válido.');
+        alert('Type a valid CVV.');
         return false;
     }
     return true;
@@ -116,14 +116,14 @@ function showYappyModal() {
     modal.style.zIndex = '99999';
     modal.innerHTML = `
         <div style="background:#fff;padding:2.5rem 2rem;border-radius:18px;max-width:350px;text-align:center;box-shadow:0 4px 32px rgba(0,158,227,0.13);">
-            <h2 style="color:#009ee3;font-size:1.5rem;margin-bottom:1rem;">Pago con Yappy</h2>
-            <p style="color:#1e293b;font-size:1.08rem;margin-bottom:1.5rem;">Escanea el código QR o haz clic en el botón para continuar con Yappy.</p>
+            <h2 style="color:#009ee3;font-size:1.5rem;margin-bottom:1rem;">Pay with Yappy</h2>
+            <p style="color:#1e293b;font-size:1.08rem;margin-bottom:1.5rem;">Scan the QR code or click the button to continue with Yappy.</p>
             <div style="margin-bottom:1.5rem;">
                 <img src="https://yappy-assets.s3.amazonaws.com/qr-demo.png" alt="QR Yappy" style="width:120px;height:120px;object-fit:contain;border-radius:10px;border:1.5px solid #e5e7eb;background:#f6fbfd;">
             </div>
-            <button style="background:#009ee3;color:#fff;padding:0.7rem 2rem;border:none;border-radius:8px;font-weight:600;font-size:1.08rem;cursor:pointer;" onclick="window.open('https://yappy.pagoseguro.panama/', '_blank')">Ir a Yappy</button>
+            <button style="background:#009ee3;color:#fff;padding:0.7rem 2rem;border:none;border-radius:8px;font-weight:600;font-size:1.08rem;cursor:pointer;" onclick="window.open('https://www.yappy.com.pa/', '_blank')">Go to Yappy</button>
             <br><br>
-            <button style="background:#e5e7eb;color:#1e293b;padding:0.5rem 1.5rem;border:none;border-radius:8px;font-weight:500;font-size:1rem;cursor:pointer;" onclick="this.closest('div[style]').remove()">Cerrar</button>
+            <button style="background:#e5e7eb;color:#1e293b;padding:0.5rem 1.5rem;border:none;border-radius:8px;font-weight:500;font-size:1rem;cursor:pointer;" onclick="this.closest('div[style]').remove()">Close</button>
         </div>
     `;
     document.body.appendChild(modal);
