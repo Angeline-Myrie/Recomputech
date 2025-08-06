@@ -850,7 +850,6 @@ class HeaderComponent extends HTMLElement {
                         <!-- Logo Section -->
                         <a class="recomputech-navbar-brand" href="index.html">
                             <img src="../assets/logos/logo-.png" alt="Logo" class="recomputech-logo recomputech-logo-small">
-                            <img src="" alt="Logo" class="recomputech-logo recomputech-logo-small" id="header-logo">
                             <div class="recomputech-brand-text">
                                 <span class="recomputech-brand-name">Recomputech</span>
                                 <span class="recomputech-brand-tagline">Sustainable Technology</span>
@@ -864,10 +863,6 @@ class HeaderComponent extends HTMLElement {
                             <li><a class="recomputech-nav-link" href="/pages/Aboutus.html">About Us</a></li>
                             <li><a class="recomputech-nav-link" href="/pages/services.html">Services</a></li>
                             <li><a class="recomputech-nav-link" href="/pages/contact.html">Contact</a></li>
-                            <li><a class="recomputech-nav-link" href="../pages/marketplace.html">Marketplace</a></li>
-                            <li><a class="recomputech-nav-link" href="../pages/Aboutus.html">About Us</a></li>
-                            <li><a class="recomputech-nav-link" href="../pages/services.html">Services</a></li>
-                            <li><a class="recomputech-nav-link" href="../pages/contact.html">Contact</a></li>
                         </ul>
 
                         <!-- Actions Section -->
@@ -884,7 +879,6 @@ class HeaderComponent extends HTMLElement {
 
                                             <!-- Auth Buttons -->
                         
-                            <a href="/auth/auth.html" class="recomputech-btn-primary">Login & Register</a>
                             <a href="/auth/auth.html" class="recomputech-btn-primary">Login & Register</a>
 
                             <!-- Cart Icon -->
