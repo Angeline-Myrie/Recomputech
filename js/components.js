@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
     loadComponent('header-component', '../components/header.html');
     loadComponent('footer-component', '../components/footer.html');
 },
+                          
 // Función para cargar componentes
 async function loadComponent(elementId, componentPath) {
     try {
@@ -83,4 +84,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (footerComponent && !footerComponent.querySelector('rc-footer')) {
         loadComponent('footer-component', '../components/footer.html');
     }
+
+}); 
+
 }));
+
