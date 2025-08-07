@@ -11,6 +11,16 @@ class HeaderComponent extends HTMLElement {
         this.setupEventListeners();
         this.loadCartFromStorage();
         this.setLogoPath();
+        
+        // Escuchar cambios de tema del DarkModeManager
+        document.addEventListener('themeChanged', (e) => {
+            this.updateThemeIcons(e.detail.theme);
+        });
+        
+        // Inicializar tema si el DarkModeManager está disponible
+        if (window.darkModeManager) {
+            this.updateThemeIcons(window.darkModeManager.getCurrentTheme());
+        }
     }
 
     render() {
@@ -1323,51 +1333,83 @@ class HeaderComponent extends HTMLElement {
     }
 
     toggleTheme() {
-        const body = document.body;
-        const isDark = body.classList.contains('dark-mode');
-        const themeToggle = this.shadowRoot.getElementById('recomputech-theme-toggle');
-        const moonIcon = themeToggle?.querySelector('.moon-icon');
-        const sunIcon = themeToggle?.querySelector('.sun-icon');
-        
-        if (isDark) {
-            // Switch to light mode
-            body.classList.remove('dark-mode');
-            this.classList.remove('dark-mode');
-            localStorage.setItem('theme', 'light');
-            if (moonIcon) moonIcon.style.display = 'block';
-            if (sunIcon) sunIcon.style.display = 'none';
+        // Usar el DarkModeManager centralizado
+        if (window.darkModeManager) {
+            window.darkModeManager.toggleTheme();
         } else {
-            // Switch to dark mode
-            body.classList.add('dark-mode');
-            this.classList.add('dark-mode');
-            localStorage.setItem('theme', 'dark');
-            if (moonIcon) moonIcon.style.display = 'none';
-            if (sunIcon) sunIcon.style.display = 'block';
+            // Fallback si el DarkModeManager no está disponible
+            const body = document.body;
+            const isDark = body.classList.contains('dark-mode');
+            const themeToggle = this.shadowRoot.getElementById('recomputech-theme-toggle');
+            const moonIcon = themeToggle?.querySelector('.moon-icon');
+            const sunIcon = themeToggle?.querySelector('.sun-icon');
+            
+            if (isDark) {
+                // Switch to light mode
+                body.classList.remove('dark-mode');
+                this.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light');
+                if (moonIcon) moonIcon.style.display = 'block';
+                if (sunIcon) sunIcon.style.display = 'none';
+            } else {
+                // Switch to dark mode
+                body.classList.add('dark-mode');
+                this.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark');
+                if (moonIcon) moonIcon.style.display = 'none';
+                if (sunIcon) sunIcon.style.display = 'block';
+            }
+            
+            console.log('Theme toggled:', isDark ? 'light' : 'dark');
         }
-        
-        console.log('Theme toggled:', isDark ? 'light' : 'dark');
     }
 
     initializeTheme() {
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        const body = document.body;
+        // Usar el DarkModeManager centralizado
+        if (window.darkModeManager) {
+            const currentTheme = window.darkModeManager.getCurrentTheme();
+            this.updateThemeIcons(currentTheme);
+        } else {
+            // Fallback si el DarkModeManager no está disponible
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            const body = document.body;
+            const themeToggle = this.shadowRoot.getElementById('recomputech-theme-toggle');
+            const moonIcon = themeToggle?.querySelector('.moon-icon');
+            const sunIcon = themeToggle?.querySelector('.sun-icon');
+            
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                this.classList.add('dark-mode');
+                if (moonIcon) moonIcon.style.display = 'none';
+                if (sunIcon) sunIcon.style.display = 'block';
+            } else {
+                body.classList.remove('dark-mode');
+                this.classList.remove('dark-mode');
+                if (moonIcon) moonIcon.style.display = 'block';
+                if (sunIcon) sunIcon.style.display = 'none';
+            }
+            
+            console.log('Theme initialized:', savedTheme);
+        }
+    }
+
+    updateThemeIcons(theme) {
         const themeToggle = this.shadowRoot.getElementById('recomputech-theme-toggle');
         const moonIcon = themeToggle?.querySelector('.moon-icon');
         const sunIcon = themeToggle?.querySelector('.sun-icon');
         
-        if (savedTheme === 'dark') {
-            body.classList.add('dark-mode');
-            this.classList.add('dark-mode');
-            if (moonIcon) moonIcon.style.display = 'none';
-            if (sunIcon) sunIcon.style.display = 'block';
-        } else {
-            body.classList.remove('dark-mode');
-            this.classList.remove('dark-mode');
-            if (moonIcon) moonIcon.style.display = 'block';
-            if (sunIcon) sunIcon.style.display = 'none';
+        if (moonIcon && sunIcon) {
+            if (theme === 'dark') {
+                moonIcon.style.display = 'none';
+                sunIcon.style.display = 'block';
+            } else {
+                moonIcon.style.display = 'block';
+                sunIcon.style.display = 'none';
+            }
         }
         
-        console.log('Theme initialized:', savedTheme);
+        // Actualizar clase del componente
+        this.classList.toggle('dark-mode', theme === 'dark');
     }
 
     setLogoPath() {
