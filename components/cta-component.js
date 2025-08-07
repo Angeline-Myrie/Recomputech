@@ -1,4 +1,4 @@
-// CTA Component
+//CTA Component
 class RecomputechCTA extends HTMLElement {
     constructor() {
         super();
@@ -10,7 +10,7 @@ class RecomputechCTA extends HTMLElement {
         const isHomePage = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
         const basePath = isHomePage ? '' : '../';
         
-        this.shadowRoot.innerHTML = `
+       this.shadowRoot.innerHTML = `
             <style>
                 /* CTA Component Styles */
                 .cta-section {
@@ -258,11 +258,11 @@ class RecomputechCTA extends HTMLElement {
                             <p class="cta-subtitle">Explore our quality products or find the perfect technician for your project</p>
                             
                             <div class="cta-actions">
-                                <a href="${basePath}pages/products.html" class="cta-btn cta-btn-primary">
+                                <a href="/pages/marketplace.html" class="cta-btn cta-btn-primary">
                                     <i class="fas fa-laptop" style="margin-right: 0.5rem;"></i>
                                     Browse Products
                                 </a>
-                                <a href="${basePath}pages/technicians.html" class="cta-btn cta-btn-secondary">
+                                <a href="/pages/technician/info-technician.html" class="cta-btn cta-btn-secondary">
                                     <i class="fas fa-tools" style="margin-right: 0.5rem;"></i>
                                     Find Technicians
                                 </a>
@@ -290,4 +290,4 @@ class RecomputechCTA extends HTMLElement {
     }
 }
 
-customElements.define('recomputech-cta', RecomputechCTA); 
+customElements.define('recomputech-cta', RecomputechCTA);

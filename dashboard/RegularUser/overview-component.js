@@ -51,119 +51,86 @@ class OverviewComponent extends HTMLElement {
     render() {
         this.innerHTML = `
             <!-- Welcome Section -->
-            <section class="welcome-section" data-aos="fade-up">
-                <div class="welcome-header">
-                    <div class="welcome-text">
-                        <h1>¡Bienvenido de vuelta, <span id="userName">${this.userData?.name || 'Usuario'}</span>! 👋</h1>
-                        <p>Aquí tienes un resumen de tu actividad en Recomputech</p>
-                    </div>
-                    <div class="welcome-actions">
-                        <button class="btn btn-light" onclick="window.location.href='/pages/marketplace.html'">
-                            <i class="fas fa-shopping-cart"></i>
-                            Explorar Productos
-                        </button>
+            <section class="welcome-section" data-aos="fade-up" style="width: 100vw; position: relative; left: 50%; right: 50%; margin-left: -50vw; margin-right: -50vw; margin-top: 2.5rem; padding-top: 3.5rem;">
+                <div class="welcome-header" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 260px; background: linear-gradient(135deg, #218DA6 0%, #1b6e82 100%); border-radius: 0 0 32px 32px; margin-bottom: 2.5rem; width: 100vw;">
+                    <h1 style="font-size: 4rem; font-weight: 800; color: #fff; margin-bottom: 1rem; text-align: center; letter-spacing: -2px;">Welcome</h1>
+                    <p data-aos="fade-in" data-aos-delay="200" style="font-size: 1.5rem; color: #e0f7fa; margin-bottom: 0; text-align: center; max-width: 600px;">
+                        Here is a summary of your activity on Recomputech
+                    </p>
+                    <div class="welcome-user" style="margin-top: 1.5rem;">
+                        <span style="font-size: 1.2rem; color: #fff; opacity: 0.85;">${this.userData?.name ? 'Hello, ' + this.userData.name + '!' : ''}</span>
                     </div>
                 </div>
             </section>
 
-            <!-- Stats Cards Row 1 -->
-            <section class="stats-section" data-aos="fade-up" data-aos-delay="100">
-                <div class="stats-row d-flex flex-row flex-wrap justify-content-between align-items-stretch mb-4">
-                    <div class="stat-card flex-fill mx-2 mb-3">
-                        <div class="stat-header">
-                            <h4>Tiempo en el Perfil</h4>
-                            <div class="stat-change positive">+${Math.floor(Math.random() * 10) + 1}%</div>
+            <!-- Stats Cards Single Row -->
+            <section class="stats-section" data-aos="fade-up" data-aos-delay="100" style="margin-top: 2.5rem;">
+                <div class="container-fluid">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-3 col-md-6 col-12 mb-4">
+                            <div class="stat-card h-100">
+                                <div class="stat-header">
+                                    <h4>Time on Profile</h4>
+                                </div>
+                                <div class="stat-content">
+                                    <h3>${this.stats.timeInProfile}</h3>
+                                    <p>Days since registration</p>
+                                </div>
+                                <div class="stat-chart">
+                                    <canvas id="timeChart" width="200" height="100"></canvas>
+                                </div>
+                            </div>
                         </div>
-                        <div class="stat-content">
-                            <h3>${this.stats.timeInProfile}</h3>
-                            <p>Días desde tu registro</p>
+                        <div class="col-lg-3 col-md-6 col-12 mb-4">
+                            <div class="stat-card h-100">
+                                <div class="stat-header">
+                                    <h4>Purchases Made</h4>
+                                </div>
+                                <div class="stat-content">
+                                    <h3>${this.stats.totalPurchases}</h3>
+                                    <p>Total purchases</p>
+                                </div>
+                                <div class="stat-chart">
+                                    <canvas id="purchasesChart" width="200" height="100"></canvas>
+                                </div>
+                            </div>
                         </div>
-                        <div class="stat-chart">
-                            <canvas id="timeChart" width="200" height="60"></canvas>
+                        <div class="col-lg-3 col-md-6 col-12 mb-4">
+                            <div class="stat-card h-100">
+                                <div class="stat-header">
+                                    <h4>Products Sold</h4>
+                                </div>
+                                <div class="stat-content">
+                                    <h3>${this.stats.totalSales}</h3>
+                                    <p>Total sales</p>
+                                </div>
+                                <div class="stat-chart">
+                                    <canvas id="salesChart" width="200" height="100"></canvas>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    
-                    <div class="stat-card flex-fill mx-2 mb-3">
-                        <div class="stat-header">
-                            <h4>Compras Realizadas</h4>
-                            <div class="stat-change positive">+${Math.floor(Math.random() * 20) + 5}%</div>
-                        </div>
-                        <div class="stat-content">
-                            <h3>${this.stats.totalPurchases}</h3>
-                            <p>Total de compras</p>
-                        </div>
-                        <div class="stat-chart">
-                            <canvas id="purchasesChart" width="200" height="60"></canvas>
-                        </div>
-                    </div>
-                    
-                    <div class="stat-card flex-fill mx-2 mb-3">
-                        <div class="stat-header">
-                            <h4>Productos Vendidos</h4>
-                            <div class="stat-change positive">+${Math.floor(Math.random() * 15) + 3}%</div>
-                        </div>
-                        <div class="stat-content">
-                            <h3>${this.stats.totalSales}</h3>
-                            <p>Total de ventas</p>
-                        </div>
-                        <div class="stat-chart">
-                            <canvas id="salesChart" width="200" height="60"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Stats Cards Row 2 -->
-            <section class="stats-section" data-aos="fade-up" data-aos-delay="150">
-                <div class="stats-row d-flex flex-row flex-wrap justify-content-between align-items-stretch mb-4">
-                    <div class="stat-card flex-fill mx-2 mb-3">
-                        <div class="stat-header">
-                            <h4>Técnicos Contactados</h4>
-                            <div class="stat-change positive">+${Math.floor(Math.random() * 8) + 2}%</div>
-                        </div>
-                        <div class="stat-content">
-                            <h3>${this.stats.techniciansContacted}</h3>
-                            <p>Servicios solicitados</p>
-                        </div>
-                        <div class="stat-chart">
-                            <canvas id="techniciansChart" width="200" height="60"></canvas>
-                        </div>
-                    </div>
-                    
-                    <div class="stat-card flex-fill mx-2 mb-3">
-                        <div class="stat-header">
-                            <h4>Dinero Gastado</h4>
-                            <div class="stat-change positive">+${Math.floor(Math.random() * 12) + 3}%</div>
-                        </div>
-                        <div class="stat-content">
-                            <h3>B/. ${this.stats.totalSpent.toFixed(2)}</h3>
-                            <p>Total invertido</p>
-                        </div>
-                        <div class="stat-chart">
-                            <canvas id="spentChart" width="200" height="60"></canvas>
-                        </div>
-                    </div>
-                    
-                    <div class="stat-card flex-fill mx-2 mb-3">
-                        <div class="stat-header">
-                            <h4>Dinero Ganado</h4>
-                            <div class="stat-change positive">+${Math.floor(Math.random() * 18) + 5}%</div>
-                        </div>
-                        <div class="stat-content">
-                            <h3>B/. ${this.stats.totalEarned.toFixed(2)}</h3>
-                            <p>Total ganado</p>
-                        </div>
-                        <div class="stat-chart">
-                            <canvas id="earnedChart" width="200" height="60"></canvas>
+                        <div class="col-lg-3 col-md-6 col-12 mb-4">
+                            <div class="stat-card h-100">
+                                <div class="stat-header">
+                                    <h4>Technicians Contacted</h4>
+                                </div>
+                                <div class="stat-content">
+                                    <h3>${this.stats.techniciansContacted}</h3>
+                                    <p>Services requested</p>
+                                </div>
+                                <div class="stat-chart">
+                                    <canvas id="techniciansChart" width="200" height="100"></canvas>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Charts Section -->
+            <!-- Charts Section (solo actividad mensual) -->
             <section class="charts-section" data-aos="fade-up" data-aos-delay="200">
                 <div class="row">
-                    <div class="col-lg-8 mb-4">
+                    <div class="col-lg-12 mb-4">
                         <div class="chart-card">
                             <div class="chart-header">
                                 <h4><i class="fas fa-chart-line"></i> Actividad Mensual</h4>
@@ -174,92 +141,78 @@ class OverviewComponent extends HTMLElement {
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="col-lg-4 mb-4">
-                        <div class="chart-card">
-                            <div class="chart-header">
-                                <h4><i class="fas fa-chart-pie"></i> Distribución de Gastos</h4>
-                                <p>¿En qué gastas tu dinero?</p>
-                            </div>
-                            <div class="chart-body">
-                                <canvas id="expensesChart" height="300"></canvas>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </section>
 
-            <!-- Recent Activity -->
-            <section class="activity-section" data-aos="fade-up" data-aos-delay="250">
-                <div class="card activity-card">
-                    <div class="card-header">
-                        <h3><i class="fas fa-history"></i> Actividad Reciente</h3>
+            <!-- Recent Activity & Quick Actions Row -->
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-12 mb-4">
+                        <section class="activity-section" data-aos="fade-up" data-aos-delay="250" style="height: 100%;">
+                            <div class="card activity-card h-100">
+                                <div class="card-header">
+                                    <h3><i class="fas fa-history"></i> Recent Activity</h3>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="activity-list" id="activityList">
+                                        <li class="activity-item">
+                                            <div class="activity-icon">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </div>
+                                            <div class="activity-content">
+                                                <h5>Purchase made</h5>
+                                                <p>You bought "HP Victus Gaming Laptop" for $850.00</p>
+                                                <span class="activity-time">2 days ago</span>
+                                            </div>
+                                        </li>
+                                        <li class="activity-item">
+                                            <div class="activity-icon">
+                                                <i class="fas fa-box"></i>
+                                            </div>
+                                            <div class="activity-content">
+                                                <h5>Product sold</h5>
+                                                <p>You sold "Refurbished Dell PC" for $450.00</p>
+                                                <span class="activity-time">5 days ago</span>
+                                            </div>
+                                        </li>
+                                        <li class="activity-item">
+                                            <div class="activity-icon">
+                                                <i class="fas fa-tools"></i>
+                                            </div>
+                                            <div class="activity-content">
+                                                <h5>Contacted technician</h5>
+                                                <p>You contacted María García for repair</p>
+                                                <span class="activity-time">1 week ago</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
                     </div>
-                    <div class="card-body">
-                        <ul class="activity-list" id="activityList">
-                            <li class="activity-item">
-                                <div class="activity-icon">
-                                    <i class="fas fa-shopping-cart"></i>
+                    <div class="col-lg-6 col-12 mb-4">
+                        <section class="quick-actions-section" data-aos="fade-up" data-aos-delay="300" style="height: 100%;">
+                            <div class="quick-actions-card h-100">
+                                <div class="card-header">
+                                    <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
                                 </div>
-                                <div class="activity-content">
-                                    <h5>Compra realizada</h5>
-                                    <p>Compraste "Laptop Gaming HP Victus" por B/. 850.00</p>
-                                    <span class="activity-time">Hace 2 días</span>
+                                <div class="card-body">
+                                    <div class="quick-actions">
+                                        <button class="quick-action-btn" onclick="window.location.href='/dashboard/RegularUser/sell.html'">
+                                            <i class="fas fa-plus-circle"></i>
+                                            <span>Sell Product</span>
+                                        </button>
+                                        <button class="quick-action-btn" onclick="window.location.href='/dashboard/RegularUser/cart.html'">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            <span>View Cart</span>
+                                        </button>
+                                    </div>
                                 </div>
-                            </li>
-                            <li class="activity-item">
-                                <div class="activity-icon">
-                                    <i class="fas fa-box"></i>
-                                </div>
-                                <div class="activity-content">
-                                    <h5>Producto vendido</h5>
-                                    <p>Vendiste "PC Refurbished Dell" por B/. 450.00</p>
-                                    <span class="activity-time">Hace 5 días</span>
-                                </div>
-                            </li>
-                            <li class="activity-item">
-                                <div class="activity-icon">
-                                    <i class="fas fa-tools"></i>
-                                </div>
-                                <div class="activity-content">
-                                    <h5>Contacto con técnico</h5>
-                                    <p>Contactaste a María García para reparación</p>
-                                    <span class="activity-time">Hace 1 semana</span>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Quick Actions -->
-            <section class="quick-actions-section" data-aos="fade-up" data-aos-delay="300">
-                <div class="quick-actions-card">
-                    <div class="card-header">
-                        <h3><i class="fas fa-bolt"></i> Acciones Rápidas</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="quick-actions">
-                            <button class="quick-action-btn" onclick="window.location.href='/dashboard/RegularUser/sell.html'">
-                                <i class="fas fa-plus-circle"></i>
-                                <span>Vender Producto</span>
-                            </button>
-                            <button class="quick-action-btn" onclick="window.location.href='/dashboard/RegularUser/cart.html'">
-                                <i class="fas fa-shopping-cart"></i>
-                                <span>Ver Carrito</span>
-                            </button>
-                            <button class="quick-action-btn" onclick="window.location.href='/pages/marketplace.html'">
-                                <i class="fas fa-search"></i>
-                                <span>Explorar Productos</span>
-                            </button>
-                            <button class="quick-action-btn" onclick="window.location.href='/pages/technicians.html'">
-                                <i class="fas fa-tools"></i>
-                                <span>Buscar Técnicos</span>
-                            </button>
-                        </div>
+                            </div>
+                        </section>
                     </div>
                 </div>
-            </section>
+            </div>
         `;
     }
 
@@ -272,26 +225,23 @@ class OverviewComponent extends HTMLElement {
             if (window.Chart) {
                 this.createMiniCharts();
                 this.createMonthlyActivityChart();
-                this.createExpensesChart();
             }
         }, 500);
     }
 
     createMiniCharts() {
-        // Mini chart para tiempo en perfil
+        // Mini chart para tiempo en el perfil
         const timeCtx = document.getElementById('timeChart');
         if (timeCtx) {
             new Chart(timeCtx, {
-                type: 'line',
+                type: 'bar',
                 data: {
-                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
                     datasets: [{
-                        data: [0, 15, 30, 45, 60, this.stats.timeInProfile],
-                        borderColor: '#218DA6',
-                        backgroundColor: 'rgba(33, 141, 166, 0.1)',
-                        borderWidth: 2,
-                        fill: true,
-                        tension: 0.4
+                        data: [5, 10, 15, 20, 25, this.stats.timeInProfile],
+                        backgroundColor: '#218DA6', // azul principal
+                        borderRadius: 8,
+                        maxBarThickness: 18
                     }]
                 },
                 options: {
@@ -301,26 +251,22 @@ class OverviewComponent extends HTMLElement {
                     scales: {
                         x: { display: false },
                         y: { display: false }
-                    },
-                    elements: { point: { radius: 0 } }
+                    }
                 }
             });
         }
-
-        // Mini chart para compras
+        // Mini chart para compras realizadas
         const purchasesCtx = document.getElementById('purchasesChart');
         if (purchasesCtx) {
             new Chart(purchasesCtx, {
-                type: 'line',
+                type: 'bar',
                 data: {
-                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
                     datasets: [{
-                        data: [2, 4, 3, 6, 8, this.stats.totalPurchases],
-                        borderColor: '#28a745',
-                        backgroundColor: 'rgba(40, 167, 69, 0.1)',
-                        borderWidth: 2,
-                        fill: true,
-                        tension: 0.4
+                        data: [2, 4, 6, 8, 10, this.stats.totalPurchases],
+                        backgroundColor: '#1b6e82', // azul secundario
+                        borderRadius: 8,
+                        maxBarThickness: 18
                     }]
                 },
                 options: {
@@ -330,26 +276,22 @@ class OverviewComponent extends HTMLElement {
                     scales: {
                         x: { display: false },
                         y: { display: false }
-                    },
-                    elements: { point: { radius: 0 } }
+                    }
                 }
             });
         }
-
-        // Mini chart para ventas
+        // Mini chart para productos vendidos
         const salesCtx = document.getElementById('salesChart');
         if (salesCtx) {
             new Chart(salesCtx, {
-                type: 'line',
+                type: 'bar',
                 data: {
-                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
                     datasets: [{
-                        data: [1, 3, 2, 5, 6, this.stats.totalSales],
-                        borderColor: '#ffc107',
-                        backgroundColor: 'rgba(255, 193, 7, 0.1)',
-                        borderWidth: 2,
-                        fill: true,
-                        tension: 0.4
+                        data: [1, 3, 5, 7, 9, this.stats.totalSales],
+                        backgroundColor: '#155a6b', // acento
+                        borderRadius: 8,
+                        maxBarThickness: 18
                     }]
                 },
                 options: {
@@ -359,26 +301,22 @@ class OverviewComponent extends HTMLElement {
                     scales: {
                         x: { display: false },
                         y: { display: false }
-                    },
-                    elements: { point: { radius: 0 } }
+                    }
                 }
             });
         }
-
-        // Mini chart para técnicos
+        // Mini chart para técnicos contactados
         const techniciansCtx = document.getElementById('techniciansChart');
         if (techniciansCtx) {
             new Chart(techniciansCtx, {
-                type: 'line',
+                type: 'bar',
                 data: {
-                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
                     datasets: [{
-                        data: [0, 1, 2, 3, 4, this.stats.techniciansContacted],
-                        borderColor: '#dc3545',
-                        backgroundColor: 'rgba(220, 53, 69, 0.1)',
-                        borderWidth: 2,
-                        fill: true,
-                        tension: 0.4
+                        data: [1, 2, 3, 4, 5, this.stats.techniciansContacted],
+                        backgroundColor: '#218DA6', // azul principal (repetido para consistencia)
+                        borderRadius: 8,
+                        maxBarThickness: 18
                     }]
                 },
                 options: {
@@ -388,66 +326,7 @@ class OverviewComponent extends HTMLElement {
                     scales: {
                         x: { display: false },
                         y: { display: false }
-                    },
-                    elements: { point: { radius: 0 } }
-                }
-            });
-        }
-
-        // Mini chart para dinero gastado
-        const spentCtx = document.getElementById('spentChart');
-        if (spentCtx) {
-            new Chart(spentCtx, {
-                type: 'line',
-                data: {
-                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
-                    datasets: [{
-                        data: [200, 350, 280, 450, 600, this.stats.totalSpent],
-                        borderColor: '#6f42c1',
-                        backgroundColor: 'rgba(111, 66, 193, 0.1)',
-                        borderWidth: 2,
-                        fill: true,
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        x: { display: false },
-                        y: { display: false }
-                    },
-                    elements: { point: { radius: 0 } }
-                }
-            });
-        }
-
-        // Mini chart para dinero ganado
-        const earnedCtx = document.getElementById('earnedChart');
-        if (earnedCtx) {
-            new Chart(earnedCtx, {
-                type: 'line',
-                data: {
-                    labels: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'],
-                    datasets: [{
-                        data: [150, 250, 200, 350, 400, this.stats.totalEarned],
-                        borderColor: '#20c997',
-                        backgroundColor: 'rgba(32, 201, 151, 0.1)',
-                        borderWidth: 2,
-                        fill: true,
-                        tension: 0.4
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: { legend: { display: false } },
-                    scales: {
-                        x: { display: false },
-                        y: { display: false }
-                    },
-                    elements: { point: { radius: 0 } }
+                    }
                 }
             });
         }
@@ -461,16 +340,16 @@ class OverviewComponent extends HTMLElement {
                 data: {
                     labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
                     datasets: [{
-                        label: 'Compras',
+                        label: 'Purchases',
                         data: [3, 5, 2, 8, 4, 6],
-                        backgroundColor: 'rgba(33, 141, 166, 0.7)',
+                        backgroundColor: 'rgba(33, 141, 166, 0.7)', // azul principal
                         borderColor: '#218DA6',
                         borderWidth: 1
                     }, {
-                        label: 'Ventas',
+                        label: 'Sales',
                         data: [2, 3, 4, 5, 6, 7],
-                        backgroundColor: 'rgba(255, 193, 7, 0.7)',
-                        borderColor: '#ffc107',
+                        backgroundColor: 'rgba(27, 110, 130, 0.7)', // azul secundario
+                        borderColor: '#1b6e82',
                         borderWidth: 1
                     }]
                 },
@@ -496,41 +375,6 @@ class OverviewComponent extends HTMLElement {
                         x: {
                             grid: {
                                 display: false
-                            }
-                        }
-                    }
-                }
-            });
-        }
-    }
-
-    createExpensesChart() {
-        const ctx = document.getElementById('expensesChart');
-        if (ctx) {
-            new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Laptops', 'PCs', 'Accesorios', 'Servicios'],
-                    datasets: [{
-                        data: [45, 25, 20, 10],
-                        backgroundColor: [
-                            '#218DA6',
-                            '#28a745',
-                            '#ffc107',
-                            '#dc3545'
-                        ],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: {
-                                usePointStyle: true,
-                                padding: 15
                             }
                         }
                     }

@@ -6,71 +6,74 @@ body {
 }
 
 /* Hero Section */
-.services-hero {
-    background: #1976d2;
-    color: #fff;
-    border-radius: 0; /* <--- QUITA EL BORDE REDONDEADO */
-    box-shadow: 0 4px 24px 0 rgba(25, 118, 210, 0.10);
-    margin-bottom: 0; /* <--- NUNCA NEGATIVO */
-    position: relative;
-    z-index: 1;
-    padding-bottom: 3rem;
-}
-.services-hero i {
-    color: #fff;
-    opacity: 0.85;
-}
-
-/* Services Hero Section */
 .services-hero-section {
-    background: #007a87; /* Similar background color */
-    color: #fff; /* White text for contrast */
-    padding: 100px 0; /* Adjust spacing */
-    text-align: center;
-    border-radius: 20px; /* Rounded corners */
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    padding: 7rem 0 5rem 0;
     position: relative;
     overflow: hidden;
+    border-radius: 0 0 30px 30px;
 }
-
 .services-hero-section::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 4px;
-    background: linear-gradient(135deg, #0096A7 0%, #007a87 100%);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+    border-radius: 0 0 30px 30px;
 }
-
-.services-hero-section:hover::before {
-    transform: scaleX(1);
-}
-
 .services-hero-content {
-    max-width: 600px;
-    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding-top: 2rem;
 }
 
 .services-hero-badge {
     display: inline-block;
-    background: rgba(255, 255, 255, 0.1); /* Transparent badge */
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 15px;
-    font-size: 1.2rem; /* Slightly larger text */
-    font-weight: 500;
-    margin-bottom: 20px;
-    animation: fadeIn 1.5s ease-in-out; /* Fade-in animation */
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.75rem 2rem;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    animation: pulse 2s infinite;
 }
 
 .services-hero-title {
-    font-size: 3rem; /* Larger text size */
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 0;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Contact Section */
+.services-section {
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    padding: 5rem 0;
+}
+
+.services-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.services-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.services-title{
+    font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: 15px;
-    animation: slideIn 1.5s ease-in-out; /* Slide-in animation */
+    margin-bottom: 0;
+    color: var(--text-color);
 }
 
 /* Animations */
