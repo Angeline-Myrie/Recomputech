@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Ícono del Carrito en Dark Mode</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/homepage.css">
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+        .test-section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid var(--card-border);
+        }
+        .debug-info {
+            background: var(--card-bg);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        .icon-test {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+        .icon-sample {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            border: 1px solid var(--card-border);
+            border-radius: 0.5rem;
+            background: var(--card-bg);
+            min-width: 120px;
+        }
+        .icon-sample i {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .contrast-test {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .contrast-item {
+            padding: 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Test - Ícono del Carrito en Dark Mode</h1>
+        
+        <!-- Theme Toggle -->
+        <div class="mb-4">
+            <button id="themeToggle" class="btn btn-primary">
+                <i class="fas fa-moon"></i> Toggle Dark Mode
+            </button>
+            <span id="currentTheme" class="ms-3 badge bg-secondary">Light Mode</span>
+        </div>
+
+        <!-- Debug Info -->
+        <div class="debug-info">
+            <h5>Información de Debug:</h5>
+            <div>CSS Variables actuales:</div>
+            <div id="cssVars"></div>
+        </div>
+
+        <!-- Test Section 1: Add to Cart Buttons -->
+        <div class="test-section">
+            <h3>1. Botones "Add to Cart" del Homepage</h3>
+            <p>Estos son los botones exactos que se usan en el homepage:</p>
+            
+            <div class="icon-test">
+                <div class="icon-sample">
+                    <button class="btn btn-light add-to-cart-btn">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                    <small>Estado Normal</small>
+                </div>
+                <div class="icon-sample">
+                    <button class="btn btn-light add-to-cart-btn" style="background-color: var(--primary-color); color: var(--text-inverse);">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                    <small>Estado Hover</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Section 2: Different Icon Colors -->
+        <div class="test-section">
+            <h3>2. Comparación de Colores de Íconos</h3>
+            <p>Comparación con otros íconos para verificar contraste:</p>
+            
+            <div class="icon-test">
+                <div class="icon-sample">
+                    <i class="fas fa-shopping-cart" style="color: var(--primary-color);"></i>
+                    <small>Carrito - Primary Color</small>
+                </div>
+                <div class="icon-sample">
+                    <i class="fas fa-shopping-cart" style="color: var(--text-inverse);"></i>
+                    <small>Carrito - Text Inverse</small>
+                </div>
+                <div class="icon-sample">
+                    <i class="fas fa-shopping-cart" style="color: var(--text-color);"></i>
+                    <small>Carrito - Text Color</small>
+                </div>
+                <div class="icon-sample">
+                    <i class="fas fa-shopping-cart" style="color: #218DA6;"></i>
+                    <small>Carrito - Hardcoded Blue</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Section 3: Contrast Test -->
+        <div class="test-section">
+            <h3>3. Test de Contraste</h3>
+            <p>Verificar visibilidad en diferentes fondos:</p>
+            
+            <div class="contrast-test">
+                <div class="contrast-item" style="background: var(--card-bg);">
+                    <i class="fas fa-shopping-cart" style="color: var(--primary-color); font-size: 2rem;"></i>
+                    <p>Fondo: Card BG<br>Color: Primary</p>
+                </div>
+                <div class="contrast-item" style="background: var(--primary-color);">
+                    <i class="fas fa-shopping-cart" style="color: var(--text-inverse); font-size: 2rem;"></i>
+                    <p>Fondo: Primary<br>Color: Text Inverse</p>
+                </div>
+                <div class="contrast-item" style="background: var(--bg-color);">
+                    <i class="fas fa-shopping-cart" style="color: var(--primary-color); font-size: 2rem;"></i>
+                    <p>Fondo: BG Color<br>Color: Primary</p>
+                </div>
+                <div class="contrast-item" style="background: var(--card-bg);">
+                    <i class="fas fa-shopping-cart" style="color: var(--text-color); font-size: 2rem;"></i>
+                    <p>Fondo: Card BG<br>Color: Text Color</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Section 4: Real Product Cards -->
+        <div class="test-section">
+            <h3>4. Tarjetas de Producto Reales</h3>
+            <p>Simulación de las tarjetas del homepage:</p>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="assets/images/pcs refurbished/DELL 3070.png" alt="DELL 3070" class="img-fluid">
+                            <div class="product-badge">Refurbished</div>
+                        </div>
+                        <div class="product-content">
+                            <h5 class="product-title">DELL OptiPlex 3070</h5>
+                            <p class="product-description">Desktop computer with excellent performance</p>
+                            <div class="product-price">
+                                <span class="current-price">B/. 239.99</span>
+                                <span class="original-price">B/. 399.99</span>
+                            </div>
+                            <div class="product-actions d-flex gap-2">
+                                <a href="#" class="btn btn-primary flex-grow-1">View Details</a>
+                                <button class="btn btn-light add-to-cart-btn">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="assets/images/smartphones refurbished/iPhone-13-pink.png" alt="iPhone 13" class="img-fluid">
+                            <div class="product-badge">Refurbished</div>
+                        </div>
+                        <div class="product-content">
+                            <h5 class="product-title">iPhone 13 128GB</h5>
+                            <p class="product-description">Premium smartphone with excellent performance</p>
+                            <div class="product-price">
+                                <span class="current-price">B/. 599.99</span>
+                                <span class="original-price">B/. 899.99</span>
+                            </div>
+                            <div class="product-actions d-flex gap-2">
+                                <a href="#" class="btn btn-primary flex-grow-1">View Details</a>
+                                <button class="btn btn-light add-to-cart-btn">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/dark-mode-manager.js"></script>
+    <script>
+        // Initialize dark mode manager
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.darkModeManager) {
+                window.darkModeManager.init();
+            }
+            
+            // Theme toggle functionality
+            const themeToggle = document.getElementById('themeToggle');
+            const currentTheme = document.getElementById('currentTheme');
+            
+            themeToggle.addEventListener('click', function() {
+                if (window.darkModeManager) {
+                    window.darkModeManager.toggleTheme();
+                    updateThemeDisplay();
+                }
+            });
+            
+            function updateThemeDisplay() {
+                const isDark = document.body.classList.contains('dark-mode') || 
+                              document.documentElement.getAttribute('data-theme') === 'dark';
+                currentTheme.textContent = isDark ? 'Dark Mode' : 'Light Mode';
+                currentTheme.className = isDark ? 'ms-3 badge bg-dark' : 'ms-3 badge bg-secondary';
+                
+                // Update debug info
+                updateDebugInfo();
+            }
+            
+            function updateDebugInfo() {
+                const cssVars = document.getElementById('cssVars');
+                const computedStyle = getComputedStyle(document.documentElement);
+                
+                const variables = [
+                    '--primary-color',
+                    '--text-color',
+                    '--text-inverse',
+                    '--card-bg',
+                    '--bg-color'
+                ];
+                
+                let html = '';
+                variables.forEach(varName => {
+                    const value = computedStyle.getPropertyValue(varName);
+                    html += `<div><strong>${varName}:</strong> ${value}</div>`;
+                });
+                
+                cssVars.innerHTML = html;
+            }
+            
+            // Initial update
+            updateThemeDisplay();
+            
+            // Listen for theme changes
+            document.addEventListener('themeChanged', updateThemeDisplay);
+        });
+    </script>
+</body>
+</html>

@@ -100,6 +100,54 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
+    // Cart functionality
+    window.addToCart = function(productId) {
+        // Get the header component
+        const header = document.querySelector('recomputech-header');
+        
+        if (header && header.addToCart) {
+            // Find the product data based on productId
+            const productData = getProductData(productId);
+            if (productData) {
+                header.addToCart(productData);
+            }
+        } else {
+            console.warn('Header component not found or addToCart method not available');
+        }
+    };
+    
+    function getProductData(productId) {
+        // Product data mapping for homepage products
+        const products = {
+            'dell-3070': {
+                id: 'dell-3070',
+                name: 'DELL OptiPlex 3070',
+                price: 239.99,
+                images: ['assets/images/pcs refurbished/DELL 3070.png']
+            },
+            'iphone-13': {
+                id: 'iphone-13',
+                name: 'iPhone 13 128GB',
+                price: 599.99,
+                images: ['assets/images/smartphones refurbished/iPhone 13 128GB.1.png']
+            },
+            'ipad-pro-11': {
+                id: 'ipad-pro-11',
+                name: 'iPad Pro 11"',
+                price: 699.99,
+                images: ['assets/images/Tablet 11 Pro.png']
+            },
+            'galaxy-s21': {
+                id: 'galaxy-s21',
+                name: 'Galaxy S21 5G',
+                price: 399.99,
+                images: ['assets/images/smartphones refurbished/Galaxy S21 5G 128GB - Gray.png']
+            }
+        };
+        
+        return products[productId];
+    }
+    
     // Add focus styles for better accessibility
     const focusableElements = document.querySelectorAll('button, a');
     focusableElements.forEach(element => {

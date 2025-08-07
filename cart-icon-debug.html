@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - Ícono del Carrito en Dark Mode</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/homepage.css">
+    <style>
+        .debug-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+        .debug-section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            border-radius: 1rem;
+            border: 1px solid var(--card-border);
+            background: var(--card-bg);
+        }
+        .debug-info {
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            font-family: monospace;
+            font-size: 0.9rem;
+            border: 1px solid var(--card-border);
+        }
+        .test-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .test-item {
+            padding: 1rem;
+            border: 1px solid var(--card-border);
+            border-radius: 0.5rem;
+            background: var(--card-bg);
+            text-align: center;
+        }
+        .test-item h5 {
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+        .css-inspector {
+            background: var(--bg-darker);
+            color: var(--text-inverse);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: monospace;
+            font-size: 0.8rem;
+            margin: 1rem 0;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .color-preview {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 0.5rem;
+            border: 2px solid var(--card-border);
+        }
+        .specificity-test {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin: 1rem 0;
+        }
+        .specificity-item {
+            padding: 1rem;
+            border: 1px solid var(--card-border);
+            border-radius: 0.5rem;
+            background: var(--card-bg);
+            min-width: 150px;
+            text-align: center;
+        }
+        .specificity-item button {
+            margin: 0.5rem;
+        }
+        .computed-styles {
+            background: var(--bg-light);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: monospace;
+            font-size: 0.8rem;
+            margin: 1rem 0;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="debug-container">
+        <h1>Debug - Ícono del Carrito en Dark Mode</h1>
+        
+        <!-- Theme Toggle -->
+        <div class="mb-4">
+            <button id="themeToggle" class="btn btn-primary">
+                <i class="fas fa-moon"></i> Toggle Dark Mode
+            </button>
+            <span id="currentTheme" class="ms-3 badge bg-secondary">Light Mode</span>
+        </div>
+
+        <!-- CSS Variables Debug -->
+        <div class="debug-section">
+            <h3>1. Variables CSS Actuales</h3>
+            <div class="debug-info">
+                <h5>Variables CSS:</h5>
+                <div id="cssVars"></div>
+            </div>
+        </div>
+
+        <!-- Test Section 1: Different Button Structures -->
+        <div class="debug-section">
+            <h3>2. Diferentes Estructuras de Botones</h3>
+            <p>Probando diferentes combinaciones de clases:</p>
+            
+            <div class="test-grid">
+                <div class="test-item">
+                    <h5>Botón Original del Homepage</h5>
+                    <button class="btn btn-light add-to-cart-btn" onclick="inspectElement(this)">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                    <small>btn btn-light add-to-cart-btn</small>
+                </div>
+                
+                <div class="test-item">
+                    <h5>Solo add-to-cart-btn</h5>
+                    <button class="add-to-cart-btn" onclick="inspectElement(this)">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                    <small>add-to-cart-btn</small>
+                </div>
+                
+                <div class="test-item">
+                    <h5>Solo btn-light</h5>
+                    <button class="btn btn-light" onclick="inspectElement(this)">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                    <small>btn btn-light</small>
+                </div>
+                
+                <div class="test-item">
+                    <h5>Con btn-primary</h5>
+                    <button class="btn btn-primary add-to-cart-btn" onclick="inspectElement(this)">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                    <small>btn btn-primary add-to-cart-btn</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Section 2: Specificity Test -->
+        <div class="debug-section">
+            <h3>3. Test de Especificidad CSS</h3>
+            <p>Probando diferentes niveles de especificidad:</p>
+            
+            <div class="specificity-test">
+                <div class="specificity-item">
+                    <h6>Especificidad Baja</h6>
+                    <button class="btn btn-light add-to-cart-btn" onclick="inspectElement(this)">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
+                
+                <div class="specificity-item">
+                    <h6>Especificidad Media</h6>
+                    <button class="btn btn-light add-to-cart-btn" style="color: var(--primary-color) !important;" onclick="inspectElement(this)">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
+                
+                <div class="specificity-item">
+                    <h6>Especificidad Alta</h6>
+                    <button class="btn btn-light add-to-cart-btn" style="color: var(--primary-color) !important; background-color: var(--card-bg) !important;" onclick="inspectElement(this)">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
+                
+                <div class="specificity-item">
+                    <h6>Inline Style</h6>
+                    <button class="btn btn-light add-to-cart-btn" style="color: #218DA6 !important; background-color: #ffffff !important;" onclick="inspectElement(this)">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Section 3: Icon Color Test -->
+        <div class="debug-section">
+            <h3>4. Test de Colores de Íconos</h3>
+            <p>Probando diferentes colores para el ícono:</p>
+            
+            <div class="test-grid">
+                <div class="test-item">
+                    <h5>Primary Color</h5>
+                    <button class="btn btn-light add-to-cart-btn">
+                        <i class="fas fa-shopping-cart" style="color: var(--primary-color);"></i>
+                    </button>
+                    <small>color: var(--primary-color)</small>
+                </div>
+                
+                <div class="test-item">
+                    <h5>Text Color</h5>
+                    <button class="btn btn-light add-to-cart-btn">
+                        <i class="fas fa-shopping-cart" style="color: var(--text-color);"></i>
+                    </button>
+                    <small>color: var(--text-color)</small>
+                </div>
+                
+                <div class="test-item">
+                    <h5>Text Inverse</h5>
+                    <button class="btn btn-light add-to-cart-btn">
+                        <i class="fas fa-shopping-cart" style="color: var(--text-inverse);"></i>
+                    </button>
+                    <small>color: var(--text-inverse)</small>
+                </div>
+                
+                <div class="test-item">
+                    <h5>Hardcoded Blue</h5>
+                    <button class="btn btn-light add-to-cart-btn">
+                        <i class="fas fa-shopping-cart" style="color: #218DA6;"></i>
+                    </button>
+                    <small>color: #218DA6</small>
+                </div>
+                
+                <div class="test-item">
+                    <h5>Hardcoded White</h5>
+                    <button class="btn btn-light add-to-cart-btn">
+                        <i class="fas fa-shopping-cart" style="color: #ffffff;"></i>
+                    </button>
+                    <small>color: #ffffff</small>
+                </div>
+                
+                <div class="test-item">
+                    <h5>Hardcoded Black</h5>
+                    <button class="btn btn-light add-to-cart-btn">
+                        <i class="fas fa-shopping-cart" style="color: #000000;"></i>
+                    </button>
+                    <small>color: #000000</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Section 4: Computed Styles Inspector -->
+        <div class="debug-section">
+            <h3>5. Inspector de Estilos Computados</h3>
+            <p>Haz clic en cualquier botón para ver sus estilos computados:</p>
+            
+            <div id="computedStyles" class="computed-styles">
+                <p>Haz clic en un botón para ver sus estilos...</p>
+            </div>
+        </div>
+
+        <!-- Test Section 5: Real Product Card -->
+        <div class="debug-section">
+            <h3>6. Tarjeta de Producto Real</h3>
+            <p>Simulación exacta del homepage:</p>
+            
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="assets/images/pcs refurbished/DELL 3070.png" alt="DELL 3070" class="img-fluid">
+                            <div class="product-badge">Refurbished</div>
+                        </div>
+                        <div class="product-content">
+                            <h5 class="product-title">DELL OptiPlex 3070</h5>
+                            <p class="product-description">Desktop computer with excellent performance</p>
+                            <div class="product-price">
+                                <span class="current-price">B/. 239.99</span>
+                                <span class="original-price">B/. 399.99</span>
+                            </div>
+                            <div class="product-actions d-flex gap-2">
+                                <a href="#" class="btn btn-primary flex-grow-1">View Details</a>
+                                <button class="btn btn-light add-to-cart-btn" onclick="inspectElement(this)">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Section 6: CSS Rules Debug -->
+        <div class="debug-section">
+            <h3>7. Debug de Reglas CSS</h3>
+            <p>Reglas CSS aplicadas al ícono del carrito:</p>
+            
+            <div class="css-inspector">
+                <h6>Reglas CSS para .add-to-cart-btn:</h6>
+                <pre>
+.add-to-cart-btn {
+    border: 2px solid var(--primary-color) !important;
+    background-color: var(--card-bg) !important;
+    color: var(--primary-color) !important;
+    transition: all 0.3s ease;
+}
+
+.add-to-cart-btn i {
+    color: var(--primary-color);
+    transition: color 0.3s ease;
+}
+
+/* Dark mode rules */
+body.dark-mode .add-to-cart-btn i,
+[data-theme="dark"] .add-to-cart-btn i {
+    color: var(--primary-color) !important;
+}
+
+body.dark-mode .add-to-cart-btn .fas.fa-shopping-cart,
+[data-theme="dark"] .add-to-cart-btn .fas.fa-shopping-cart {
+    color: var(--primary-color) !important;
+}
+                </pre>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/dark-mode-manager.js"></script>
+    <script>
+        // Initialize dark mode manager
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.darkModeManager) {
+                window.darkModeManager.init();
+            }
+            
+            // Theme toggle functionality
+            const themeToggle = document.getElementById('themeToggle');
+            const currentTheme = document.getElementById('currentTheme');
+            
+            themeToggle.addEventListener('click', function() {
+                if (window.darkModeManager) {
+                    window.darkModeManager.toggleTheme();
+                    updateThemeDisplay();
+                }
+            });
+            
+            function updateThemeDisplay() {
+                const isDark = document.body.classList.contains('dark-mode') || 
+                              document.documentElement.getAttribute('data-theme') === 'dark';
+                currentTheme.textContent = isDark ? 'Dark Mode' : 'Light Mode';
+                currentTheme.className = isDark ? 'ms-3 badge bg-dark' : 'ms-3 badge bg-secondary';
+                
+                // Update debug info
+                updateDebugInfo();
+            }
+            
+            function updateDebugInfo() {
+                const cssVars = document.getElementById('cssVars');
+                const computedStyle = getComputedStyle(document.documentElement);
+                
+                const variables = [
+                    '--primary-color',
+                    '--text-color',
+                    '--text-inverse',
+                    '--card-bg',
+                    '--bg-color',
+                    '--card-border'
+                ];
+                
+                let html = '';
+                variables.forEach(varName => {
+                    const value = computedStyle.getPropertyValue(varName);
+                    html += `<div><strong>${varName}:</strong> <span style="color: ${value}">${value}</span></div>`;
+                });
+                
+                cssVars.innerHTML = html;
+            }
+            
+            // Function to inspect element styles
+            window.inspectElement = function(element) {
+                const computedStyles = document.getElementById('computedStyles');
+                const icon = element.querySelector('i');
+                
+                let html = '<h6>Estilos del Botón:</h6>';
+                html += `<div><strong>background-color:</strong> ${getComputedStyle(element).backgroundColor}</div>`;
+                html += `<div><strong>color:</strong> ${getComputedStyle(element).color}</div>`;
+                html += `<div><strong>border-color:</strong> ${getComputedStyle(element).borderColor}</div>`;
+                
+                if (icon) {
+                    html += '<h6>Estilos del Ícono:</h6>';
+                    html += `<div><strong>color:</strong> ${getComputedStyle(icon).color}</div>`;
+                    html += `<div><strong>font-size:</strong> ${getComputedStyle(icon).fontSize}</div>`;
+                    html += `<div><strong>display:</strong> ${getComputedStyle(icon).display}</div>`;
+                }
+                
+                html += '<h6>Clases CSS:</h6>';
+                html += `<div><strong>class:</strong> ${element.className}</div>`;
+                
+                computedStyles.innerHTML = html;
+            };
+            
+            // Initial update
+            updateThemeDisplay();
+            
+            // Listen for theme changes
+            document.addEventListener('themeChanged', updateThemeDisplay);
+        });
+    </script>
+</body>
+</html>

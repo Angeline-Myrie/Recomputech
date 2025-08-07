@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technician Cards Test - Recomputech</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/homepage.css">
+    <style>
+        .test-container {
+            padding: 2rem;
+            background: var(--bg-color);
+            min-height: 100vh;
+        }
+        .test-section {
+            margin: 2rem 0;
+            padding: 2rem;
+            border: 2px solid var(--card-border);
+            border-radius: 12px;
+            background: var(--card-bg);
+        }
+        .debug-info {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+        .debug-info h4 {
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+        .debug-info p {
+            color: var(--text-color);
+            margin: 0.25rem 0;
+        }
+    </style>
+</head>
+<body class="light-mode">
+    <div class="test-container">
+        <div class="container">
+            <h1 class="text-center mb-5">Technician Cards Test</h1>
+            <p class="text-center mb-4">Testing technician cards and their category tags in both light and dark modes.</p>
+            
+            <!-- Theme Toggle -->
+            <div class="text-center mb-5">
+                <button id="themeToggle" class="btn btn-primary btn-lg">
+                    <i class="fas fa-moon me-2"></i>Toggle Dark Mode
+                </button>
+            </div>
+
+            <!-- Debug Information -->
+            <div class="debug-info">
+                <h4>Debug Information</h4>
+                <p><strong>Current Theme:</strong> <span id="currentTheme">light</span></p>
+                <p><strong>CSS Variables:</strong></p>
+                <p>--text-color: <span id="textColor">#1f2937</span></p>
+                <p>--card-bg: <span id="cardBg">#ffffff</span></p>
+                <p>--card-border: <span id="cardBorder">#e5e7eb</span></p>
+                <p>--primary-color: <span id="primaryColor">#218DA6</span></p>
+            </div>
+
+            <!-- Test Section: Technician Cards -->
+            <section class="test-section">
+                <h2 class="text-center mb-4">Technician Cards</h2>
+                <div class="row">
+                    <!-- Technician Card 1 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="tech-card">
+                            <div class="tech-header">
+                                <img src="assets/images/teamimagen/David.png" alt="David Martez" class="tech-avatar-img">
+                                <div class="tech-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span>4.9</span>
+                                </div>
+                            </div>
+                            <div class="tech-info">
+                                <h4>David Martez</h4>
+                                <p>Specialist in laptop and PC repair</p>
+                            </div>
+                            <div class="tech-tags">
+                                <span>Laptops</span>
+                                <span>PCs</span>
+                                <span>Hardware</span>
+                                <span>Software</span>
+                            </div>
+                            <div class="tech-stats">
+                                <div>
+                                    <i class="fas fa-cog"></i>
+                                    <span>200+</span>
+                                </div>
+                                <div>
+                                    <i class="fas fa-clock"></i>
+                                    <span>24h Average</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary w-100">View Profile</button>
+                        </div>
+                    </div>
+
+                    <!-- Technician Card 2 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="tech-card">
+                            <div class="tech-header">
+                                <img src="assets/images/teamimagen/Angeline.png" alt="Ana Martinez" class="tech-avatar-img">
+                                <div class="tech-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span>4.8</span>
+                                </div>
+                            </div>
+                            <div class="tech-info">
+                                <h4>Ana Martinez</h4>
+                                <p>System Optimization Expert</p>
+                            </div>
+                            <div class="tech-tags">
+                                <span>Systems</span>
+                                <span>Networks</span>
+                                <span>Security</span>
+                                <span>Cloud</span>
+                            </div>
+                            <div class="tech-stats">
+                                <div>
+                                    <i class="fas fa-cog"></i>
+                                    <span>180+</span>
+                                </div>
+                                <div>
+                                    <i class="fas fa-clock"></i>
+                                    <span>36h Average</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary w-100">View Profile</button>
+                        </div>
+                    </div>
+
+                    <!-- Technician Card 3 -->
+                    <div class="col-md-4 mb-4">
+                        <div class="tech-card">
+                            <div class="tech-header">
+                                <img src="assets/images/teamimagen/Johan.JPG" alt="John Perez" class="tech-avatar-img">
+                                <div class="tech-rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span>5.0</span>
+                                </div>
+                            </div>
+                            <div class="tech-info">
+                                <h4>John Perez</h4>
+                                <p>Data Recovery Specialist</p>
+                            </div>
+                            <div class="tech-tags">
+                                <span>Data</span>
+                                <span>Backup</span>
+                                <span>Storage</span>
+                                <span>Recovery</span>
+                            </div>
+                            <div class="tech-stats">
+                                <div>
+                                    <i class="fas fa-database"></i>
+                                    <span>150+</span>
+                                </div>
+                                <div>
+                                    <i class="fas fa-clock"></i>
+                                    <span>48h Average</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary w-100">View Profile</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contrast Test Section -->
+            <section class="test-section">
+                <h3 class="text-center mb-4">Contrast Test</h3>
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Category Tags Should:</h4>
+                        <ul>
+                            <li>Have dark text on light background in light mode</li>
+                            <li>Have light text on dark background in dark mode</li>
+                            <li>Be clearly readable in both modes</li>
+                            <li>Have proper contrast ratios</li>
+                        </ul>
+                    </div>
+                    <div class="col-md-6">
+                        <h4>Current Issues:</h4>
+                        <ul>
+                            <li>White text on white background in dark mode</li>
+                            <li>Poor contrast in some cases</li>
+                            <li>Text not visible enough</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/dark-mode-manager.js"></script>
+    <script>
+        // Initialize dark mode manager
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.darkModeManager) {
+                window.darkModeManager.init();
+            }
+            
+            // Add theme toggle functionality
+            const themeToggle = document.getElementById('themeToggle');
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    if (window.darkModeManager) {
+                        window.darkModeManager.toggleTheme();
+                    }
+                });
+            }
+
+            // Update debug information
+            function updateDebugInfo() {
+                const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+                const currentTheme = document.getElementById('currentTheme');
+                const textColor = document.getElementById('textColor');
+                const cardBg = document.getElementById('cardBg');
+                const cardBorder = document.getElementById('cardBorder');
+                const primaryColor = document.getElementById('primaryColor');
+
+                if (currentTheme) currentTheme.textContent = isDark ? 'dark' : 'light';
+                if (textColor) textColor.textContent = getComputedStyle(document.documentElement).getPropertyValue('--text-color').trim();
+                if (cardBg) cardBg.textContent = getComputedStyle(document.documentElement).getPropertyValue('--card-bg').trim();
+                if (cardBorder) cardBorder.textContent = getComputedStyle(document.documentElement).getPropertyValue('--card-border').trim();
+                if (primaryColor) primaryColor.textContent = getComputedStyle(document.documentElement).getPropertyValue('--primary-color').trim();
+            }
+
+            // Update debug info initially and on theme change
+            updateDebugInfo();
+            document.addEventListener('themeChanged', updateDebugInfo);
+        });
+    </script>
+</body>
+</html>

@@ -12,6 +12,7 @@
     --text-light: #4b5563;
     --text-muted: #6b7280;
     --text-inverse: #ffffff;
+    --dark-color: #1f2937;
     
     /* Colores de fondo */
     --bg-color: #ffffff;
@@ -105,6 +106,7 @@
     --text-light: #cbd5e1;
     --text-muted: #94a3b8;
     --text-inverse: #0f172a;
+    --dark-color: #f8fafc;
     
     /* Colores de fondo - Mejorado para mejor contraste */
     --bg-color: #0f172a;

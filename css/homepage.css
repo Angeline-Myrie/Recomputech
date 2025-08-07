@@ -65,7 +65,7 @@ body.dark-mode .about-feature-desc, body.dark-mode .about-stat-label,
 /* Custom Badge for Sustainable Technology */
 .badge.bg-brand {
     background-color: #218DA6 !important;
-    color: white;
+    color: var(--text-inverse);
     font-weight: 500;
     padding: 0.5rem 1rem;
     border-radius: 25px;
@@ -85,7 +85,7 @@ body.dark-mode .about-feature-desc, body.dark-mode .about-stat-label,
 /* Dark mode support for brand badge */
 body.dark-mode .badge.bg-brand {
     background-color: #218DA6 !important;
-    color: white;
+    color: var(--text-inverse);
 }
 
 .hero-overlay {
@@ -166,7 +166,7 @@ body.dark-mode .badge.bg-brand {
 /* Hero Buttons */
 .hero-btn-primary {
     background-color: var(--primary-color);
-    color: #fff;
+    color: var(--text-inverse);
     border: none;
     box-shadow: 0 2px 8px rgba(33, 141, 166, 0.08);
     transition: background 0.2s, color 0.2s, box-shadow 0.2s;
@@ -174,7 +174,7 @@ body.dark-mode .badge.bg-brand {
 
 .hero-btn-primary:hover, .hero-btn-primary:active {
     background-color: var(--secondary-color);
-    color: #fff;
+    color: var(--text-inverse);
     box-shadow: 0 4px 16px rgba(27, 110, 130, 0.12);
 }
 
@@ -187,7 +187,7 @@ body.dark-mode .badge.bg-brand {
 
 .hero-btn-outline:hover, .hero-btn-outline:active {
     background: var(--primary-color);
-    color: #fff;
+    color: var(--text-inverse);
     border-color: var(--primary-color);
 }
 
@@ -308,7 +308,7 @@ body.dark-mode .hero-btn-outline:active,
     justify-content: center;
     margin: 0 auto 1.5rem;
     font-size: 2rem;
-    color: white;
+    color: var(--text-inverse);
     box-shadow: 0 8px 25px rgba(33, 145, 166, 0.3);
     transition: all 0.3s ease;
 }
@@ -366,7 +366,7 @@ body.dark-mode .hero-btn-outline:active,
 .filter-categories .btn:hover,
 .filter-categories .btn.active {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: white;
+    color: var(--text-inverse);
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(33, 145, 166, 0.3);
 }
@@ -426,7 +426,7 @@ body.dark-mode .hero-btn-outline:active,
     height: 50px;
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
     border-radius: 50%;
-    color: white;
+    color: var(--text-inverse);
     box-shadow: 0 8px 25px rgba(33, 145, 166, 0.3);
     transition: all 0.3s ease;
 }
@@ -480,7 +480,7 @@ body.dark-mode .hero-btn-outline:active,
     top: 1rem;
     right: 1rem;
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: white;
+    color: var(--text-inverse);
     padding: 0.5rem 1rem;
     border-radius: 20px;
     font-size: 0.8rem;
@@ -588,7 +588,7 @@ body.dark-mode .hero-btn-outline:active,
     bottom: -20px;
     right: -20px;
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: white;
+    color: var(--text-inverse);
     padding: 1.5rem;
     border-radius: 20px;
     text-align: center;
@@ -639,7 +639,7 @@ body.dark-mode .hero-btn-outline:active,
     justify-content: center;
     margin: 0 auto 1rem;
     font-size: 1.5rem;
-    color: white;
+    color: var(--text-inverse);
     box-shadow: 0 5px 15px rgba(33, 145, 166, 0.3);
     transition: all 0.3s ease;
 }
@@ -790,13 +790,13 @@ body.dark-mode .hero-btn-outline:active,
 }
 
 .tech-tags span {
-    background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+    background: var(--card-bg);
     color: var(--text-color);
     padding: 0.4rem 0.8rem;
     border-radius: 15px;
     font-size: 0.8rem;
     font-weight: 500;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--card-border);
 }
 
 .tech-stats {
@@ -863,7 +863,7 @@ body.dark-mode .hero-btn-outline:active,
     align-items: center;
     justify-content: center;
     font-size: 1.5rem;
-    color: white;
+    color: var(--text-inverse);
     box-shadow: 0 5px 15px rgba(33, 145, 166, 0.3);
     transition: all 0.3s ease;
 }
@@ -895,7 +895,7 @@ body.dark-mode .hero-btn-outline:active,
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--text-inverse);
     font-size: 1.2rem;
     transition: all 0.3s ease;
     text-decoration: none;
@@ -1161,15 +1161,15 @@ body.dark-mode .hero-btn-outline:active,
 
 /* Icon colors */
 .stat-icon i {
-    color: white;
+    color: var(--text-inverse);
 }
 
 .service-icon i {
-    color: white;
+    color: var(--text-inverse);
 }
 
 .about-feature-icon i {
-    color: white;
+    color: var(--text-inverse);
 }
 
 .tech-rating i {
@@ -1177,7 +1177,7 @@ body.dark-mode .hero-btn-outline:active,
 }
 
 .contact-info-card i {
-    color: white;
+    color: var(--text-inverse);
 }
 
 .product-rating i {
@@ -1243,7 +1243,7 @@ body.dark-mode .hero-btn-outline:active,
 
 .search-btn {
     background: var(--primary-color);
-    color: white;
+    color: var(--text-inverse);
     border: none;
     border-radius: 50%;
     width: 40px;
@@ -1345,7 +1345,7 @@ body.dark-mode .hero-btn-outline:active,
 
 .category-btn.active {
     background: var(--primary-color);
-    color: white;
+    color: var(--text-inverse);
     border-color: var(--primary-color);
     box-shadow: 0 4px 12px rgba(33, 141, 166, 0.25);
 }
@@ -1384,7 +1384,7 @@ body.dark-mode .hero-btn-outline:active,
     transform: translateY(-3px);
     box-shadow: 0 6px 20px rgba(33, 141, 166, 0.25);
     text-decoration: none;
-    color: white;
+    color: var(--text-inverse);
 }
 
 .filter-view-all i {
@@ -1568,8 +1568,8 @@ body.dark-mode .tech-stats div,
 
 body.dark-mode .tech-tags span,
 [data-theme="dark"] .tech-tags span {
-    background-color: var(--tech-tag-bg) !important;
-    color: var(--tech-tag-text) !important;
+    background-color: var(--card-bg) !important;
+    color: var(--text-color) !important;
     border-color: var(--card-border) !important;
 }
 
@@ -1629,7 +1629,7 @@ body.dark-mode .btn-light:hover,
 
 .add-to-cart-btn:hover {
     background-color: var(--primary-color) !important;
-    color: white !important;
+    color: var(--text-inverse) !important;
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(33, 141, 166, 0.3);
 }
@@ -1640,7 +1640,7 @@ body.dark-mode .btn-light:hover,
 }
 
 .add-to-cart-btn:hover i {
-    color: white;
+    color: var(--text-inverse);
 }
 
 /* Dark mode para botones de Add to Cart */
@@ -1665,6 +1665,49 @@ body.dark-mode .add-to-cart-btn:hover,
 body.dark-mode .add-to-cart-btn:hover i,
 [data-theme="dark"] .add-to-cart-btn:hover i {
     color: var(--text-inverse) !important;
+}
+
+/* Reglas específicas para el ícono del carrito en dark mode - Color blanco por defecto */
+body.dark-mode .add-to-cart-btn .fas.fa-shopping-cart,
+[data-theme="dark"] .add-to-cart-btn .fas.fa-shopping-cart {
+    color: white !important;
+    font-weight: bold !important;
+}
+
+body.dark-mode .add-to-cart-btn:hover .fas.fa-shopping-cart,
+[data-theme="dark"] .add-to-cart-btn:hover .fas.fa-shopping-cart {
+    color: var(--primary-color) !important;
+    font-weight: bold !important;
+}
+
+/* Override específico para íconos dentro de botones btn-light en dark mode */
+body.dark-mode .btn-light i,
+[data-theme="dark"] .btn-light i {
+    color: inherit !important;
+}
+
+/* Asegurar que los íconos del carrito tengan prioridad sobre btn-light */
+body.dark-mode .btn-light.add-to-cart-btn i,
+[data-theme="dark"] .btn-light.add-to-cart-btn i {
+    color: white !important;
+}
+
+body.dark-mode .btn-light.add-to-cart-btn:hover i,
+[data-theme="dark"] .btn-light.add-to-cart-btn:hover i {
+    color: var(--primary-color) !important;
+}
+
+/* Regla de máxima especificidad para el ícono del carrito */
+body.dark-mode .btn.btn-light.add-to-cart-btn .fas.fa-shopping-cart,
+[data-theme="dark"] .btn.btn-light.add-to-cart-btn .fas.fa-shopping-cart {
+    color: white !important;
+    font-weight: bold !important;
+}
+
+body.dark-mode .btn.btn-light.add-to-cart-btn:hover .fas.fa-shopping-cart,
+[data-theme="dark"] .btn.btn-light.add-to-cart-btn:hover .fas.fa-shopping-cart {
+    color: var(--primary-color) !important;
+    font-weight: bold !important;
 }
 
 /* Mejorar el formulario de contacto en dark mode */

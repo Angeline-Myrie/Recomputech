@@ -13,8 +13,8 @@
 /* Search Section */
 .search-section {
     padding: 2rem 2rem;
-    background: white;
-    border-bottom: 1px solid #e5e7eb;
+    background: var(--bg-color);
+    border-bottom: 1px solid var(--card-border);
 }
 
 .search-container {
@@ -26,21 +26,21 @@
 .search-input {
     width: 100%;
     padding: 1.25rem 1.25rem 1.25rem 3.5rem;
-    border: 2px solid #e5e7eb;
+    border: 2px solid var(--input-border);
     border-radius: 50px;
     font-size: 1.1rem;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
-    background: white;
-    color: #333;
+    background: var(--input-bg);
+    color: var(--text-color);
 }
 
 .search-input:focus {
     outline: none;
-    border-color: #218DA6;
+    border-color: var(--primary-color);
     box-shadow: 0 4px 15px rgba(33, 141, 166, 0.1);
     transform: translateY(-1px);
-    background: white;
+    background: var(--input-bg);
 }
 
 .search-icon {
@@ -159,8 +159,8 @@
     padding: 0.75rem 1.5rem;
     border: 2px solid #e5e7eb;
     border-radius: 25px;
-    background: white;
-    color: #64748b;
+    background: var(--card-bg);
+    color: var(--text-color);
     font-weight: 500;
     font-size: 1rem;
     cursor: pointer;
@@ -175,16 +175,16 @@
 }
 
 .category-btn.active {
-    background: #218DA6;
-    color: white;
-    border-color: #218DA6;
+    background: var(--primary-color);
+    color: var(--text-inverse);
+    border-color: var(--primary-color);
     box-shadow: 0 2px 8px rgba(33, 141, 166, 0.3);
 }
 
 /* Technicians Section */
 .technicians-section {
     padding: 5rem 2rem;
-    background: white;
+    background: var(--bg-color);
 }
 
 .technicians-header {
@@ -208,8 +208,8 @@
     border-radius: 10px;
     padding: 0.5rem 1rem;
     font-weight: 500;
-    color: #374151;
-    background: white;
+    color: var(--text-color);
+    background: var(--input-bg);
     transition: all 0.3s ease;
 }
 
@@ -220,12 +220,12 @@
 
 /* Technician Cards */
 .technician-card {
-    background: white;
+    background: var(--card-bg);
     border-radius: 20px;
     padding: 2rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
-    border: 1px solid #e5e7eb;
+    border: 1px solid var(--card-border);
     height: 100%;
 }
 

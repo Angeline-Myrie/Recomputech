@@ -7,7 +7,7 @@
   }
   
   .product-categories {
-    background: #fff;
+    background: var(--card-bg);
     box-shadow: 0 2px 8px rgba(0,0,0,0.07);
     position: relative;
     z-index: 10;
@@ -197,7 +197,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    background: #fff;
+    background: var(--input-bg);
     border-radius: 1rem;
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
     overflow: hidden;
@@ -232,7 +232,7 @@
   
   .search-btn {
     background: var(--primary-color);
-    color: #fff;
+    color: var(--text-inverse);
     border: none;
     padding: 1rem 1.5rem;
     border-radius: 0 1rem 1rem 0;
@@ -288,7 +288,7 @@
     align-items: center;
     gap: 0.5rem;
     padding: 1rem;
-    background: #fff;
+    background: var(--card-bg);
     border: 2px solid #e5e7eb;
     border-radius: 1rem;
     cursor: pointer;
@@ -324,7 +324,7 @@
   .category-btn.active {
     background: var(--primary-color);
     border-color: var(--primary-color);
-    color: #fff;
+    color: var(--text-inverse);
     box-shadow: 0 4px 16px rgba(33, 141, 166, 0.25);
     transform: translateY(-2px) scale(1.01);
   }
@@ -363,7 +363,7 @@
     padding: 0.75rem 1rem;
     border: 2px solid #e5e7eb;
     border-radius: 0.75rem;
-    background: #fff;
+    background: var(--input-bg);
     font-size: 0.9rem;
     color: var(--text-color);
     cursor: pointer;
@@ -523,7 +523,7 @@
   body.dark-mode .category-btn.active {
     background: var(--primary-color);
     border-color: var(--primary-color);
-    color: #fff;
+    color: var(--text-inverse);
   }
   
   body.dark-mode .filter-select {
@@ -600,13 +600,13 @@
       font-size: 3rem;
       position: relative;
       /* Añade fondo blanco para mejor visibilidad */
-      background: #fff;
+      background: var(--card-bg);
   }
   .product-image img {
     width: 100%;
     height: 100%;
     object-fit: contain; /* Cambia cover por contain */
-    background: #fff;    /* Fondo blanco detrás de la imagen */
+    background: var(--card-bg);    /* Fondo blanco detrás de la imagen */
     padding: 10px;       /* Opcional: agrega espacio alrededor */
     border-radius: 10px; /* Opcional: bordes redondeados */
 }
@@ -1156,14 +1156,14 @@ body {
     font-size: 3rem;
     position: relative;
     /* Añade fondo blanco para mejor visibilidad */
-    background: #fff;
+    background: var(--card-bg);
 }
 
 .product-image img {
     width: 100%;
     height: 100%;
     object-fit: contain; /* Cambia cover por contain */
-    background: #fff;    /* Fondo blanco detrás de la imagen */
+    background: var(--card-bg);    /* Fondo blanco detrás de la imagen */
     padding: 10px;       /* Opcional: agrega espacio alrededor */
     border-radius: 10px; /* Opcional: bordes redondeados */
 }

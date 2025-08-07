@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test - Ícono del Carrito Blanco</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/homepage.css">
+    <style>
+        .test-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+        .test-section {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--card-border);
+            background: var(--card-bg);
+        }
+        .product-card {
+            border: 1px solid var(--card-border);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            background: var(--card-bg);
+        }
+        .product-image {
+            width: 100px;
+            height: 100px;
+            background: var(--card-bg);
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .product-actions {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+        .status-display {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+        .debug-info {
+            font-family: monospace;
+            font-size: 0.8rem;
+            background: var(--bg-color);
+            padding: 0.5rem;
+            border-radius: 0.25rem;
+            margin: 0.5rem 0;
+        }
+        .color-test {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-left: 10px;
+            border: 1px solid var(--card-border);
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>Test - Ícono del Carrito Blanco</h1>
+        
+        <!-- Theme Toggle -->
+        <div class="mb-4">
+            <button id="themeToggle" class="btn btn-primary">
+                <i class="fas fa-moon"></i> Toggle Dark Mode
+            </button>
+            <span id="currentTheme" class="ms-3 badge bg-secondary">Light Mode</span>
+        </div>
+
+        <!-- Test Section 1: Cart Icon Color Verification -->
+        <div class="test-section">
+            <h3>1. Verificación del Color del Ícono del Carrito</h3>
+            <p>El ícono debe ser <strong>blanco</strong> en dark mode y cambiar a <strong>color primario</strong> al hacer hover:</p>
+            
+            <div class="product-card">
+                <div class="product-image">
+                    <i class="fas fa-laptop" style="font-size: 2rem; color: var(--text-color);"></i>
+                </div>
+                <h5>DELL OptiPlex 3070</h5>
+                <p>Desktop computer with excellent performance</p>
+                <div class="product-price">
+                    <span class="current-price">B/. 239.99</span>
+                    <span class="original-price">B/. 399.99</span>
+                </div>
+                <div class="product-actions">
+                    <a href="#" class="btn btn-primary flex-grow-1">View Details</a>
+                    <button class="btn btn-light add-to-cart-btn" onclick="testCartIcon()">
+                        <i class="fas fa-shopping-cart"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="status-display">
+                <h6>Estado del Ícono:</h6>
+                <div id="iconStatus">Verificando...</div>
+                <div id="iconColorInfo"></div>
+            </div>
+        </div>
+
+        <!-- Test Section 2: Multiple Cart Icons -->
+        <div class="test-section">
+            <h3>2. Test con Múltiples Íconos del Carrito</h3>
+            <p>Prueba varios botones del carrito para verificar consistencia:</p>
+            
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <h6>iPhone 13</h6>
+                        <p>B/. 599.99</p>
+                        <button class="btn btn-light add-to-cart-btn" onclick="testCartIcon()">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <h6>iPad Pro 11"</h6>
+                        <p>B/. 699.99</p>
+                        <button class="btn btn-light add-to-cart-btn" onclick="testCartIcon()">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <h6>Galaxy S21 5G</h6>
+                        <p>B/. 399.99</p>
+                        <button class="btn btn-light add-to-cart-btn" onclick="testCartIcon()">
+                            <i class="fas fa-shopping-cart"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Test Section 3: Debug Information -->
+        <div class="test-section">
+            <h3>3. Información de Debug</h3>
+            <div class="debug-info">
+                <div><strong>CSS Variables:</strong></div>
+                <div id="cssVariables"></div>
+            </div>
+            <div class="debug-info">
+                <div><strong>Computed Styles del Ícono:</strong></div>
+                <div id="computedStyles"></div>
+            </div>
+            <div class="debug-info">
+                <div><strong>Reglas CSS Aplicadas:</strong></div>
+                <div id="appliedRules"></div>
+            </div>
+        </div>
+
+        <!-- Test Section 4: Manual Color Test -->
+        <div class="test-section">
+            <h3>4. Test Manual de Colores</h3>
+            <p>Compara con estos colores de referencia:</p>
+            <div>
+                <span>Blanco: <span class="color-test" style="background: white;"></span></span>
+                <span>Color Primario: <span class="color-test" style="background: var(--primary-color);"></span></span>
+                <span>Texto Inverso: <span class="color-test" style="background: var(--text-inverse);"></span></span>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/dark-mode-manager.js"></script>
+    <script>
+        // Initialize dark mode manager
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.darkModeManager) {
+                window.darkModeManager.init();
+            }
+            
+            // Theme toggle functionality
+            const themeToggle = document.getElementById('themeToggle');
+            const currentTheme = document.getElementById('currentTheme');
+            
+            themeToggle.addEventListener('click', function() {
+                if (window.darkModeManager) {
+                    window.darkModeManager.toggleTheme();
+                    updateThemeDisplay();
+                    updateDebugInfo();
+                }
+            });
+            
+            function updateThemeDisplay() {
+                const isDark = document.body.classList.contains('dark-mode') || 
+                               document.documentElement.getAttribute('data-theme') === 'dark';
+                currentTheme.textContent = isDark ? 'Dark Mode' : 'Light Mode';
+                currentTheme.className = isDark ? 'ms-3 badge bg-dark' : 'ms-3 badge bg-secondary';
+            }
+            
+            function updateDebugInfo() {
+                // Update CSS variables
+                const cssVariables = document.getElementById('cssVariables');
+                const computedStyle = getComputedStyle(document.documentElement);
+                
+                const variables = [
+                    '--primary-color',
+                    '--text-color',
+                    '--text-inverse',
+                    '--card-bg',
+                    '--bg-color'
+                ];
+                
+                let html = '';
+                variables.forEach(varName => {
+                    const value = computedStyle.getPropertyValue(varName);
+                    html += `<div>${varName}: ${value}</div>`;
+                });
+                
+                cssVariables.innerHTML = html;
+                
+                // Update computed styles for cart icon
+                const cartIcon = document.querySelector('.add-to-cart-btn .fas.fa-shopping-cart');
+                const computedStyles = document.getElementById('computedStyles');
+                
+                if (cartIcon) {
+                    const iconStyle = getComputedStyle(cartIcon);
+                    const color = iconStyle.color;
+                    const backgroundColor = iconStyle.backgroundColor;
+                    const fontWeight = iconStyle.fontWeight;
+                    
+                    computedStyles.innerHTML = `
+                        <div>Icon Color: ${color}</div>
+                        <div>Icon Background: ${backgroundColor}</div>
+                        <div>Icon Font Weight: ${fontWeight}</div>
+                        <div>Icon Display: ${iconStyle.display}</div>
+                        <div>Icon Visibility: ${iconStyle.visibility}</div>
+                    `;
+                }
+                
+                // Check applied CSS rules
+                const appliedRules = document.getElementById('appliedRules');
+                if (cartIcon) {
+                    const isDark = document.body.classList.contains('dark-mode') || 
+                                   document.documentElement.getAttribute('data-theme') === 'dark';
+                    
+                    appliedRules.innerHTML = `
+                        <div>Dark Mode Active: ${isDark ? 'Yes' : 'No'}</div>
+                        <div>Element Classes: ${cartIcon.className}</div>
+                        <div>Parent Classes: ${cartIcon.parentElement.className}</div>
+                        <div>Expected Color: ${isDark ? 'white' : 'inherit'}</div>
+                        <div>Expected Hover Color: ${isDark ? 'var(--primary-color)' : 'inherit'}</div>
+                    `;
+                }
+            }
+            
+            // Test cart icon functionality
+            window.testCartIcon = function() {
+                const iconStatus = document.getElementById('iconStatus');
+                const iconColorInfo = document.getElementById('iconColorInfo');
+                
+                // Check icon visibility
+                const cartIcon = document.querySelector('.add-to-cart-btn .fas.fa-shopping-cart');
+                if (cartIcon) {
+                    const iconStyle = getComputedStyle(cartIcon);
+                    const color = iconStyle.color;
+                    const isDark = document.body.classList.contains('dark-mode') || 
+                                   document.documentElement.getAttribute('data-theme') === 'dark';
+                    
+                    const isWhite = color.includes('255, 255, 255') || color.includes('white');
+                    const isVisible = color !== 'rgba(0, 0, 0, 0)' && color !== 'transparent';
+                    
+                    iconStatus.innerHTML = `
+                        <span class="${isVisible ? 'text-success' : 'text-danger'}">
+                            ${isVisible ? '✓' : '✗'} Icono visible
+                        </span><br>
+                        <span class="${isDark && isWhite ? 'text-success' : 'text-danger'}">
+                            ${isDark && isWhite ? '✓' : '✗'} Color correcto en dark mode
+                        </span>
+                    `;
+                    
+                    iconColorInfo.innerHTML = `
+                        <div>Color Actual: ${color}</div>
+                        <div>Dark Mode: ${isDark ? 'Sí' : 'No'}</div>
+                        <div>Es Blanco: ${isWhite ? 'Sí' : 'No'}</div>
+                    `;
+                } else {
+                    iconStatus.innerHTML = '<span class="text-danger">✗ Icono no encontrado</span>';
+                }
+                
+                updateDebugInfo();
+            };
+            
+            // Initial updates
+            updateThemeDisplay();
+            updateDebugInfo();
+            
+            // Listen for theme changes
+            document.addEventListener('themeChanged', function() {
+                updateThemeDisplay();
+                updateDebugInfo();
+                setTimeout(testCartIcon, 100); // Check after theme change
+            });
+            
+            // Initial test
+            setTimeout(testCartIcon, 500);
+        });
+    </script>
+</body>
+</html>
