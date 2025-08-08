@@ -1,4 +1,6 @@
 /* Homepage Specific Styles */
+/* Importar variables de dark mode */
+@import url('./dark-mode-variables.css');
 
 /* Dark Mode para el body y secciones principales - Mejorado */
 body.dark-mode,

@@ -1,4 +1,6 @@
 /* Contact Page Styles */
+/* Importar variables de dark mode */
+@import url('./dark-mode-variables.css');
 
 /* Hero Section */
 .contact-hero-section {
@@ -8,6 +10,15 @@
     position: relative;
     overflow: hidden;
     border-radius: 0 0 30px 30px;
+    transition: all 0.3s ease;
+}
+
+/* Dark Mode Hero Section - More specific selectors */
+body.dark-mode .contact-hero-section,
+[data-theme="dark"] .contact-hero-section,
+html[data-theme="dark"] .contact-hero-section,
+html.dark-mode .contact-hero-section {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
 }
 
 .contact-hero-section::before {
@@ -41,6 +52,16 @@
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.3);
     animation: pulse 2s infinite;
+    transition: all 0.3s ease;
+}
+
+/* Dark Mode Hero Badge - More specific selectors */
+body.dark-mode .contact-hero-badge,
+[data-theme="dark"] .contact-hero-badge,
+html[data-theme="dark"] .contact-hero-badge,
+html.dark-mode .contact-hero-badge {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.2) !important;
 }
 
 .contact-hero-title {
@@ -48,12 +69,30 @@
     font-weight: 800;
     margin-bottom: 0;
     text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: color 0.3s ease;
+    color: white;
+}
+
+/* Dark Mode Hero Title - More specific selectors */
+body.dark-mode .contact-hero-title,
+[data-theme="dark"] .contact-hero-title,
+html[data-theme="dark"] .contact-hero-title,
+html.dark-mode .contact-hero-title {
+    color: white !important;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3) !important;
 }
 
 /* Contact Section */
 .contact-section {
     background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
     padding: 5rem 0;
+    transition: all 0.3s ease;
+}
+
+/* Dark Mode Contact Section */
+body.dark-mode .contact-section,
+[data-theme="dark"] .contact-section {
+    background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-light-dark) 100%);
 }
 
 .contact-container {
@@ -71,6 +110,13 @@
     font-weight: 700;
     margin-bottom: 0;
     color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+/* Dark Mode Contact Title */
+body.dark-mode .contact-title,
+[data-theme="dark"] .contact-title {
+    color: var(--text-inverse);
 }
 
 /* Contact Info Cards */
@@ -80,6 +126,14 @@
     padding: 3rem;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
     height: 100%;
+    transition: all 0.3s ease;
+}
+
+/* Dark Mode Contact Info Section */
+body.dark-mode .contact-info-section,
+[data-theme="dark"] .contact-info-section {
+    background: var(--card-bg-dark);
+    box-shadow: var(--shadow-lg);
 }
 
 .contact-info-card {
@@ -94,11 +148,25 @@
     border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
+/* Dark Mode Contact Info Card */
+body.dark-mode .contact-info-card,
+[data-theme="dark"] .contact-info-card {
+    background: var(--card-bg-dark);
+    border-color: var(--card-border-dark);
+}
+
 .contact-info-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Dark Mode Contact Info Card Hover */
+body.dark-mode .contact-info-card:hover,
+[data-theme="dark"] .contact-info-card:hover {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    box-shadow: var(--shadow-xl);
 }
 
 .contact-info-card:hover .info-icon {
@@ -117,55 +185,91 @@
 .info-icon {
     width: 60px;
     height: 60px;
-    border-radius: 50%;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: white;
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
+    color: white;
     font-size: 1.5rem;
+    box-shadow: 0 4px 15px rgba(33, 141, 166, 0.3);
     transition: all 0.3s ease;
-    flex-shrink: 0;
+}
+
+/* Dark Mode Info Icon */
+body.dark-mode .info-icon,
+[data-theme="dark"] .info-icon {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    box-shadow: 0 4px 15px rgba(33, 141, 166, 0.4);
 }
 
 .contact-info-card h5 {
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1.2rem;
+    font-weight: 700;
     margin-bottom: 0.5rem;
     color: var(--text-color);
     transition: color 0.3s ease;
 }
 
+/* Dark Mode Contact Info Card Title */
+body.dark-mode .contact-info-card h5,
+[data-theme="dark"] .contact-info-card h5 {
+    color: var(--text-inverse);
+}
+
 .contact-info-card p {
-    margin: 0;
-    color: var(--text-light);
+    margin-bottom: 0;
+    color: var(--text-muted);
+    line-height: 1.6;
     transition: color 0.3s ease;
+}
+
+/* Dark Mode Contact Info Card Text */
+body.dark-mode .contact-info-card p,
+[data-theme="dark"] .contact-info-card p {
+    color: var(--text-muted);
 }
 
 /* Social Media */
 .contact-socials {
     margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
 }
 
 .social-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     width: 50px;
     height: 50px;
-    border-radius: 50%;
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: white;
-    text-decoration: none;
-    margin-right: 1rem;
-    transition: all 0.3s ease;
     font-size: 1.2rem;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(33, 141, 166, 0.3);
+}
+
+/* Dark Mode Social Icon */
+body.dark-mode .social-icon,
+[data-theme="dark"] .social-icon {
+    box-shadow: 0 4px 15px rgba(33, 141, 166, 0.4);
 }
 
 .social-icon:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 25px rgba(33, 141, 166, 0.4);
     color: white;
+    text-decoration: none;
+}
+
+/* Dark Mode Social Icon Hover */
+body.dark-mode .social-icon:hover,
+[data-theme="dark"] .social-icon:hover {
+    box-shadow: 0 8px 25px rgba(33, 141, 166, 0.5);
 }
 
 .social-icon.facebook:hover {
@@ -191,55 +295,99 @@
     padding: 3rem;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
     height: 100%;
+    transition: all 0.3s ease;
+}
+
+/* Dark Mode Contact Form Section */
+body.dark-mode .contact-form-section,
+[data-theme="dark"] .contact-form-section {
+    background: var(--card-bg-dark);
+    box-shadow: var(--shadow-lg);
 }
 
 .contact-form-wrapper {
-    background: transparent;
-    box-shadow: none;
-    padding: 0;
+    max-width: 100%;
 }
 
 .contact-form-wrapper .form-control {
-    border: 2px solid #e5e7eb;
-    border-radius: 12px;
-    padding: 1rem 1.25rem;
+    background: var(--input-bg);
+    border: 2px solid var(--input-border);
+    border-radius: 10px;
+    padding: 1rem 1.5rem;
     font-size: 1rem;
+    color: var(--text-color);
     transition: all 0.3s ease;
-    background: #f9fafb;
+}
+
+/* Dark Mode Form Control */
+body.dark-mode .contact-form-wrapper .form-control,
+[data-theme="dark"] .contact-form-wrapper .form-control {
+    background: var(--input-bg-dark);
+    color: var(--text-inverse);
+    border-color: var(--input-border-dark);
 }
 
 .contact-form-wrapper .form-control:focus {
+    outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-    background: white;
+    box-shadow: 0 0 0 3px rgba(33, 141, 166, 0.1);
+    background: var(--input-bg);
+}
+
+/* Dark Mode Form Control Focus */
+body.dark-mode .contact-form-wrapper .form-control:focus,
+[data-theme="dark"] .contact-form-wrapper .form-control:focus {
+    background: var(--input-bg-dark);
+    box-shadow: 0 0 0 3px rgba(33, 141, 166, 0.2);
 }
 
 .contact-form-wrapper label {
     font-weight: 600;
     color: var(--text-color);
     margin-bottom: 0.5rem;
-    font-size: 0.95rem;
+    transition: color 0.3s ease;
+}
+
+/* Dark Mode Form Label */
+body.dark-mode .contact-form-wrapper label,
+[data-theme="dark"] .contact-form-wrapper label {
+    color: var(--text-inverse);
 }
 
 .contact-form-wrapper textarea {
-    resize: vertical;
     min-height: 120px;
+    resize: vertical;
 }
 
 .contact-form-wrapper .btn {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
     border: none;
     padding: 1rem 2rem;
+    border-radius: 10px;
     font-weight: 600;
-    border-radius: 12px;
+    font-size: 1rem;
     transition: all 0.3s ease;
-    font-size: 1.1rem;
+    box-shadow: 0 4px 15px rgba(33, 141, 166, 0.3);
+}
+
+/* Dark Mode Form Button */
+body.dark-mode .contact-form-wrapper .btn,
+[data-theme="dark"] .contact-form-wrapper .btn {
+    box-shadow: 0 4px 15px rgba(33, 141, 166, 0.4);
 }
 
 .contact-form-wrapper .btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    box-shadow: 0 8px 25px rgba(33, 141, 166, 0.4);
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+    color: white;
+}
+
+/* Dark Mode Form Button Hover */
+body.dark-mode .contact-form-wrapper .btn:hover,
+[data-theme="dark"] .contact-form-wrapper .btn:hover {
+    box-shadow: 0 8px 25px rgba(33, 141, 166, 0.5);
 }
 
 /* Dark Mode Support */
@@ -273,6 +421,19 @@ body.dark-mode .contact-form-wrapper label {
     color: #f1f1f1;
 }
 
+/* Animations */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(255, 255, 255, 0);
+    }
+}
+
 /* Responsive Design */
 @media (max-width: 1200px) {
     .contact-hero-title {
@@ -280,14 +441,14 @@ body.dark-mode .contact-form-wrapper label {
     }
     
     .contact-title {
-        font-size: 2.25rem;
+        font-size: 2.2rem;
     }
 }
 
 @media (max-width: 768px) {
     .contact-hero-section {
         padding: 5rem 0 3rem 0;
-        border-radius: 0 0 20px 20px;
+        margin-top: 70px;
     }
     
     .contact-hero-section::before {
@@ -313,13 +474,14 @@ body.dark-mode .contact-form-wrapper label {
     }
     
     .contact-info-card {
-        padding: 1.25rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
     }
     
     .info-icon {
         width: 50px;
         height: 50px;
-        font-size: 1.25rem;
+        font-size: 1.2rem;
     }
     
     .social-icon {
@@ -332,7 +494,7 @@ body.dark-mode .contact-form-wrapper label {
 @media (max-width: 576px) {
     .contact-hero-section {
         padding: 4rem 0 2rem 0;
-        border-radius: 0 0 15px 15px;
+        margin-top: 60px;
     }
     
     .contact-hero-section::before {
@@ -348,7 +510,7 @@ body.dark-mode .contact-form-wrapper label {
     }
     
     .contact-title {
-        font-size: 1.75rem;
+        font-size: 1.8rem;
     }
     
     .contact-header {
@@ -358,6 +520,7 @@ body.dark-mode .contact-form-wrapper label {
     .contact-info-section,
     .contact-form-section {
         padding: 1.5rem;
+        border-radius: 15px;
     }
     
     .contact-info-card {
@@ -367,111 +530,22 @@ body.dark-mode .contact-form-wrapper label {
     }
     
     .contact-form-wrapper .btn {
-        padding: 0.875rem 1.5rem;
-        font-size: 1rem;
+        width: 100%;
+        padding: 1rem;
     }
 }
 
-/* Animations */
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-        opacity: 1;
+/* Dark Mode Responsive Adjustments */
+@media (max-width: 768px) {
+    body.dark-mode .contact-hero-section,
+    [data-theme="dark"] .contact-hero-section {
+        margin-top: 70px;
     }
-    50% {
-        transform: scale(1.05);
-        opacity: 0.8;
+}
+
+@media (max-width: 576px) {
+    body.dark-mode .contact-hero-section,
+    [data-theme="dark"] .contact-hero-section {
+        margin-top: 60px;
     }
-} 
-
-/* Mejoras para dark mode en Contact Page */
-body.dark-mode .contact-hero-section {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: var(--text-color);
-}
-
-body.dark-mode .contact-hero-badge {
-    background: rgba(255,255,255,0.08);
-    color: var(--text-color);
-    border: 1px solid rgba(255,255,255,0.12);
-}
-
-body.dark-mode .contact-hero-title {
-    color: var(--text-color);
-    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-}
-
-body.dark-mode .contact-section {
-    background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-color) 100%);
-}
-
-body.dark-mode .contact-header .contact-title {
-    color: var(--text-color);
-}
-
-body.dark-mode .contact-info-section,
-body.dark-mode .contact-form-section {
-    background: var(--card-bg);
-    color: var(--text-color);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.18);
-}
-
-body.dark-mode .contact-info-card {
-    background: linear-gradient(135deg, #232b39 0%, #374151 100%);
-    border-color: rgba(255,255,255,0.08);
-    color: var(--text-color);
-}
-
-body.dark-mode .contact-info-card h5 {
-    color: var(--text-color);
-}
-
-body.dark-mode .contact-info-card p {
-    color: var(--text-light);
-}
-
-body.dark-mode .contact-info-card:hover {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: #fff;
-}
-
-body.dark-mode .contact-info-card:hover h5,
-body.dark-mode .contact-info-card:hover p {
-    color: #fff;
-}
-
-body.dark-mode .info-icon {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: #fff;
-}
-
-body.dark-mode .contact-socials .social-icon {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: #fff;
-}
-
-body.dark-mode .contact-form-wrapper .form-control {
-    background: var(--input-bg);
-    border-color: var(--border-color);
-    color: var(--input-text);
-}
-
-body.dark-mode .contact-form-wrapper .form-control:focus {
-    background: #232b39;
-    border-color: var(--primary-color);
-    color: var(--input-text);
-}
-
-body.dark-mode .contact-form-wrapper label {
-    color: var(--text-color);
-}
-
-body.dark-mode .contact-form-wrapper .btn {
-    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-    color: #fff;
-}
-
-body.dark-mode .contact-form-wrapper .btn:hover {
-    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
-    color: #fff;
 } 

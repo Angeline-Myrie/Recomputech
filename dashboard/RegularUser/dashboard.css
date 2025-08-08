@@ -1,3 +1,5 @@
+@import url('../../css/dark-mode-variables.css');
+
 /* Dashboard Component Styles */
 :root {
     --primary-color: #218DA6;

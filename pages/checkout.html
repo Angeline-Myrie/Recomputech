@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../css/checkout.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="light-mode">
     <div id="headerContainer">
         <script>window.addEventListener('DOMContentLoaded',()=>{const hc=document.getElementById('headerContainer');if(hc){const h=document.createElement('script');h.src='../components/header-component.js';document.body.appendChild(h);hc.innerHTML='<recomputech-header></recomputech-header>';}});</script>
     </div>
@@ -80,6 +80,18 @@
     </div>
     <script src="../js/config.js"></script>
     <script src="../js/path-fixer.js"></script>
+    <script src="../js/dark-mode-manager.js"></script>
     <script src="../js/checkout.js"></script>
+    
+    <script>
+        // Ensure dark mode is properly applied
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                if (window.darkModeManager) {
+                    window.darkModeManager.forceThemeApplication();
+                }
+            }, 200);
+        });
+    </script>
 </body>
 </html> 

@@ -419,7 +419,7 @@
         }
     </style>
 </head>
-<body>
+<body class="light-mode">
     <!-- Dynamic Header based on authentication status -->
     <div id="headerContainer">
         <!-- Header will be loaded dynamically -->
@@ -574,6 +574,9 @@
     <!-- Config -->
     <script src="../../js/config.js"></script>
     
+    <!-- Dark Mode Manager -->
+    <script src="../../js/dark-mode-manager.js"></script>
+    
     <!-- Web Components -->
     <script src="../../components/header-component.js"></script>
     <script src="../../components/header-auth-component.js"></script>
@@ -607,6 +610,13 @@
             } else {
                 showError();
             }
+            
+            // Ensure dark mode is properly applied
+            setTimeout(() => {
+                if (window.darkModeManager) {
+                    window.darkModeManager.forceThemeApplication();
+                }
+            }, 200);
         });
 
         function loadProduct(productId) {

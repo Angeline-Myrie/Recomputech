@@ -605,6 +605,18 @@
       window.addEventListener('DOMContentLoaded', function() {
         const heroImg = document.querySelector('.hero-image');
         heroImg.classList.add('animate-slide-in');
+        
+        // Ensure dark mode is properly applied
+        setTimeout(() => {
+          if (window.darkModeManager) {
+            window.darkModeManager.forceThemeApplication();
+            
+            // Test script to verify dark mode is working
+            console.log('Homepage loaded');
+            console.log('Current theme:', window.darkModeManager.getCurrentTheme());
+            console.log('Is dark mode:', window.darkModeManager.isDarkMode());
+          }
+        }, 200);
       });
 
       // Add to Cart functionality

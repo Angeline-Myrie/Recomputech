@@ -169,7 +169,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="../js/config.js"></script>
     <script src="../js/path-fixer.js"></script>
-    <script src="../js/theme.js"></script>
+    <script src="../js/dark-mode-manager.js"></script>
     <script src="../js/components.js"></script>
     <script src="../components/header-component.js"></script>
     <script src="../components/header-auth-component.js"></script>
@@ -181,6 +181,16 @@
     <script src="../components/cta-component.js"></script>
     <script>
         AOS.init();
+        
+        // Ensure dark mode is properly applied
+        document.addEventListener('DOMContentLoaded', function() {
+            // Force dark mode application after a short delay
+            setTimeout(() => {
+                if (window.darkModeManager) {
+                    window.darkModeManager.forceThemeApplication();
+                }
+            }, 200);
+        });
     </script>
     <script>
       // Oculta el header si está dentro de un iframe (dashboard)

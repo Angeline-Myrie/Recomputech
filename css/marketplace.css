@@ -1,3 +1,5 @@
+@import url('./dark-mode-variables.css');
+
 /* Main products section */
 .main-products {
     margin-top: 0px;
@@ -1355,5 +1357,320 @@ body {
 
     .banner-subtitle {
         font-size: 1rem;
+    }
+}
+
+/* Dark Mode Support for Marketplace */
+body.dark-mode {
+    background: #0f172a;
+    color: #f1f1f1;
+}
+
+body.dark-mode .marketplace-banner {
+    background: linear-gradient(135deg, #1e293b, #334155);
+}
+
+body.dark-mode .search-input {
+    background: #374151;
+    color: #f1f1f1;
+    border: 1px solid #4b5563;
+}
+
+body.dark-mode .search-input:focus {
+    background: #374151;
+    border-color: #218DA6;
+}
+
+body.dark-mode .search-input::placeholder {
+    color: #9ca3af;
+}
+
+/* Sidebar Dark Mode */
+body.dark-mode .sidebar {
+    background: #1f2937;
+    border: 1px solid #374151;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .category-item {
+    color: #f1f1f1;
+    border-color: #374151;
+}
+
+body.dark-mode .category-item:hover {
+    background: #374151;
+    border-color: #4b5563;
+}
+
+body.dark-mode .category-item.active {
+    background: #218DA6;
+    color: white;
+    border-color: #218DA6;
+}
+
+body.dark-mode .filter-label {
+    color: #f1f1f1;
+}
+
+body.dark-mode .price-input {
+    background: #374151;
+    border-color: #4b5563;
+    color: #f1f1f1;
+}
+
+body.dark-mode .price-input:focus {
+    border-color: #218DA6;
+    background: #374151;
+}
+
+body.dark-mode .price-input::placeholder {
+    color: #9ca3af;
+}
+
+body.dark-mode .brand-item {
+    color: #f1f1f1;
+}
+
+body.dark-mode .brand-item:hover {
+    background: #374151;
+}
+
+body.dark-mode .brand-item label {
+    color: #f1f1f1;
+}
+
+body.dark-mode .condition-item {
+    color: #f1f1f1;
+}
+
+body.dark-mode .condition-item:hover {
+    background: #374151;
+}
+
+body.dark-mode .condition-item label {
+    color: #f1f1f1;
+}
+
+/* Products Section Dark Mode */
+body.dark-mode .products-section {
+    background: #0f172a;
+}
+
+body.dark-mode .results-count {
+    color: #9ca3af;
+}
+
+body.dark-mode .sort-select {
+    background: #374151;
+    border-color: #4b5563;
+    color: #f1f1f1;
+}
+
+body.dark-mode .sort-select:focus {
+    border-color: #218DA6;
+}
+
+/* Product Cards Dark Mode */
+body.dark-mode .product-card {
+    background: #1f2937;
+    border-color: #374151;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .product-card:hover {
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    border-color: #218DA6;
+}
+
+body.dark-mode .product-image {
+    background: #374151;
+}
+
+body.dark-mode .product-category {
+    color: #218DA6;
+}
+
+body.dark-mode .product-title {
+    color: #f1f1f1;
+}
+
+body.dark-mode .product-description {
+    color: #9ca3af;
+}
+
+body.dark-mode .product-original-price {
+    color: #6b7280;
+}
+
+body.dark-mode .product-rating-text {
+    color: #9ca3af;
+}
+
+body.dark-mode .btn-add-cart {
+    background: #1f2937;
+    color: #16a34a;
+    border-color: #16a34a;
+}
+
+body.dark-mode .btn-add-cart:hover {
+    background: #16a34a;
+    color: white;
+}
+
+/* Mobile Filter Toggle Dark Mode */
+body.dark-mode .mobile-filter-toggle {
+    background: #218DA6;
+    color: white;
+}
+
+/* Sidebar Overlay Dark Mode */
+body.dark-mode .sidebar-overlay {
+    background: rgba(0, 0, 0, 0.7);
+}
+
+/* Scrollbar Dark Mode */
+body.dark-mode .sidebar::-webkit-scrollbar-track {
+    background: #374151;
+}
+
+body.dark-mode .sidebar::-webkit-scrollbar-thumb {
+    background: #4b5563;
+}
+
+body.dark-mode .sidebar::-webkit-scrollbar-thumb:hover {
+    background: #6b7280;
+}
+
+/* Filter Section Dark Mode */
+body.dark-mode .filter-section {
+    border-color: #374151;
+}
+
+/* Price Range Dark Mode */
+body.dark-mode .price-slider {
+    background: #374151;
+}
+
+body.dark-mode .price-slider::-webkit-slider-thumb {
+    background: #218DA6;
+}
+
+body.dark-mode .price-slider::-moz-range-thumb {
+    background: #218DA6;
+}
+
+/* Checkbox Dark Mode */
+body.dark-mode .brand-checkbox,
+body.dark-mode .condition-checkbox {
+    accent-color: #218DA6;
+}
+
+/* Apply Button Dark Mode */
+body.dark-mode .apply-filters {
+    background: linear-gradient(135deg, #218DA6, #1b6e82);
+    color: white;
+}
+
+body.dark-mode .apply-filters:hover {
+    background: linear-gradient(135deg, #1b6e82, #218DA6);
+    color: white;
+}
+
+/* No Products Found Dark Mode */
+body.dark-mode .no-products-content {
+    background: rgba(31, 41, 55, 0.8);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .no-products-content h4 {
+    color: #f1f1f1;
+}
+
+body.dark-mode .no-products-content p {
+    color: #9ca3af;
+}
+
+/* Results Counter Dark Mode */
+body.dark-mode .results-counter {
+    background: rgba(31, 41, 55, 0.9);
+    color: #f1f1f1;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Banner Content Dark Mode */
+body.dark-mode .banner-content {
+    color: #f1f1f1;
+}
+
+body.dark-mode .banner-title {
+    color: #f1f1f1;
+}
+
+body.dark-mode .banner-subtitle {
+    color: rgba(241, 241, 241, 0.9);
+}
+
+/* Search Icon Dark Mode */
+body.dark-mode .search-icon {
+    color: #9ca3af;
+}
+
+body.dark-mode .search-input:focus + .search-icon {
+    color: #218DA6;
+}
+
+/* Category Icon Dark Mode */
+body.dark-mode .category-icon {
+    color: #f1f1f1;
+}
+
+body.dark-mode .category-item.active .category-icon {
+    color: white;
+}
+
+/* Price Range Labels Dark Mode */
+body.dark-mode .price-range small {
+    color: #9ca3af;
+}
+
+/* Filter Section Labels Dark Mode */
+body.dark-mode .filter-section label {
+    color: #f1f1f1;
+}
+
+/* Products Header Dark Mode */
+body.dark-mode .products-header {
+    border-color: #374151;
+}
+
+/* Product Actions Dark Mode */
+body.dark-mode .btn-view-details {
+    background: linear-gradient(135deg, #218DA6, #1b6e82);
+    color: white;
+}
+
+body.dark-mode .btn-view-details:hover {
+    background: linear-gradient(135deg, #1b6e82, #218DA6);
+    color: white;
+}
+
+/* Product Discount Badge Dark Mode */
+body.dark-mode .product-discount {
+    background: #ef4444;
+    color: white;
+}
+
+/* Mobile Responsive Dark Mode */
+@media (max-width: 1200px) {
+    body.dark-mode .sidebar {
+        background: #1f2937;
+        border-color: #374151;
+    }
+}
+
+@media (max-width: 768px) {
+    body.dark-mode .mobile-filter-toggle {
+        background: #218DA6;
+        color: white;
     }
 }

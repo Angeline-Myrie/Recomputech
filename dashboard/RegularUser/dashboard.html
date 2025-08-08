@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../../css/styles.css">
     <link rel="stylesheet" href="dashboard.css">
 </head>
-<body>
+<body class="light-mode">
     <!-- Header Components -->
     <recomputech-header-auth></recomputech-header-auth>
     
@@ -50,6 +50,9 @@
     <!-- Path Fixer -->
     <script src="../../js/path-fixer.js"></script>
     
+    <!-- Dark Mode Manager -->
+    <script src="../../js/dark-mode-manager.js"></script>
+    
     <!-- Header Manager -->
     <script src="../../js/header-manager.js"></script>
     
@@ -74,6 +77,15 @@
             duration: 800,
             easing: 'ease-in-out',
             once: true
+        });
+        
+        // Ensure dark mode is properly applied
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                if (window.darkModeManager) {
+                    window.darkModeManager.forceThemeApplication();
+                }
+            }, 200);
         });
     </script>
 </body>

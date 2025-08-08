@@ -25,10 +25,13 @@
         <!-- Header will be loaded dynamically -->
     </div>
 
-    <section class="aboutus-hero-section py-5" style="background: linear-gradient(135deg, #e3f2fd 0%, #fff 100%); margin-top: 90px;">
+    <section class="aboutus-hero-section">
         <div class="aboutus-hero-container">
             <div class="aboutus-hero-content">
                 <div class="aboutus-hero-text" data-aos="fade-right">
+                    <div class="aboutus-hero-badge">
+                        <i class="fas fa-users me-2"></i>About Our Team
+                    </div>
                     <h1 class="aboutus-hero-title">We are Recomputech</h1>
                     <p class="aboutus-hero-description">Recomputech was founded with a clear mission: to provide consumers with high-quality products at affordable prices, without compromising on performance or reliability.</p>
                     <a href="../index.html" class="aboutus-hero-btn">
@@ -65,7 +68,7 @@
 
     <!-- Divider: gap between Mission/Vision and Team -->
     <div class="container">
-        <hr style="border-top: 2.5px solid #e3eafc; margin: 0 auto 48px auto; width: 80%; opacity: 1;">
+        <hr class="about-divider">
     </div>
 
     <section class="about-team py-5">
@@ -254,7 +257,7 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="../js/config.js"></script>
     <script src="../js/path-fixer.js"></script>
-    <script src="../js/theme.js"></script>
+    <script src="../js/dark-mode-manager.js"></script>
     <script src="../js/components.js"></script>
     <script src="../components/header-component.js"></script>
     <script src="../components/header-auth-component.js"></script>
@@ -319,6 +322,16 @@
           clickable: true,
           dynamicBullets: true,
         }
+      });
+
+      // Ensure dark mode is properly applied
+      document.addEventListener('DOMContentLoaded', function() {
+        // Force dark mode application after a short delay
+        setTimeout(() => {
+          if (window.darkModeManager) {
+            window.darkModeManager.forceThemeApplication();
+          }
+        }, 200);
       });
 
       // Oculta el header si está dentro de un iframe (dashboard)

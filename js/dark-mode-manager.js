@@ -115,14 +115,24 @@ class DarkModeManager {
         });
 
         // Aplicar específicamente a componentes web conocidos
-        const knownWebComponents = document.querySelectorAll('recomputech-header, recomputech-header-auth, recomputech-header-auth-technician');
+        const knownWebComponents = document.querySelectorAll('recomputech-header, recomputech-header-auth, recomputech-header-auth-technician, recomputech-cta, recomputech-footer');
         knownWebComponents.forEach(component => {
             component.classList.toggle('dark-mode', theme === 'dark');
             component.setAttribute('data-theme', theme);
             
+            // Disparar evento personalizado para que el componente sepa del cambio
+            component.dispatchEvent(new CustomEvent('themeChanged', {
+                detail: { theme: theme }
+            }));
+            
             // Actualizar íconos si el componente tiene el método
             if (component.updateThemeIcons && typeof component.updateThemeIcons === 'function') {
                 component.updateThemeIcons(theme);
+            }
+            
+            // Llamar método applyDarkMode si existe
+            if (component.applyDarkMode && typeof component.applyDarkMode === 'function') {
+                component.applyDarkMode();
             }
         });
     }
