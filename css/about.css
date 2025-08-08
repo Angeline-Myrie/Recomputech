@@ -454,6 +454,9 @@ body.dark-mode .aboutus-hero-description,
     transform: translateY(-50%);
     z-index: 10;
     border: 1px solid var(--card-border);
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
 }
 
 .swiper-button-next {
@@ -462,6 +465,23 @@ body.dark-mode .aboutus-hero-description,
 
 .swiper-button-prev {
     left: 10px;
+}
+
+/* Ensure navigation arrows are visible */
+.swiper-button-next,
+.swiper-button-prev {
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+/* Dark mode navigation arrows */
+body.dark-mode .swiper-button-next,
+body.dark-mode .swiper-button-prev,
+[data-theme="dark"] .swiper-button-next,
+[data-theme="dark"] .swiper-button-prev {
+    background: var(--card-bg);
+    color: var(--primary-color);
+    border-color: var(--card-border);
 }
 
 .swiper-button-next:hover,
@@ -518,16 +538,17 @@ body.dark-mode .aboutus-hero-description,
     box-shadow: var(--shadow-lg);
     transition: all 0.3s ease;
     width: 100%;
-    height: 350px;
-    max-width: 320px;
-    width:  100%;
     max-width: 250px;
+    height: 300px;
     text-align: center;
     position: relative;
     overflow: hidden;
     border: 1px solid var(--card-border);
     margin: 0 auto;
-    height: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .team-card::before {
@@ -553,13 +574,14 @@ body.dark-mode .aboutus-hero-description,
 
 .team-avatar {
     margin-bottom: 1.5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .team-avatar img {
-    width: 200px;
-    height: 200px;
-    width: 90px;
-    height: 90px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid var(--primary-color);
@@ -570,6 +592,14 @@ body.dark-mode .aboutus-hero-description,
 .team-card:hover .team-avatar img {
     transform: scale(1.1);
     box-shadow: var(--shadow-lg);
+}
+
+.team-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
 }
 
 .team-name {
@@ -885,8 +915,8 @@ body.dark-mode .aboutus-hero-description,
     }
     
     .team-avatar img {
-        width: 80px;
-        height: 80px;
+        width: 100px;
+        height: 100px;
     }
     
     .team-name {
@@ -965,8 +995,8 @@ body.dark-mode .aboutus-hero-description,
     }
     
     .team-avatar img {
-        width: 70px;
-        height: 70px;
+        width: 90px;
+        height: 90px;
     }
     
     .team-name {
