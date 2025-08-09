@@ -182,7 +182,7 @@
         </div>
     </div>
     
-    <!-- Footer Component -->
+    <!-- Footer Component (hidden if embedded in dashboard) -->
     <recomputech-footer></recomputech-footer>
 
     <!-- Scripts -->
@@ -462,10 +462,15 @@
             }
         });
 
-        // Oculta el header si está dentro de un iframe (dashboard)
+        // Si está embebido en el dashboard (iframe), ocultar su propio footer para evitar doble footer
         if (window.self !== window.top) {
             const header = document.getElementById('headerContainer') || document.querySelector('header') || document.querySelector('recomputech-header') || document.querySelector('recomputech-header-auth');
             if (header) header.style.display = 'none';
+            const footer = document.querySelector('recomputech-footer');
+            if (footer) footer.style.display = 'none';
+            // Evitar doble scroll interno
+            document.documentElement.style.overflow = 'hidden';
+            document.body.style.overflow = 'hidden';
         }
     </script>
 </body>

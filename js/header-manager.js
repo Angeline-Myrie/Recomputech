@@ -23,6 +23,14 @@ class HeaderManager {
 
     checkAuthStatus() {
         const currentUser = this.getCurrentUser();
+        // If a specific home container exists, always render public header on homepage
+        const headerContainerHome = document.getElementById('headerContainerHome');
+        if (headerContainerHome) {
+            if (!headerContainerHome.querySelector('recomputech-header')) {
+                headerContainerHome.innerHTML = '<recomputech-header></recomputech-header>';
+            }
+            return;
+        }
         const headerContainer = document.getElementById('headerContainer');
         
         if (!headerContainer) return;
