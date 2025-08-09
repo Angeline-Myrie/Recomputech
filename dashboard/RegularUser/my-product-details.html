@@ -8,24 +8,35 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="../../css/styles.css">
     <style>
         body {
-            background-color: #f8f9fa;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         .product-detail-container {
             max-width: 1200px;
-            margin: 2rem auto;
+            margin: 4rem auto;
             padding: 0 1rem;
         }
         
         .product-image-section {
-            background: white;
+            background: var(--card-bg);
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-md);
             position: relative;
+        }
+        .product-image-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
         }
         
         .product-main-image {
@@ -35,10 +46,26 @@
         }
         
         .product-info-section {
-            background: white;
+            background: var(--card-bg);
             border-radius: 20px;
             padding: 2rem;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .product-info-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+        .product-info-section:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
         }
         
         .status-badge {
@@ -54,20 +81,20 @@
         .price-tag {
             font-size: 2.5rem;
             font-weight: 800;
-            color: #218DA6;
+            color: var(--primary-color);
             margin-bottom: 1rem;
         }
         
         .product-title {
             font-size: 2rem;
             font-weight: 700;
-            color: #2c3e50;
+            color: var(--text-color);
             margin-bottom: 1rem;
         }
         
         .product-description {
             font-size: 1.1rem;
-            color: #6c757d;
+            color: var(--text-light);
             line-height: 1.6;
             margin-bottom: 2rem;
         }
@@ -82,12 +109,12 @@
         
         .detail-label {
             font-weight: 600;
-            color: #6c757d;
+            color: var(--text-light);
         }
         
         .detail-value {
             font-weight: 600;
-            color: #2c3e50;
+            color: var(--text-color);
         }
         
         .action-buttons {
@@ -97,9 +124,9 @@
         }
         
         .btn-edit {
-            background: linear-gradient(135deg, #218DA6 0%, #1b6e82 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
             border: none;
-            color: white;
+            color: #fff;
             padding: 1rem 2rem;
             border-radius: 12px;
             font-weight: 600;
@@ -129,17 +156,17 @@
         }
         
         .stats-section {
-            background: white;
+            background: var(--card-bg);
             border-radius: 20px;
             padding: 2rem;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-md);
             margin-top: 2rem;
         }
         
         .stat-card {
             text-align: center;
             padding: 1.5rem;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            background: linear-gradient(135deg, var(--bg-light) 0%, var(--bg-color) 100%);
             border-radius: 15px;
             transition: all 0.3s ease;
         }
@@ -152,29 +179,33 @@
         .stat-number {
             font-size: 2rem;
             font-weight: 800;
-            color: #218DA6;
+            color: var(--primary-color);
             margin-bottom: 0.5rem;
         }
         
         .stat-label {
             font-size: 0.9rem;
-            color: #6c757d;
+            color: var(--text-light);
             font-weight: 500;
         }
         
         .breadcrumb-custom {
-            background: white;
+            background: var(--card-bg);
             border-radius: 15px;
             padding: 1rem 1.5rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-md);
             margin-bottom: 2rem;
         }
         
         .breadcrumb-custom a {
-            color: #218DA6;
+            color: var(--primary-color);
             text-decoration: none;
             font-weight: 500;
         }
+
+        /* Centrar contenido y ocultar sidebar en esta vista */
+        .dashboard-main { margin-left: 0 !important; }
+        #sidebar-container { display: none; }
         
         .breadcrumb-custom a:hover {
             text-decoration: underline;
@@ -183,7 +214,7 @@
 </head>
 <body>
     <!-- Header Component -->
-    <div id="header-container"></div>
+    <recomputech-header-auth></recomputech-header-auth>
     
     <div class="container-fluid">
         <div class="row">
@@ -300,8 +331,14 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="../components/header-auth-component.js"></script>
-    <script src="../js/sidebar-resize.js"></script>
+    <script src="../../js/config.js"></script>
+    <script src="../../js/path-fixer.js"></script>
+    <script src="../../js/header-manager.js"></script>
+    <script src="../../js/theme.js"></script>
+    <script src="../../components/header-component.js"></script>
+    <script src="../../components/header-auth-component.js"></script>
+    <script src="../../components/footer-component.js"></script>
+    <script src="../../js/sidebar-resize.js"></script>
     
     <script>
         // Initialize AOS

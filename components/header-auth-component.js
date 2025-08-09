@@ -817,7 +817,7 @@ class RecomputechHeaderAuth extends HTMLElement {
                     <div class="recomputech-navbar-container">
                         <!-- Logo Section -->
                         <a class="recomputech-navbar-brand" href="index.html">
-                            <img src="" alt="Logo" class="recomputech-logo recomputech-logo-small" id="header-logo">
+                            <img src="/assets/logos/logo-.png" alt="Logo" class="recomputech-logo recomputech-logo-small" id="header-logo">
                             <div class="recomputech-brand-text">
                                 <span class="recomputech-brand-name">Recomputech</span>
                                 <span class="recomputech-brand-tagline">Sustainable Technology</span>

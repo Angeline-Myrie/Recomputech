@@ -53,6 +53,8 @@ class DashboardContentComponent extends HTMLElement {
     }
 
     loadSection() {
+        // Ensure dashboard UI is restored when leaving external pages
+        this.cleanupExternalPageUI();
         console.log('Loading section:', this.currentSection);
         switch (this.currentSection) {
             case 'overview':
@@ -317,11 +319,45 @@ class DashboardContentComponent extends HTMLElement {
     loadExternalPage(url) {
         this.externalPageUrl = url;
         if (url) {
+            // Hide dashboard footer and prevent double scrollbars on parent
+            const dashboardFooter = document.querySelector('recomputech-footer');
+            if (dashboardFooter) dashboardFooter.style.display = 'none';
+            document.documentElement.style.overflowY = 'hidden';
+            document.body.style.overflowY = 'hidden';
+
+            // Render iframe with responsive height (fills viewport under header)
             this.innerHTML = `
-                <iframe src="${url}" style="width:100vw;height:100vh;border:none;display:block;"></iframe>
+                <iframe id="external-page-frame" src="${url}" style="width:100%;border:none;display:block;"></iframe>
             `;
+
+            const adjustIframeHeight = () => {
+                const header = document.querySelector('recomputech-header-auth') || document.querySelector('recomputech-header');
+                const headerHeight = header ? header.getBoundingClientRect().height : 0;
+                const iframe = this.querySelector('#external-page-frame');
+                if (iframe) {
+                    iframe.style.height = Math.max(0, window.innerHeight - headerHeight) + 'px';
+                }
+            };
+
+            // Initial adjust and on resize
+            adjustIframeHeight();
+            window.addEventListener('resize', adjustIframeHeight, { passive: true });
+            // Store handler for cleanup
+            this._adjustIframeHeightHandler = adjustIframeHeight;
         } else {
             this.loadSection();
+        }
+    }
+
+    cleanupExternalPageUI() {
+        // Restore footer and scrolling if previously modified
+        const dashboardFooter = document.querySelector('recomputech-footer');
+        if (dashboardFooter) dashboardFooter.style.display = '';
+        document.documentElement.style.overflowY = '';
+        document.body.style.overflowY = '';
+        if (this._adjustIframeHeightHandler) {
+            window.removeEventListener('resize', this._adjustIframeHeightHandler);
+            this._adjustIframeHeightHandler = null;
         }
     }
 
