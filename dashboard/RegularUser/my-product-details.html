@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - Recomputech Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .product-detail-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .product-image-section {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .product-main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+        
+        .product-info-section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .status-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+        }
+        
+        .price-tag {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #218DA6;
+            margin-bottom: 1rem;
+        }
+        
+        .product-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        
+        .product-description {
+            font-size: 1.1rem;
+            color: #6c757d;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .detail-label {
+            font-weight: 600;
+            color: #6c757d;
+        }
+        
+        .detail-value {
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .btn-edit {
+            background: linear-gradient(135deg, #218DA6 0%, #1b6e82 100%);
+            border: none;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-edit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(33, 141, 166, 0.4);
+            color: white;
+        }
+        
+        .btn-back {
+            background: transparent;
+            border: 2px solid #6c757d;
+            color: #6c757d;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-back:hover {
+            background: #6c757d;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .stats-section {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            margin-top: 2rem;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #218DA6;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #6c757d;
+            font-weight: 500;
+        }
+        
+        .breadcrumb-custom {
+            background: white;
+            border-radius: 15px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+        
+        .breadcrumb-custom a {
+            color: #218DA6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .breadcrumb-custom a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Component -->
+    <div id="header-container"></div>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div id="sidebar-container"></div>
+            
+            <!-- Main Content -->
+            <main class="dashboard-main">
+                <div class="product-detail-container">
+                    <!-- Breadcrumb -->
+                    <nav class="breadcrumb-custom" data-aos="fade-down">
+                        <a href="dashboard.html">Dashboard</a> / 
+                        <a href="dashboard.html#my-products">My Products</a> / 
+                        <span id="product-breadcrumb">Product Details</span>
+                    </nav>
+                    
+                    <div class="row">
+                        <!-- Product Image -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="product-image-section" data-aos="fade-right">
+                                <img id="productImage" src="" alt="Product Image" class="product-main-image">
+                                <div id="statusBadge" class="status-badge"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Product Information -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="product-info-section" data-aos="fade-left">
+                                <div class="price-tag" id="productPrice">B/. 0.00</div>
+                                <h1 class="product-title" id="productTitle">Product Name</h1>
+                                <p class="product-description" id="productDescription">Product description...</p>
+                                
+                                <div class="product-details">
+                                    <div class="detail-item">
+                                        <span class="detail-label">
+                                            <i class="fas fa-tag" style="color: #218DA6; margin-right: 0.5rem;"></i>
+                                            Category:
+                                        </span>
+                                        <span class="detail-value" id="productCategory">-</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">
+                                            <i class="fas fa-calendar" style="color: #218DA6; margin-right: 0.5rem;"></i>
+                                            Listed Date:
+                                        </span>
+                                        <span class="detail-value" id="productDate">-</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">
+                                            <i class="fas fa-hashtag" style="color: #218DA6; margin-right: 0.5rem;"></i>
+                                            Product ID:
+                                        </span>
+                                        <span class="detail-value" id="productId">-</span>
+                                    </div>
+                                    <div class="detail-item">
+                                        <span class="detail-label">
+                                            <i class="fas fa-info-circle" style="color: #218DA6; margin-right: 0.5rem;"></i>
+                                            Status:
+                                        </span>
+                                        <span class="detail-value" id="productStatus">-</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="action-buttons">
+                                    <button class="btn btn-edit" id="editProductBtn">
+                                        <i class="fas fa-edit"></i> Edit Product
+                                    </button>
+                                    <button class="btn btn-back" onclick="history.back()">
+                                        <i class="fas fa-arrow-left"></i> Back to My Products
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Product Statistics -->
+                    <div class="stats-section" data-aos="fade-up" data-aos-delay="200">
+                        <h3 style="color: #2c3e50; margin-bottom: 2rem; text-align: center;">
+                            <i class="fas fa-chart-bar" style="color: #218DA6; margin-right: 0.5rem;"></i>
+                            Product Performance
+                        </h3>
+                        <div class="row">
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="stat-card">
+                                    <div class="stat-number">24</div>
+                                    <div class="stat-label">Views</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="stat-card">
+                                    <div class="stat-number">7</div>
+                                    <div class="stat-label">Interested</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="stat-card">
+                                    <div class="stat-number">15</div>
+                                    <div class="stat-label">Days Listed</div>
+                                </div>
+                            </div>
+                            <div class="col-md-3 col-6 mb-3">
+                                <div class="stat-card">
+                                    <div class="stat-number">3</div>
+                                    <div class="stat-label">Messages</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../components/header-auth-component.js"></script>
+    <script src="../js/sidebar-resize.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+        
+        // Load product details
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProductDetails();
+            setupEventListeners();
+        });
+        
+        function loadProductDetails() {
+            const product = JSON.parse(localStorage.getItem('selectedProduct'));
+            
+            if (!product) {
+                alert('Product not found');
+                window.location.href = 'dashboard.html';
+                return;
+            }
+            
+            // Update page content
+            document.getElementById('productImage').src = product.image;
+            document.getElementById('productImage').alt = product.name;
+            document.getElementById('productPrice').textContent = `B/. ${product.price}`;
+            document.getElementById('productTitle').textContent = product.name;
+            document.getElementById('productDescription').textContent = product.description;
+            document.getElementById('productCategory').textContent = product.category;
+            document.getElementById('productDate').textContent = product.date;
+            document.getElementById('productId').textContent = `#${product.id}`;
+            document.getElementById('productStatus').textContent = product.status;
+            document.getElementById('product-breadcrumb').textContent = product.name;
+            
+            // Update status badge
+            const statusBadge = document.getElementById('statusBadge');
+            statusBadge.textContent = product.status;
+            if (product.status === 'active') {
+                statusBadge.style.background = 'rgba(40, 167, 69, 0.9)';
+                statusBadge.style.color = '#fff';
+                statusBadge.style.border = '1px solid #28a745';
+            } else {
+                statusBadge.style.background = 'rgba(255, 193, 7, 0.9)';
+                statusBadge.style.color = '#000';
+                statusBadge.style.border = '1px solid #ffc107';
+            }
+            
+            // Update page title
+            document.title = `${product.name} - Product Details - Recomputech`;
+        }
+        
+        function setupEventListeners() {
+            const editBtn = document.getElementById('editProductBtn');
+            editBtn.addEventListener('click', function() {
+                const product = JSON.parse(localStorage.getItem('selectedProduct'));
+                localStorage.setItem('editingProduct', JSON.stringify(product));
+                window.location.href = 'edit-product.html';
+            });
+        }
+    </script>
+</body>
+</html>
