@@ -519,10 +519,16 @@ class RecomputechHeaderAuthTechnician extends HTMLElement {
     }
 
     initializeTheme() {
+        // For technician dashboard, default to light mode
         const savedTheme = localStorage.getItem('theme') || 'light';
         if (savedTheme === 'dark') {
             document.documentElement.classList.add('dark-mode');
             this.classList.add('dark-mode');
+        } else {
+            // Ensure light mode is applied
+            document.documentElement.classList.remove('dark-mode');
+            this.classList.remove('dark-mode');
+            document.documentElement.removeAttribute('data-theme');
         }
         this.updateThemeIcon();
     }
