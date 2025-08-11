@@ -219,6 +219,8 @@ class TechnicianDashboardContent extends HTMLElement {
         setTimeout(() => {
             if (window.Chart) {
                 const ctx = document.getElementById('technicianOverviewChart').getContext('2d');
+                const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark' || document.body.classList.contains('dark-mode');
+                
                 new Chart(ctx, {
                     type: 'bar',
                     data: {
@@ -243,7 +245,32 @@ class TechnicianDashboardContent extends HTMLElement {
                     },
                     options: {
                         responsive: true,
-                        plugins: { legend: { position: 'top' } }
+                        plugins: { 
+                            legend: { 
+                                position: 'top',
+                                labels: {
+                                    color: isDarkMode ? '#f8fafc' : '#1f2937'
+                                }
+                            } 
+                        },
+                        scales: {
+                            x: {
+                                ticks: {
+                                    color: isDarkMode ? '#f8fafc' : '#1f2937'
+                                },
+                                grid: {
+                                    color: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
+                                }
+                            },
+                            y: {
+                                ticks: {
+                                    color: isDarkMode ? '#f8fafc' : '#1f2937'
+                                },
+                                grid: {
+                                    color: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
+                                }
+                            }
+                        }
                     }
                 });
             }
@@ -682,6 +709,32 @@ class TechnicianDashboardContent extends HTMLElement {
                 this.handleCertificationForm(e.target);
             }
         });
+
+        // Listen for theme changes
+        document.addEventListener('themeChanged', () => {
+            this.updateCharts();
+        });
+
+        // Listen for dark mode toggle
+        document.addEventListener('darkModeToggled', () => {
+            this.updateCharts();
+        });
+    }
+
+    updateCharts() {
+        // Update existing charts with new theme colors
+        const charts = Chart.getChart ? Chart.getChart('technicianOverviewChart') : null;
+        if (charts) {
+            const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark' || document.body.classList.contains('dark-mode');
+            
+            charts.options.plugins.legend.labels.color = isDarkMode ? '#f8fafc' : '#1f2937';
+            charts.options.scales.x.ticks.color = isDarkMode ? '#f8fafc' : '#1f2937';
+            charts.options.scales.y.ticks.color = isDarkMode ? '#f8fafc' : '#1f2937';
+            charts.options.scales.x.grid.color = isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+            charts.options.scales.y.grid.color = isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+            
+            charts.update();
+        }
     }
 
     handleCertificationForm(form) {

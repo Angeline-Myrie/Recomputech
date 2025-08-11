@@ -871,10 +871,6 @@ class RecomputechHeaderAuth extends HTMLElement {
                                         <i class="fas fa-plus-circle"></i>
                                         Add Product
                                     </a>
-                                    <a href="#purchases" class="dropdown-item" data-section="purchases">
-                                        <i class="fas fa-shopping-bag"></i>
-                                        Purchases
-                                    </a>
                                     <a href="#settings" class="dropdown-item" data-section="settings">
 
                                         <i class="fas fa-cog"></i>
