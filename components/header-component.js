@@ -1348,6 +1348,7 @@ class HeaderComponent extends HTMLElement {
                 // Switch to light mode
                 body.classList.remove('dark-mode');
                 this.classList.remove('dark-mode');
+                document.documentElement.classList.remove('dark-mode');
                 localStorage.setItem('theme', 'light');
                 if (moonIcon) moonIcon.style.display = 'block';
                 if (sunIcon) sunIcon.style.display = 'none';
@@ -1355,6 +1356,7 @@ class HeaderComponent extends HTMLElement {
                 // Switch to dark mode
                 body.classList.add('dark-mode');
                 this.classList.add('dark-mode');
+                document.documentElement.classList.add('dark-mode');
                 localStorage.setItem('theme', 'dark');
                 if (moonIcon) moonIcon.style.display = 'none';
                 if (sunIcon) sunIcon.style.display = 'block';
@@ -1369,6 +1371,11 @@ class HeaderComponent extends HTMLElement {
         if (window.darkModeManager) {
             const currentTheme = window.darkModeManager.getCurrentTheme();
             this.updateThemeIcons(currentTheme);
+            
+            // Aplicar tema inmediatamente al componente
+            this.classList.toggle('dark-mode', currentTheme === 'dark');
+            document.documentElement.classList.toggle('dark-mode', currentTheme === 'dark');
+            document.body.classList.toggle('dark-mode', currentTheme === 'dark');
         } else {
             // Fallback si el DarkModeManager no está disponible
             const savedTheme = localStorage.getItem('theme') || 'light';
@@ -1380,11 +1387,13 @@ class HeaderComponent extends HTMLElement {
             if (savedTheme === 'dark') {
                 body.classList.add('dark-mode');
                 this.classList.add('dark-mode');
+                document.documentElement.classList.add('dark-mode');
                 if (moonIcon) moonIcon.style.display = 'none';
                 if (sunIcon) sunIcon.style.display = 'block';
             } else {
                 body.classList.remove('dark-mode');
                 this.classList.remove('dark-mode');
+                document.documentElement.classList.remove('dark-mode');
                 if (moonIcon) moonIcon.style.display = 'block';
                 if (sunIcon) sunIcon.style.display = 'none';
             }

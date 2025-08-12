@@ -1338,10 +1338,12 @@ class RecomputechHeaderAuth extends HTMLElement {
         if (isDark) {
             document.documentElement.classList.remove('dark-mode');
             this.classList.remove('dark-mode');
+            document.body.classList.remove('dark-mode');
             localStorage.setItem('theme', 'light');
         } else {
             document.documentElement.classList.add('dark-mode');
             this.classList.add('dark-mode');
+            document.body.classList.add('dark-mode');
             localStorage.setItem('theme', 'dark');
         }
         
@@ -1354,6 +1356,11 @@ class RecomputechHeaderAuth extends HTMLElement {
         if (savedTheme === 'dark') {
             document.documentElement.classList.add('dark-mode');
             this.classList.add('dark-mode');
+            document.body.classList.add('dark-mode');
+        } else {
+            document.documentElement.classList.remove('dark-mode');
+            this.classList.remove('dark-mode');
+            document.body.classList.remove('dark-mode');
         }
         
         this.updateThemeIcon();
