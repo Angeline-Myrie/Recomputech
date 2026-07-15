@@ -95,22 +95,33 @@ class TechnicianDashboardContent extends HTMLElement {
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="stat-card">
                                 <div class="stat-icon">
-                                    <i class="fas fa-tools"></i>
+                                    <i class="fas fa-eye"></i>
                                 </div>
                                 <div class="stat-content">
-                                    <h3 id="totalRequests">12</h3>
-                                    <p>Total Requests</p>
+                                    <h3 id="profileViews">120</h3>
+                                    <p>Profile Views</p>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 mb-4">
                             <div class="stat-card">
                                 <div class="stat-icon">
-                                    <i class="fas fa-check-circle"></i>
+                                    <i class="fas fa-dollar-sign"></i>
                                 </div>
                                 <div class="stat-content">
-                                    <h3 id="completedJobs">8</h3>
-                                    <p>Completed Jobs</p>
+                                    <h3 id="totalSales">B/. 2,500</h3>
+                                    <p>Total Sold</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 mb-4">
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <h3 id="totalPurchases">B/. 1,200</h3>
+                                    <p>Total Purchased</p>
                                 </div>
                             </div>
                         </div>
@@ -125,17 +136,10 @@ class TechnicianDashboardContent extends HTMLElement {
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 mb-4">
-                            <div class="stat-card">
-                                <div class="stat-icon">
-                                    <i class="fas fa-dollar-sign"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <h3 id="earnings">B/. 1,250</h3>
-                                    <p>Total Earnings</p>
-                                </div>
-                            </div>
-                        </div>
+                    </div>
+                    <!-- Gráfica de actividad -->
+                    <div class="chart-container my-4" style="width:100%;max-width:600px;margin:auto;">
+                        <canvas id="technicianOverviewChart"></canvas>
                     </div>
 
                     <!-- Recent Activity -->
@@ -212,6 +216,65 @@ class TechnicianDashboardContent extends HTMLElement {
                 </div>
             </div>
         `;
+        setTimeout(() => {
+            if (window.Chart) {
+                const ctx = document.getElementById('technicianOverviewChart').getContext('2d');
+                const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark' || document.body.classList.contains('dark-mode');
+                
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                        datasets: [
+                            {
+                                label: 'Profile Views',
+                                data: [20, 35, 40, 60, 80, 120],
+                                backgroundColor: 'rgba(33, 141, 166, 0.7)'
+                            },
+                            {
+                                label: 'Sales',
+                                data: [2, 3, 4, 5, 6, 7],
+                                backgroundColor: 'rgba(21, 90, 107, 0.7)'
+                            },
+                            {
+                                label: 'Purchases',
+                                data: [1, 2, 1, 3, 2, 4],
+                                backgroundColor: 'rgba(246, 189, 22, 0.7)'
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { 
+                            legend: { 
+                                position: 'top',
+                                labels: {
+                                    color: isDarkMode ? '#f8fafc' : '#1f2937'
+                                }
+                            } 
+                        },
+                        scales: {
+                            x: {
+                                ticks: {
+                                    color: isDarkMode ? '#f8fafc' : '#1f2937'
+                                },
+                                grid: {
+                                    color: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
+                                }
+                            },
+                            y: {
+                                ticks: {
+                                    color: isDarkMode ? '#f8fafc' : '#1f2937'
+                                },
+                                grid: {
+                                    color: isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)'
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }, 500);
     }
 
     loadContact() {
@@ -646,6 +709,32 @@ class TechnicianDashboardContent extends HTMLElement {
                 this.handleCertificationForm(e.target);
             }
         });
+
+        // Listen for theme changes
+        document.addEventListener('themeChanged', () => {
+            this.updateCharts();
+        });
+
+        // Listen for dark mode toggle
+        document.addEventListener('darkModeToggled', () => {
+            this.updateCharts();
+        });
+    }
+
+    updateCharts() {
+        // Update existing charts with new theme colors
+        const charts = Chart.getChart ? Chart.getChart('technicianOverviewChart') : null;
+        if (charts) {
+            const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark' || document.body.classList.contains('dark-mode');
+            
+            charts.options.plugins.legend.labels.color = isDarkMode ? '#f8fafc' : '#1f2937';
+            charts.options.scales.x.ticks.color = isDarkMode ? '#f8fafc' : '#1f2937';
+            charts.options.scales.y.ticks.color = isDarkMode ? '#f8fafc' : '#1f2937';
+            charts.options.scales.x.grid.color = isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+            charts.options.scales.y.grid.color = isDarkMode ? 'rgba(255, 255, 255, 0.1)' : 'rgba(0, 0, 0, 0.1)';
+            
+            charts.update();
+        }
     }
 
     handleCertificationForm(form) {

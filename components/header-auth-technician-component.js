@@ -8,6 +8,7 @@ class RecomputechHeaderAuthTechnician extends HTMLElement {
     connectedCallback() {
         this.render();
         this.setupEventListeners();
+        this.setLogoPath();
     }
 
     render() {
@@ -346,7 +347,7 @@ class RecomputechHeaderAuthTechnician extends HTMLElement {
                     <div class="recomputech-navbar-container">
                         <!-- Logo Section -->
                         <a class="recomputech-navbar-brand" href="index.html">
-                            <img src="/assets/logos/logo-.png" alt="Logo" class="recomputech-logo recomputech-logo-small">
+                            <img src="" alt="Logo" class="recomputech-logo recomputech-logo-small" id="header-logo">
                             <div class="recomputech-brand-text">
                                 <span class="recomputech-brand-name">Recomputech</span>
                                 <span class="recomputech-brand-tagline">Sustainable Technology</span>
@@ -480,6 +481,27 @@ class RecomputechHeaderAuthTechnician extends HTMLElement {
         });
     }
 
+    setLogoPath() {
+        const logo = this.shadowRoot.getElementById('header-logo');
+        if (logo) {
+            // Use centralized logo path resolver
+            const logoPath = window.CONFIG ? window.CONFIG.getLogoPathForCurrentLocation() : this.getFallbackLogoPath();
+            logo.src = logoPath;
+        }
+    }
+    
+    getFallbackLogoPath() {
+        // Fallback method if CONFIG is not available
+        const isGitHubPages = window.location.hostname !== 'localhost' && 
+                             window.location.hostname !== '127.0.0.1' &&
+                             window.location.hostname.includes('github.io');
+        
+        if (isGitHubPages) {
+            return '/Recomputech/assets/logos/logo-.png';
+        } else {
+            return 'assets/logos/logo-.png';
+        }
+    }
 
 
     toggleTheme() {
@@ -487,20 +509,30 @@ class RecomputechHeaderAuthTechnician extends HTMLElement {
         if (isDark) {
             document.documentElement.classList.remove('dark-mode');
             this.classList.remove('dark-mode');
+            document.body.classList.remove('dark-mode');
             localStorage.setItem('theme', 'light');
         } else {
             document.documentElement.classList.add('dark-mode');
             this.classList.add('dark-mode');
+            document.body.classList.add('dark-mode');
             localStorage.setItem('theme', 'dark');
         }
         this.updateThemeIcon();
     }
 
     initializeTheme() {
+        // For technician dashboard, default to light mode
         const savedTheme = localStorage.getItem('theme') || 'light';
         if (savedTheme === 'dark') {
             document.documentElement.classList.add('dark-mode');
             this.classList.add('dark-mode');
+            document.body.classList.add('dark-mode');
+        } else {
+            // Ensure light mode is applied
+            document.documentElement.classList.remove('dark-mode');
+            this.classList.remove('dark-mode');
+            document.body.classList.remove('dark-mode');
+            document.documentElement.removeAttribute('data-theme');
         }
         this.updateThemeIcon();
     }

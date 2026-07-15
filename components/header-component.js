@@ -10,6 +10,17 @@ class HeaderComponent extends HTMLElement {
         this.render();
         this.setupEventListeners();
         this.loadCartFromStorage();
+        this.setLogoPath();
+        
+        // Escuchar cambios de tema del DarkModeManager
+        document.addEventListener('themeChanged', (e) => {
+            this.updateThemeIcons(e.detail.theme);
+        });
+        
+        // Inicializar tema si el DarkModeManager está disponible
+        if (window.darkModeManager) {
+            this.updateThemeIcons(window.darkModeManager.getCurrentTheme());
+        }
     }
 
     render() {
@@ -877,8 +888,8 @@ class HeaderComponent extends HTMLElement {
                             </button>
 
                                             <!-- Auth Buttons -->
-                            <a href="/auth/auth.html" class="recomputech-btn-outline-primary">Login</a>
-                            <a href="/auth/auth.html" class="recomputech-btn-primary">Register</a>
+                        
+                            <a href="/auth/auth.html" class="recomputech-btn-primary">Login & Register</a>
 
                             <!-- Cart Icon -->
                             <button class="recomputech-cart-icon" id="recomputech-cart-icon" title="Shopping Cart">
@@ -924,11 +935,7 @@ class HeaderComponent extends HTMLElement {
                             <i class="fas fa-shopping-cart recomputech-mobile-cart-icon"></i>
                             <span class="recomputech-mobile-cart-text">Shopping Cart (0)</span>
                         </div>
-                        
-                        <div style="display: flex; gap: 1rem;">
-                                            <a href="/auth/auth.html" class="recomputech-btn-outline-primary" style="flex: 1; text-align: center;">Login</a>
-                <a href="/auth/auth.html" class="recomputech-btn-primary" style="flex: 1; text-align: center;">Register</a>
-                        </div>
+                        <a href="/auth/auth.html" class="recomputech-btn-primary" style="width: 100%; text-align: center;">Login & Register</a>
                     </div>
                 </div>
             </div>
@@ -1121,6 +1128,7 @@ class HeaderComponent extends HTMLElement {
         } else {
             this.cartItems.push({
                 ...product,
+                image: product.images[1],
                 quantity: 1
             });
         }
@@ -1274,13 +1282,18 @@ class HeaderComponent extends HTMLElement {
             this.showNotification('Your cart is empty', 'error');
             return;
         }
-        
-        // Here you can implement checkout logic
-        console.log('Proceeding to checkout with items:', this.cartItems);
-        this.showNotification('Redirecting to checkout...', 'success');
-        
-        // For demo purposes, you can redirect to a checkout page
-        // window.location.href = '/checkout.html';
+        // Guardar carrito en localStorage para el checkout
+        localStorage.setItem('cartItems', JSON.stringify(this.cartItems.map(item => ({
+            id: item.id,
+            name: item.name,
+            price: item.price,
+            image: item.image,
+            qty: item.quantity || 1
+        }))));
+        this.showNotification('Redirigiendo a checkout...', 'success');
+        setTimeout(() => {
+            window.location.href = '/pages/checkout.html';
+        }, 800);
     }
 
     showNotification(message, type = 'info') {
@@ -1320,52 +1333,115 @@ class HeaderComponent extends HTMLElement {
     }
 
     toggleTheme() {
-        const body = document.body;
-        const isDark = body.classList.contains('dark-mode');
-        const themeToggle = this.shadowRoot.getElementById('recomputech-theme-toggle');
-        const moonIcon = themeToggle?.querySelector('.moon-icon');
-        const sunIcon = themeToggle?.querySelector('.sun-icon');
-        
-        if (isDark) {
-            // Switch to light mode
-            body.classList.remove('dark-mode');
-            this.classList.remove('dark-mode');
-            localStorage.setItem('theme', 'light');
-            if (moonIcon) moonIcon.style.display = 'block';
-            if (sunIcon) sunIcon.style.display = 'none';
+        // Usar el DarkModeManager centralizado
+        if (window.darkModeManager) {
+            window.darkModeManager.toggleTheme();
         } else {
-            // Switch to dark mode
-            body.classList.add('dark-mode');
-            this.classList.add('dark-mode');
-            localStorage.setItem('theme', 'dark');
-            if (moonIcon) moonIcon.style.display = 'none';
-            if (sunIcon) sunIcon.style.display = 'block';
+            // Fallback si el DarkModeManager no está disponible
+            const body = document.body;
+            const isDark = body.classList.contains('dark-mode');
+            const themeToggle = this.shadowRoot.getElementById('recomputech-theme-toggle');
+            const moonIcon = themeToggle?.querySelector('.moon-icon');
+            const sunIcon = themeToggle?.querySelector('.sun-icon');
+            
+            if (isDark) {
+                // Switch to light mode
+                body.classList.remove('dark-mode');
+                this.classList.remove('dark-mode');
+                document.documentElement.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light');
+                if (moonIcon) moonIcon.style.display = 'block';
+                if (sunIcon) sunIcon.style.display = 'none';
+            } else {
+                // Switch to dark mode
+                body.classList.add('dark-mode');
+                this.classList.add('dark-mode');
+                document.documentElement.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark');
+                if (moonIcon) moonIcon.style.display = 'none';
+                if (sunIcon) sunIcon.style.display = 'block';
+            }
+            
+            console.log('Theme toggled:', isDark ? 'light' : 'dark');
         }
-        
-        console.log('Theme toggled:', isDark ? 'light' : 'dark');
     }
 
     initializeTheme() {
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        const body = document.body;
+        // Usar el DarkModeManager centralizado
+        if (window.darkModeManager) {
+            const currentTheme = window.darkModeManager.getCurrentTheme();
+            this.updateThemeIcons(currentTheme);
+            
+            // Aplicar tema inmediatamente al componente
+            this.classList.toggle('dark-mode', currentTheme === 'dark');
+            document.documentElement.classList.toggle('dark-mode', currentTheme === 'dark');
+            document.body.classList.toggle('dark-mode', currentTheme === 'dark');
+        } else {
+            // Fallback si el DarkModeManager no está disponible
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            const body = document.body;
+            const themeToggle = this.shadowRoot.getElementById('recomputech-theme-toggle');
+            const moonIcon = themeToggle?.querySelector('.moon-icon');
+            const sunIcon = themeToggle?.querySelector('.sun-icon');
+            
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                this.classList.add('dark-mode');
+                document.documentElement.classList.add('dark-mode');
+                if (moonIcon) moonIcon.style.display = 'none';
+                if (sunIcon) sunIcon.style.display = 'block';
+            } else {
+                body.classList.remove('dark-mode');
+                this.classList.remove('dark-mode');
+                document.documentElement.classList.remove('dark-mode');
+                if (moonIcon) moonIcon.style.display = 'block';
+                if (sunIcon) sunIcon.style.display = 'none';
+            }
+            
+            console.log('Theme initialized:', savedTheme);
+        }
+    }
+
+    updateThemeIcons(theme) {
         const themeToggle = this.shadowRoot.getElementById('recomputech-theme-toggle');
         const moonIcon = themeToggle?.querySelector('.moon-icon');
         const sunIcon = themeToggle?.querySelector('.sun-icon');
         
-        if (savedTheme === 'dark') {
-            body.classList.add('dark-mode');
-            this.classList.add('dark-mode');
-            if (moonIcon) moonIcon.style.display = 'none';
-            if (sunIcon) sunIcon.style.display = 'block';
-        } else {
-            body.classList.remove('dark-mode');
-            this.classList.remove('dark-mode');
-            if (moonIcon) moonIcon.style.display = 'block';
-            if (sunIcon) sunIcon.style.display = 'none';
+        if (moonIcon && sunIcon) {
+            if (theme === 'dark') {
+                moonIcon.style.display = 'none';
+                sunIcon.style.display = 'block';
+            } else {
+                moonIcon.style.display = 'block';
+                sunIcon.style.display = 'none';
+            }
         }
         
-        console.log('Theme initialized:', savedTheme);
+        // Actualizar clase del componente
+        this.classList.toggle('dark-mode', theme === 'dark');
+    }
+
+    setLogoPath() {
+        const logo = this.shadowRoot.getElementById('header-logo');
+        if (logo) {
+            // Use centralized logo path resolver
+            const logoPath = window.CONFIG ? window.CONFIG.getLogoPathForCurrentLocation() : this.getFallbackLogoPath();
+            logo.src = logoPath;
+        }
+    }
+    
+    getFallbackLogoPath() {
+        // Fallback method if CONFIG is not available
+        const isGitHubPages = window.location.hostname !== 'localhost' && 
+                             window.location.hostname !== '127.0.0.1' &&
+                             window.location.hostname.includes('github.io');
+        
+        if (isGitHubPages) {
+            return '/Recomputech/assets/logos/logo-.png';
+        } else {
+            return 'assets/logos/logo-.png';
+        }
     }
 }
 
-customElements.define('recomputech-header', HeaderComponent); 
+customElements.define('recomputech-header', HeaderComponent);

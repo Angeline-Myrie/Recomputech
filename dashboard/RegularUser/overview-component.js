@@ -2,12 +2,24 @@ class OverviewComponent extends HTMLElement {
     constructor() {
         super();
         this.userData = null;
+        this.stats = {
+            timeInProfile: 0,
+            totalPurchases: 0,
+            totalSales: 0,
+            techniciansContacted: 0,
+            totalSpent: 0,
+            totalEarned: 0,
+            activeListings: 0,
+            reviewsGiven: 0
+        };
     }
 
     connectedCallback() {
         this.loadUserData();
+        this.generateMockData();
         this.render();
         this.setupEventListeners();
+        this.initializeCharts();
     }
 
     loadUserData() {
@@ -17,184 +29,220 @@ class OverviewComponent extends HTMLElement {
         }
     }
 
+    generateMockData() {
+        // Generar datos simulados basados en el usuario
+        const userId = this.userData?.id || 1;
+        
+        // Tiempo en el perfil (días desde registro)
+        const registrationDate = new Date(2024, 0, 15); // 15 de enero 2024
+        const today = new Date();
+        this.stats.timeInProfile = Math.floor((today - registrationDate) / (1000 * 60 * 60 * 24));
+        
+        // Datos simulados basados en el ID del usuario
+        this.stats.totalPurchases = 12 + (userId * 3);
+        this.stats.totalSales = 8 + (userId * 2);
+        this.stats.techniciansContacted = 5 + userId;
+        this.stats.totalSpent = 1250.50 + (userId * 150);
+        this.stats.totalEarned = 890.75 + (userId * 100);
+        this.stats.activeListings = 3 + (userId % 3);
+        this.stats.reviewsGiven = 7 + (userId * 2);
+    }
+
     render() {
         this.innerHTML = `
             <!-- Welcome Section -->
             <section class="welcome-section" data-aos="fade-up">
                 <div class="welcome-header">
-                    <div class="welcome-text">
-                        <h1>Welcome back, <span id="userName">${this.userData?.name || 'User'}</span>! 👋</h1>
-                        <p>Here's what's happening with your account today</p>
+                    <!-- Animated background elements -->
+                    <div class="welcome-bg-elements" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none;">
+                        <div class="floating-circle" style="position: absolute; width: 120px; height: 120px; background: rgba(255,255,255,0.1); border-radius: 50%; top: 20%; left: 10%; animation: float 6s ease-in-out infinite;"></div>
+                        <div class="floating-circle" style="position: absolute; width: 80px; height: 80px; background: rgba(255,255,255,0.08); border-radius: 50%; top: 60%; right: 15%; animation: float 8s ease-in-out infinite reverse;"></div>
+                        <div class="floating-circle" style="position: absolute; width: 60px; height: 60px; background: rgba(255,255,255,0.06); border-radius: 50%; bottom: 20%; left: 20%; animation: float 7s ease-in-out infinite;"></div>
                     </div>
-                    <div class="welcome-actions">
-                        <button class="btn btn-light" onclick="window.location.href='/pages/marketplace.html'">
-                            <i class="fas fa-shopping-cart"></i>
-                            Browse Products
-                        </button>
+                    
+                    <!-- Main content -->
+                    <div class="welcome-content">
+                        <h1 data-aos="fade-down" data-aos-delay="100">
+                            Welcome
+                        </h1>
+                        <p data-aos="fade-in" data-aos-delay="300">
+                            Here is a summary of your activity on <span style="font-weight: 600; color: #fff;">Recomputech</span>
+                        </p>
+                        <div class="welcome-user" data-aos="fade-up" data-aos-delay="400">
+                            <span>
+                                ${this.userData?.name ? 'Hello, ' + this.userData.name + '! 👋' : 'Welcome back! 👋'}
+                            </span>
+                        </div>
+                        
+                        <!-- Animated stats preview -->
+                        <div class="welcome-stats-preview" data-aos="fade-up" data-aos-delay="500">
+                            <div class="stat-preview">
+                                <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.3rem;">${this.stats.totalPurchases}</div>
+                                <div style="font-size: 0.8rem; opacity: 0.8;">Purchases</div>
+                            </div>
+                            <div class="stat-preview">
+                                <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.3rem;">${this.stats.totalSales}</div>
+                                <div style="font-size: 0.8rem; opacity: 0.8;">Sales</div>
+                            </div>
+                            <div class="stat-preview">
+                                <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.3rem;">${this.stats.timeInProfile}</div>
+                                <div style="font-size: 0.8rem; opacity: 0.8;">Days</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Stats Cards -->
+            <!-- Stats Cards Single Row -->
             <section class="stats-section" data-aos="fade-up" data-aos-delay="100">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <div class="stat-card">
-                            <div class="stat-icon">
-                                <i class="fas fa-shopping-bag"></i>
-                            </div>
-                            <div class="stat-content">
-                                <h3 id="totalPurchases">0</h3>
-                                <p>Total Purchases</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <div class="stat-card">
-                            <div class="stat-icon">
-                                <i class="fas fa-box"></i>
-                            </div>
-                            <div class="stat-content">
-                                <h3 id="activeListings">0</h3>
-                                <p>Active Listings</p>
+                <div class="stats-row">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-3 col-md-6 col-12 mb-4">
+                            <div class="stat-card h-100">
+                                <div class="stat-header">
+                                    <h4>Time on Profile</h4>
+                                </div>
+                                <div class="stat-content">
+                                    <h3>${this.stats.timeInProfile}</h3>
+                                    <p>Days since registration</p>
+                                </div>
+                                <div class="stat-chart">
+                                    <canvas id="timeChart" width="200" height="100"></canvas>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <div class="stat-card">
-                            <div class="stat-icon">
-                                <i class="fas fa-star"></i>
-                            </div>
-                            <div class="stat-content">
-                                <h3 id="totalReviews">0</h3>
-                                <p>Reviews Given</p>
+                        <div class="col-lg-3 col-md-6 col-12 mb-4">
+                            <div class="stat-card h-100">
+                                <div class="stat-header">
+                                    <h4>Purchases Made</h4>
+                                </div>
+                                <div class="stat-content">
+                                    <h3>${this.stats.totalPurchases}</h3>
+                                    <p>Total purchases</p>
+                                </div>
+                                <div class="stat-chart">
+                                    <canvas id="purchasesChart" width="200" height="100"></canvas>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 mb-4">
-                        <div class="stat-card">
-                            <div class="stat-icon">
-                                <i class="fas fa-wallet"></i>
+                        <div class="col-lg-3 col-md-6 col-12 mb-4">
+                            <div class="stat-card h-100">
+                                <div class="stat-header">
+                                    <h4>Products Sold</h4>
+                                </div>
+                                <div class="stat-content">
+                                    <h3>${this.stats.totalSales}</h3>
+                                    <p>Total sales</p>
+                                </div>
+                                <div class="stat-chart">
+                                    <canvas id="salesChart" width="200" height="100"></canvas>
+                                </div>
                             </div>
-                            <div class="stat-content">
-                                <h3 id="totalSpent">B/. 0.00</h3>
-                                <p>Total Spent</p>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12 mb-4">
+                            <div class="stat-card h-100">
+                                <div class="stat-header">
+                                    <h4>Technicians Contacted</h4>
+                                </div>
+                                <div class="stat-content">
+                                    <h3>${this.stats.techniciansContacted}</h3>
+                                    <p>Services requested</p>
+                                </div>
+                                <div class="stat-chart">
+                                    <canvas id="techniciansChart" width="200" height="100"></canvas>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Recent Activity -->
-            <section class="activity-section" data-aos="fade-up" data-aos-delay="200">
+            <!-- Charts Section (solo actividad mensual) -->
+            <section class="charts-section" data-aos="fade-up" data-aos-delay="200">
                 <div class="row">
-                    <div class="col-lg-8 mb-4">
-                        <div class="activity-card">
-                            <div class="card-header">
-                                <h3><i class="fas fa-history"></i> Recent Activity</h3>
+                    <div class="col-lg-12 mb-4">
+                        <div class="chart-card">
+                            <div class="chart-header">
+                                <h4><i class="fas fa-chart-line"></i> Actividad Mensual</h4>
+                                <p>Análisis de compras y ventas por mes</p>
                             </div>
-                            <div class="card-body">
-                                <div class="activity-list" id="activityList">
-                                    <div class="activity-item">
-                                        <div class="activity-icon">
+                            <div class="chart-body">
+                                <canvas id="monthlyActivityChart" height="300"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Activity & Quick Actions Row -->
+            <div class="container-fluid">
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-12 mb-4">
+                        <section class="activity-section" data-aos="fade-up" data-aos-delay="250" style="height: 100%;">
+                            <div class="card activity-card h-100">
+                                <div class="card-header">
+                                    <h3><i class="fas fa-history"></i> Recent Activity</h3>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="activity-list" id="activityList">
+                                        <li class="activity-item">
+                                            <div class="activity-icon">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </div>
+                                            <div class="activity-content">
+                                                <h5>Purchase made</h5>
+                                                <p>You bought "HP Victus Gaming Laptop" for $850.00</p>
+                                                <span class="activity-time">2 days ago</span>
+                                            </div>
+                                        </li>
+                                        <li class="activity-item">
+                                            <div class="activity-icon">
+                                                <i class="fas fa-box"></i>
+                                            </div>
+                                            <div class="activity-content">
+                                                <h5>Product sold</h5>
+                                                <p>You sold "Refurbished Dell PC" for $450.00</p>
+                                                <span class="activity-time">5 days ago</span>
+                                            </div>
+                                        </li>
+                                        <li class="activity-item">
+                                            <div class="activity-icon">
+                                                <i class="fas fa-tools"></i>
+                                            </div>
+                                            <div class="activity-content">
+                                                <h5>Contacted technician</h5>
+                                                <p>You contacted María García for repair</p>
+                                                <span class="activity-time">1 week ago</span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                    <div class="col-lg-6 col-12 mb-4">
+                        <section class="quick-actions-section" data-aos="fade-up" data-aos-delay="300" style="height: 100%;">
+                            <div class="quick-actions-card h-100">
+                                <div class="card-header">
+                                    <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="quick-actions">
+                                        <button class="quick-action-btn" onclick="window.location.href='/dashboard/RegularUser/sell.html'">
+                                            <i class="fas fa-plus-circle"></i>
+                                            <span>Sell Product</span>
+                                        </button>
+                                        <button class="quick-action-btn" onclick="window.location.href='/dashboard/RegularUser/cart.html'">
                                             <i class="fas fa-shopping-cart"></i>
-                                        </div>
-                                        <div class="activity-content">
-                                            <h5>Welcome to Recomputech!</h5>
-                                            <p>Start exploring our marketplace for great deals on refurbished technology.</p>
-                                            <span class="activity-time">Just now</span>
-                                        </div>
+                                            <span>View Cart</span>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 mb-4">
-                        <div class="quick-actions-card">
-                            <div class="card-header">
-                                <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
-                            </div>
-                            <div class="card-body">
-                                <div class="quick-actions">
-                                    <button class="quick-action-btn" onclick="window.location.href='/dashboard/RegularUser/sell.html'">
-                                        <i class="fas fa-plus-circle"></i>
-                                        <span>Sell a Product</span>
-                                    </button>
-                                    <button class="quick-action-btn" onclick="window.location.href='/dashboard/RegularUser/cart.html'">
-                                        <i class="fas fa-shopping-cart"></i>
-                                        <span>View Cart</span>
-                                    </button>
-                                    <button class="quick-action-btn" onclick="window.location.href='/pages/marketplace.html'">
-                                        <i class="fas fa-search"></i>
-                                        <span>Browse Products</span>
-                                    </button>
-                                    <button class="quick-action-btn" onclick="window.location.href='/dashboard/RegularUser/settings.html'">
-                                        <i class="fas fa-cog"></i>
-                                        <span>Account Settings</span>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        </section>
                     </div>
                 </div>
-            </section>
-
-            <!-- Platform Guide -->
-            <section class="guide-section" data-aos="fade-up" data-aos-delay="300">
-                <div class="guide-card">
-                    <div class="card-header">
-                        <h3><i class="fas fa-graduation-cap"></i> Platform Guide</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <div class="guide-item">
-                                    <div class="guide-icon">
-                                        <i class="fas fa-shopping-cart"></i>
-                                    </div>
-                                    <div class="guide-content">
-                                        <h5>How to Buy</h5>
-                                        <p>Browse our marketplace, add items to cart, and complete your purchase securely.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <div class="guide-item">
-                                    <div class="guide-icon">
-                                        <i class="fas fa-plus-circle"></i>
-                                    </div>
-                                    <div class="guide-content">
-                                        <h5>How to Sell</h5>
-                                        <p>List your refurbished products with detailed descriptions and competitive pricing.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <div class="guide-item">
-                                    <div class="guide-icon">
-                                        <i class="fas fa-tools"></i>
-                                    </div>
-                                    <div class="guide-content">
-                                        <h5>Find Technicians</h5>
-                                        <p>Connect with certified technicians for repair and maintenance services.</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 mb-3">
-                                <div class="guide-item">
-                                    <div class="guide-icon">
-                                        <i class="fas fa-shield-alt"></i>
-                                    </div>
-                                    <div class="guide-content">
-                                        <h5>Quality Assurance</h5>
-                                        <p>All products are tested and certified for quality and performance.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            </div>
         `;
     }
 
@@ -202,24 +250,191 @@ class OverviewComponent extends HTMLElement {
         // Add any specific event listeners for overview
     }
 
+    initializeCharts() {
+        setTimeout(() => {
+            if (window.Chart) {
+                this.createMiniCharts();
+                this.createMonthlyActivityChart();
+            }
+        }, 500);
+    }
+
+    createMiniCharts() {
+        // Mini chart para tiempo en el perfil
+        const timeCtx = document.getElementById('timeChart');
+        if (timeCtx) {
+            new Chart(timeCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        data: [5, 10, 15, 20, 25, this.stats.timeInProfile],
+                        backgroundColor: '#218DA6', // azul principal
+                        borderRadius: 8,
+                        maxBarThickness: 18
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { display: false },
+                        y: { display: false }
+                    }
+                }
+            });
+        }
+        // Mini chart para compras realizadas
+        const purchasesCtx = document.getElementById('purchasesChart');
+        if (purchasesCtx) {
+            new Chart(purchasesCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        data: [2, 4, 6, 8, 10, this.stats.totalPurchases],
+                        backgroundColor: '#1b6e82', // azul secundario
+                        borderRadius: 8,
+                        maxBarThickness: 18
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { display: false },
+                        y: { display: false }
+                    }
+                }
+            });
+        }
+        // Mini chart para productos vendidos
+        const salesCtx = document.getElementById('salesChart');
+        if (salesCtx) {
+            new Chart(salesCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        data: [1, 3, 5, 7, 9, this.stats.totalSales],
+                        backgroundColor: '#155a6b', // acento
+                        borderRadius: 8,
+                        maxBarThickness: 18
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { display: false },
+                        y: { display: false }
+                    }
+                }
+            });
+        }
+        // Mini chart para técnicos contactados
+        const techniciansCtx = document.getElementById('techniciansChart');
+        if (techniciansCtx) {
+            new Chart(techniciansCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+                    datasets: [{
+                        data: [1, 2, 3, 4, 5, this.stats.techniciansContacted],
+                        backgroundColor: '#218DA6', // azul principal (repetido para consistencia)
+                        borderRadius: 8,
+                        maxBarThickness: 18
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { display: false },
+                        y: { display: false }
+                    }
+                }
+            });
+        }
+    }
+
+    createMonthlyActivityChart() {
+        const ctx = document.getElementById('monthlyActivityChart');
+        if (ctx) {
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
+                    datasets: [{
+                        label: 'Purchases',
+                        data: [3, 5, 2, 8, 4, 6],
+                        backgroundColor: 'rgba(33, 141, 166, 0.7)', // azul principal
+                        borderColor: '#218DA6',
+                        borderWidth: 1
+                    }, {
+                        label: 'Sales',
+                        data: [2, 3, 4, 5, 6, 7],
+                        backgroundColor: 'rgba(27, 110, 130, 0.7)', // azul secundario
+                        borderColor: '#1b6e82',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                usePointStyle: true,
+                                padding: 20
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: {
+                                color: 'rgba(0,0,0,0.1)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    }
+
     updateStats(stats) {
         if (stats.purchases !== undefined) {
+            this.stats.totalPurchases = stats.purchases;
             this.querySelector('#totalPurchases').textContent = stats.purchases;
         }
         if (stats.listings !== undefined) {
+            this.stats.activeListings = stats.listings;
             this.querySelector('#activeListings').textContent = stats.listings;
         }
         if (stats.reviews !== undefined) {
+            this.stats.reviewsGiven = stats.reviews;
             this.querySelector('#totalReviews').textContent = stats.reviews;
         }
         if (stats.spent !== undefined) {
+            this.stats.totalSpent = stats.spent;
             this.querySelector('#totalSpent').textContent = `B/. ${stats.spent.toFixed(2)}`;
         }
     }
 
     addActivity(activity) {
         const activityList = this.querySelector('#activityList');
-        const activityItem = document.createElement('div');
+        const activityItem = document.createElement('li');
         activityItem.className = 'activity-item';
         activityItem.innerHTML = `
             <div class="activity-icon">

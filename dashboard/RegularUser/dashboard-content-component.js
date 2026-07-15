@@ -3,6 +3,7 @@ class DashboardContentComponent extends HTMLElement {
         super();
         this.currentSection = 'overview';
         this.userData = null;
+        this.externalPageUrl = null;
     }
 
     connectedCallback() {
@@ -47,28 +48,26 @@ class DashboardContentComponent extends HTMLElement {
     }
 
     isValidSection(section) {
-        const validSections = ['overview', 'sell', 'purchases', 'my-products', 'cart', 'settings'];
+        const validSections = ['overview', 'my-products', 'add-product', 'purchases', 'settings'];
         return validSections.includes(section);
     }
 
     loadSection() {
+        // Ensure dashboard UI is restored when leaving external pages
+        this.cleanupExternalPageUI();
         console.log('Loading section:', this.currentSection);
-        
         switch (this.currentSection) {
             case 'overview':
                 this.loadOverview();
                 break;
-            case 'sell':
-                this.loadSell();
-                break;
-            case 'purchases':
-                this.loadPurchases();
-                break;
             case 'my-products':
                 this.loadMyProducts();
                 break;
-            case 'cart':
-                this.loadCart();
+            case 'add-product':
+                this.loadSell(); // Reutiliza el formulario de venta
+                break;
+            case 'purchases':
+                this.loadPurchases();
                 break;
             case 'settings':
                 this.loadSettings();
@@ -79,119 +78,7 @@ class DashboardContentComponent extends HTMLElement {
     }
 
     loadOverview() {
-        this.innerHTML = `
-            <div class="dashboard-section" data-aos="fade-up">
-                <!-- Welcome Section -->
-                <section class="section-header">
-                    <div class="header-content">
-                        <h1>Welcome back, <span id="userName">${this.userData?.name || 'User'}</span>! 👋</h1>
-                        <p>Here's what's happening with your account today</p>
-                    </div>
-                </section>
-
-                <div class="content-container">
-                    <!-- Stats Cards -->
-                    <div class="row" data-aos="fade-up" data-aos-delay="100">
-                        <div class="col-lg-3 col-md-6 mb-4">
-                            <div class="stat-card">
-                                <div class="stat-icon">
-                                    <i class="fas fa-shopping-bag"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <h3 id="totalPurchases">0</h3>
-                                    <p>Total Purchases</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 mb-4">
-                            <div class="stat-card">
-                                <div class="stat-icon">
-                                    <i class="fas fa-box"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <h3 id="activeListings">0</h3>
-                                    <p>Active Listings</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 mb-4">
-                            <div class="stat-card">
-                                <div class="stat-icon">
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <h3 id="totalReviews">0</h3>
-                                    <p>Reviews Given</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6 mb-4">
-                            <div class="stat-card">
-                                <div class="stat-icon">
-                                    <i class="fas fa-wallet"></i>
-                                </div>
-                                <div class="stat-content">
-                                    <h3 id="totalSpent">B/. 0.00</h3>
-                                    <p>Total Spent</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Recent Activity -->
-                    <div class="row" data-aos="fade-up" data-aos-delay="200">
-                        <div class="col-lg-8 mb-4">
-                            <div class="dashboard-card">
-                                <div class="card-header">
-                                    <h3><i class="fas fa-history"></i> Recent Activity</h3>
-                                </div>
-                                <div class="card-body">
-                                    <div class="activity-list" id="activityList">
-                                        <div class="activity-item">
-                                            <div class="activity-icon">
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </div>
-                                            <div class="activity-content">
-                                                <h5>Welcome to Recomputech!</h5>
-                                                <p>Start exploring our marketplace for great deals on refurbished technology.</p>
-                                                <span class="activity-time">Just now</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 mb-4">
-                            <div class="dashboard-card">
-                                <div class="card-header">
-                                    <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
-                                </div>
-                                <div class="card-body">
-                                    <div class="quick-actions">
-                                        <button class="quick-action-btn" data-section="sell">
-                                            <i class="fas fa-plus-circle"></i>
-                                            <span>Sell a Product</span>
-                                        </button>
-                                        <button class="quick-action-btn" data-section="cart">
-                                            <i class="fas fa-shopping-cart"></i>
-                                            <span>View Cart</span>
-                                        </button>
-                                        <button class="quick-action-btn" onclick="window.location.href='/pages/marketplace.html'">
-                                            <i class="fas fa-search"></i>
-                                            <span>Browse Products</span>
-                                        </button>
-                                        <button class="quick-action-btn" data-section="settings">
-                                            <i class="fas fa-cog"></i>
-                                            <span>Account Settings</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
+        this.innerHTML = `<overview-component></overview-component>`;
     }
 
     loadSell() {
@@ -315,73 +202,11 @@ class DashboardContentComponent extends HTMLElement {
     }
 
     loadPurchases() {
-        this.innerHTML = `
-            <div class="dashboard-section" data-aos="fade-up">
-                <!-- Section Header -->
-                <section class="section-header">
-                    <div class="header-content">
-                        <h1>My Purchases</h1>
-                        <p>Track your orders and purchase history</p>
-                    </div>
-                </section>
-
-                <div class="content-container">
-                    <div class="dashboard-card">
-                        <div class="card-header">
-                            <h3><i class="fas fa-shopping-bag"></i> Purchase History</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="purchase-list" id="purchaseList">
-                                <div class="activity-item">
-                                    <div class="activity-icon">
-                                        <i class="fas fa-box"></i>
-                                    </div>
-                                    <div class="activity-content">
-                                        <h5>No purchases yet</h5>
-                                        <p>Start shopping to see your purchase history here</p>
-                                        <span class="activity-time">Ready to shop</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
+        this.innerHTML = `<my-purchases-component></my-purchases-component>`;
     }
 
     loadMyProducts() {
-        this.innerHTML = `
-            <div class="dashboard-section" data-aos="fade-up">
-                <!-- Section Header -->
-                <section class="section-header">
-                    <div class="header-content">
-                        <h1>My Products</h1>
-                        <p>Manage your listed products and track their performance</p>
-                    </div>
-                </section>
-
-                <div class="content-container">
-                    <div class="dashboard-card">
-                        <div class="card-header">
-                            <h3><i class="fas fa-box"></i> Listed Products</h3>
-                        </div>
-                        <div class="card-body">
-                            <div class="product-grid" id="myProductsGrid">
-                                <div class="text-center py-5">
-                                    <i class="fas fa-box-open fa-3x text-muted mb-3"></i>
-                                    <h5 class="text-muted">No products listed yet</h5>
-                                    <p class="text-muted">Start selling to see your products here</p>
-                                    <button class="btn btn-primary" data-section="sell">
-                                        <i class="fas fa-plus-circle"></i> List Your First Product
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
+        this.innerHTML = `<my-products-component></my-products-component>`;
     }
 
     loadCart() {
@@ -489,6 +314,51 @@ class DashboardContentComponent extends HTMLElement {
                 </div>
             </div>
         `;
+    }
+
+    loadExternalPage(url) {
+        this.externalPageUrl = url;
+        if (url) {
+            // Hide dashboard footer and prevent double scrollbars on parent
+            const dashboardFooter = document.querySelector('recomputech-footer');
+            if (dashboardFooter) dashboardFooter.style.display = 'none';
+            document.documentElement.style.overflowY = 'hidden';
+            document.body.style.overflowY = 'hidden';
+
+            // Render iframe with responsive height (fills viewport under header)
+            this.innerHTML = `
+                <iframe id="external-page-frame" src="${url}" style="width:100%;border:none;display:block;"></iframe>
+            `;
+
+            const adjustIframeHeight = () => {
+                const header = document.querySelector('recomputech-header-auth') || document.querySelector('recomputech-header');
+                const headerHeight = header ? header.getBoundingClientRect().height : 0;
+                const iframe = this.querySelector('#external-page-frame');
+                if (iframe) {
+                    iframe.style.height = Math.max(0, window.innerHeight - headerHeight) + 'px';
+                }
+            };
+
+            // Initial adjust and on resize
+            adjustIframeHeight();
+            window.addEventListener('resize', adjustIframeHeight, { passive: true });
+            // Store handler for cleanup
+            this._adjustIframeHeightHandler = adjustIframeHeight;
+        } else {
+            this.loadSection();
+        }
+    }
+
+    cleanupExternalPageUI() {
+        // Restore footer and scrolling if previously modified
+        const dashboardFooter = document.querySelector('recomputech-footer');
+        if (dashboardFooter) dashboardFooter.style.display = '';
+        document.documentElement.style.overflowY = '';
+        document.body.style.overflowY = '';
+        if (this._adjustIframeHeightHandler) {
+            window.removeEventListener('resize', this._adjustIframeHeightHandler);
+            this._adjustIframeHeightHandler = null;
+        }
     }
 
     setupEventListeners() {
