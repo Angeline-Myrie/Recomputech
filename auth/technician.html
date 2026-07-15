@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technician Portal - Recomputech</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body class="auth-body technician-auth-body">
+    <div class="auth-back">
+        <a href="../index.html" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+    </div>
+
+    <div class="auth-container technician-auth-container">
+        <div class="auth-card technician-auth-card">
+            <div class="auth-header">
+                <div class="auth-logo technician-logo">
+                    <i class="fas fa-tools"></i>
+                </div>
+                <h1 id="authTitle">Technician Sign In</h1>
+                <p id="authSubtitle">Access your technician dashboard</p>
+            </div>
+
+            <div class="auth-toggle">
+                <button class="toggle-btn active" data-mode="login">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Sign In
+                </button>
+                <button class="toggle-btn" data-mode="register">
+                    <i class="fas fa-user-plus"></i>
+                    Sign Up
+                </button>
+            </div>
+
+            <!-- Technician Login -->
+            <form class="auth-form" id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email address</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                        <input type="email" id="loginEmail" class="form-control" placeholder="you@email.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <div class="input-group">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required>
+                        <button type="button" class="btn btn-outline-secondary toggle-password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="remember">
+                        <label class="form-check-label" for="remember">Remember me</label>
+                    </div>
+                    <a href="forgot-password.html" class="forgot-link">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 auth-submit-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Sign In as Technician
+                </button>
+
+                <p class="auth-switch-link text-center mt-3">
+                    Not a technician? <a href="auth.html">Sign in as a regular user</a>
+                </p>
+            </form>
+
+            <!-- Technician Registration -->
+            <form class="auth-form" id="registerForm" style="display: none;">
+                <div class="technician-form-intro">
+                    <i class="fas fa-id-card"></i>
+                    <p>Build your professional technician profile. This information helps customers find and trust your expertise.</p>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="form-section-title"><i class="fas fa-user"></i> Account Information</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    <input type="text" id="firstName" class="form-control" placeholder="First name" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    <input type="text" id="lastName" class="form-control" placeholder="Last name" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerEmail">Email address</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            <input type="email" id="registerEmail" class="form-control" placeholder="you@email.com" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="registerPassword">Password</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                    <input type="password" id="registerPassword" class="form-control" placeholder="••••••••" required>
+                                    <button type="button" class="btn btn-outline-secondary toggle-password">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                                <small class="password-hint">Minimum 8 characters with uppercase, lowercase, and numbers</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="confirmPassword">Confirm Password</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                    <input type="password" id="confirmPassword" class="form-control" placeholder="••••••••" required>
+                                    <button type="button" class="btn btn-outline-secondary toggle-password">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="form-section-title"><i class="fas fa-camera"></i> Profile Photo</h3>
+                    <div class="form-group">
+                        <label for="profilePhoto">Upload a professional photo</label>
+                        <input type="file" id="profilePhoto" class="form-control file-input" accept="image/*">
+                        <div id="profilePhotoPreview" class="photo-preview" hidden>
+                            <img id="profilePhotoImg" alt="Profile preview">
+                            <button type="button" class="btn btn-sm btn-outline-danger" id="removeProfilePhoto">
+                                <i class="fas fa-times"></i> Remove
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="form-section-title"><i class="fas fa-certificate"></i> Certifications</h3>
+                    <div class="form-group">
+                        <label for="certifications">Certification names</label>
+                        <input type="text" id="certifications" class="form-control" placeholder="e.g. CompTIA A+, Apple Certified, Dell Certified">
+                        <small class="password-hint">Separate multiple certifications with commas</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="certificationPhotos">Photos of certifications</label>
+                        <input type="file" id="certificationPhotos" class="form-control file-input" accept="image/*" multiple>
+                        <div id="certificationPhotosPreview" class="photo-preview-grid"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="experienceDescription">Certifications &amp; experience description</label>
+                        <textarea id="experienceDescription" class="form-control" rows="4" placeholder="Describe your certifications, training, and professional experience..." required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="form-section-title"><i class="fas fa-microchip"></i> Technologies You Work With</h3>
+                    <div class="checkbox-grid" id="technologiesGrid">
+                        <label class="checkbox-chip"><input type="checkbox" name="technologies" value="Laptop Repair"> Laptop Repair</label>
+                        <label class="checkbox-chip"><input type="checkbox" name="technologies" value="Desktop PCs"> Desktop PCs</label>
+                        <label class="checkbox-chip"><input type="checkbox" name="technologies" value="Hardware Upgrades"> Hardware Upgrades</label>
+                        <label class="checkbox-chip"><input type="checkbox" name="technologies" value="System Optimization"> System Optimization</label>
+                        <label class="checkbox-chip"><input type="checkbox" name="technologies" value="Virus Removal"> Virus Removal</label>
+                        <label class="checkbox-chip"><input type="checkbox" name="technologies" value="OS Installation"> OS Installation</label>
+                        <label class="checkbox-chip"><input type="checkbox" name="technologies" value="Data Recovery"> Data Recovery</label>
+                        <label class="checkbox-chip"><input type="checkbox" name="technologies" value="Network Setup"> Network Setup</label>
+                        <label class="checkbox-chip"><input type="checkbox" name="technologies" value="WiFi Configuration"> WiFi Configuration</label>
+                        <label class="checkbox-chip"><input type="checkbox" name="technologies" value="Security Audits"> Security Audits</label>
+                        <label class="checkbox-chip"><input type="checkbox" name="technologies" value="Mobile Device Repair"> Mobile Device Repair</label>
+                        <label class="checkbox-chip"><input type="checkbox" name="technologies" value="Screen Replacement"> Screen Replacement</label>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="form-section-title"><i class="fas fa-box"></i> Products You Work With</h3>
+                    <div class="checkbox-grid" id="productsGrid">
+                        <label class="checkbox-chip"><input type="checkbox" name="products" value="PCs Refurbished"> PCs Refurbished</label>
+                        <label class="checkbox-chip"><input type="checkbox" name="products" value="Smartphones Refurbished"> Smartphones Refurbished</label>
+                        <label class="checkbox-chip"><input type="checkbox" name="products" value="Tablets"> Tablets</label>
+                        <label class="checkbox-chip"><input type="checkbox" name="products" value="Mini PCs"> Mini PCs</label>
+                        <label class="checkbox-chip"><input type="checkbox" name="products" value="Laptops"> Laptops</label>
+                        <label class="checkbox-chip"><input type="checkbox" name="products" value="Monitors"> Monitors</label>
+                        <label class="checkbox-chip"><input type="checkbox" name="products" value="Components"> Components</label>
+                        <label class="checkbox-chip"><input type="checkbox" name="products" value="Peripherals"> Peripherals</label>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3 class="form-section-title"><i class="fas fa-briefcase"></i> Professional Details</h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="specialty">Primary specialty</label>
+                                <input type="text" id="specialty" class="form-control" placeholder="e.g. Hardware Repair Specialist" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="experienceYears">Years of experience</label>
+                                <input type="number" id="experienceYears" class="form-control" min="0" max="50" placeholder="5" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="location">Location</label>
+                                <input type="text" id="location" class="form-control" placeholder="City, Country" required>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="hourlyRate">Hourly rate (USD, optional)</label>
+                                <input type="number" id="hourlyRate" class="form-control" min="0" step="1" placeholder="35">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="languages">Languages spoken</label>
+                        <input type="text" id="languages" class="form-control" placeholder="e.g. English, Spanish">
+                    </div>
+                    <div class="form-group">
+                        <label for="availability">Availability</label>
+                        <input type="text" id="availability" class="form-control" placeholder="e.g. Mon-Fri 9AM-6PM">
+                    </div>
+                    <div class="form-group">
+                        <label for="professionalInfo">Additional professional information</label>
+                        <textarea id="professionalInfo" class="form-control" rows="3" placeholder="Any other relevant details about your services, tools, or work preferences..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="agreeTerms" required>
+                        <label class="form-check-label" for="agreeTerms">
+                            I agree to the <a href="#" class="text-primary">Terms of Service</a> and confirm that my certification information is accurate
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary w-100 auth-submit-btn">
+                    <i class="fas fa-tools"></i>
+                    Create Technician Profile
+                </button>
+
+                <p class="auth-switch-link text-center mt-3">
+                    Looking for a regular account? <a href="auth.html">Register as a user</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="technician.js"></script>
+    <script src="../js/theme.js"></script>
+</body>
+</html>

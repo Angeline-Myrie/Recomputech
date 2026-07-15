@@ -168,6 +168,11 @@ document.addEventListener('DOMContentLoaded', async function() {
 
             // Store selected type
             localStorage.setItem('selectedUserType', type);
+
+            // Redirect to dedicated technician registration page
+            if (type === 'technician') {
+                window.location.href = 'technician.html?mode=register';
+            }
         });
     });
 
