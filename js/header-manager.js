@@ -5,6 +5,11 @@ class HeaderManager {
     }
 
     init() {
+        if (this.isEmbeddedInDashboard()) {
+            this.applyEmbeddedDashboardMode();
+            return;
+        }
+
         // Check authentication status on page load
         this.checkAuthStatus();
         
@@ -19,6 +24,38 @@ class HeaderManager {
         document.addEventListener('logout', () => {
             this.handleLogout();
         });
+    }
+
+    isEmbeddedInDashboard() {
+        return window.self !== window.top;
+    }
+
+    applyEmbeddedDashboardMode() {
+        const hideChrome = () => {
+            const headerContainer = document.getElementById('headerContainer');
+            if (headerContainer) {
+                headerContainer.style.display = 'none';
+                headerContainer.innerHTML = '';
+            }
+
+            document.querySelectorAll(
+                'recomputech-header, recomputech-header-auth, recomputech-header-auth-technician, header'
+            ).forEach(el => {
+                el.style.display = 'none';
+            });
+
+            const footer = document.querySelector('recomputech-footer');
+            if (footer) footer.style.display = 'none';
+
+            document.documentElement.classList.add('dashboard-embedded');
+            document.body?.classList.add('dashboard-embedded');
+        };
+
+        hideChrome();
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', hideChrome);
+        }
     }
 
     checkAuthStatus() {

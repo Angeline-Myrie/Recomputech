@@ -49,6 +49,7 @@ class RecomputechHeaderAuthTechnician extends HTMLElement {
                     align-items: center;
                     text-decoration: none;
                     color: inherit;
+                    justify-self: start;
                 }
                 .recomputech-logo {
                     width: 48px;
@@ -116,6 +117,9 @@ class RecomputechHeaderAuthTechnician extends HTMLElement {
                     display: flex;
                     align-items: center;
                     gap: 1rem;
+                    justify-content: flex-end;
+                    margin-left: auto;
+                    grid-column: 3;
                 }
                 .recomputech-btn-icon {
                     background: none;
@@ -198,9 +202,11 @@ class RecomputechHeaderAuthTechnician extends HTMLElement {
 
                 /* User Section Styles */
                 .user-section {
-                    position: relative;
-                    display: flex;
+                   display: flex;
                     align-items: center;
+                    gap: 1rem;
+                    position: relative;
+                    margin-left: auto;
                 }
 
                 .user-info {
@@ -353,12 +359,6 @@ class RecomputechHeaderAuthTechnician extends HTMLElement {
                                 <span class="recomputech-brand-tagline">Sustainable Technology</span>
                             </div>
                         </a>
-                        <!-- Navigation Section -->
-                        <ul class="recomputech-navbar-nav">
-                            <li><a class="recomputech-nav-link" href="/dashboard/Technician/dashboard-technician.html">Dashboard</a></li>
-                            <li><a class="recomputech-nav-link" href="/pages/marketplace.html">Marketplace</a></li>
-                            <li><a class="recomputech-nav-link" href="/pages/contact.html">Contact</a></li>
-                        </ul>
                         <!-- Actions Section -->
                         <div class="recomputech-header-actions">
                             <!-- Theme Toggle -->

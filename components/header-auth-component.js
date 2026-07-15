@@ -51,6 +51,10 @@ class RecomputechHeaderAuth extends HTMLElement {
                     padding-right: 60px;
                 }
 
+                .recomputech-navbar-brand {
+                    justify-self: start;
+                }
+
                 /* Logo Section */
                 .recomputech-navbar-brand {
                     display: flex;
@@ -103,7 +107,7 @@ class RecomputechHeaderAuth extends HTMLElement {
                     list-style: none;
                     margin: 0;
                     padding: 0;
-                    gap: 2rem;
+                    gap: 1.25rem;
                 }
 
                 .recomputech-nav-link {
@@ -133,11 +137,143 @@ class RecomputechHeaderAuth extends HTMLElement {
                     border-radius: 1px;
                 }
 
+                .recomputech-nav-link-btn {
+                    padding: 6px 14px;
+                    border: 1px solid #218DA6;
+                    border-radius: 0.375rem;
+                    color: #218DA6;
+                    white-space: nowrap;
+                }
+
+                .recomputech-nav-link-btn:hover {
+                    background: #218DA6;
+                    color: #fff;
+                }
+
+                .recomputech-nav-link-btn.active {
+                    background: #218DA6;
+                    color: #fff;
+                }
+
+                .recomputech-nav-link-btn.active::after {
+                    display: none;
+                }
+
+                .recomputech-nav-link-btn i {
+                    margin-right: 0.35rem;
+                }
+
+                /* Mobile Menu Overlay */
+                .recomputech-mobile-menu {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0, 0, 0, 0.5);
+                    z-index: 1040;
+                    display: none;
+                    opacity: 0;
+                    transition: opacity 0.3s ease;
+                }
+
+                .recomputech-mobile-menu.show {
+                    display: block;
+                    opacity: 1;
+                }
+
+                .recomputech-mobile-menu-content {
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    width: 300px;
+                    height: 100vh;
+                    background: #fff;
+                    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+                    transform: translateX(100%);
+                    transition: transform 0.3s ease;
+                    padding: 2rem 1.5rem;
+                    overflow-y: auto;
+                }
+
+                :host(.dark-mode) .recomputech-mobile-menu-content {
+                    background: #1f2937;
+                }
+
+                .recomputech-mobile-menu.show .recomputech-mobile-menu-content {
+                    transform: translateX(0);
+                }
+
+                .recomputech-mobile-menu-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 2rem;
+                    padding-bottom: 1rem;
+                    border-bottom: 1px solid #e5e7eb;
+                }
+
+                :host(.dark-mode) .recomputech-mobile-menu-header {
+                    border-bottom-color: #374151;
+                }
+
+                .recomputech-mobile-close {
+                    background: none;
+                    border: none;
+                    color: #666;
+                    cursor: pointer;
+                    padding: 0.5rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                .recomputech-mobile-close svg {
+                    width: 24px;
+                    height: 24px;
+                    fill: currentColor;
+                }
+
+                .recomputech-mobile-nav {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                }
+
+                .recomputech-mobile-nav li {
+                    margin-bottom: 0.5rem;
+                }
+
+                .recomputech-mobile-nav a {
+                    display: block;
+                    padding: 1rem;
+                    color: #1f2937;
+                    text-decoration: none;
+                    border-radius: 0.375rem;
+                    font-weight: 500;
+                }
+
+                :host(.dark-mode) .recomputech-mobile-nav a {
+                    color: #e5e7eb;
+                }
+
+                .recomputech-mobile-nav a:hover {
+                    background: #f3f4f6;
+                    color: #218DA6;
+                }
+
+                :host(.dark-mode) .recomputech-mobile-nav a:hover {
+                    background: #374151;
+                }
+
                 /* Actions Section */
                 .recomputech-header-actions {
                     display: flex;
                     align-items: center;
                     gap: 1rem;
+                    justify-content: flex-end;
+                    margin-left: auto;
+                    grid-column: 3;
                 }
 
                 /* Theme Toggle Button */
@@ -566,6 +702,7 @@ class RecomputechHeaderAuth extends HTMLElement {
                     align-items: center;
                     gap: 1rem;
                     position: relative;
+                    margin-left: auto;
                 }
 
                 .user-info {
@@ -816,7 +953,7 @@ class RecomputechHeaderAuth extends HTMLElement {
                 <div class="container">
                     <div class="recomputech-navbar-container">
                         <!-- Logo Section -->
-                        <a class="recomputech-navbar-brand" href="index.html">
+                        <a class="recomputech-navbar-brand" href="#" id="header-logo-link">
                             <img src="/assets/logos/logo-.png" alt="Logo" class="recomputech-logo recomputech-logo-small" id="header-logo">
                             <div class="recomputech-brand-text">
                                 <span class="recomputech-brand-name">Recomputech</span>
@@ -824,27 +961,8 @@ class RecomputechHeaderAuth extends HTMLElement {
                             </div>
                         </a>
 
-                        <!-- Navigation Section -->
-                        <ul class="recomputech-navbar-nav">
-                            <li><a class="recomputech-nav-link" href="#" data-url="/pages/market-user.html">Marketplace</a></li>
-                            <li><a class="recomputech-nav-link" href="#" data-url="/pages/contact.html">Contact</a></li>
-                            <li><a class="recomputech-nav-link" href="#" data-url="/pages/Aboutus.html">About Us</a></li>
-                            <li><a class="recomputech-nav-link" href="#" data-url="/pages/services.html">Services</a></li>
-
-                        </ul>
-
                         <!-- Actions Section -->
                         <div class="recomputech-header-actions">
-                            <!-- Theme Toggle -->
-                            <button class="recomputech-btn-icon" id="recomputech-theme-toggle" title="Toggle dark mode">
-                                <svg class="moon-icon" viewBox="0 0 24 24">
-                                    <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"/>
-                                </svg>
-                                <svg class="sun-icon" viewBox="0 0 24 24" style="display: none;">
-                                    <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
-                                </svg>
-                            </button>
-
                             <!-- User Section -->
                             <div class="user-section">
                                 <div class="user-info" id="userInfo">
@@ -887,6 +1005,16 @@ class RecomputechHeaderAuth extends HTMLElement {
                                 </div>
                             </div>
 
+                            <!-- Theme Toggle -->
+                            <button class="recomputech-btn-icon" id="recomputech-theme-toggle" title="Toggle dark mode">
+                                <svg class="moon-icon" viewBox="0 0 24 24">
+                                    <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"/>
+                                </svg>
+                                <svg class="sun-icon" viewBox="0 0 24 24" style="display: none;">
+                                    <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                                </svg>
+                            </button>
+
                             <!-- Cart Icon -->
                             <button class="recomputech-cart-icon" id="recomputech-cart-icon" title="Shopping Cart">
                                 <svg viewBox="0 0 24 24">
@@ -905,6 +1033,27 @@ class RecomputechHeaderAuth extends HTMLElement {
                     </div>
                 </div>
             </nav>
+
+            <!-- Mobile Menu -->
+            <div class="recomputech-mobile-menu" id="recomputech-mobile-menu">
+                <div class="recomputech-mobile-menu-content">
+                    <div class="recomputech-mobile-menu-header">
+                        <h3>Menu</h3>
+                        <button class="recomputech-mobile-close" id="recomputech-mobile-close">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M6.225 4.811a1 1 0 00-1.414 1.414L10.586 12 4.81 17.775a1 1 0 101.414 1.414L12 13.414l5.775 5.775a1 1 0 001.414-1.414L13.414 12l5.775-5.775a1 1 0 00-1.414-1.414L12 10.586 6.225 4.81z"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <ul class="recomputech-mobile-nav">
+                        <li><a href="#" data-url="/pages/market-user.html">Marketplace</a></li>
+                        <li><a href="#" data-url="/pages/contact.html">Contact</a></li>
+                        <li><a href="#" data-url="/pages/Aboutus.html">About Us</a></li>
+                        <li><a href="#" data-url="/pages/services.html">Services</a></li>
+                        <li><a href="#" data-url="/pages/technician/info-technician.html"><i class="fas fa-tools"></i> Technicians</a></li>
+                    </ul>
+                </div>
+            </div>
 
             <!-- Cart Sidebar -->
             <div class="recomputech-cart-overlay" id="recomputech-cart-overlay"></div>
@@ -968,6 +1117,9 @@ class RecomputechHeaderAuth extends HTMLElement {
         const cartBadge = this.shadowRoot.getElementById('recomputech-cart-badge');
         const themeToggle = this.shadowRoot.getElementById('recomputech-theme-toggle');
         const mobileToggle = this.shadowRoot.getElementById('recomputech-navbar-toggler');
+        const mobileMenu = this.shadowRoot.getElementById('recomputech-mobile-menu');
+        const mobileClose = this.shadowRoot.getElementById('recomputech-mobile-close');
+        const logoLink = this.shadowRoot.getElementById('header-logo-link');
         const userInfo = this.shadowRoot.getElementById('userInfo');
         const dropdownMenu = this.shadowRoot.getElementById('dropdownMenu');
         const logoutBtn = this.shadowRoot.getElementById('logoutBtn');
@@ -1017,6 +1169,24 @@ class RecomputechHeaderAuth extends HTMLElement {
             this.openMobileMenu();
         });
 
+        mobileClose?.addEventListener('click', () => {
+            this.closeMobileMenu();
+        });
+
+        mobileMenu?.addEventListener('click', (e) => {
+            if (e.target === mobileMenu) {
+                this.closeMobileMenu();
+            }
+        });
+
+        logoLink?.addEventListener('click', (e) => {
+            if (this.isInRegularUserDashboard()) {
+                e.preventDefault();
+                this.setActiveNavLink(null);
+                document.dispatchEvent(new CustomEvent('dashboard-navigate', { detail: { section: 'overview' } }));
+            }
+        });
+
         // User dropdown functionality
         userInfo?.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -1042,19 +1212,14 @@ class RecomputechHeaderAuth extends HTMLElement {
         // Set active nav link based on current page
         this.setActiveNavLink();
 
-
-        // Navigation links (main bar and dropdown)
-        const navLinks = this.shadowRoot.querySelectorAll('.recomputech-nav-link');
-        navLinks.forEach(link => {
+        // Navigation links (main bar, mobile menu, and dropdown)
+        this.shadowRoot.querySelectorAll('[data-url]').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const url = link.getAttribute('data-url');
                 if (url) {
-                    // Busca el iframe en el dashboard-content-component y cambia su src
-                    const dashboardContent = document.querySelector('dashboard-content-component');
-                    if (dashboardContent) {
-                        dashboardContent.loadExternalPage(url);
-                    }
+                    this.navigateExternalPage(url);
+                    this.closeMobileMenu();
                 }
             });
         });
@@ -1066,12 +1231,44 @@ class RecomputechHeaderAuth extends HTMLElement {
                 const section = link.getAttribute('data-section');
                 if (section) {
                     dropdownMenu.classList.remove('show');
-                    // Disparar evento personalizado para navegación interna
+                    this.setActiveNavLink(null);
                     document.dispatchEvent(new CustomEvent('dashboard-navigate', { detail: { section } }));
                 }
             });
         });
- main
+
+        document.addEventListener('dashboard-navigate', () => {
+            this.setActiveNavLink(null);
+        });
+    }
+
+    isInRegularUserDashboard() {
+        return window.location.pathname.includes('/dashboard/RegularUser/');
+    }
+
+    resolvePageUrl(path) {
+        const base = window.CONFIG?.getBaseUrl?.() || window.PathFixer?.basePath || '';
+        return `${base}${path}`;
+    }
+
+    navigateExternalPage(url) {
+        const resolvedUrl = this.resolvePageUrl(url);
+        const dashboardContent = document.querySelector('dashboard-content-component');
+
+        if (dashboardContent && typeof dashboardContent.loadExternalPage === 'function') {
+            dashboardContent.loadExternalPage(resolvedUrl);
+            this.setActiveNavLink(url);
+            return;
+        }
+
+        if (this.isInRegularUserDashboard()) {
+            document.dispatchEvent(new CustomEvent('dashboard-load-external', { detail: { url: resolvedUrl } }));
+            this.setActiveNavLink(url);
+            return;
+        }
+
+        sessionStorage.setItem('dashboardExternalPage', resolvedUrl);
+        window.location.href = this.resolvePageUrl('/dashboard/RegularUser/dashboard.html');
     }
 
     getCurrentUser() {
@@ -1102,13 +1299,12 @@ class RecomputechHeaderAuth extends HTMLElement {
         }
     }
 
-    setActiveNavLink() {
-        const currentPath = window.location.pathname;
-        const navLinks = this.shadowRoot.querySelectorAll('.recomputech-nav-link');
+    setActiveNavLink(activeUrl = null) {
+        const navLinks = this.shadowRoot.querySelectorAll('[data-url]');
         
         navLinks.forEach(link => {
             link.classList.remove('active');
-            if (link.getAttribute('href') === currentPath) {
+            if (activeUrl && link.getAttribute('data-url') === activeUrl) {
                 link.classList.add('active');
             }
         });
@@ -1381,13 +1577,15 @@ class RecomputechHeaderAuth extends HTMLElement {
 
     // Mobile menu functionality
     openMobileMenu() {
-        // Implement mobile menu functionality
-        console.log('Opening mobile menu');
+        const mobileMenu = this.shadowRoot.getElementById('recomputech-mobile-menu');
+        mobileMenu?.classList.add('show');
+        document.body.style.overflow = 'hidden';
     }
 
     closeMobileMenu() {
-        // Implement mobile menu close functionality
-        console.log('Closing mobile menu');
+        const mobileMenu = this.shadowRoot.getElementById('recomputech-mobile-menu');
+        mobileMenu?.classList.remove('show');
+        document.body.style.overflow = '';
     }
 
     // Notification functionality

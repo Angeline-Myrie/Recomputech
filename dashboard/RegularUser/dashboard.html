@@ -24,12 +24,63 @@
 <body>
     <!-- Header Components -->
     <recomputech-header-auth></recomputech-header-auth>
-    
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Dynamic Dashboard Component -->
-        <dashboard-content-component></dashboard-content-component>
-    </main>
+
+    <div class="dashboard-shell">
+        <aside class="dashboard-sidebar" id="dashboardSidebar">
+            <div class="sidebar-header">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="user-details">
+                        <h5>Dashboard</h5>
+                        <p class="user-role">User Panel</p>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#overview">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Overview</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#my-products">
+                            <i class="fas fa-box"></i>
+                            <span>My Products</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#add-product">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>Add Product</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#purchases">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span>Purchases</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#settings">
+                            <i class="fas fa-cog"></i>
+                            <span>Settings</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="dashboard-main">
+            <main class="main-content">
+                <dashboard-content-component></dashboard-content-component>
+            </main>
+        </div>
+    </div>
 
     <!-- Footer Component -->
     <recomputech-footer></recomputech-footer>

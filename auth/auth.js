@@ -235,7 +235,10 @@ document.addEventListener('DOMContentLoaded', async function() {
             }
         } catch (error) {
             console.error('Login error:', error);
-            showNotification(error.message || 'Invalid email or password', 'error');
+            const message = window.UsersService?.getAuthErrorMessage
+                ? UsersService.getAuthErrorMessage(error)
+                : (error.message || 'Invalid email or password');
+            showNotification(message, 'error');
         }
     });
 
@@ -316,7 +319,10 @@ document.addEventListener('DOMContentLoaded', async function() {
             }, 2000);
         } catch (error) {
             console.error('Registration error:', error);
-            showNotification(error.message || 'Could not create account. Please try again.', 'error');
+            const message = window.UsersService?.getAuthErrorMessage
+                ? UsersService.getAuthErrorMessage(error)
+                : (error.message || 'Could not create account. Please try again.');
+            showNotification(message, 'error');
         }
     });
 
