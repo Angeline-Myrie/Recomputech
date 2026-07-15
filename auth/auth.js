@@ -173,12 +173,10 @@ document.addEventListener('DOMContentLoaded', async function() {
             // Store selected type
             localStorage.setItem('selectedUserType', type);
 
-             // Si selecciona Technician, ir a la otra página
-        if (type === 'technician') {
-            window.location.href = 'technician.html';
-        } else {
-            window.location.href = 'auth.html' ;
-        }
+            // Redirect to dedicated technician registration page
+            if (type === 'technician') {
+                window.location.href = 'technician.html?mode=register';
+            }
         });
     });
 

@@ -1127,4 +1127,190 @@
     .auth-body::after {
         animation: none;
     }
-} 
+}
+
+/* ========================================
+   TECHNICIAN AUTH & REGISTRATION
+   ======================================== */
+
+.technician-auth-container {
+    max-width: 720px;
+    width: 100%;
+}
+
+.technician-auth-card {
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.technician-logo {
+    background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+}
+
+.technician-form-intro {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.5rem;
+    background: rgba(33, 141, 166, 0.08);
+    border: 1px solid rgba(33, 141, 166, 0.2);
+    border-radius: 12px;
+    color: #475569;
+}
+
+.technician-form-intro i {
+    color: #218DA6;
+    font-size: 1.25rem;
+    margin-top: 0.15rem;
+}
+
+.technician-form-intro p {
+    margin: 0;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.form-section {
+    margin-bottom: 1.75rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.form-section:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.form-section-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-section-title i {
+    color: #218DA6;
+}
+
+.checkbox-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.checkbox-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.85rem;
+    border-radius: 999px;
+    border: 1px solid #e2e8f0;
+    background: rgba(255, 255, 255, 0.85);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin: 0;
+}
+
+.checkbox-chip:hover {
+    border-color: #218DA6;
+    color: #218DA6;
+}
+
+.checkbox-chip input {
+    accent-color: #218DA6;
+}
+
+.checkbox-chip:has(input:checked) {
+    background: linear-gradient(135deg, rgba(33, 141, 166, 0.15), rgba(27, 110, 130, 0.1));
+    border-color: #218DA6;
+    color: #1b6e82;
+    font-weight: 600;
+}
+
+.file-input {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px dashed #cbd5e1;
+    padding: 0.65rem;
+}
+
+.photo-preview {
+    margin-top: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.photo-preview img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 2px solid #e2e8f0;
+}
+
+.photo-preview-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+}
+
+.photo-preview-item img {
+    width: 72px;
+    height: 72px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 2px solid #e2e8f0;
+}
+
+.auth-switch-link {
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+.auth-switch-link a {
+    color: #218DA6;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-switch-link a:hover {
+    text-decoration: underline;
+}
+
+[data-theme="dark"] .form-section-title {
+    color: #e2e8f0;
+}
+
+[data-theme="dark"] .technician-form-intro {
+    background: rgba(33, 141, 166, 0.12);
+    color: #cbd5e1;
+}
+
+[data-theme="dark"] .checkbox-chip {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: #334155;
+    color: #cbd5e1;
+}
+
+@media (max-width: 768px) {
+    .technician-auth-card {
+        max-height: none;
+    }
+
+    .checkbox-grid {
+        gap: 0.4rem;
+    }
+
+    .checkbox-chip {
+        font-size: 0.78rem;
+        padding: 0.45rem 0.7rem;
+    }
+}
