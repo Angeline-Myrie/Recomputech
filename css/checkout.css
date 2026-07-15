@@ -1,3 +1,7 @@
+/* Checkout Page Styles */
+/* Importar variables de dark mode */
+@import url('./dark-mode-variables.css');
+
 body, .checkout-inspiration-container, .checkout-title, .card-title, .factura-btn, .confirmation-content {
     font-family: 'Poppins', sans-serif;
 }
@@ -15,6 +19,13 @@ body, .checkout-inspiration-container, .checkout-title, .card-title, .factura-bt
     font-weight: 800;
     color: #1e293b;
     margin-bottom: 2.5rem;
+    transition: color 0.3s ease;
+}
+
+/* Dark Mode Checkout Title */
+body.dark-mode .checkout-title,
+[data-theme="dark"] .checkout-title {
+    color: var(--text-inverse);
 }
 
 .checkout-inspiration-content {
@@ -33,6 +44,14 @@ body, .checkout-inspiration-container, .checkout-title, .card-title, .factura-bt
     min-width: 340px;
     max-width: 400px;
     width: 100%;
+    transition: all 0.3s ease;
+}
+
+/* Dark Mode Checkout Card */
+body.dark-mode .checkout-card,
+[data-theme="dark"] .checkout-card {
+    background: var(--card-bg-dark);
+    box-shadow: var(--shadow-lg);
 }
 
 .card-title {
@@ -40,11 +59,19 @@ body, .checkout-inspiration-container, .checkout-title, .card-title, .factura-bt
     font-size: 1.45rem;
     font-weight: 700;
     margin-bottom: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+/* Dark Mode Card Title */
+body.dark-mode .card-title,
+[data-theme="dark"] .card-title {
+    color: var(--primary-color);
 }
 
 #cartItemsContainer {
     margin-bottom: 1.5rem;
 }
+
 .cart-item-inspiration {
     display: flex;
     align-items: center;
@@ -52,7 +79,15 @@ body, .checkout-inspiration-container, .checkout-title, .card-title, .factura-bt
     margin-bottom: 1.2rem;
     border-bottom: 1px solid #e5e7eb;
     padding-bottom: 0.7rem;
+    transition: all 0.3s ease;
 }
+
+/* Dark Mode Cart Item */
+body.dark-mode .cart-item-inspiration,
+[data-theme="dark"] .cart-item-inspiration {
+    border-bottom-color: var(--card-border);
+}
+
 .cart-item-inspiration img {
     width: 54px;
     height: 54px;
@@ -60,25 +95,59 @@ body, .checkout-inspiration-container, .checkout-title, .card-title, .factura-bt
     border-radius: 10px;
     background: #fff;
     border: 1px solid #e5e7eb;
+    transition: all 0.3s ease;
 }
+
+/* Dark Mode Cart Item Image */
+body.dark-mode .cart-item-inspiration img,
+[data-theme="dark"] .cart-item-inspiration img {
+    background: var(--card-bg-dark);
+    border-color: var(--card-border-dark);
+}
+
 .cart-item-details-inspiration {
     flex: 1;
 }
+
 .cart-item-title-inspiration {
     font-weight: 700;
     color: #1e293b;
     font-size: 1.08rem;
     margin-bottom: 0.2rem;
+    transition: color 0.3s ease;
 }
+
+/* Dark Mode Cart Item Title */
+body.dark-mode .cart-item-title-inspiration,
+[data-theme="dark"] .cart-item-title-inspiration {
+    color: var(--text-inverse);
+}
+
 .cart-item-qty-inspiration {
     color: #64748b;
     font-size: 0.98rem;
+    transition: color 0.3s ease;
 }
+
+/* Dark Mode Cart Item Qty */
+body.dark-mode .cart-item-qty-inspiration,
+[data-theme="dark"] .cart-item-qty-inspiration {
+    color: var(--text-muted);
+}
+
 .cart-item-price-inspiration {
     font-weight: 600;
     color: #218DA6;
     font-size: 1.08rem;
+    transition: color 0.3s ease;
 }
+
+/* Dark Mode Cart Item Price */
+body.dark-mode .cart-item-price-inspiration,
+[data-theme="dark"] .cart-item-price-inspiration {
+    color: var(--primary-color);
+}
+
 .cart-total-inspiration {
     display: flex;
     justify-content: space-between;
@@ -86,10 +155,13 @@ body, .checkout-inspiration-container, .checkout-title, .card-title, .factura-bt
     font-weight: 700;
     color: #16a34a;
     margin-top: 1.2rem;
+    transition: color 0.3s ease;
 }
+
 .cart-total-green {
     color: #16a34a;
     font-size: 1.25rem;
+    transition: color 0.3s ease;
 }
 
 .datos-factura label {
@@ -98,84 +170,170 @@ body, .checkout-inspiration-container, .checkout-title, .card-title, .factura-bt
     margin-bottom: 0.3rem;
     display: block;
     margin-top: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+/* Dark Mode Datos Factura Label */
+body.dark-mode .datos-factura label,
+[data-theme="dark"] .datos-factura label {
+    color: var(--text-inverse);
 }
 .datos-factura input {
     width: 100%;
-    padding: 0.7rem 1rem;
-    border: 1.5px solid #e5e7eb;
-    border-radius: 8px;
-    font-size: 1.08rem;
-    outline: none;
-    background: #fff;
-    margin-bottom: 0.5rem;
-    transition: border 0.2s;
-}
-.datos-factura input:focus {
-    border: 1.5px solid #218DA6;
-}
-.factura-btn {
-    display: block;
-    width: 100%;
-    margin: 1.7rem auto 0 auto;
-    background: #16a34a;
-    color: #fff;
-    border: none;
-    padding: 1rem 0;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e5e7eb;
     border-radius: 10px;
-    font-weight: 700;
-    font-size: 1.18rem;
-    cursor: pointer;
-    box-shadow: 0 2px 12px rgba(33,141,166,0.08);
-    transition: background 0.2s, box-shadow 0.2s;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: var(--input-bg);
+    color: var(--text-color);
 }
+
+/* Dark Mode Datos Factura Input */
+body.dark-mode .datos-factura input,
+[data-theme="dark"] .datos-factura input {
+    background: var(--input-bg-dark);
+    color: var(--text-inverse);
+    border-color: var(--input-border-dark);
+}
+
+.datos-factura input:focus {
+    outline: none;
+    border-color: #218DA6;
+    box-shadow: 0 0 0 3px rgba(33, 141, 166, 0.1);
+}
+
+/* Dark Mode Datos Factura Input Focus */
+body.dark-mode .datos-factura input:focus,
+[data-theme="dark"] .datos-factura input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(33, 141, 166, 0.2);
+}
+
+.factura-btn {
+    background: linear-gradient(135deg, #218DA6 0%, #1b6e82 100%);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-top: 1.5rem;
+    box-shadow: 0 4px 15px rgba(33, 141, 166, 0.3);
+}
+
+/* Dark Mode Factura Button */
+body.dark-mode .factura-btn,
+[data-theme="dark"] .factura-btn {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    box-shadow: 0 4px 15px rgba(33, 141, 166, 0.4);
+}
+
 .factura-btn:hover {
-    background: #218DA6;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(33, 141, 166, 0.4);
+    background: linear-gradient(135deg, #1b6e82 0%, #155a6b 100%);
+}
+
+/* Dark Mode Factura Button Hover */
+body.dark-mode .factura-btn:hover,
+[data-theme="dark"] .factura-btn:hover {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+    box-shadow: 0 8px 25px rgba(33, 141, 166, 0.5);
 }
 
 .confirmation-screen {
-    display: none;
     position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(33, 141, 166, 0.10);
-    z-index: 9999;
-    align-items: center;
-    justify-content: center;
-}
-.confirmation-screen.active {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
     display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
 }
+
+.confirmation-screen.active {
+    opacity: 1;
+    visibility: visible;
+}
+
 .confirmation-content {
-    background: #fff;
-    border-radius: 18px;
-    box-shadow: 0 4px 32px rgba(22,163,74,0.13);
-    padding: 3rem 2.5rem 2.5rem 2.5rem;
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
     text-align: center;
-    max-width: 400px;
-    margin: auto;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
 }
+
+/* Dark Mode Confirmation Content */
+body.dark-mode .confirmation-content,
+[data-theme="dark"] .confirmation-content {
+    background: var(--card-bg-dark);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
 .confirmation-content h2 {
     color: #16a34a;
     font-size: 2rem;
     margin-bottom: 1rem;
+    transition: color 0.3s ease;
 }
+
 .confirmation-content p {
-    color: #1e293b;
-    font-size: 1.1rem;
+    color: #64748b;
     margin-bottom: 2rem;
+    transition: color 0.3s ease;
 }
+
+/* Dark Mode Confirmation Content Text */
+body.dark-mode .confirmation-content p,
+[data-theme="dark"] .confirmation-content p {
+    color: var(--text-muted);
+}
+
 .confirmation-home-btn {
-    display: inline-block;
-    background: #218DA6;
-    color: #fff;
-    padding: 0.8rem 2rem;
-    border-radius: 8px;
+    background: linear-gradient(135deg, #218DA6 0%, #1b6e82 100%);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 10px;
     font-weight: 600;
     text-decoration: none;
-    font-size: 1.1rem;
-    transition: background 0.2s;
+    display: inline-block;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(33, 141, 166, 0.3);
 }
+
+/* Dark Mode Confirmation Home Button */
+body.dark-mode .confirmation-home-btn,
+[data-theme="dark"] .confirmation-home-btn {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    box-shadow: 0 4px 15px rgba(33, 141, 166, 0.4);
+}
+
 .confirmation-home-btn:hover {
-    background: #16a34a;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(33, 141, 166, 0.4);
+    color: white;
+    text-decoration: none;
+}
+
+/* Dark Mode Confirmation Home Button Hover */
+body.dark-mode .confirmation-home-btn:hover,
+[data-theme="dark"] .confirmation-home-btn:hover {
+    box-shadow: 0 8px 25px rgba(33, 141, 166, 0.5);
 }
 
 .payment-section {

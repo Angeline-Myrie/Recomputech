@@ -1,0 +1,620 @@
+/* Technician Dashboard Light Mode Override */
+/* This file forces light mode for the technician dashboard */
+
+/* Animations Keyframes */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 53%, 80%, 100% {
+        transform: translate3d(0,0,0);
+    }
+    40%, 43% {
+        transform: translate3d(0, -8px, 0);
+    }
+    70% {
+        transform: translate3d(0, -4px, 0);
+    }
+    90% {
+        transform: translate3d(0, -2px, 0);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200px 0;
+    }
+    100% {
+        background-position: calc(200px + 100%) 0;
+    }
+}
+
+/* Force light mode variables with Recomputech brand colors */
+:root {
+    --primary-color: #218DA6;
+    --secondary-color: #1b6e82;
+    --accent-color: #155a6b;
+    
+    /* Light mode colors */
+    --text-color: #1f2937;
+    --text-light: #4b5563;
+    --text-muted: #6b7280;
+    --text-inverse: #ffffff;
+    --dark-color: #1f2937;
+    
+    /* Light mode backgrounds */
+    --bg-color: #ffffff;
+    --bg-light: #f8fafc;
+    --bg-lighter: #f1f5f9;
+    --bg-dark: #111827;
+    --bg-darker: #0f172a;
+    
+    /* Light mode cards */
+    --card-bg: #ffffff;
+    --card-border: #e5e7eb;
+    --card-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    
+    /* Light mode forms */
+    --input-bg: #ffffff;
+    --input-border: #d1d5db;
+    --input-text: #1f2937;
+    --input-placeholder: #9ca3af;
+    --input-focus-border: #218DA6;
+    
+    /* Light mode buttons */
+    --btn-primary-bg: #218DA6;
+    --btn-primary-hover: #1b6e82;
+    --btn-secondary-bg: #f3f4f6;
+    --btn-secondary-hover: #e5e7eb;
+    --btn-text: #1f2937;
+    
+    /* Light mode navigation */
+    --nav-bg: rgba(255, 255, 255, 0.95);
+    --nav-border: rgba(0, 0, 0, 0.1);
+    --nav-text: #1f2937;
+    --nav-hover: #218DA6;
+    
+    /* Light mode footer */
+    --footer-bg: #111827;
+    --footer-text: #ffffff;
+    
+    /* Light mode shadows */
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1);
+    
+    /* Light mode states */
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --error-color: #ef4444;
+    --info-color: #3b82f6;
+    
+    /* Light mode rating */
+    --rating-color: #fbbf24;
+    
+    /* Light mode services */
+    --service-icon-bg: #218DA6;
+    
+    /* Light mode newsletter */
+    --newsletter-input-bg: rgba(255, 255, 255, 0.1);
+    --newsletter-input-border: rgba(255, 255, 255, 0.2);
+    --newsletter-btn-bg: #f3f4f6;
+    --newsletter-btn-color: #2563eb;
+    
+    /* Light mode filters */
+    --filter-bg: #f7f8fa;
+    --filter-card-bg: #ffffff;
+    --filter-border: #e5e7eb;
+    
+    /* Light mode products */
+    --product-card-bg: #ffffff;
+    --product-image-bg: #f8fafc;
+    
+    /* Light mode technicians */
+    --tech-tag-bg: #f3f4f6;
+    --tech-tag-text: #374151;
+    --tech-avatar-bg: #218DA6;
+    
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+/* Override any dark mode classes */
+.dark-mode,
+[data-theme="dark"] {
+    /* Force light mode colors */
+    --text-color: #1f2937 !important;
+    --text-light: #4b5563 !important;
+    --text-muted: #6b7280 !important;
+    --text-inverse: #ffffff !important;
+    --dark-color: #1f2937 !important;
+    
+    --bg-color: #ffffff !important;
+    --bg-light: #f8fafc !important;
+    --bg-lighter: #f1f5f9 !important;
+    
+    --card-bg: #ffffff !important;
+    --card-border: #e5e7eb !important;
+    --card-shadow: 0 4px 6px -1px rgba(0,0,0,0.1) !important;
+    
+    --input-bg: #ffffff !important;
+    --input-border: #d1d5db !important;
+    --input-text: #1f2937 !important;
+    --input-placeholder: #9ca3af !important;
+    --input-focus-border: #218DA6 !important;
+    
+    --btn-primary-bg: #218DA6 !important;
+    --btn-primary-hover: #1b6e82 !important;
+    --btn-secondary-bg: #f3f4f6 !important;
+    --btn-secondary-hover: #e5e7eb !important;
+    --btn-text: #1f2937 !important;
+    
+    --nav-bg: rgba(255, 255, 255, 0.95) !important;
+    --nav-border: rgba(0, 0, 0, 0.1) !important;
+    --nav-text: #1f2937 !important;
+    --nav-hover: #218DA6 !important;
+    
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05) !important;
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1) !important;
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1) !important;
+    --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1) !important;
+    
+    --filter-bg: #f7f8fa !important;
+    --filter-card-bg: #ffffff !important;
+    --filter-border: #e5e7eb !important;
+    
+    --product-card-bg: #ffffff !important;
+    --product-image-bg: #f8fafc !important;
+    
+    --tech-tag-bg: #f3f4f6 !important;
+    --tech-tag-text: #374151 !important;
+    --tech-avatar-bg: #218DA6 !important;
+}
+
+/* Force light mode on body and html */
+body,
+html {
+    background-color: #ffffff !important;
+    color: #1f2937 !important;
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* Force light mode on all dashboard elements with animations */
+.dashboard-section {
+    animation: fadeInUp 0.8s ease-out !important;
+}
+
+.dashboard-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
+    border: 2px solid #e5e7eb !important;
+    color: #1f2937 !important;
+    animation: slideInRight 0.8s ease-out !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px) !important;
+    border-color: #218DA6 !important;
+    box-shadow: 0 15px 35px rgba(33, 141, 166, 0.1) !important;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
+    border: 2px solid transparent !important;
+    color: #1f2937 !important;
+    animation: fadeInUp 0.8s ease-out !important;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.stat-card:hover {
+    transform: translateY(-8px) scale(1.02) !important;
+    border-color: #218DA6 !important;
+    box-shadow: 0 20px 40px rgba(33, 141, 166, 0.15) !important;
+}
+
+.activity-item {
+    background: #f8fafc !important;
+    color: #1f2937 !important;
+    border-color: #e5e7eb !important;
+    animation: fadeInUp 0.6s ease-out !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.activity-item:hover {
+    background: #f1f5f9 !important;
+    border-left-color: #218DA6 !important;
+    transform: translateX(10px) !important;
+    box-shadow: 0 5px 15px rgba(33, 141, 166, 0.1) !important;
+}
+
+.quick-action-btn {
+    background: #f8fafc !important;
+    border: 2px solid #e5e7eb !important;
+    color: #1f2937 !important;
+    animation: slideInLeft 0.6s ease-out !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.quick-action-btn:hover {
+    background: #f1f5f9 !important;
+    border-color: #218DA6 !important;
+    color: #1f2937 !important;
+    transform: translateX(10px) scale(1.02) !important;
+    box-shadow: 0 5px 15px rgba(33, 141, 166, 0.1) !important;
+}
+
+.message-item {
+    background: #f8fafc !important;
+    color: #1f2937 !important;
+    animation: fadeInUp 0.6s ease-out !important;
+    transition: all 0.3s ease !important;
+}
+
+.message-item:hover {
+    background: #f1f5f9 !important;
+    transform: translateX(5px) !important;
+    box-shadow: 0 3px 10px rgba(33, 141, 166, 0.1) !important;
+}
+
+.certification-item {
+    background: #f8fafc !important;
+    color: #1f2937 !important;
+    border-left: 4px solid #218DA6 !important;
+    animation: slideInRight 0.6s ease-out !important;
+    transition: all 0.3s ease !important;
+}
+
+.certification-item:hover {
+    background: #f1f5f9 !important;
+    transform: translateX(10px) !important;
+    box-shadow: 0 5px 15px rgba(33, 141, 166, 0.1) !important;
+}
+
+.request-item {
+    background: #f8fafc !important;
+    color: #1f2937 !important;
+    border-left: 4px solid #218DA6 !important;
+    animation: fadeInUp 0.6s ease-out !important;
+    transition: all 0.3s ease !important;
+}
+
+.request-item:hover {
+    background: #f1f5f9 !important;
+    transform: translateX(10px) !important;
+    box-shadow: 0 5px 15px rgba(33, 141, 166, 0.1) !important;
+}
+
+.service-item {
+    background: #f8fafc !important;
+    color: #1f2937 !important;
+    animation: slideInLeft 0.6s ease-out !important;
+    transition: all 0.3s ease !important;
+}
+
+.service-item:hover {
+    background: #f1f5f9 !important;
+    transform: translateX(5px) !important;
+    box-shadow: 0 3px 10px rgba(33, 141, 166, 0.1) !important;
+}
+
+.notification-item {
+    background: #f8fafc !important;
+    color: #1f2937 !important;
+    border-left: 4px solid #218DA6 !important;
+    animation: slideInRight 0.6s ease-out !important;
+    transition: all 0.3s ease !important;
+}
+
+.notification-item:hover {
+    background: #f1f5f9 !important;
+    transform: translateX(10px) !important;
+    box-shadow: 0 5px 15px rgba(33, 141, 166, 0.1) !important;
+}
+
+.notification-item.unread {
+    border-left-color: #f59e0b !important;
+    background: #f1f5f9 !important;
+    animation: pulse 2s infinite !important;
+}
+
+/* Force light mode on card headers */
+.card-header {
+    background: linear-gradient(135deg, #218DA6 0%, #1b6e82 100%) !important;
+    color: #ffffff !important;
+    border-color: #218DA6 !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.card-header::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%) !important;
+    animation: shimmer 2s infinite !important;
+}
+
+.card-header h3 {
+    color: #ffffff !important;
+    position: relative !important;
+    z-index: 1 !important;
+}
+
+/* Force light mode on form elements */
+.form-control,
+.form-select,
+.form-control-static {
+    background-color: #ffffff !important;
+    color: #1f2937 !important;
+    border: 2px solid #d1d5db !important;
+    border-radius: 0.5rem !important;
+    transition: all 0.3s ease !important;
+    animation: fadeInUp 0.6s ease-out !important;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: #218DA6 !important;
+    box-shadow: 0 0 0 3px rgba(33, 141, 166, 0.1) !important;
+    transform: translateY(-2px) !important;
+}
+
+.form-control-static:hover {
+    border-color: #218DA6 !important;
+    box-shadow: 0 2px 8px rgba(33, 141, 166, 0.1) !important;
+}
+
+/* Force light mode on buttons */
+.btn {
+    color: #1f2937 !important;
+    border-radius: 0.5rem !important;
+    font-weight: 500 !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    position: relative !important;
+    overflow: hidden !important;
+}
+
+.btn::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: -100% !important;
+    width: 100% !important;
+    height: 100% !important;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent) !important;
+    transition: left 0.5s !important;
+}
+
+.btn:hover::before {
+    left: 100% !important;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #218DA6 0%, #1b6e82 100%) !important;
+    border-color: #218DA6 !important;
+    color: #ffffff !important;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #1b6e82 0%, #218DA6 100%) !important;
+    border-color: #1b6e82 !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px rgba(33, 141, 166, 0.3) !important;
+}
+
+.btn-outline-primary {
+    color: #218DA6 !important;
+    border-color: #218DA6 !important;
+    background: transparent !important;
+}
+
+.btn-outline-primary:hover {
+    background: linear-gradient(135deg, #218DA6 0%, #1b6e82 100%) !important;
+    border-color: #218DA6 !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px rgba(33, 141, 166, 0.3) !important;
+}
+
+.btn-outline-secondary {
+    color: #4b5563 !important;
+    border-color: #e5e7eb !important;
+    background: transparent !important;
+}
+
+.btn-outline-secondary:hover {
+    background: #f1f5f9 !important;
+    border-color: #e5e7eb !important;
+    color: #1f2937 !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    border-color: #10b981 !important;
+    color: #ffffff !important;
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, #059669 0%, #10b981 100%) !important;
+    border-color: #059669 !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3) !important;
+}
+
+.btn-outline-warning {
+    color: #f59e0b !important;
+    border-color: #f59e0b !important;
+    background: transparent !important;
+}
+
+.btn-outline-warning:hover {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+    border-color: #f59e0b !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px rgba(245, 158, 11, 0.3) !important;
+}
+
+.btn-outline-success {
+    color: #10b981 !important;
+    border-color: #10b981 !important;
+    background: transparent !important;
+}
+
+.btn-outline-success:hover {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    border-color: #10b981 !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3) !important;
+}
+
+/* Force light mode on text elements */
+h1, h2, h3, h4, h5, h6, p, span, div {
+    color: #1f2937 !important;
+}
+
+/* Force light mode on icons with animations */
+.stat-icon,
+.activity-icon,
+.message-avatar,
+.cert-icon,
+.request-status,
+.notification-icon {
+    background: linear-gradient(135deg, #218DA6 0%, #1b6e82 100%) !important;
+    color: #ffffff !important;
+    transition: all 0.3s ease !important;
+}
+
+.stat-icon {
+    animation: pulse 2s infinite !important;
+}
+
+.stat-card:hover .stat-icon,
+.activity-item:hover .activity-icon,
+.certification-item:hover .cert-icon,
+.request-item:hover .request-status,
+.notification-item:hover .notification-icon {
+    transform: scale(1.1) rotate(10deg) !important;
+    animation: bounce 0.6s ease !important;
+}
+
+.message-item:hover .message-avatar {
+    transform: scale(1.1) !important;
+    animation: pulse 1s ease !important;
+}
+
+/* Force light mode on chart container */
+.chart-container {
+    background-color: #ffffff !important;
+    border: 2px solid #e5e7eb !important;
+    border-radius: 0.5rem !important;
+    padding: 1rem !important;
+    margin: 1rem 0 !important;
+    transition: all 0.3s ease !important;
+    animation: fadeInUp 0.8s ease-out !important;
+}
+
+.chart-container:hover {
+    border-color: #218DA6 !important;
+    box-shadow: 0 10px 25px rgba(33, 141, 166, 0.1) !important;
+    transform: translateY(-3px) !important;
+}
+
+/* Section header animations */
+.section-header {
+    animation: slideInLeft 0.8s ease-out !important;
+}
+
+.header-content h1 {
+    background: linear-gradient(135deg, #218DA6 0%, #1b6e82 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    animation: fadeInUp 1s ease-out 0.2s both !important;
+}
+
+.header-content p {
+    animation: fadeInUp 1s ease-out 0.4s both !important;
+}
+
+/* Performance metrics animations */
+.metric-item {
+    animation: fadeInUp 0.6s ease-out !important;
+    transition: all 0.3s ease !important;
+}
+
+.metric-item:hover {
+    transform: translateY(-5px) !important;
+}
+
+.metric-item:hover h4 {
+    transform: scale(1.1) !important;
+    animation: bounce 0.6s ease !important;
+}
+
+/* Loading animation */
+.loading {
+    background: linear-gradient(90deg, #f8fafc 25%, #f1f5f9 50%, #f8fafc 75%) !important;
+    background-size: 200px 100% !important;
+    animation: shimmer 1.5s infinite !important;
+}
+
+/* Responsive animations */
+@media (max-width: 768px) {
+    .stat-card:hover,
+    .dashboard-card:hover,
+    .activity-item:hover,
+    .quick-action-btn:hover {
+        transform: none !important;
+    }
+}

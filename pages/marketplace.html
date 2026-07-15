@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marketplace - Recomputech</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/logo-recomputech.png">
+    <link rel="shortcut icon" type="image/png" href="../assets/logo-recomputech.png">
+    <link rel="apple-touch-icon" href="../assets/logo-recomputech.png">
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -18,9 +22,13 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <!-- Custom CSS -->
+    <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/marketplace.css">
+    
+    <!-- Theme Initializer - Apply theme immediately -->
+    <script src="../js/theme-initializer.js"></script>
 </head>
-<body>
+<body class="light-mode">
     <!-- Dynamic Header based on authentication status -->
     <div id="headerContainer">
         <!-- Header will be loaded dynamically -->
@@ -181,7 +189,7 @@
         </div>
     </div>
     
-    <!-- Footer Component -->
+    <!-- Footer Component (hidden if embedded in dashboard) -->
     <recomputech-footer></recomputech-footer>
 
     <!-- Scripts -->
@@ -189,6 +197,7 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="../js/config.js"></script>
     <script src="../js/path-fixer.js"></script>
+    <script src="../js/dark-mode-manager.js"></script>
     
     <!-- Web Components -->
     <script src="../components/header-component.js"></script>
@@ -460,10 +469,15 @@
             }
         });
 
-        // Oculta el header si está dentro de un iframe (dashboard)
+        // Si está embebido en el dashboard (iframe), ocultar su propio footer para evitar doble footer
         if (window.self !== window.top) {
             const header = document.getElementById('headerContainer') || document.querySelector('header') || document.querySelector('recomputech-header') || document.querySelector('recomputech-header-auth');
             if (header) header.style.display = 'none';
+            const footer = document.querySelector('recomputech-footer');
+            if (footer) footer.style.display = 'none';
+            // Evitar doble scroll interno
+            document.documentElement.style.overflow = 'hidden';
+            document.body.style.overflow = 'hidden';
         }
     </script>
 </body>

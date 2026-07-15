@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Expert Technicians - Recomputech</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../assets/logo-recomputech.png">
+    <link rel="shortcut icon" type="image/png" href="../../assets/logo-recomputech.png">
+    <link rel="apple-touch-icon" href="../../assets/logo-recomputech.png">
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -21,7 +25,7 @@
     <link rel="stylesheet" href="../../css/styles.css">
     <link rel="stylesheet" href="../../css/technician.css">
 </head>
-<body>
+<body class="light-mode">
     <!-- Dynamic Header based on authentication status -->
     <div id="headerContainer">
         <!-- Header will be loaded dynamically -->
@@ -152,11 +156,11 @@
                     </div>
                 </div>
                 <div class="cta-buttons">
-                    <a href="../auth/auth.html" class="btn btn-primary btn-lg">
+                    <a href="/auth/auth.html" class="btn btn-primary btn-lg">
                         <i class="fas fa-user-plus"></i>
                         Register Now
                     </a>
-                    <a href="../auth/auth.html" class="btn btn-outline-primary btn-lg">
+                    <a href="/auth/auth.html" class="btn btn-outline-primary btn-lg">
                         <i class="fas fa-sign-in-alt"></i>
                         Login
                     </a>
@@ -177,6 +181,9 @@
     
     <!-- Config -->
     <script src="../../js/config.js"></script>
+    
+    <!-- Dark Mode Manager -->
+    <script src="../../js/dark-mode-manager.js"></script>
     
     <!-- Web Components -->
     <script src="../../components/header-component.js"></script>
@@ -210,6 +217,13 @@
         document.addEventListener('DOMContentLoaded', function() {
             loadTechnicians();
             setupEventListeners();
+            
+            // Ensure dark mode is properly applied
+            setTimeout(() => {
+                if (window.darkModeManager) {
+                    window.darkModeManager.forceThemeApplication();
+                }
+            }, 200);
         });
 
         function loadTechnicians() {

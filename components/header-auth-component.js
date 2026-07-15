@@ -817,7 +817,7 @@ class RecomputechHeaderAuth extends HTMLElement {
                     <div class="recomputech-navbar-container">
                         <!-- Logo Section -->
                         <a class="recomputech-navbar-brand" href="index.html">
-                            <img src="" alt="Logo" class="recomputech-logo recomputech-logo-small" id="header-logo">
+                            <img src="/assets/logos/logo-.png" alt="Logo" class="recomputech-logo recomputech-logo-small" id="header-logo">
                             <div class="recomputech-brand-text">
                                 <span class="recomputech-brand-name">Recomputech</span>
                                 <span class="recomputech-brand-tagline">Sustainable Technology</span>
@@ -826,14 +826,7 @@ class RecomputechHeaderAuth extends HTMLElement {
 
                         <!-- Navigation Section -->
                         <ul class="recomputech-navbar-nav">
-
-                            <li><a class="recomputech-nav-link" href="/pages/marketplace.html">Marketplace</a></li>
-                            <li><a class="recomputech-nav-link" href="/pages/technician/info-technician.html">Technicians</a></li>
-                            <li><a class="recomputech-nav-link" href="/pages/services.html">Services</a></li>
-                            <li><a class="recomputech-nav-link" href="/pages/Aboutus.html">About Us</a></li>
-                            <li><a class="recomputech-nav-link" href="/pages/contact.html">Contact</a></li>
-
-                            <li><a class="recomputech-nav-link" href="#" data-url="/pages/marketplace.html">Marketplace</a></li>
+                            <li><a class="recomputech-nav-link" href="#" data-url="/pages/market-user.html">Marketplace</a></li>
                             <li><a class="recomputech-nav-link" href="#" data-url="/pages/contact.html">Contact</a></li>
                             <li><a class="recomputech-nav-link" href="#" data-url="/pages/Aboutus.html">About Us</a></li>
                             <li><a class="recomputech-nav-link" href="#" data-url="/pages/services.html">Services</a></li>
@@ -866,29 +859,6 @@ class RecomputechHeaderAuth extends HTMLElement {
                                 </div>
 
                                 <div class="dropdown-menu" id="dropdownMenu">
-
-                                    <a href="/dashboard/RegularUser/dashboard.html" class="dropdown-item">
-                                        <i class="fas fa-tachometer-alt"></i>
-                                        Overview
-                                    </a>
-                                    <a href="/dashboard/RegularUser/dashboard.html#sell" class="dropdown-item">
-                                        <i class="fas fa-plus-circle"></i>
-                                        Sell
-                                    </a>
-                                    <a href="/dashboard/RegularUser/dashboard.html#purchases" class="dropdown-item">
-                                        <i class="fas fa-shopping-bag"></i>
-                                        Purchases
-                                    </a>
-                                    <a href="/dashboard/RegularUser/dashboard.html#my-products" class="dropdown-item">
-                                        <i class="fas fa-box"></i>
-                                        My Products
-                                    </a>
-                                    <a href="/dashboard/RegularUser/dashboard.html#cart" class="dropdown-item">
-                                        <i class="fas fa-shopping-cart"></i>
-                                        Cart
-                                    </a>
-                                    <a href="/dashboard/RegularUser/dashboard.html#settings" class="dropdown-item">
-
                                     <a href="#overview" class="dropdown-item" data-section="overview">
                                         <i class="fas fa-tachometer-alt"></i>
                                         Overview
@@ -900,10 +870,6 @@ class RecomputechHeaderAuth extends HTMLElement {
                                     <a href="#add-product" class="dropdown-item" data-section="add-product">
                                         <i class="fas fa-plus-circle"></i>
                                         Add Product
-                                    </a>
-                                    <a href="#purchases" class="dropdown-item" data-section="purchases">
-                                        <i class="fas fa-shopping-bag"></i>
-                                        Purchases
                                     </a>
                                     <a href="#settings" class="dropdown-item" data-section="settings">
 
@@ -1372,10 +1338,12 @@ class RecomputechHeaderAuth extends HTMLElement {
         if (isDark) {
             document.documentElement.classList.remove('dark-mode');
             this.classList.remove('dark-mode');
+            document.body.classList.remove('dark-mode');
             localStorage.setItem('theme', 'light');
         } else {
             document.documentElement.classList.add('dark-mode');
             this.classList.add('dark-mode');
+            document.body.classList.add('dark-mode');
             localStorage.setItem('theme', 'dark');
         }
         
@@ -1388,6 +1356,11 @@ class RecomputechHeaderAuth extends HTMLElement {
         if (savedTheme === 'dark') {
             document.documentElement.classList.add('dark-mode');
             this.classList.add('dark-mode');
+            document.body.classList.add('dark-mode');
+        } else {
+            document.documentElement.classList.remove('dark-mode');
+            this.classList.remove('dark-mode');
+            document.body.classList.remove('dark-mode');
         }
         
         this.updateThemeIcon();

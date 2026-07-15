@@ -1,19 +1,6 @@
 /* Global Styles */
-:root {
-    --primary-color: #218DA6;
-    --secondary-color: #1b6e82;
-    --accent-color: #155a6b;
-    --text-color: #1f2937;
-    --text-light: #4b5563;
-    --bg-color: #ffffff;
-    --bg-light: #f8fafc;
-    --card-bg: #ffffff;
-    --footer-bg: #111827;
-    --border-color: #e5e7eb;
-    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
-    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
-    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
-}
+/* Importar variables de dark mode */
+@import url('./dark-mode-variables.css');
 
 /* Prevent horizontal scroll */
 html, body {
@@ -51,34 +38,7 @@ img, video, iframe {
     height: auto;
 }
 
-/* Dark Mode Variables */
-[data-theme="dark"] {
-    --primary-color: #218DA6;
-    --secondary-color: #1b6e82;
-    --accent-color: #60a5fa;
-    --text-color: #0d0e10;
-    --text-light: #f4f4f4;
-    --bg-color: #111827;
-    --bg-light: #1f2937;
-    --card-bg: #1f2937;
-    --footer-bg: #f4f4f4;
-    --border-color: #374151;
-    --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
-    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.3);
-    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.3);
-    --input-bg: #374151;
-    --input-text: #f3f4f6;
-    --input-placeholder: #9ca3af;
-    --btn-hover: #4b5563;
-    --tech-tag-bg: #374151;
-    --tech-tag-text: #f3f4f6;
-    --rating-color: #fbbf24;
-    --service-icon-bg: var(--primary-color);
-    --newsletter-input-bg: rgba(255, 255, 255, 0.1);
-    --newsletter-input-border: rgba(255, 255, 255, 0.2);
-    --newsletter-btn-bg: #f3f4f6;
-    --newsletter-btn-color: #2563eb;
-}
+/* Dark Mode Variables - Removed duplicate, using dark-mode-variables.css instead */
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -87,6 +47,36 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
     line-height: 1.6;
     overflow-x: hidden;
+}
+
+/* Asegurar que el body y html tengan las variables aplicadas correctamente */
+html[data-theme="dark"] body,
+body.dark-mode {
+    background-color: var(--bg-color) !important;
+    color: var(--text-color) !important;
+}
+
+html[data-theme="light"] body,
+body:not(.dark-mode) {
+    background-color: var(--bg-color) !important;
+    color: var(--text-color) !important;
+}
+
+/* Aplicar dark mode a todas las secciones principales */
+html[data-theme="dark"] section,
+body.dark-mode section {
+    background-color: var(--bg-color) !important;
+    color: var(--text-color) !important;
+}
+
+/* Aplicar dark mode a elementos de texto principales */
+html[data-theme="dark"] h1, html[data-theme="dark"] h2, html[data-theme="dark"] h3, 
+html[data-theme="dark"] h4, html[data-theme="dark"] h5, html[data-theme="dark"] h6,
+html[data-theme="dark"] p, html[data-theme="dark"] span, html[data-theme="dark"] div,
+body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, 
+body.dark-mode h4, body.dark-mode h5, body.dark-mode h6,
+body.dark-mode p, body.dark-mode span, body.dark-mode div {
+    color: var(--text-color) !important;
 }
 
 /* Product Categories */
@@ -793,7 +783,7 @@ body {
     padding: 0;
 }
 .filter-actions-bar {
-    background: #fff;
+    background: var(--card-bg);
     border-radius: 1rem;
     box-shadow: 0 1px 4px rgba(0,0,0,0.04);
     padding: 0.5rem 1rem;
@@ -983,7 +973,7 @@ main {
   object-fit: cover;
   border: 3px solid var(--primary-color);
   box-shadow: 0 2px 8px rgba(37,99,235,0.10);
-  background: #fff;
+  background: var(--card-bg);
   margin-right: 0.75rem;
   display: inline-block;
 }
@@ -1026,7 +1016,7 @@ main {
     height: 180px;
     object-fit: contain;
     border-radius: 10px;
-    background: #fff;
+    background: var(--card-bg);
     display: block;
     margin: 0 auto;
     padding: 10px;

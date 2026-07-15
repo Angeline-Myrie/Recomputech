@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Mode Test - Recomputech</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/logo-recomputech.png">
+    <link rel="shortcut icon" type="image/png" href="assets/logo-recomputech.png">
+    <link rel="apple-touch-icon" href="assets/logo-recomputech.png">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    
+    <!-- Theme Initializer - Apply theme immediately -->
+    <script src="js/theme-initializer.js"></script>
+</head>
+<body>
+    <!-- Header Component -->
+    <recomputech-header></recomputech-header>
+    
+    <!-- Test Content -->
+    <div class="container mt-5 pt-5">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="mb-4">Dark Mode Test Page</h1>
+                <p class="lead">This page tests the dark mode functionality across the entire website.</p>
+                
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">Test Instructions</h5>
+                        <ol>
+                            <li>Click the dark mode toggle in the header</li>
+                            <li>Verify that the theme changes immediately</li>
+                            <li>Navigate to another page (e.g., <a href="pages/marketplace.html">Marketplace</a>)</li>
+                            <li>Verify that the theme persists across navigation</li>
+                            <li>Refresh the page and verify the theme is still applied</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Test Card 1</h5>
+                                <p class="card-text">This card should change appearance in dark mode.</p>
+                                <button class="btn btn-primary">Test Button</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Test Card 2</h5>
+                                <p class="card-text">Another card to test dark mode styling.</p>
+                                <button class="btn btn-outline-primary">Outline Button</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4">
+                    <h3>Navigation Test</h3>
+                    <p>Click these links to test theme persistence across pages:</p>
+                    <a href="index.html" class="btn btn-secondary me-2">Home</a>
+                    <a href="pages/marketplace.html" class="btn btn-secondary me-2">Marketplace</a>
+                    <a href="pages/Aboutus.html" class="btn btn-secondary me-2">About Us</a>
+                    <a href="auth/auth.html" class="btn btn-secondary me-2">Auth</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/header-manager.js"></script>
+    <script src="js/dark-mode-manager.js"></script>
+    <script src="components/header-component.js"></script>
+    
+    <script>
+        // Test script to verify dark mode is working
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Test page loaded');
+            console.log('Current theme:', localStorage.getItem('theme') || 'light');
+            console.log('Dark mode manager available:', !!window.darkModeManager);
+            
+            // Log theme changes
+            document.addEventListener('themeChanged', function(e) {
+                console.log('Theme changed to:', e.detail.theme);
+            });
+        });
+    </script>
+</body>
+</html>

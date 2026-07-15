@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product - Recomputech Dashboard</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../assets/logo-recomputech.png">
+    <link rel="shortcut icon" type="image/png" href="../../assets/logo-recomputech.png">
+    <link rel="apple-touch-icon" href="../../assets/logo-recomputech.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="../../css/styles.css">
+    <style>
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        .edit-container {
+            max-width: 1000px;
+            margin: 4rem auto;
+            padding: 0 1rem;
+        }
+        
+        .edit-card {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+        .edit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+        .edit-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .form-section {
+            margin-bottom: 2rem;
+        }
+        
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-control, .form-select {
+            border: 2px solid var(--input-border);
+            border-radius: 12px;
+            padding: 0.8rem 1rem;
+            transition: all 0.3s ease;
+            background: var(--input-bg);
+            color: var(--input-text);
+        }
+        
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(33, 141, 166, 0.25);
+            background: var(--card-bg);
+            transform: translateY(-1px);
+        }
+        
+        .image-upload-section {
+            border: 2px dashed var(--primary-color);
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            background: rgba(33, 141, 166, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .image-upload-section:hover {
+            background: rgba(33, 141, 166, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .current-image {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 1rem;
+        }
+        
+        .btn-save {
+            background: linear-gradient(135deg, #218DA6 0%, #1b6e82 100%);
+            border: none;
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-save:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(33, 141, 166, 0.4);
+            color: white;
+        }
+        
+        .btn-cancel {
+            background: transparent;
+            border: 2px solid #dc3545;
+            color: #dc3545;
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-cancel:hover {
+            background: #dc3545;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .btn-preview {
+            background: transparent;
+            border: 2px solid #6c757d;
+            color: #6c757d;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-preview:hover {
+            background: #6c757d;
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .breadcrumb-custom {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 1rem 1.5rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem;
+        }
+        
+        .breadcrumb-custom a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .breadcrumb-custom a:hover {
+            text-decoration: underline;
+        }
+        
+        .status-toggle {
+            display: flex;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        .status-option {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+        
+        .status-option.active {
+            border-color: var(--primary-color);
+            background: rgba(33, 141, 166, 0.1);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .status-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .price-input-group {
+            position: relative;
+        }
+        
+        .price-currency {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-weight: 600;
+            color: var(--primary-color);
+            z-index: 5;
+        }
+
+        /* Centrar contenido y ocultar sidebar en esta vista */
+        .dashboard-main { margin-left: 0 !important; }
+        #sidebar-container { display: none; }
+        
+        .price-input {
+            padding-left: 3rem !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Component -->
+    <recomputech-header-auth></recomputech-header-auth>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <div id="sidebar-container"></div>
+            
+            <!-- Main Content -->
+            <main class="dashboard-main">
+                <div class="edit-container">
+                    <!-- Breadcrumb -->
+                    <nav class="breadcrumb-custom" data-aos="fade-down">
+                        <a href="dashboard.html">Dashboard</a> / 
+                        <a href="dashboard.html#my-products">My Products</a> / 
+                        <span id="product-breadcrumb">Edit Product</span>
+                    </nav>
+                    
+                    <!-- Edit Form -->
+                    <div class="edit-card" data-aos="fade-up">
+                        <form id="editProductForm">
+                            <!-- Basic Information -->
+                            <div class="form-section">
+                                <h3 class="section-title">
+                                    <i class="fas fa-info-circle"></i>
+                                    Basic Information
+                                </h3>
+                                <div class="row">
+                                    <div class="col-md-8 mb-3">
+                                        <label class="form-label">Product Name *</label>
+                                        <input type="text" class="form-control" id="productName" required>
+                                    </div>
+                                    <div class="col-md-4 mb-3">
+                                        <label class="form-label">Category *</label>
+                                        <select class="form-select" id="productCategory" required>
+                                            <option value="">Select Category</option>
+                                            <option value="Laptops">Laptops</option>
+                                            <option value="Desktops">Desktops</option>
+                                            <option value="Tablets">Tablets</option>
+                                            <option value="Accessories">Accessories</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Description *</label>
+                                    <textarea class="form-control" id="productDescription" rows="4" placeholder="Describe your product in detail..." required></textarea>
+                                </div>
+                            </div>
+                            
+                            <!-- Price and Status -->
+                            <div class="form-section">
+                                <h3 class="section-title">
+                                    <i class="fas fa-dollar-sign"></i>
+                                    Price & Status
+                                </h3>
+                                <div class="row">
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Price (B/.) *</label>
+                                        <div class="price-input-group">
+                                            <span class="price-currency">B/.</span>
+                                            <input type="number" class="form-control price-input" id="productPrice" min="0" step="0.01" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 mb-3">
+                                        <label class="form-label">Status *</label>
+                                        <div class="status-toggle">
+                                            <div class="status-option" data-status="active">
+                                                <i class="fas fa-check-circle"></i><br>
+                                                <strong>Active</strong><br>
+                                                <small>Visible to buyers</small>
+                                            </div>
+                                            <div class="status-option" data-status="pending">
+                                                <i class="fas fa-clock"></i><br>
+                                                <strong>Pending</strong><br>
+                                                <small>Under review</small>
+                                            </div>
+                                        </div>
+                                        <input type="hidden" id="productStatus" required>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Image -->
+                            <div class="form-section">
+                                <h3 class="section-title">
+                                    <i class="fas fa-image"></i>
+                                    Product Image
+                                </h3>
+                                <div class="image-upload-section">
+                                    <img id="currentImage" class="current-image" style="display: none;">
+                                    <div id="imageUploadArea">
+                                        <i class="fas fa-cloud-upload-alt" style="font-size: 3rem; color: var(--primary-color); margin-bottom: 1rem;"></i>
+                                        <h5 style="color: var(--text-color);">Current Product Image</h5>
+                                        <p style="color: var(--text-light);">Image upload functionality would be implemented here</p>
+                                        <button type="button" class="btn btn-outline-primary">
+                                            <i class="fas fa-upload"></i> Change Image
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Action Buttons -->
+                            <div class="form-section">
+                                <div class="d-flex gap-3 justify-content-center flex-wrap">
+                                    <button type="submit" class="btn btn-save">
+                                        <i class="fas fa-save"></i> Save Changes
+                                    </button>
+                                    <button type="button" class="btn btn-preview" id="previewBtn">
+                                        <i class="fas fa-eye"></i> Preview
+                                    </button>
+                                    <button type="button" class="btn btn-cancel" onclick="history.back()">
+                                        <i class="fas fa-times"></i> Cancel
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="../../js/config.js"></script>
+    <script src="../../js/path-fixer.js"></script>
+    <script src="../../js/header-manager.js"></script>
+    <script src="../../js/dark-mode-manager.js"></script>
+    <script src="../../js/theme.js"></script>
+    <script src="../../components/header-component.js"></script>
+    <script src="../../components/header-auth-component.js"></script>
+    <script src="../../components/footer-component.js"></script>
+    <script src="../../js/sidebar-resize.js"></script>
+    
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true
+        });
+        
+        // Load product for editing
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProductForEditing();
+            setupEventListeners();
+        });
+        
+        function loadProductForEditing() {
+            const product = JSON.parse(localStorage.getItem('editingProduct'));
+            
+            if (!product) {
+                alert('Product not found');
+                window.location.href = 'dashboard.html';
+                return;
+            }
+            
+            // Populate form fields
+            document.getElementById('productName').value = product.name;
+            document.getElementById('productCategory').value = product.category;
+            document.getElementById('productDescription').value = product.description;
+            document.getElementById('productPrice').value = product.price;
+            document.getElementById('productStatus').value = product.status;
+            document.getElementById('product-breadcrumb').textContent = `Edit ${product.name}`;
+            
+            // Show current image
+            const currentImage = document.getElementById('currentImage');
+            currentImage.src = product.image;
+            currentImage.style.display = 'block';
+            
+            // Set status toggle
+            const statusOptions = document.querySelectorAll('.status-option');
+            statusOptions.forEach(option => {
+                if (option.dataset.status === product.status) {
+                    option.classList.add('active');
+                }
+            });
+            
+            // Update page title
+            document.title = `Edit ${product.name} - Recomputech`;
+        }
+        
+        function setupEventListeners() {
+            // Status toggle functionality
+            const statusOptions = document.querySelectorAll('.status-option');
+            statusOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    statusOptions.forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+                    document.getElementById('productStatus').value = this.dataset.status;
+                });
+            });
+            
+            // Form submission
+            const form = document.getElementById('editProductForm');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                saveProductChanges();
+            });
+            
+            // Preview button
+            document.getElementById('previewBtn').addEventListener('click', function() {
+                previewProduct();
+            });
+        }
+        
+        function saveProductChanges() {
+            const product = JSON.parse(localStorage.getItem('editingProduct'));
+            
+            // Update product with new values
+            const updatedProduct = {
+                ...product,
+                name: document.getElementById('productName').value,
+                category: document.getElementById('productCategory').value,
+                description: document.getElementById('productDescription').value,
+                price: parseFloat(document.getElementById('productPrice').value),
+                status: document.getElementById('productStatus').value
+            };
+            
+            // In a real application, this would be sent to the server
+            console.log('Saving product changes:', updatedProduct);
+            
+            // Show success message
+            alert('Product updated successfully!');
+            
+            // Update localStorage and redirect
+            localStorage.setItem('selectedProduct', JSON.stringify(updatedProduct));
+            window.location.href = 'my-product-details.html';
+        }
+        
+        function previewProduct() {
+            const previewData = {
+                id: JSON.parse(localStorage.getItem('editingProduct')).id,
+                name: document.getElementById('productName').value,
+                category: document.getElementById('productCategory').value,
+                description: document.getElementById('productDescription').value,
+                price: parseFloat(document.getElementById('productPrice').value),
+                status: document.getElementById('productStatus').value,
+                image: JSON.parse(localStorage.getItem('editingProduct')).image,
+                date: JSON.parse(localStorage.getItem('editingProduct')).date
+            };
+            
+            localStorage.setItem('selectedProduct', JSON.stringify(previewData));
+            window.open('my-product-details.html', '_blank');
+        }
+    </script>
+</body>
+</html>
