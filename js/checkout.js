@@ -103,7 +103,11 @@ function validateCardForm() {
 }
 
 function showYappyModal() {
+    const existingModal = document.querySelector('.yappy-modal-overlay');
+    if (existingModal) existingModal.remove();
+
     const modal = document.createElement('div');
+    modal.className = 'yappy-modal-overlay';
     modal.style.position = 'fixed';
     modal.style.top = '0';
     modal.style.left = '0';
@@ -115,16 +119,35 @@ function showYappyModal() {
     modal.style.justifyContent = 'center';
     modal.style.zIndex = '99999';
     modal.innerHTML = `
-        <div style="background:#fff;padding:2.5rem 2rem;border-radius:18px;max-width:350px;text-align:center;box-shadow:0 4px 32px rgba(0,158,227,0.13);">
+        <div class="yappy-modal-content" style="background:#fff;padding:2.5rem 2rem;border-radius:18px;max-width:350px;text-align:center;box-shadow:0 4px 32px rgba(0,158,227,0.13);">
             <h2 style="color:#009ee3;font-size:1.5rem;margin-bottom:1rem;">Pay with Yappy</h2>
             <p style="color:#1e293b;font-size:1.08rem;margin-bottom:1.5rem;">Scan the QR code or click the button to continue with Yappy.</p>
             <div style="margin-bottom:1.5rem;">
                 <img src="https://yappy-assets.s3.amazonaws.com/qr-demo.png" alt="QR Yappy" style="width:120px;height:120px;object-fit:contain;border-radius:10px;border:1.5px solid #e5e7eb;background:#f6fbfd;">
             </div>
-            <button style="background:#009ee3;color:#fff;padding:0.7rem 2rem;border:none;border-radius:8px;font-weight:600;font-size:1.08rem;cursor:pointer;" onclick="window.open('https://www.yappy.com.pa/', '_blank')">Go to Yappy</button>
+            <button type="button" class="yappy-modal-go-btn" style="background:#009ee3;color:#fff;padding:0.7rem 2rem;border:none;border-radius:8px;font-weight:600;font-size:1.08rem;cursor:pointer;">Go to Yappy</button>
             <br><br>
-            <button style="background:#e5e7eb;color:#1e293b;padding:0.5rem 1.5rem;border:none;border-radius:8px;font-weight:500;font-size:1rem;cursor:pointer;" onclick="this.closest('div[style]').remove()">Close</button>
+            <button type="button" class="yappy-modal-close-btn" style="background:#e5e7eb;color:#1e293b;padding:0.5rem 1.5rem;border:none;border-radius:8px;font-weight:500;font-size:1rem;cursor:pointer;">Close</button>
         </div>
     `;
+
+    const closeModal = () => {
+        modal.remove();
+        document.removeEventListener('keydown', onEscape);
+    };
+
+    const onEscape = (e) => {
+        if (e.key === 'Escape') closeModal();
+    };
+
+    modal.querySelector('.yappy-modal-close-btn').addEventListener('click', closeModal);
+    modal.querySelector('.yappy-modal-go-btn').addEventListener('click', () => {
+        window.open('https://www.yappy.com.pa/', '_blank');
+    });
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', onEscape);
+
     document.body.appendChild(modal);
 } 
