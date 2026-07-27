@@ -74,8 +74,8 @@
     render() {
         this.innerHTML = `
             <!-- Welcome Section -->
-            <section class="welcome-section" data-aos="fade-up" style="margin: 2rem auto; padding: 0; overflow: hidden; background: linear-gradient(135deg, #218DA6 0%, #1b6e82 50%, #155a6b 100%); color: white; border-radius: 20px; max-width: 1200px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-                <div class="welcome-header" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 200px; padding: 3rem 2rem; border-radius: 20px; margin-bottom: 0; width: 100%; position: relative; overflow: hidden;">
+            <section class="welcome-section" data-aos="fade-up">
+                <div class="welcome-header">
                     <!-- Animated background elements -->
                     <div class="welcome-bg-elements" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none;">
                         <div class="floating-circle" style="position: absolute; width: 120px; height: 120px; background: rgba(255,255,255,0.1); border-radius: 50%; top: 20%; left: 10%; animation: float 6s ease-in-out infinite;"></div>
@@ -84,25 +84,25 @@
                     </div>
                     
                     <!-- Main content -->
-                    <div class="welcome-content" style="position: relative; z-index: 2; text-align: center;">
-                        <h1 data-aos="fade-down" data-aos-delay="100" style="font-size: 3rem; font-weight: 800; color: #fff; margin-bottom: 1rem; text-align: center; letter-spacing: -1px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); transform: translateY(0); transition: transform 0.3s ease;">
+                    <div class="welcome-content">
+                        <h1 data-aos="fade-down" data-aos-delay="100">
                             My Products
                         </h1>
-                        <p data-aos="fade-in" data-aos-delay="300" style="font-size: 1.2rem; color: #e0f7fa; margin-bottom: 0; text-align: center; max-width: 500px; line-height: 1.4; text-shadow: 0 1px 2px rgba(0,0,0,0.2);">
+                        <p data-aos="fade-in" data-aos-delay="300">
                             Manage and track all your products on <span style="font-weight: 600; color: #fff;">Recomputech</span>
                         </p>
                         
                         <!-- Stats preview -->
-                        <div class="welcome-stats-preview" data-aos="fade-up" data-aos-delay="500" style="display: flex; justify-content: center; gap: 1.5rem; margin-top: 1.5rem; flex-wrap: wrap;">
-                            <div class="stat-preview" style="text-align: center; color: #fff;">
+                        <div class="welcome-stats-preview" data-aos="fade-up" data-aos-delay="500">
+                            <div class="stat-preview">
                                 <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.3rem;">${this.products.length}</div>
                                 <div style="font-size: 0.8rem; opacity: 0.8;">Total Products</div>
                             </div>
-                            <div class="stat-preview" style="text-align: center; color: #fff;">
+                            <div class="stat-preview">
                                 <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.3rem;">${this.products.filter(p => p.status === 'active').length}</div>
                                 <div style="font-size: 0.8rem; opacity: 0.8;">Active</div>
                             </div>
-                            <div class="stat-preview" style="text-align: center; color: #fff;">
+                            <div class="stat-preview">
                                 <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.3rem;">${this.products.filter(p => p.status === 'pending').length}</div>
                                 <div style="font-size: 0.8rem; opacity: 0.8;">Pending</div>
                             </div>
@@ -112,8 +112,8 @@
             </section>
 
             <!-- Filters Section -->
-            <section class="filters-section" data-aos="fade-up" data-aos-delay="200" style="margin: 2rem auto; max-width: 1200px;">
-                <div class="filters-card" style="background: white; border-radius: 20px; padding: 2rem; box-shadow: 0 8px 25px rgba(0,0,0,0.1); border: 1px solid #e9ecef;">
+            <section class="filters-section" data-aos="fade-up" data-aos-delay="200">
+                <div class="filters-card">
                     <div class="filters-header" style="margin-bottom: 1.5rem;">
                         <h3 style="color: #2c3e50; font-weight: 600; margin-bottom: 0.5rem;">
                             <i class="fas fa-filter" style="color: #218DA6; margin-right: 0.5rem;"></i>
@@ -148,16 +148,17 @@
             </section>
 
             <!-- Products Grid -->
-            <section class="products-section" data-aos="fade-up" data-aos-delay="300" style="margin: 2rem auto; max-width: 1200px;">
-                <div class="products-header" style="margin-bottom: 2rem;">
-                    <h3 style="color: #2c3e50; font-weight: 600; margin-bottom: 0.5rem;">
-                        <i class="fas fa-box" style="color: #218DA6; margin-right: 0.5rem;"></i>
-                        Your Products (${this.filteredProducts.length})
-                    </h3>
-                    <p style="color: #6c757d; margin: 0; font-size: 0.95rem;">Manage and monitor your product listings</p>
-                </div>
-                
-                <div class="product-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 2rem;">
+            <section class="products-section" data-aos="fade-up" data-aos-delay="300">
+                <div class="centered-container">
+                    <div class="products-header" style="margin-bottom: 2rem;">
+                        <h3 style="color: #2c3e50; font-weight: 600; margin-bottom: 0.5rem;">
+                            <i class="fas fa-box" style="color: #218DA6; margin-right: 0.5rem;"></i>
+                            Your Products (${this.filteredProducts.length})
+                        </h3>
+                        <p style="color: #6c757d; margin: 0; font-size: 0.95rem;">Manage and monitor your product listings</p>
+                    </div>
+                    
+                    <div class="products-grid">
                     ${this.filteredProducts.map(product => `
                         <div class="product-card" data-aos="fade-up" data-aos-delay="${Math.random() * 300 + 100}" 
                              style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.1); transition: all 0.3s ease; border: 1px solid #e9ecef; position: relative;">
@@ -228,21 +229,22 @@
                             </div>
                         </div>
                     `).join('')}
-                </div>
-                
-                ${this.filteredProducts.length === 0 ? `
-                    <div class="empty-state" data-aos="fade-up" style="text-align: center; padding: 4rem 2rem; background: white; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.1);">
-                        <div class="empty-icon" style="width: 80px; height: 80px; background: linear-gradient(135deg, #218DA6 0%, #1b6e82 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: white; font-size: 2rem;">
-                            <i class="fas fa-box-open"></i>
+                    </div>
+                    
+                    ${this.filteredProducts.length === 0 ? `
+                        <div class="empty-state" data-aos="fade-up" style="text-align: center; padding: 4rem 2rem; background: white; border-radius: 20px; box-shadow: 0 8px 25px rgba(0,0,0,0.1);">
+                            <div class="empty-icon" style="width: 80px; height: 80px; background: linear-gradient(135deg, #218DA6 0%, #1b6e82 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: white; font-size: 2rem;">
+                                <i class="fas fa-box-open"></i>
+                            </div>
+                            <h4 style="color: #2c3e50; font-weight: 600; margin-bottom: 0.5rem;">No Products Found</h4>
+                            <p style="color: #6c757d; margin: 0 0 1.5rem 0;">Try adjusting your filters or add a new product</p>
+                            <button class="btn btn-primary" style="background: linear-gradient(135deg, #218DA6 0%, #1b6e82 100%); border: none; padding: 1rem 2rem; border-radius: 12px; color: white; font-weight: 600;">
+                                <i class="fas fa-plus" style="margin-right: 0.5rem;"></i>
+                                Add New Product
+                            </button>
                         </div>
-                        <h4 style="color: #2c3e50; font-weight: 600; margin-bottom: 0.5rem;">No Products Found</h4>
-                        <p style="color: #6c757d; margin: 0 0 1.5rem 0;">Try adjusting your filters or add a new product</p>
-                        <button class="btn btn-primary" style="background: linear-gradient(135deg, #218DA6 0%, #1b6e82 100%); border: none; padding: 1rem 2rem; border-radius: 12px; color: white; font-weight: 600;">
-                            <i class="fas fa-plus" style="margin-right: 0.5rem;"></i>
-                            Add New Product
-                        </button>
-            </div>
-                ` : ''}
+                    ` : ''}
+                </div>
             </section>
         `;
     }
