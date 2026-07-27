@@ -51,8 +51,8 @@ class OverviewComponent extends HTMLElement {
     render() {
         this.innerHTML = `
             <!-- Welcome Section -->
-            <section class="welcome-section" data-aos="fade-up" style="margin: 2rem auto; padding: 0; overflow: hidden; background: linear-gradient(135deg, #218DA6 0%, #1b6e82 50%, #155a6b 100%); color: white; border-radius: 20px; max-width: 1200px; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
-                <div class="welcome-header" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 200px; padding: 3rem 2rem; border-radius: 20px; margin-bottom: 0; width: 100%; position: relative; overflow: hidden;">
+            <section class="welcome-section" data-aos="fade-up">
+                <div class="welcome-header">
                     <!-- Animated background elements -->
                     <div class="welcome-bg-elements" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none;">
                         <div class="floating-circle" style="position: absolute; width: 120px; height: 120px; background: rgba(255,255,255,0.1); border-radius: 50%; top: 20%; left: 10%; animation: float 6s ease-in-out infinite;"></div>
@@ -61,30 +61,30 @@ class OverviewComponent extends HTMLElement {
                     </div>
                     
                     <!-- Main content -->
-                    <div class="welcome-content" style="position: relative; z-index: 2; text-align: center;">
-                        <h1 data-aos="fade-down" data-aos-delay="100" style="font-size: 3rem; font-weight: 800; color: #fff; margin-bottom: 1rem; text-align: center; letter-spacing: -1px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); transform: translateY(0); transition: transform 0.3s ease;">
+                    <div class="welcome-content">
+                        <h1 data-aos="fade-down" data-aos-delay="100">
                             Welcome
                         </h1>
-                        <p data-aos="fade-in" data-aos-delay="300" style="font-size: 1.2rem; color: #e0f7fa; margin-bottom: 0; text-align: center; max-width: 500px; line-height: 1.4; text-shadow: 0 1px 2px rgba(0,0,0,0.2);">
+                        <p data-aos="fade-in" data-aos-delay="300">
                             Here is a summary of your activity on <span style="font-weight: 600; color: #fff;">Recomputech</span>
                         </p>
-                        <div class="welcome-user" data-aos="fade-up" data-aos-delay="400" style="margin-top: 1.5rem;">
-                            <span style="font-size: 1.1rem; color: #fff; opacity: 0.9; background: rgba(255,255,255,0.1); padding: 0.6rem 1.2rem; border-radius: 20px; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
+                        <div class="welcome-user" data-aos="fade-up" data-aos-delay="400">
+                            <span>
                                 ${this.userData?.name ? 'Hello, ' + this.userData.name + '! 👋' : 'Welcome back! 👋'}
                             </span>
                         </div>
                         
                         <!-- Animated stats preview -->
-                        <div class="welcome-stats-preview" data-aos="fade-up" data-aos-delay="500" style="display: flex; justify-content: center; gap: 1.5rem; margin-top: 1.5rem; flex-wrap: wrap;">
-                            <div class="stat-preview" style="text-align: center; color: #fff;">
+                        <div class="welcome-stats-preview" data-aos="fade-up" data-aos-delay="500">
+                            <div class="stat-preview">
                                 <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.3rem;">${this.stats.totalPurchases}</div>
                                 <div style="font-size: 0.8rem; opacity: 0.8;">Purchases</div>
                             </div>
-                            <div class="stat-preview" style="text-align: center; color: #fff;">
+                            <div class="stat-preview">
                                 <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.3rem;">${this.stats.totalSales}</div>
                                 <div style="font-size: 0.8rem; opacity: 0.8;">Sales</div>
                             </div>
-                            <div class="stat-preview" style="text-align: center; color: #fff;">
+                            <div class="stat-preview">
                                 <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.3rem;">${this.stats.timeInProfile}</div>
                                 <div style="font-size: 0.8rem; opacity: 0.8;">Days</div>
                             </div>
@@ -94,8 +94,8 @@ class OverviewComponent extends HTMLElement {
             </section>
 
             <!-- Stats Cards Single Row -->
-            <section class="stats-section" data-aos="fade-up" data-aos-delay="100" style="margin-top: 2.5rem;">
-                <div class="container-fluid">
+            <section class="stats-section" data-aos="fade-up" data-aos-delay="100">
+                <div class="stats-row">
                     <div class="row justify-content-center">
                         <div class="col-lg-3 col-md-6 col-12 mb-4">
                             <div class="stat-card h-100">
