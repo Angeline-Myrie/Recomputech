@@ -9,7 +9,11 @@ class DashboardContentComponent extends HTMLElement {
     connectedCallback() {
         this.loadUserData();
         this.setupNavigation();
-        this.loadSection();
+        this.setupExternalPageListener();
+        const loadedExternalPage = this.loadPendingExternalPage();
+        if (!loadedExternalPage) {
+            this.loadSection();
+        }
         this.setupEventListeners();
     }
 
@@ -41,10 +45,30 @@ class DashboardContentComponent extends HTMLElement {
             const section = e.detail.section;
             if (this.isValidSection(section)) {
                 this.currentSection = section;
+                this.externalPageUrl = null;
                 window.location.hash = section;
                 this.loadSection();
             }
         });
+    }
+
+    setupExternalPageListener() {
+        document.addEventListener('dashboard-load-external', (e) => {
+            const url = e.detail?.url;
+            if (url) {
+                this.loadExternalPage(url);
+            }
+        });
+    }
+
+    loadPendingExternalPage() {
+        const pendingUrl = sessionStorage.getItem('dashboardExternalPage');
+        if (pendingUrl) {
+            sessionStorage.removeItem('dashboardExternalPage');
+            this.loadExternalPage(pendingUrl);
+            return true;
+        }
+        return false;
     }
 
     isValidSection(section) {
@@ -319,6 +343,10 @@ class DashboardContentComponent extends HTMLElement {
     loadExternalPage(url) {
         this.externalPageUrl = url;
         if (url) {
+            if (window.location.hash) {
+                history.replaceState(null, '', window.location.pathname + window.location.search);
+            }
+
             // Hide dashboard footer and prevent double scrollbars on parent
             const dashboardFooter = document.querySelector('recomputech-footer');
             if (dashboardFooter) dashboardFooter.style.display = 'none';

@@ -19,6 +19,11 @@ body.dark-mode .technician-hero,
     background: linear-gradient(135deg, #1e293b, #0f172a);
 }
 
+body.dashboard-embedded .technician-hero {
+    margin-top: 0;
+    padding-top: 2rem;
+}
+
 /* Search Section */
 .search-section {
     padding: 2rem 2rem;
