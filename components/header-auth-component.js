@@ -32,7 +32,9 @@ class RecomputechHeaderAuth extends HTMLElement {
                     transition: all 0.3s ease;
                 }
 
-                :host(.dark-mode) {
+                :host(.dark-mode),
+                :host-context([data-theme="dark"]),
+                :host-context(body.dark-mode) {
                     background: rgba(24, 31, 42, 0.95);
                     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
                 }
@@ -95,7 +97,11 @@ class RecomputechHeaderAuth extends HTMLElement {
                 }
 
                 :host(.dark-mode) .recomputech-brand-name,
-                :host(.dark-mode) .recomputech-brand-tagline {
+                :host(.dark-mode) .recomputech-brand-tagline,
+                :host-context([data-theme="dark"]) .recomputech-brand-name,
+                :host-context([data-theme="dark"]) .recomputech-brand-tagline,
+                :host-context(body.dark-mode) .recomputech-brand-name,
+                :host-context(body.dark-mode) .recomputech-brand-tagline {
                     color: #fff;
                 }
 

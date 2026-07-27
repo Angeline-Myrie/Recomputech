@@ -33,15 +33,24 @@ class DarkModeManager {
     }
 
     setTheme(theme) {
+        const previousTheme = this.currentTheme;
         this.currentTheme = theme;
         
+        const root = document.documentElement;
+        const body = document.body;
+        
         // Aplicar al documento
-        document.documentElement.setAttribute('data-theme', theme);
-        document.documentElement.classList.toggle('dark-mode', theme === 'dark');
+        root.setAttribute('data-theme', theme);
+        root.classList.toggle('dark-mode', theme === 'dark');
+        root.style.colorScheme = theme === 'dark' ? 'dark' : 'light';
         
         // Aplicar al body
-        document.body.setAttribute('data-theme', theme);
-        document.body.classList.toggle('dark-mode', theme === 'dark');
+        if (body) {
+            body.setAttribute('data-theme', theme);
+            body.classList.toggle('dark-mode', theme === 'dark');
+            body.style.backgroundColor = 'var(--bg-color)';
+            body.style.color = 'var(--text-color)';
+        }
         
         // Aplicar a todos los elementos con clase theme-aware
         this.applyThemeToAllElements(theme);
@@ -57,7 +66,7 @@ class DarkModeManager {
         
         // Disparar evento personalizado
         document.dispatchEvent(new CustomEvent('themeChanged', { 
-            detail: { theme, previousTheme: this.currentTheme } 
+            detail: { theme, previousTheme } 
         }));
         
         console.log(`Theme changed to: ${theme}`);

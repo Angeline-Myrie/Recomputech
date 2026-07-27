@@ -48,6 +48,18 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="#marketplace">
+                            <i class="fas fa-dollar-sign"></i>
+                            <span>Marketplace</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#technicians">
+                            <i class="fas fa-wrench"></i>
+                            <span>Technicians</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#my-products">
                             <i class="fas fa-box"></i>
                             <span>My Products</span>
@@ -77,6 +89,12 @@
 
         <div class="dashboard-main">
             <main class="main-content">
+                <div class="dashboard-toolbar">
+                    <button id="sidebarToggleBtn" class="sidebar-toggle-btn">
+                        <i class="fas fa-bars"></i>
+                        Ocultar menú
+                    </button>
+                </div>
                 <dashboard-content-component></dashboard-content-component>
             </main>
         </div>
@@ -122,6 +140,13 @@
             duration: 800,
             easing: 'ease-in-out',
             once: true
+        });
+
+        const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
+        sidebarToggleBtn?.addEventListener('click', () => {
+            document.body.classList.toggle('sidebar-collapsed');
+            const isCollapsed = document.body.classList.contains('sidebar-collapsed');
+            sidebarToggleBtn.innerHTML = `${isCollapsed ? '<i class="fas fa-bars"></i> Mostrar menú' : '<i class="fas fa-bars"></i> Ocultar menú'}`;
         });
     </script>
 </body>

@@ -50,6 +50,21 @@ class DashboardContentComponent extends HTMLElement {
                 this.loadSection();
             }
         });
+
+        this.updateActiveNavLink();
+    }
+
+    updateActiveNavLink() {
+        const links = document.querySelectorAll('.dashboard-sidebar .nav-link');
+        links.forEach(link => {
+            const href = link.getAttribute('href') || '';
+            const section = href.startsWith('#') ? href.substring(1) : '';
+            if (section === this.currentSection) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
     }
 
     setupExternalPageListener() {
@@ -72,7 +87,7 @@ class DashboardContentComponent extends HTMLElement {
     }
 
     isValidSection(section) {
-        const validSections = ['overview', 'my-products', 'add-product', 'purchases', 'settings'];
+        const validSections = ['overview', 'marketplace', 'technicians', 'my-products', 'add-product', 'purchases', 'settings'];
         return validSections.includes(section);
     }
 
@@ -83,6 +98,12 @@ class DashboardContentComponent extends HTMLElement {
         switch (this.currentSection) {
             case 'overview':
                 this.loadOverview();
+                break;
+            case 'marketplace':
+                this.loadMarketplace();
+                break;
+            case 'technicians':
+                this.loadTechnicians();
                 break;
             case 'my-products':
                 this.loadMyProducts();
@@ -99,6 +120,8 @@ class DashboardContentComponent extends HTMLElement {
             default:
                 this.loadOverview();
         }
+
+        this.updateActiveNavLink();
     }
 
     loadOverview() {
@@ -367,6 +390,20 @@ class DashboardContentComponent extends HTMLElement {
                 }
             };
 
+            // Hide embedded page chrome if it is already rendered inside the iframe after load
+            const iframe = this.querySelector('#external-page-frame');
+            iframe.addEventListener('load', () => {
+                try {
+                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    const embeddedHeader = iframeDoc.querySelector('#headerContainer');
+                    if (embeddedHeader) {
+                        embeddedHeader.style.display = 'none';
+                    }
+                } catch (e) {
+                    // Cross-origin iframe; rely on page-side embedded dashboard logic
+                }
+            });
+
             // Initial adjust and on resize
             adjustIframeHeight();
             window.addEventListener('resize', adjustIframeHeight, { passive: true });
@@ -387,6 +424,14 @@ class DashboardContentComponent extends HTMLElement {
             window.removeEventListener('resize', this._adjustIframeHeightHandler);
             this._adjustIframeHeightHandler = null;
         }
+    }
+
+    loadMarketplace() {
+        this.loadExternalPage('../../pages/marketplace.html');
+    }
+
+    loadTechnicians() {
+        this.loadExternalPage('../../pages/technician/info-technician.html');
     }
 
     setupEventListeners() {
