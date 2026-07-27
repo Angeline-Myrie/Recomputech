@@ -976,23 +976,7 @@ class RecomputechHeaderAuth extends HTMLElement {
                                     </div>
                                 </div>
 
-                                <div class="dropdown-menu" id="dropdownMenu">
-                                    <a href="#overview" class="dropdown-item" data-section="overview">
-                                        <i class="fas fa-tachometer-alt"></i>
-                                        Overview
-                                    </a>
-                                    <a href="#my-products" class="dropdown-item" data-section="my-products">
-                                        <i class="fas fa-box"></i>
-                                        My Products
-                                    </a>
-                                    <a href="#add-product" class="dropdown-item" data-section="add-product">
-                                        <i class="fas fa-plus-circle"></i>
-                                        Add Product
-                                    </a>
-                                    <a href="#purchases" class="dropdown-item" data-section="purchases">
-                                        <i class="fas fa-shopping-bag"></i>
-                                        Purchases
-                                    </a>
+                                <div class="dropdown-menu" id="dropdownMenu">   
                                     <a href="#settings" class="dropdown-item" data-section="settings">
 
                                         <i class="fas fa-cog"></i>
