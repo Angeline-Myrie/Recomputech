@@ -41,6 +41,9 @@
                         <p class="user-role">User Panel</p>
                     </div>
                 </div>
+                <button id="sidebarToggleBtn" class="sidebar-toggle-btn">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
             </div>
 
             <nav class="sidebar-nav">
@@ -91,14 +94,13 @@
             </nav>
         </aside>
 
+        <!-- Floating Toggle Button (visible when sidebar is collapsed) -->
+        <button id="sidebarFloatingToggleBtn" class="sidebar-floating-toggle-btn" title="Mostrar menú">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
         <div class="dashboard-main">
             <main class="main-content">
-                <div class="dashboard-toolbar">
-                    <button id="sidebarToggleBtn" class="sidebar-toggle-btn">
-                        <i class="fas fa-bars"></i>
-                        Ocultar menú
-                    </button>
-                </div>
                 <dashboard-content-component></dashboard-content-component>
             </main>
         </div>
@@ -150,11 +152,19 @@
         });
 
         const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
-        sidebarToggleBtn?.addEventListener('click', () => {
+        const sidebarFloatingToggleBtn = document.getElementById('sidebarFloatingToggleBtn');
+        
+        function toggleSidebar() {
             document.body.classList.toggle('sidebar-collapsed');
             const isCollapsed = document.body.classList.contains('sidebar-collapsed');
-            sidebarToggleBtn.innerHTML = `${isCollapsed ? '<i class="fas fa-bars"></i> Mostrar menú' : '<i class="fas fa-bars"></i> Ocultar menú'}`;
-        });
+            const iconElement = sidebarToggleBtn.querySelector('i');
+            if (iconElement) {
+                iconElement.className = isCollapsed ? 'fas fa-chevron-right' : 'fas fa-chevron-left';
+            }
+        }
+        
+        sidebarToggleBtn?.addEventListener('click', toggleSidebar);
+        sidebarFloatingToggleBtn?.addEventListener('click', toggleSidebar);
     </script>
 </body>
 </html> 
