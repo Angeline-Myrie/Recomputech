@@ -839,14 +839,20 @@ body {
      z-index: 10;
 }
 
-/* Desktop: sidebar fijo al hacer scroll, debajo del header (banner sube normalmente) */
+.sidebar-column {
+    position: relative;
+}
+
+/* Desktop: sidebar pegado al scroll (refuerzo JS con .is-fixed) */
 @media (min-width: 1201px) {
     .sidebar {
-        position:sticky;
-        top: 100px;
-        height: auto;
-        max-height: calc(100vh - 120px);
         width: 100%;
+        max-height: calc(100vh - 120px);
+    }
+
+    .sidebar.is-fixed {
+        position: fixed;
+        z-index: 100;
     }
 }
 .sidebar.collapsed {
