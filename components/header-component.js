@@ -1134,7 +1134,7 @@ class HeaderComponent extends HTMLElement {
         } else {
             this.cartItems.push({
                 ...product,
-                image: product.images[1],
+                image: product.images?.[0] || product.image,
                 quantity: 1
             });
         }
