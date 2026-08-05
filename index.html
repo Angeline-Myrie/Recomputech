@@ -118,63 +118,20 @@
     <section id="products" class="py-5">
         <div class="container">
             <div class="section-header text-center mb-5" data-aos="fade-up">
-                <span class="section-badge">Featured Products</span>
-                <h2 class="section-title">Discover Our Selection</h2>
-                <p class="section-subtitle">Refurbished products with warranty and quality certification</p>
+                <span class="section-badge">Our Products</span>
+                <h2 class="section-title">Explore Our Best Refurbished Picks</h2>
+                <p class="section-subtitle">A curated horizontal showcase of top refurbished devices ready to shop.</p>
             </div>
             
-            <!-- Modern Search and Filter Section -->
-            <div class="search-filter-container mb-5" data-aos="fade-up">
-                <!-- Categories Filter -->
-                <div class="filters-section">
-                    <div class="categories-filter mb-4">
-                        <h6 class="filter-label">Categories</h6>
-                        <div class="categories-grid">
-                            <button class="category-btn active" data-category="all">
-                                <i class="fas fa-border-all"></i>
-                                <span>All Products</span>
-                            </button>
-                            <button class="category-btn" data-category="laptops">
-                                <i class="fas fa-laptop"></i>
-                                <span>Laptops</span>
-                            </button>
-                            <button class="category-btn" data-category="desktops">
-                                <i class="fas fa-desktop"></i>
-                                <span>Desktop PCs</span>
-                            </button>
-                            <button class="category-btn" data-category="phones">
-                                <i class="fas fa-mobile-alt"></i>
-                                <span>Smartphones</span>
-                            </button>
-                            <button class="category-btn" data-category="tablets">
-                                <i class="fas fa-tablet-alt"></i>
-                                <span>Tablets</span>
-                            </button>
-                            <button class="category-btn" data-category="accessories">
-                                <i class="fas fa-headphones"></i>
-                                <span>Accessories</span>
-                            </button>
-                        </div>
-                    </div>
-                    
-                    <div class="view-all-section text-center">
-                        <a href="pages/marketplace.html" class="btn btn-primary btn-lg filter-view-all">
-                            <i class="fas fa-arrow-right"></i>
-                            <span>View All Products</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row g-4" data-aos="fade-up">
-                <div class="col-lg-3 col-md-6">
+            <div class="product-slider-wrapper mb-4" data-aos="fade-up">
+                <div class="product-slider">
                     <div class="product-card" data-category="desktops">
                         <div class="product-image">
-                            <img src="assets/images/pcs%20refurbished/Lenovo%20M920q%20Mini%20PC.png" alt="Lenovo M920q Mini PC" class="img-fluid">
+                            <img src="assets/images/pcs refurbished/DELL 3070.png" alt="DELL OptiPlex 3070" class="img-fluid">
                             <div class="product-badge">Refurbished</div>
                         </div>
                         <div class="product-content">
-                            <h5 class="product-title">DELL 3070</h5>
+                            <h5 class="product-title">DELL OptiPlex 3070</h5>
                             <p class="product-description">High-performance desktop computer with warranty</p>
                             <div class="product-price">
                                 <span class="current-price">B/. 239.99</span>
@@ -196,11 +153,37 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
+                    <div class="product-card" data-category="laptops">
+                        <div class="product-image">
+                            <img src="assets/images/laptops refurbished/HP Victus 15.jpg" alt="HP Victus 15" class="img-fluid">
+                            <div class="product-badge">Refurbished</div>
+                        </div>
+                        <div class="product-content">
+                            <h5 class="product-title">HP Victus 15</h5>
+                            <p class="product-description">Powerful laptop with impeccable gaming performance</p>
+                            <div class="product-price">
+                                <span class="current-price">B/. 549.99</span>
+                                <span class="original-price">B/. 799.99</span>
+                            </div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>4.7</span>
+                            </div>
+                            <div class="product-actions d-flex gap-2">
+                                <a href="pages/products/product-detail.html?id=hp-victus-15" class="btn btn-primary flex-grow-1">View Details</a>
+                                <button class="btn btn-light add-to-cart-btn" onclick="addToCart('hp-victus-15')">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                     <div class="product-card" data-category="phones">
                         <div class="product-image">
-                            <img src="assets/images/smartphones refurbished/iPhone-13-pink.png" alt="iPhone 13" class="img-fluid">
+                            <img src="assets/images/smartphones refurbished/iPhone-13-pink.png" alt="iPhone 13 128GB" class="img-fluid">
                             <div class="product-badge">Refurbished</div>
                         </div>
                         <div class="product-content">
@@ -226,16 +209,14 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="product-card" data-category="laptops">
+                    <div class="product-card" data-category="tablets">
                         <div class="product-image">
-                            <img src="assets/images/iPad 11 pro max.jpg" alt="Gaming Laptop" class="img-fluid">
+                            <img src="assets/images/tablet.png" alt="iPad Pro 11&quot;" class="img-fluid">
                             <div class="product-badge">Refurbished</div>
                         </div>
                         <div class="product-content">
                             <h5 class="product-title">iPad Pro 11"</h5>
-                            <p class="product-description">Professional tablet with Apple M1 chip</p>
+                            <p class="product-description">Professional tablet with fast Apple M1 performance</p>
                             <div class="product-price">
                                 <span class="current-price">B/. 699.99</span>
                                 <span class="original-price">B/. 999.99</span>
@@ -256,11 +237,37 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="product-card" data-category="tablets">
+                    <div class="product-card" data-category="accessories">
                         <div class="product-image">
-                            <img src="assets/images/smartphones refurbished/Galaxy S21 5G 128GB - Gray.png" alt="iPad Pro 11" class="img-fluid">
+                            <img src="assets/images/accessories refurbished/Galaxy Buds FE.jpg" alt="Galaxy Buds FE" class="img-fluid">
+                            <div class="product-badge">Refurbished</div>
+                        </div>
+                        <div class="product-content">
+                            <h5 class="product-title">Galaxy Buds FE</h5>
+                            <p class="product-description">Wireless earbuds with rich sound and long battery life</p>
+                            <div class="product-price">
+                                <span class="current-price">B/. 79.99</span>
+                                <span class="original-price">B/. 129.99</span>
+                            </div>
+                            <div class="product-rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span>4.6</span>
+                            </div>
+                            <div class="product-actions d-flex gap-2">
+                                <a href="pages/products/product-detail.html?id=galaxy-buds-fe" class="btn btn-primary flex-grow-1">View Details</a>
+                                <button class="btn btn-light add-to-cart-btn" onclick="addToCart('galaxy-buds-fe')">
+                                    <i class="fas fa-shopping-cart"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-card" data-category="phones">
+                        <div class="product-image">
+                            <img src="assets/images/smartphones refurbished/Galaxy S21 5G 128GB - Gray.png" alt="Galaxy S21 5G" class="img-fluid">
                             <div class="product-badge">Refurbished</div>
                         </div>
                         <div class="product-content">
@@ -287,6 +294,11 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="text-center mt-4" data-aos="fade-up">
+                <a href="pages/marketplace.html" class="btn btn-primary btn-lg">
+                    <i class="fas fa-arrow-right me-2"></i>View More Products
+                </a>
             </div>
         </div>
     </section>
@@ -517,27 +529,27 @@
                     <div class="contact-info-card mb-4">
                         <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
                         <div>
-                            <h5>Location</h5>
-                            <p>123 Main Street, City</p>
+                            <h5>Our Location</h5>
+                            <p>San Miguelito,<br>Panama</p>
                         </div>
                     </div>
                     <div class="contact-info-card mb-4">
                         <div class="info-icon"><i class="fas fa-phone"></i></div>
                         <div>
-                            <h5>Phone</h5>
-                            <p>(123) 456-7890</p>
+                            <h5>Phone Number</h5>
+                            <p>+507 6755-3342</p>
                         </div>
                     </div>
                     <div class="contact-info-card mb-4">
                         <div class="info-icon"><i class="fas fa-envelope"></i></div>
                         <div>
-                            <h5>Email</h5>
-                            <p>info@example.com</p>
+                            <h5>Email Address</h5>
+                            <p>info@recomputech.com<br>support@recomputech.com</p>
                         </div>
                     </div>
                     <div class="contact-socials mt-4">
                         <a href="#" class="social-icon facebook" title="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-icon twitter" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon" title="X" style="background: #000;"><i class="fab fa-x-twitter"></i></a>
                         <a href="https://www.instagram.com/recomputech.sm" class="social-icon instagram" title="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
                         <a href="#" class="social-icon linkedin" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                     </div>
@@ -623,44 +635,6 @@
         }, 200);
       });
 
-      // Add to Cart functionality
-      function addToCart(productId) {
-        const header = document.querySelector('recomputech-header') || document.querySelector('recomputech-header-auth');
-        if (header) {
-          // Get product data from our database
-          const productData = {
-            'dell-3070': {
-              id: 'dell-3070',
-              name: 'DELL OptiPlex 3070',
-              price: 239.99,
-              image: '/assets/images/pcs refurbished/DELL 3070.png'
-            },
-            'iphone-13': {
-              id: 'iphone-13',
-              name: 'iPhone 13 128GB',
-              price: 599.99,
-              image: '/assets/images/smartphones refurbished/iPhone-13-pink.png'
-            },
-            'ipad-pro-11': {
-              id: 'ipad-pro-11',
-              name: 'iPad Pro 11"',
-              price: 699.99,
-              image: '/assets/images/iPad 11 pro max.jpg'
-            },
-            'galaxy-s21': {
-              id: 'galaxy-s21',
-              name: 'Galaxy S21 5G',
-              price: 399.99,
-              image: '/assets/images/smartphones refurbished/Galaxy S21 5G 128GB - Gray.png'
-            }
-          };
-
-          const product = productData[productId];
-          if (product) {
-            header.addToCart(product);
-          }
-        }
-      }
     </script>
  
 </body>
