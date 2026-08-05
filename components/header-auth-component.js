@@ -709,6 +709,7 @@ class RecomputechHeaderAuth extends HTMLElement {
                     gap: 1rem;
                     position: relative;
                     margin-left: auto;
+                    z-index: 1000;
                 }
 
                 .user-info {
@@ -720,6 +721,7 @@ class RecomputechHeaderAuth extends HTMLElement {
                     border-radius: 10px;
                     transition: all 0.3s ease;
                     border: 1px solid #d1d5db;
+                    position: relative;
                 }
 
                 :host(.dark-mode) .user-info {
@@ -794,9 +796,10 @@ class RecomputechHeaderAuth extends HTMLElement {
                     visibility: hidden;
                     transform: translateY(-10px);
                     transition: all 0.3s ease;
-                    z-index: 1001;
+                    z-index: 10000;
                     border: 1px solid #e5e7eb;
                     padding: 0.5rem;
+                    margin-top: 0.5rem;
                 }
 
                 :host(.dark-mode) .dropdown-menu {
@@ -983,25 +986,7 @@ class RecomputechHeaderAuth extends HTMLElement {
                                 </div>
 
 
-                                <div class="dropdown-menu" id="dropdownMenu">   
                                 <div class="dropdown-menu" id="dropdownMenu">
-                                    <a href="#overview" class="dropdown-item" data-section="overview">
-                                        <i class="fas fa-tachometer-alt"></i>
-                                        Overview
-                                    </a>
-                                    <a href="#my-products" class="dropdown-item" data-section="my-products">
-                                        <i class="fas fa-box"></i>
-                                        My Products
-                                    </a>
-                                    <a href="#add-product" class="dropdown-item" data-section="add-product">
-                                        <i class="fas fa-plus-circle"></i>
-                                        Add Product
-                                    </a>
-                                    <a href="#settings" class="dropdown-item" data-section="settings">
-
-                                        <i class="fas fa-cog"></i>
-                                        Settings
-                                    </a>
                                     <a href="#" class="dropdown-item" id="logoutBtn">
                                         <i class="fas fa-sign-out-alt"></i>
                                         Logout
@@ -1293,14 +1278,13 @@ class RecomputechHeaderAuth extends HTMLElement {
     }
 
     logout() {
-        // Use global header manager for logout
-        if (window.headerManager) {
-            window.headerManager.logout();
-        } else {
-            // Fallback if header manager is not available
-            localStorage.removeItem('currentUser');
-            window.location.href = '/';
-        }
+        // Limpia datos del usuario
+        localStorage.removeItem('currentUser');
+        localStorage.removeItem('currentRole');
+        sessionStorage.clear();
+        
+        // Redirige a la página principal
+        window.location.href = '/';
     }
 
     setActiveNavLink(activeUrl = null) {

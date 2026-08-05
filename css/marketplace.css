@@ -551,6 +551,19 @@
       font-family: 'Poppins', sans-serif;
       margin-top: 80px; /* Ajusta el valor según sea necesario */
   }
+
+  body.dashboard-embedded {
+      margin-top: 0;
+  }
+
+  body.dashboard-embedded .marketplace-banner {
+      margin-top: 0;
+      padding-top: 2rem;
+  }
+
+  body.dashboard-embedded .marketplace-content {
+      padding-bottom: 2rem;
+  }
   
   /* Hero Section */
   .hero-section {

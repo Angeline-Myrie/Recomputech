@@ -70,8 +70,11 @@ body {
 }
 
 .sidebar-header {
-    padding: 2rem 1.5rem;
+    padding: 1.5rem 1.5rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .user-info {
@@ -152,33 +155,81 @@ body {
     margin-left: 280px;
     margin-top: 0 !important;
     padding-top: 0 !important;
-<<<<<<< HEAD
+    width: calc(100vw - 280px);
+    overflow-x: hidden;
     transition: margin-left 0.3s ease;
 }
 
 .dashboard-toolbar {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 1rem;
+    display: none;
 }
 
 .sidebar-toggle-btn {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.85rem 1.25rem;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
     border: none;
-    border-radius: 12px;
-    background: var(--primary-color);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
     color: white;
     font-weight: 600;
     cursor: pointer;
     transition: background 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 8px 20px rgba(33, 141, 166, 0.18);
+    flex-shrink: 0;
 }
 
 .sidebar-toggle-btn:hover {
-    background: var(--secondary-color);
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.sidebar-toggle-btn i {
+    font-size: 1.1rem;
+}
+
+/* Floating Toggle Button */
+.sidebar-floating-toggle-btn {
+    position: fixed;
+    left: 10px;
+    top: 110px;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 25;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-60px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(33, 141, 166, 0.25);
+}
+
+.sidebar-floating-toggle-btn:hover {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+    transform: translateX(-60px) scale(1.05);
+    box-shadow: 0 6px 16px rgba(33, 141, 166, 0.35);
+}
+
+.sidebar-floating-toggle-btn i {
+    font-size: 1.1rem;
+}
+
+/* Show floating button when sidebar is collapsed */
+body.sidebar-collapsed .sidebar-floating-toggle-btn {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
 }
 
 .dashboard-sidebar {
@@ -203,10 +254,6 @@ body.sidebar-collapsed .dashboard-sidebar {
 
 body.sidebar-collapsed .dashboard-main {
     margin-left: 0;
-=======
-    width: calc(100vw - 280px);
-    overflow-x: hidden;
->>>>>>> 77d68579ee70f4691a5fbfe29ba18c8a246bce03
 }
 
 .main-header {

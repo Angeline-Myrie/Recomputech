@@ -30,6 +30,10 @@ class HeaderManager {
         return window.self !== window.top;
     }
 
+    isDashboardPage() {
+        return window.location.pathname.includes('/dashboard/');
+    }
+
     applyEmbeddedDashboardMode() {
         const hideChrome = () => {
             const headerContainer = document.getElementById('headerContainer');
@@ -68,10 +72,18 @@ class HeaderManager {
             }
             return;
         }
+
         const headerContainer = document.getElementById('headerContainer');
-        
         if (!headerContainer) return;
-        
+
+        // On public pages, preserve the original principal header regardless of auth status.
+        if (!this.isDashboardPage()) {
+            if (!headerContainer.querySelector('recomputech-header')) {
+                headerContainer.innerHTML = '<recomputech-header></recomputech-header>';
+            }
+            return;
+        }
+
         if (currentUser) {
             // User is logged in - show appropriate auth header based on role
             if (currentUser.role === 'technician') {
