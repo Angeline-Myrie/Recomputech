@@ -40,7 +40,9 @@ class HeaderComponent extends HTMLElement {
                     transition: all 0.3s ease;
                 }
 
-                :host(.dark-mode) {
+                :host(.dark-mode),
+                :host-context([data-theme="dark"]),
+                :host-context(body.dark-mode) {
                     background: rgba(24, 31, 42, 0.95);
                     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
                 }
@@ -99,7 +101,11 @@ class HeaderComponent extends HTMLElement {
                 }
 
                 :host(.dark-mode) .recomputech-brand-name,
-                :host(.dark-mode) .recomputech-brand-tagline {
+                :host(.dark-mode) .recomputech-brand-tagline,
+                :host-context([data-theme="dark"]) .recomputech-brand-name,
+                :host-context([data-theme="dark"]) .recomputech-brand-tagline,
+                :host-context(body.dark-mode) .recomputech-brand-name,
+                :host-context(body.dark-mode) .recomputech-brand-tagline {
                     color: #fff;
                 }
 
@@ -1128,7 +1134,7 @@ class HeaderComponent extends HTMLElement {
         } else {
             this.cartItems.push({
                 ...product,
-                image: product.images[1],
+                image: product.images?.[0] || product.image,
                 quantity: 1
             });
         }
@@ -1348,6 +1354,7 @@ class HeaderComponent extends HTMLElement {
                 // Switch to light mode
                 body.classList.remove('dark-mode');
                 this.classList.remove('dark-mode');
+                document.documentElement.classList.remove('dark-mode');
                 localStorage.setItem('theme', 'light');
                 if (moonIcon) moonIcon.style.display = 'block';
                 if (sunIcon) sunIcon.style.display = 'none';
@@ -1355,6 +1362,7 @@ class HeaderComponent extends HTMLElement {
                 // Switch to dark mode
                 body.classList.add('dark-mode');
                 this.classList.add('dark-mode');
+                document.documentElement.classList.add('dark-mode');
                 localStorage.setItem('theme', 'dark');
                 if (moonIcon) moonIcon.style.display = 'none';
                 if (sunIcon) sunIcon.style.display = 'block';
@@ -1369,6 +1377,11 @@ class HeaderComponent extends HTMLElement {
         if (window.darkModeManager) {
             const currentTheme = window.darkModeManager.getCurrentTheme();
             this.updateThemeIcons(currentTheme);
+            
+            // Aplicar tema inmediatamente al componente
+            this.classList.toggle('dark-mode', currentTheme === 'dark');
+            document.documentElement.classList.toggle('dark-mode', currentTheme === 'dark');
+            document.body.classList.toggle('dark-mode', currentTheme === 'dark');
         } else {
             // Fallback si el DarkModeManager no está disponible
             const savedTheme = localStorage.getItem('theme') || 'light';
@@ -1380,11 +1393,13 @@ class HeaderComponent extends HTMLElement {
             if (savedTheme === 'dark') {
                 body.classList.add('dark-mode');
                 this.classList.add('dark-mode');
+                document.documentElement.classList.add('dark-mode');
                 if (moonIcon) moonIcon.style.display = 'none';
                 if (sunIcon) sunIcon.style.display = 'block';
             } else {
                 body.classList.remove('dark-mode');
                 this.classList.remove('dark-mode');
+                document.documentElement.classList.remove('dark-mode');
                 if (moonIcon) moonIcon.style.display = 'block';
                 if (sunIcon) sunIcon.style.display = 'none';
             }

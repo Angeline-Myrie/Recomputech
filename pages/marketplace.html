@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Marketplace - Recomputech</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/logo-recomputech.png">
+    <link rel="shortcut icon" type="image/png" href="../assets/logo-recomputech.png">
+    <link rel="apple-touch-icon" href="../assets/logo-recomputech.png">
     
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -20,6 +24,9 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/marketplace.css">
+    
+    <!-- Theme Initializer - Apply theme immediately -->
+    <script src="../js/theme-initializer.js"></script>
 </head>
 <body class="light-mode">
     <!-- Dynamic Header based on authentication status -->
@@ -55,7 +62,7 @@
         <div class="container-fluid">
             <div class="row">
                 <!-- Sidebar Filters -->
-                <div class="col-lg-3 col-md-4">
+                <div class="col-lg-3 col-md-4 sidebar-column">
                     <div class="sidebar" id="sidebar">
                         <div class="category-filters">
                             <div class="category-item" data-category="all">
@@ -203,6 +210,7 @@
     
     <!-- Product Data -->
     <script src="products/product-data.js"></script>
+    <script src="../js/marketplace-sidebar.js"></script>
     
     <!-- Marketplace Script -->
     <script>
@@ -468,10 +476,6 @@
             if (header) header.style.display = 'none';
             const footer = document.querySelector('recomputech-footer');
             if (footer) footer.style.display = 'none';
-            // Evitar doble scroll interno
-            document.documentElement.style.overflow = 'hidden';
-            document.body.style.overflow = 'hidden';
-        }
     </script>
 </body>
 </html>

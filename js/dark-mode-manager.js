@@ -12,7 +12,7 @@ class DarkModeManager {
     }
 
     init() {
-        // Aplicar tema guardado al cargar
+        // Aplicar tema guardado inmediatamente
         this.applySavedTheme();
         
         // Configurar listeners
@@ -24,24 +24,56 @@ class DarkModeManager {
         // Aplicar tema a elementos existentes
         this.applyThemeToExistingElements();
         
+        // Forzar aplicación del tema después de un breve delay para asegurar que todos los elementos estén cargados
+        setTimeout(() => {
+            this.forceThemeApplication();
+        }, 50);
+        
+        // Aplicar tema nuevamente después de que todos los scripts se hayan cargado
+        setTimeout(() => {
+            this.forceThemeApplication();
+        }, 200);
+        
         console.log('Dark Mode Manager initialized');
     }
 
     applySavedTheme() {
         const savedTheme = localStorage.getItem('theme') || 'light';
         this.setTheme(savedTheme);
+        
+        // Aplicar inmediatamente al documento y body
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.documentElement.classList.toggle('dark-mode', savedTheme === 'dark');
+        document.body.setAttribute('data-theme', savedTheme);
+        document.body.classList.toggle('dark-mode', savedTheme === 'dark');
+        
+        // Aplicar a todos los elementos existentes
+        const allElements = document.querySelectorAll('*');
+        allElements.forEach(element => {
+            element.classList.toggle('dark-mode', savedTheme === 'dark');
+            element.setAttribute('data-theme', savedTheme);
+        });
     }
 
     setTheme(theme) {
+        const previousTheme = this.currentTheme;
         this.currentTheme = theme;
         
+        const root = document.documentElement;
+        const body = document.body;
+        
         // Aplicar al documento
-        document.documentElement.setAttribute('data-theme', theme);
-        document.documentElement.classList.toggle('dark-mode', theme === 'dark');
+        root.setAttribute('data-theme', theme);
+        root.classList.toggle('dark-mode', theme === 'dark');
+        root.style.colorScheme = theme === 'dark' ? 'dark' : 'light';
         
         // Aplicar al body
-        document.body.setAttribute('data-theme', theme);
-        document.body.classList.toggle('dark-mode', theme === 'dark');
+        if (body) {
+            body.setAttribute('data-theme', theme);
+            body.classList.toggle('dark-mode', theme === 'dark');
+            body.style.backgroundColor = 'var(--bg-color)';
+            body.style.color = 'var(--text-color)';
+        }
         
         // Aplicar a todos los elementos con clase theme-aware
         this.applyThemeToAllElements(theme);
@@ -57,7 +89,7 @@ class DarkModeManager {
         
         // Disparar evento personalizado
         document.dispatchEvent(new CustomEvent('themeChanged', { 
-            detail: { theme, previousTheme: this.currentTheme } 
+            detail: { theme, previousTheme } 
         }));
         
         console.log(`Theme changed to: ${theme}`);
@@ -316,23 +348,43 @@ function setupThemeToggle() {
     // Ya se configura automáticamente
 }
 
+// Aplicar tema inmediatamente si el DOM ya está cargado
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        if (window.darkModeManager) {
+            window.darkModeManager.forceThemeApplication();
+        }
+    });
+} else {
+    if (window.darkModeManager) {
+        window.darkModeManager.forceThemeApplication();
+    }
+}
+
 // Aplicar tema cuando el DOM esté listo
 document.addEventListener('DOMContentLoaded', () => {
     // El tema ya se aplica automáticamente en el constructor
     // Pero podemos forzar una aplicación adicional si es necesario
     setTimeout(() => {
-        window.darkModeManager.forceThemeApplication();
+        if (window.darkModeManager) {
+            window.darkModeManager.forceThemeApplication();
+        }
     }, 100);
+    
+    // Aplicar tema nuevamente después de que todos los componentes se hayan cargado
+    setTimeout(() => {
+        if (window.darkModeManager) {
+            window.darkModeManager.forceThemeApplication();
+        }
+    }, 500);
 });
 
-// Aplicar tema inmediatamente si el DOM ya está cargado
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => {
+// Aplicar tema inmediatamente al cargar la página
+document.addEventListener('readystatechange', () => {
+    if (document.readyState === 'complete' && window.darkModeManager) {
         window.darkModeManager.forceThemeApplication();
-    });
-} else {
-    window.darkModeManager.forceThemeApplication();
-}
+    }
+});
 
 // Exportar para uso en módulos
 if (typeof module !== 'undefined' && module.exports) {

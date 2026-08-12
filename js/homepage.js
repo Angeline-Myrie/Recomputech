@@ -25,12 +25,17 @@ document.addEventListener('DOMContentLoaded', function() {
         
         products.forEach(product => {
             const productCategory = product.getAttribute('data-category');
-            
-            if (category === 'all' || productCategory === category) {
-                product.style.display = 'block';
-                product.style.animation = 'fadeIn 0.5s ease-out';
+            const productCol = product.closest('.col-lg-3, .col-md-6');
+            const visible = category === 'all' || productCategory === category;
+
+            if (productCol) {
+                productCol.style.display = visible ? '' : 'none';
             } else {
-                product.style.display = 'none';
+                product.style.display = visible ? '' : 'none';
+            }
+
+            if (visible) {
+                product.style.animation = 'fadeIn 0.5s ease-out';
             }
         });
         
@@ -39,7 +44,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function updateResultsCounter(category) {
-        const visibleProducts = document.querySelectorAll('.product-card[style*="display: block"]').length;
+        const visibleProducts = Array.from(document.querySelectorAll('.product-card')).filter(product => {
+            const productCol = product.closest('.col-lg-3, .col-md-6');
+            return productCol ? productCol.offsetParent !== null : product.offsetParent !== null;
+        }).length;
         const resultsCounter = document.querySelector('.results-counter');
         
         if (resultsCounter) {
@@ -123,25 +131,53 @@ document.addEventListener('DOMContentLoaded', function() {
                 id: 'dell-3070',
                 name: 'DELL OptiPlex 3070',
                 price: 239.99,
-                images: ['assets/images/pcs refurbished/DELL 3070.png']
+                images: [
+                    'assets/images/pcs refurbished/DELL 3070.png',
+                    'assets/images/pcs refurbished/DELL 3070.2.png'
+                ]
             },
             'iphone-13': {
                 id: 'iphone-13',
                 name: 'iPhone 13 128GB',
                 price: 599.99,
-                images: ['assets/images/smartphones refurbished/iPhone 13 128GB.1.png']
+                images: [
+                    'assets/images/smartphones refurbished/iPhone-13-pink.png',
+                    'assets/images/smartphones refurbished/iPhone 13 128GB.2.png'
+                ]
             },
             'ipad-pro-11': {
                 id: 'ipad-pro-11',
                 name: 'iPad Pro 11"',
                 price: 699.99,
-                images: ['assets/images/Tablet 11 Pro.png']
+                images: [
+                    'assets/images/tablet.png',
+                    'assets/images/Tablet 11 Pro.png'
+                ]
+            },
+            'hp-victus-15': {
+                id: 'hp-victus-15',
+                name: 'HP Victus 15',
+                price: 549.99,
+                images: [
+                    'assets/images/laptops refurbished/HP Victus 15.jpg'
+                ]
             },
             'galaxy-s21': {
                 id: 'galaxy-s21',
                 name: 'Galaxy S21 5G',
                 price: 399.99,
-                images: ['assets/images/smartphones refurbished/Galaxy S21 5G 128GB - Gray.png']
+                images: [
+                    'assets/images/smartphones refurbished/Galaxy S21 5G 128GB - Gray.png',
+                    'assets/images/smartphones refurbished/Galaxy S21 5G 128GB.2.png'
+                ]
+            },
+            'galaxy-buds-fe': {
+                id: 'galaxy-buds-fe',
+                name: 'Galaxy Buds FE',
+                price: 79.99,
+                images: [
+                    'assets/images/accessories refurbished/Galaxy Buds FE.jpg'
+                ]
             }
         };
         
@@ -168,10 +204,13 @@ window.homepageFilters = {
         const products = document.querySelectorAll('.product-card');
         products.forEach(product => {
             const productCategory = product.getAttribute('data-category');
-            if (category === 'all' || productCategory === category) {
-                product.style.display = 'block';
+            const productCol = product.closest('.col-lg-3, .col-md-6');
+            const visible = category === 'all' || productCategory === category;
+
+            if (productCol) {
+                productCol.style.display = visible ? '' : 'none';
             } else {
-                product.style.display = 'none';
+                product.style.display = visible ? '' : 'none';
             }
         });
     }

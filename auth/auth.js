@@ -98,16 +98,20 @@ document.addEventListener('DOMContentLoaded', async function() {
     toggleBtns.forEach(btn => {
         btn.addEventListener('click', function() {
             const mode = this.dataset.mode;
-            // Siempre permitir el cambio de modo
+            
+            if (mode === currentMode) return;
+
             // Update active button
             toggleBtns.forEach(b => b.classList.remove('active'));
             this.classList.add('active');
+
             // Update content based on mode
             if (mode === 'login') {
                 switchToLogin();
             } else {
                 switchToRegister();
             }
+
             currentMode = mode;
         });
     });
@@ -168,6 +172,11 @@ document.addEventListener('DOMContentLoaded', async function() {
 
             // Store selected type
             localStorage.setItem('selectedUserType', type);
+
+            // Redirect to dedicated technician registration page
+            if (type === 'technician') {
+                window.location.href = 'technician.html?mode=register';
+            }
         });
     });
 
@@ -197,10 +206,10 @@ document.addEventListener('DOMContentLoaded', async function() {
     // ========================================
 
     // Login form validation
-    loginForm.addEventListener('submit', function(e) {
+    loginForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        const email = document.getElementById('loginEmail').value;
+        const email = document.getElementById('loginEmail').value.trim();
         const password = document.getElementById('loginPassword').value;
 
         if (!email || !password) {
@@ -213,39 +222,47 @@ document.addEventListener('DOMContentLoaded', async function() {
             return;
         }
 
-        // Attempt login with local data
         showNotification('Signing in...', 'info');
-        
-        const user = AuthService.login(email, password);
-        
-        if (user) {
-            showNotification(`Welcome back, ${user.name}!`, 'success');
-            setTimeout(() => {
-                // Redirect based on user role
-                if (user.role === 'technician') {
-                    window.location.href = '../dashboard/Technician/dashboard-technician.html';
-                } else if (user.role === 'admin') {
-                    window.location.href = '../dashboard/Admin/dashboard-admin.html';
-                } else {
-                    // Regular user - redirect to dashboard
-                    window.location.href = '../dashboard/RegularUser/dashboard.html';
-                }
-            }, 1500);
-        } else {
-            showNotification('Invalid email or password', 'error');
+
+        try {
+            let user = null;
+
+            if (window.UsersService && UsersService.isConfigured()) {
+                const result = await UsersService.login({ email, password });
+                user = result.user;
+            } else {
+                user = AuthService.login(email, password);
+            }
+
+            if (user) {
+                showNotification(`Welcome back, ${user.name}!`, 'success');
+                setTimeout(() => {
+                    redirectAfterAuth(user);
+                }, 1500);
+            } else {
+                showNotification('Invalid email or password', 'error');
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            const message = window.UsersService?.getAuthErrorMessage
+                ? UsersService.getAuthErrorMessage(error)
+                : (error.message || 'Invalid email or password');
+            showNotification(message, 'error');
         }
     });
 
     // Register form validation
-    registerForm.addEventListener('submit', function(e) {
+    registerForm.addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        const firstName = document.getElementById('firstName').value;
-        const lastName = document.getElementById('lastName').value;
-        const email = document.getElementById('registerEmail').value;
+        const firstName = document.getElementById('firstName').value.trim();
+        const lastName = document.getElementById('lastName').value.trim();
+        const email = document.getElementById('registerEmail').value.trim();
         const password = document.getElementById('registerPassword').value;
         const confirmPassword = document.getElementById('confirmPassword').value;
         const agreeTerms = document.getElementById('agreeTerms').checked;
+        const activeUserTypeBtn = document.querySelector('.user-type-btn.active');
+        const accountType = activeUserTypeBtn ? activeUserTypeBtn.dataset.type : 'regular';
 
         if (!firstName || !lastName || !email || !password || !confirmPassword) {
             showNotification('Please fill in all fields', 'error');
@@ -272,18 +289,50 @@ document.addEventListener('DOMContentLoaded', async function() {
             return;
         }
 
-        // Simulate registration process
         showNotification('Creating account...', 'info');
-        // Detectar si el tipo de usuario es Technician
-        const technicianBtn = document.querySelector('.user-type-btn[data-type="technician"]');
-        setTimeout(() => {
-            showNotification('Account created successfully!', 'success');
-            if (technicianBtn.classList.contains('active')) {
-                window.location.href = 'welcome-technician.html';
-            } else {
-                window.location.href = '../index.html';
+
+        try {
+            if (window.UsersService && UsersService.isConfigured()) {
+                const result = await UsersService.register({
+                    firstName,
+                    lastName,
+                    email,
+                    password,
+                    accountType,
+                    termsAccepted: agreeTerms
+                });
+
+                if (result.session && result.profile) {
+                    UsersService.saveSessionUser(UsersService.toSessionUser(result.profile));
+                    showNotification('Account created successfully!', 'success');
+                    setTimeout(() => {
+                        redirectAfterAuth(UsersService.toSessionUser(result.profile));
+                    }, 1500);
+                    return;
+                }
+
+                showNotification('Account created! Check your email to confirm before signing in.', 'success');
+                setTimeout(() => {
+                    switchToLogin();
+                }, 2500);
+                return;
             }
-        }, 2000);
+
+            showNotification('Account created successfully!', 'success');
+            setTimeout(() => {
+                if (accountType === 'technician') {
+                    window.location.href = 'welcome-technician.html';
+                } else {
+                    window.location.href = '../index.html';
+                }
+            }, 2000);
+        } catch (error) {
+            console.error('Registration error:', error);
+            const message = window.UsersService?.getAuthErrorMessage
+                ? UsersService.getAuthErrorMessage(error)
+                : (error.message || 'Could not create account. Please try again.');
+            showNotification(message, 'error');
+        }
     });
 
     // ========================================
@@ -306,6 +355,16 @@ document.addEventListener('DOMContentLoaded', async function() {
     // ========================================
     // UTILITY FUNCTIONS
     // ========================================
+
+    function redirectAfterAuth(user) {
+        if (user.role === 'technician') {
+            window.location.href = '../dashboard/Technician/dashboard-technician.html';
+        } else if (user.role === 'admin') {
+            window.location.href = '../dashboard/Admin/dashboard-admin.html';
+        } else {
+            window.location.href = '../dashboard/RegularUser/dashboard.html';
+        }
+    }
 
     function isValidEmail(email) {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -476,8 +535,6 @@ function showError(input, message) {
     input.classList.add('is-invalid');
 }
 
-    // Detectar si el tipo de usuario es Technician
-    // (Eliminado: este bloque ya está dentro del setTimeout de registro y no debe estar aquí, para no interferir con el toggle)
 function removeError(input) {
     const formGroup = input.closest('.form-group');
     const errorDiv = formGroup.querySelector('.error-message');

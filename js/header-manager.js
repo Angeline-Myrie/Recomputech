@@ -5,6 +5,11 @@ class HeaderManager {
     }
 
     init() {
+        if (this.isEmbeddedInDashboard()) {
+            this.applyEmbeddedDashboardMode();
+            return;
+        }
+
         // Check authentication status on page load
         this.checkAuthStatus();
         
@@ -21,6 +26,42 @@ class HeaderManager {
         });
     }
 
+    isEmbeddedInDashboard() {
+        return window.self !== window.top;
+    }
+
+    isDashboardPage() {
+        return window.location.pathname.includes('/dashboard/');
+    }
+
+    applyEmbeddedDashboardMode() {
+        const hideChrome = () => {
+            const headerContainer = document.getElementById('headerContainer');
+            if (headerContainer) {
+                headerContainer.style.display = 'none';
+                headerContainer.innerHTML = '';
+            }
+
+            document.querySelectorAll(
+                'recomputech-header, recomputech-header-auth, recomputech-header-auth-technician, header'
+            ).forEach(el => {
+                el.style.display = 'none';
+            });
+
+            const footer = document.querySelector('recomputech-footer');
+            if (footer) footer.style.display = 'none';
+
+            document.documentElement.classList.add('dashboard-embedded');
+            document.body?.classList.add('dashboard-embedded');
+        };
+
+        hideChrome();
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', hideChrome);
+        }
+    }
+
     checkAuthStatus() {
         const currentUser = this.getCurrentUser();
         // If a specific home container exists, always render public header on homepage
@@ -31,10 +72,18 @@ class HeaderManager {
             }
             return;
         }
+
         const headerContainer = document.getElementById('headerContainer');
-        
         if (!headerContainer) return;
-        
+
+        // On public pages, preserve the original principal header regardless of auth status.
+        if (!this.isDashboardPage()) {
+            if (!headerContainer.querySelector('recomputech-header')) {
+                headerContainer.innerHTML = '<recomputech-header></recomputech-header>';
+            }
+            return;
+        }
+
         if (currentUser) {
             // User is logged in - show appropriate auth header based on role
             if (currentUser.role === 'technician') {
