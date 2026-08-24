@@ -769,10 +769,16 @@ body {
     border-radius: 0 0 30px 30px;
     position: relative;
     z-index: 1;
+    overflow: hidden;
 }
 
+.marketplace-banner::before {
+    display:none;
+}
 .banner-content {
     text-align: center;
+    position: relative;
+    z-index: 2;
 }
 
 .banner-title {
@@ -819,9 +825,10 @@ body {
     transform: translateY(-50%);
     color: #64748b;
     transition: color 0.3s ease;
+    pointer-events: none;
 }
 
-.search-input:focus + .search-icon {
+.search-input:focus S~ .search-icon {
     color: #218DA6;
 }
 

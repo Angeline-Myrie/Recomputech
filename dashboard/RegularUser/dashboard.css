@@ -35,12 +35,12 @@
 .dashboard-container {
     display: flex;
     min-height: 100vh;
-    background-color: #f8f9fa;
+    background-color: var(--bg-light);
 }
 
 body {
     margin: 0;
-    background-color: #f8f9fa;
+    background-color: var(--bg-light);
     color: var(--text-color);
     overflow-x: hidden;
 }
@@ -50,7 +50,7 @@ body {
     align-items: flex-start;
     min-height: calc(100vh - 90px);
     padding-top: 90px;
-    background-color: #f8f9fa;
+    background-color: var(--bg-light);
 }
 
 /* Sidebar Styles */
@@ -156,6 +156,7 @@ body {
     margin-top: 0 !important;
     padding-top: 0 !important;
     width: calc(100vw - 280px);
+    background-color: var(--bg-light);
     overflow-x: hidden;
     transition: margin-left 0.3s ease;
 }
@@ -1009,6 +1010,24 @@ body.sidebar-collapsed .dashboard-main {
     width: 16px;
     text-align: center;
     color: #218DA6;
+}
+
+.activity-empty {
+    list-style: none;
+    padding: 2rem 1rem;
+    text-align: center;
+    color: var(--text-light);
+}
+
+.activity-empty i {
+    display: block;
+    margin-bottom: 0.75rem;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+}
+
+.activity-empty p {
+    margin: 0;
 }
 
 /* Danger Zone */
