@@ -782,6 +782,9 @@ body {
     display: none !important;
 }
 
+.marketplace-banner::before {
+    display:none;
+}
 .banner-content {
     text-align: center;
     position: relative;

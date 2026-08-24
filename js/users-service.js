@@ -144,24 +144,8 @@ const UsersService = {
 
         let profile = null;
 
-        if (authData.session) {
-            const { data, error } = await supabase
-                .from('users')
-                .insert({
-                    first_name: firstName,
-                    last_name: lastName,
-                    email,
-                    account_type: mappedAccountType,
-                    terms_accepted: termsAccepted
-                })
-                .select('*')
-                .single();
-
-            if (error) {
-                throw error;
-            }
-
-            profile = data;
+        if (authData.session && authData.user) {
+            profile = await this.ensureProfile(authData.user);
         }
 
         return {
