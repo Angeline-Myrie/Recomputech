@@ -131,11 +131,19 @@ class DashboardContentComponent extends HTMLElement {
     loadSell() {
         this.innerHTML = `
             <div class="dashboard-section" data-aos="fade-up">
-                <!-- Section Header -->
-                <section class="section-header">
-                    <div class="header-content">
-                        <h1>Sell Your Products</h1>
-                        <p>List your refurbished technology and reach thousands of buyers</p>
+                <!-- Welcome Section -->
+                <section class="welcome-section" data-aos="fade-up">
+                    <div class="welcome-header">
+                        <div class="welcome-bg-elements" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none;">
+                            <div class="floating-circle" style="position: absolute; width: 120px; height: 120px; background: rgba(255,255,255,0.1); border-radius: 50%; top: 20%; left: 10%; animation: float 6s ease-in-out infinite;"></div>
+                            <div class="floating-circle" style="position: absolute; width: 80px; height: 80px; background: rgba(255,255,255,0.08); border-radius: 50%; top: 60%; right: 15%; animation: float 8s ease-in-out infinite reverse;"></div>
+                            <div class="floating-circle" style="position: absolute; width: 60px; height: 60px; background: rgba(255,255,255,0.06); border-radius: 50%; bottom: 20%; left: 20%; animation: float 7s ease-in-out infinite;"></div>
+                        </div>
+
+                        <div class="welcome-content">
+                            <h1>Sell Your Products</h1>
+                            <p>List your refurbished technology and reach thousands of buyers</p>
+                        </div>
                     </div>
                 </section>
 
