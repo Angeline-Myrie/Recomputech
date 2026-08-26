@@ -227,7 +227,10 @@ document.addEventListener('DOMContentLoaded', async function() {
         try {
             let user = null;
 
-            if (window.UsersService && UsersService.isConfigured()) {
+            if (window.UsersService) {
+                if (!UsersService.isConfigured()) {
+                    throw new Error('Supabase is not configured. Add the project URL and anon key in js/supabase-config.js.');
+                }
                 const result = await UsersService.login({ email, password });
                 user = result.user;
             } else {
@@ -292,7 +295,10 @@ document.addEventListener('DOMContentLoaded', async function() {
         showNotification('Creating account...', 'info');
 
         try {
-            if (window.UsersService && UsersService.isConfigured()) {
+            if (window.UsersService) {
+                if (!UsersService.isConfigured()) {
+                    throw new Error('Supabase is not configured. Add the project URL and anon key in js/supabase-config.js.');
+                }
                 const result = await UsersService.register({
                     firstName,
                     lastName,

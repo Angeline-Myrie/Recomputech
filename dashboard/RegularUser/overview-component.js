@@ -16,7 +16,7 @@ class OverviewComponent extends HTMLElement {
 
     connectedCallback() {
         this.loadUserData();
-        this.generateMockData();
+        this.loadUserStats();
         this.render();
         this.setupEventListeners();
         this.initializeCharts();
@@ -29,23 +29,12 @@ class OverviewComponent extends HTMLElement {
         }
     }
 
-    generateMockData() {
-        // Generar datos simulados basados en el usuario
-        const userId = this.userData?.id || 1;
-        
-        // Tiempo en el perfil (días desde registro)
-        const registrationDate = new Date(2024, 0, 15); // 15 de enero 2024
+    loadUserStats() {
+        const registrationDate = this.userData?.createdAt || this.userData?.created_at;
         const today = new Date();
-        this.stats.timeInProfile = Math.floor((today - registrationDate) / (1000 * 60 * 60 * 24));
-        
-        // Datos simulados basados en el ID del usuario
-        this.stats.totalPurchases = 12 + (userId * 3);
-        this.stats.totalSales = 8 + (userId * 2);
-        this.stats.techniciansContacted = 5 + userId;
-        this.stats.totalSpent = 1250.50 + (userId * 150);
-        this.stats.totalEarned = 890.75 + (userId * 100);
-        this.stats.activeListings = 3 + (userId % 3);
-        this.stats.reviewsGiven = 7 + (userId * 2);
+        this.stats.timeInProfile = registrationDate
+            ? Math.max(0, Math.floor((today - new Date(registrationDate)) / (1000 * 60 * 60 * 24)))
+            : 0;
     }
 
     render() {
@@ -185,35 +174,9 @@ class OverviewComponent extends HTMLElement {
                                 </div>
                                 <div class="card-body">
                                     <ul class="activity-list" id="activityList">
-                                        <li class="activity-item">
-                                            <div class="activity-icon">
-                                                <i class="fas fa-shopping-cart"></i>
-                                            </div>
-                                            <div class="activity-content">
-                                                <h5>Purchase made</h5>
-                                                <p>You bought "HP Victus Gaming Laptop" for $850.00</p>
-                                                <span class="activity-time">2 days ago</span>
-                                            </div>
-                                        </li>
-                                        <li class="activity-item">
-                                            <div class="activity-icon">
-                                                <i class="fas fa-box"></i>
-                                            </div>
-                                            <div class="activity-content">
-                                                <h5>Product sold</h5>
-                                                <p>You sold "Refurbished Dell PC" for $450.00</p>
-                                                <span class="activity-time">5 days ago</span>
-                                            </div>
-                                        </li>
-                                        <li class="activity-item">
-                                            <div class="activity-icon">
-                                                <i class="fas fa-tools"></i>
-                                            </div>
-                                            <div class="activity-content">
-                                                <h5>Contacted technician</h5>
-                                                <p>You contacted María García for repair</p>
-                                                <span class="activity-time">1 week ago</span>
-                                            </div>
+                                        <li class="activity-empty">
+                                            <i class="fas fa-clock"></i>
+                                            <p>Your activity will appear here.</p>
                                         </li>
                                     </ul>
                                 </div>
@@ -228,11 +191,11 @@ class OverviewComponent extends HTMLElement {
                                 </div>
                                 <div class="card-body">
                                     <div class="quick-actions">
-                                        <button class="quick-action-btn" onclick="window.location.href='/dashboard/RegularUser/sell.html'">
+                                        <button class="quick-action-btn" data-action="sell" type="button">
                                             <i class="fas fa-plus-circle"></i>
                                             <span>Sell Product</span>
                                         </button>
-                                        <button class="quick-action-btn" onclick="window.location.href='/dashboard/RegularUser/cart.html'">
+                                        <button class="quick-action-btn" data-action="cart" type="button">
                                             <i class="fas fa-shopping-cart"></i>
                                             <span>View Cart</span>
                                         </button>
@@ -247,7 +210,15 @@ class OverviewComponent extends HTMLElement {
     }
 
     setupEventListeners() {
-        // Add any specific event listeners for overview
+        this.addEventListener('click', (event) => {
+            const action = event.target.closest('.quick-action-btn')?.dataset.action;
+            if (action === 'sell') {
+                window.location.hash = 'add-product';
+            }
+            if (action === 'cart') {
+                document.querySelector('recomputech-header-auth')?.handleCartClick();
+            }
+        });
     }
 
     initializeCharts() {
@@ -268,7 +239,7 @@ class OverviewComponent extends HTMLElement {
                 data: {
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
                     datasets: [{
-                        data: [5, 10, 15, 20, 25, this.stats.timeInProfile],
+                        data: [0, 0, 0, 0, 0, this.stats.timeInProfile],
                         backgroundColor: '#218DA6', // azul principal
                         borderRadius: 8,
                         maxBarThickness: 18
@@ -293,7 +264,7 @@ class OverviewComponent extends HTMLElement {
                 data: {
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
                     datasets: [{
-                        data: [2, 4, 6, 8, 10, this.stats.totalPurchases],
+                        data: [0, 0, 0, 0, 0, this.stats.totalPurchases],
                         backgroundColor: '#1b6e82', // azul secundario
                         borderRadius: 8,
                         maxBarThickness: 18
@@ -318,7 +289,7 @@ class OverviewComponent extends HTMLElement {
                 data: {
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
                     datasets: [{
-                        data: [1, 3, 5, 7, 9, this.stats.totalSales],
+                        data: [0, 0, 0, 0, 0, this.stats.totalSales],
                         backgroundColor: '#155a6b', // acento
                         borderRadius: 8,
                         maxBarThickness: 18
@@ -343,7 +314,7 @@ class OverviewComponent extends HTMLElement {
                 data: {
                     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
                     datasets: [{
-                        data: [1, 2, 3, 4, 5, this.stats.techniciansContacted],
+                        data: [0, 0, 0, 0, 0, this.stats.techniciansContacted],
                         backgroundColor: '#218DA6', // azul principal (repetido para consistencia)
                         borderRadius: 8,
                         maxBarThickness: 18
@@ -371,13 +342,13 @@ class OverviewComponent extends HTMLElement {
                     labels: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio'],
                     datasets: [{
                         label: 'Purchases',
-                        data: [3, 5, 2, 8, 4, 6],
+                        data: [0, 0, 0, 0, 0, this.stats.totalPurchases],
                         backgroundColor: 'rgba(33, 141, 166, 0.7)', // azul principal
                         borderColor: '#218DA6',
                         borderWidth: 1
                     }, {
                         label: 'Sales',
-                        data: [2, 3, 4, 5, 6, 7],
+                        data: [0, 0, 0, 0, 0, this.stats.totalSales],
                         backgroundColor: 'rgba(27, 110, 130, 0.7)', // azul secundario
                         borderColor: '#1b6e82',
                         borderWidth: 1
