@@ -762,10 +762,9 @@ body {
 }
 
 /* Banner Section - FIXED FOR WHITE LINE */
-.marketplace-banner {
-  background: linear-gradient(-45deg, #218DA6, #1b6e82, #155a6b, #218DA6);
-  background-size: 400% 400%;
-  animation: gradientShift 15s ease infinite;
+ .marketplace-banner {
+   background-color: var(--primary-color) !important;
+   background-image: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%) !important;
     color: white;
     padding: 4rem 0 3rem 0;
     margin-top: 80px;
@@ -776,7 +775,11 @@ body {
     overflow: hidden;
     width: 100%;
     box-sizing: border-box;
-}
+ }
+  .marketplace-banner .container,
+  .marketplace-banner .banner-content {
+    background: transparent !important;
+  }
 
 .marketplace-banner::before {
   content: '';
@@ -794,17 +797,21 @@ body {
 }
 
 .banner-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: white;
+  line-height: 1.2;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
     padding: 0 20px;
     margin: 0 auto 1rem;
 }
 
 .banner-subtitle {
-    font-size: 1.1rem;
-    opacity: 0.9;
-    margin-bottom: 2rem;
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.7;
+  margin-bottom: 2rem;
     padding: 0 20px;
     margin-bottom: 2rem;
 }
