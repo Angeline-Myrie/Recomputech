@@ -6,6 +6,7 @@
 
     let sidebar = null;
     let column = null;
+    let footer = null;
     let rafId = null;
 
     function getStickyTop() {
@@ -15,7 +16,10 @@
     function resetSidebar() {
         if (!sidebar || !column) return;
         sidebar.classList.remove('is-fixed');
+        sidebar.style.position = '';
         sidebar.style.top = '';
+        sidebar.style.right = '';
+        sidebar.style.bottom = '';
         sidebar.style.left = '';
         sidebar.style.width = '';
         sidebar.style.maxHeight = '';
@@ -33,6 +37,23 @@
 
         if (columnRect.top <= stickyTop) {
             const sidebarHeight = sidebar.offsetHeight;
+            const footerRect = footer?.getBoundingClientRect();
+            const footerTop = footerRect?.top ?? Number.POSITIVE_INFINITY;
+
+            if (footerTop <= stickyTop + sidebarHeight) {
+                sidebar.classList.remove('is-fixed');
+                sidebar.style.position = 'absolute';
+                sidebar.style.top = 'auto';
+                sidebar.style.right = '0';
+                sidebar.style.bottom = '0';
+                sidebar.style.left = '0';
+                sidebar.style.width = '100%';
+                sidebar.style.maxHeight = 'calc(100vh - ' + (stickyTop + 20) + 'px)';
+                column.style.minHeight = sidebarHeight + 'px';
+                return;
+            }
+
+            sidebar.style.position = '';
             sidebar.classList.add('is-fixed');
             sidebar.style.top = stickyTop + 'px';
             sidebar.style.left = columnRect.left + 'px';
@@ -55,6 +76,7 @@
     function init() {
         sidebar = document.getElementById('sidebar');
         column = document.querySelector('.sidebar-column');
+        footer = document.querySelector('recomputech-footer');
 
         if (!sidebar || !column) return;
 

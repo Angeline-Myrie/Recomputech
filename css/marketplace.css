@@ -135,7 +135,9 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="[...]
+    background: radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.16) 0 2px, transparent 3px),
+                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.12) 0 2px, transparent 3px);
+    background-size: 90px 90px, 120px 120px;
     opacity: 0.3;
   }
   
@@ -761,7 +763,9 @@ body {
 
 /* Banner Section - FIXED FOR WHITE LINE */
 .marketplace-banner {
-    background: linear-gradient(135deg, #218DA6 0%, #1b6e82 100%);
+  background: linear-gradient(-45deg, #218DA6, #1b6e82, #155a6b, #218DA6);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
     color: white;
     padding: 4rem 0 3rem 0;
     margin-top: 80px;
@@ -775,15 +779,13 @@ body {
 }
 
 .marketplace-banner::before {
-    display: none !important;
-}
-
-.marketplace-banner::after {
-    display: none !important;
-}
-
-.marketplace-banner::before {
-    display:none;
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+  pointer-events: none;
 }
 .banner-content {
     text-align: center;
