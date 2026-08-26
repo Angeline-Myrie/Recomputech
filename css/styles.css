@@ -725,8 +725,8 @@ body.dark-mode p, body.dark-mode span, body.dark-mode div {
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-    width: 8px;
-    border-radius: 20px;
+    width: 0px;
+    border-radius: 10px;
 }
 ::-webkit-scrollbar-track {
     background: var(--bg-light);
