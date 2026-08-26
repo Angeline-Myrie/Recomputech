@@ -1,5 +1,3 @@
-@import url('./dark-mode-variables.css');
-
 /* ========================================
    MODERN AUTHENTICATION STYLES
    Computer Marketplace - Tech Inspired
@@ -1136,7 +1134,7 @@
    ======================================== */
 
 .technician-auth-container {
-    max-width: 720px;
+    max-width: 500px;
     width: 100%;
 }
 
