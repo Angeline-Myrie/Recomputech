@@ -21,18 +21,19 @@ const UsersService = {
     },
 
     toSessionUser(profile) {
-        return {
-            id: profile.id,
-            email: profile.email,
-            name: `${profile.first_name} ${profile.last_name}`.trim(),
-            firstName: profile.first_name,
-            lastName: profile.last_name,
-            role: profile.account_type,
-            accountType: profile.account_type,
-            termsAccepted: profile.terms_accepted,
-            avatar: profile.avatar || this.getDefaultAvatar(profile.account_type)
-        };
-    },
+    return {
+        id: profile.id,
+        userId: profile.user_id,
+        email: profile.email,
+        name: `${profile.first_name} ${profile.last_name}`.trim(),
+        firstName: profile.first_name,
+        lastName: profile.last_name,
+        role: profile.account_type,
+        accountType: profile.account_type,
+        termsAccepted: profile.terms_accepted,
+        avatar: profile.avatar || this.getDefaultAvatar(profile.account_type)
+    };
+},
 
     getDefaultAvatar(accountType) {
         if (accountType === 'technician') {
