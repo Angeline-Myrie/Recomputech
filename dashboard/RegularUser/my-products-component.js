@@ -1,75 +1,61 @@
  class MyProductsComponent extends HTMLElement {
     constructor() {
-        super();
-        this.products = [
-            { 
-                id: 1, 
-                name: 'Gaming Laptop HP Victus', 
-                status: 'active', 
-                category: 'Laptops', 
-                price: 1200, 
-                date: '2024-06-01',
-                image: '../../assets/images/laptops refurbished/HP Victus 15.jpg',
-                description: 'High-performance gaming laptop with RTX graphics'
-            },
-            { 
-                id: 2, 
-                name: 'Refurbished Dell PC', 
-                status: 'pending', 
-                category: 'Desktops', 
-                price: 800, 
-                date: '2024-05-20',
-                image: '../../assets/images/pcs refurbished/DELL 3070.png',
-                description: 'Professional desktop computer for work and gaming'
-            },
-            { 
-                id: 3, 
-                name: 'iPad 11 Pro Max', 
-                status: 'active', 
-                category: 'Tablets', 
-                price: 400, 
-                date: '2024-04-15',
-                image: '../../assets/images/iPad 11 pro max.jpg',
-                description: 'Premium tablet with advanced features'
-            },
-            { 
-                id: 4, 
-                name: 'Samsung Galaxy Book4 Pro', 
-                status: 'active', 
-                category: 'Laptops', 
-                price: 950, 
-                date: '2024-06-10',
-                image: '../../assets/images/laptops refurbished/Galaxy Book4 Pro.jpg',
-                description: 'Ultra-portable laptop with long battery life'
-            },
-            { 
-                id: 5, 
-                name: 'Lenovo Mini PC', 
-                status: 'pending', 
-                category: 'Desktops', 
-                price: 650, 
-                date: '2024-05-25',
-                image: '../../assets/images/pcs refurbished/Lenovo M920q Mini PC.png',
-                description: 'Compact desktop perfect for small spaces'
-            },
-            { 
-                id: 6, 
-                name: 'Galaxy Buds Pro', 
-                status: 'active', 
-                category: 'Accessories', 
-                price: 180, 
-                date: '2024-06-05',
-                image: '../../assets/images/accessories refurbished/Galaxy Buds2 Pro.jpg',
-                description: 'Wireless earbuds with noise cancellation'
-            }
-        ];
-        this.filteredProducts = [...this.products];
-    }
+    super();
+    this.products = [];
+    this.filteredProducts = [];
+   }
 
-    connectedCallback() {
-        this.render();
-        this.setupEventListeners();
+    async connectedCallback() {
+    await this.loadProducts();
+    this.render();
+    this.setupEventListeners();
+   }
+
+   async loadProducts() {
+    try {
+        if (!window.supabaseClient) {
+            console.error('Supabase client is not available.');
+            return;
+        }
+
+        const currentUser = JSON.parse(
+            localStorage.getItem('currentUser')
+        );
+
+        if (!currentUser || !currentUser.userId) {
+            console.error('No logged-in user found.');
+            return;
+        }
+
+        const { data, error } = await window.supabaseClient
+            .from('products')
+            .select('*')
+            .eq('seller_id', currentUser.userId)
+            .order('created_at', { ascending: false });
+
+        if (error) {
+            throw error;
+        }
+
+        this.products = data.map(product => ({
+            id: product.id,
+            name: product.name,
+            description: product.description,
+            price: product.price,
+            category: product.category,
+            image: product.image_url,
+            status: product.status,
+            date: new Date(product.created_at).toLocaleDateString()
+        }));
+
+        this.filteredProducts = [...this.products];
+
+    } catch (error) {
+        console.error('Error loading products:', error);
+        this.products = [];
+        this.filteredProducts = [];
     }
+}
 
     render() {
         this.innerHTML = `
