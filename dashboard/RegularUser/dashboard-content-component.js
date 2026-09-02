@@ -324,7 +324,41 @@ class DashboardContentComponent extends HTMLElement {
                                     <h3><i class="fas fa-user"></i> Profile Information</h3>
                                 </div>
                                 <div class="card-body">
-                                    <form id="profileForm">
+
+    <!-- Profile Picture -->
+    <div class="text-center mb-4">
+        <div class="mb-3">
+            <img 
+                id="profilePreview"
+                src="${this.userData?.avatar || 'https://via.placeholder.com/120?text=User'}"
+                alt="Profile Picture"
+                style="
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    border: 4px solid #218DA6;
+                "
+            >
+        </div>
+
+        <label for="profileImage" class="btn btn-outline-primary">
+            <i class="fas fa-camera"></i> Choose Profile Picture
+        </label>
+
+        <input
+            type="file"
+            id="profileImage"
+            accept="image/*"
+            style="display: none;"
+        >
+
+        <p class="text-muted mt-2">
+            Upload a JPG or PNG image
+        </p>
+    </div>
+
+    <form id="profileForm">
                                         <div class="row">
                                             <div class="col-md-6 mb-3">
                                                 <label for="firstName" class="form-label">First Name</label>
@@ -360,15 +394,24 @@ class DashboardContentComponent extends HTMLElement {
                                     <h3><i class="fas fa-shield-alt"></i> Security</h3>
                                 </div>
                                 <div class="card-body">
-                                    <button class="btn btn-outline-primary w-100 mb-3">
+                                    <button 
+                                    type="button"
+                                    id="changePasswordBtn"
+                                    class="btn btn-outline-primary w-100 mb-3">
                                         <i class="fas fa-key"></i> Change Password
                                     </button>
-                                    <button class="btn btn-outline-secondary w-100 mb-3">
-                                        <i class="fas fa-bell"></i> Notification Settings
-                                    </button>
-                                    <button class="btn btn-outline-danger w-100">
-                                        <i class="fas fa-sign-out-alt"></i> Logout
-                                    </button>
+                                    <button 
+    type="button"
+    id="notificationSettingsBtn"
+    class="btn btn-outline-secondary w-100 mb-3">
+    <i class="fas fa-bell"></i> Notification Settings
+</button>
+                                    <button 
+    type="button"
+    id="logoutBtn"
+    class="btn btn-outline-danger w-100">
+    <i class="fas fa-sign-out-alt"></i> Logout
+</button>
                                 </div>
                             </div>
                         </div>
@@ -449,30 +492,145 @@ class DashboardContentComponent extends HTMLElement {
         this.loadExternalPage('../../pages/technician/info-technician.html');
     }
 
-    setupEventListeners() {
-        // Quick action buttons
-        this.addEventListener('click', (e) => {
-            if (e.target.closest('.quick-action-btn[data-section]')) {
-                e.preventDefault();
-                const section = e.target.closest('.quick-action-btn[data-section]').getAttribute('data-section');
-                this.currentSection = section;
-                window.location.hash = section;
-                this.loadSection();
-            }
-        });
+   setupEventListeners() {
 
-        // Form submissions
-        this.addEventListener('submit', (e) => {
-            if (e.target.id === 'sellForm') {
-                e.preventDefault();
-                this.handleSellForm(e.target);
-            } else if (e.target.id === 'profileForm') {
-                e.preventDefault();
-                this.handleProfileForm(e.target);
+    // Quick action buttons
+    this.addEventListener('click', (e) => {
+        if (e.target.closest('.quick-action-btn[data-section]')) {
+            e.preventDefault();
+
+            const section = e.target
+                .closest('.quick-action-btn[data-section]')
+                .getAttribute('data-section');
+
+            this.currentSection = section;
+            window.location.hash = section;
+            this.loadSection();
+        }
+    });
+
+    // Form submissions
+    this.addEventListener('submit', (e) => {
+        if (e.target.id === 'sellForm') {
+            e.preventDefault();
+            this.handleSellForm(e.target);
+
+        } else if (e.target.id === 'profileForm') {
+            e.preventDefault();
+            this.handleProfileForm(e.target);
+        }
+    });
+
+    // Profile image preview
+    this.addEventListener('change', (e) => {
+        if (e.target.id === 'profileImage') {
+
+            const file = e.target.files[0];
+
+            if (file) {
+                const preview = this.querySelector('#profilePreview');
+
+                if (preview) {
+                    preview.src = URL.createObjectURL(file);
+                }
             }
-        });
+        }
+    });
+
+    // Security buttons
+this.addEventListener('click', (e) => {
+
+    // Change Password
+    if (e.target.closest('#changePasswordBtn')) {
+        e.preventDefault();
+        this.handleChangePassword();
     }
 
+    // Notification Settings
+    if (e.target.closest('#notificationSettingsBtn')) {
+        e.preventDefault();
+        this.handleNotificationSettings();
+    }
+
+    // Logout
+    if (e.target.closest('#logoutBtn')) {
+        e.preventDefault();
+        this.handleLogout();
+    }
+
+});
+}
+
+async handleChangePassword() {
+    try {
+        if (!window.supabaseClient) {
+            alert('Supabase is not configured.');
+            return;
+        }
+
+        const newPassword = prompt('Enter your new password:');
+
+        if (!newPassword) {
+            return;
+        }
+
+        if (newPassword.length < 6) {
+            alert('Password must be at least 6 characters long.');
+            return;
+        }
+
+        const { error } = await window.supabaseClient.auth.updateUser({
+            password: newPassword
+        });
+
+        if (error) {
+            throw error;
+        }
+
+        alert('Password changed successfully!');
+
+    } catch (error) {
+        console.error('Error changing password:', error);
+        alert('Error changing password: ' + error.message);
+    }
+}
+
+handleNotificationSettings() {
+    const currentSetting =
+        localStorage.getItem('notificationsEnabled') !== 'false';
+
+    const newSetting = confirm(
+        currentSetting
+            ? 'Notifications are currently ON.\n\nDo you want to turn them OFF?'
+            : 'Notifications are currently OFF.\n\nDo you want to turn them ON?'
+    );
+
+    localStorage.setItem(
+        'notificationsEnabled',
+        newSetting ? 'true' : 'false'
+    );
+
+    alert(
+        newSetting
+            ? 'Notifications enabled!'
+            : 'Notifications disabled!'
+    );
+}
+
+handleLogout() {
+    const confirmLogout = confirm(
+        'Are you sure you want to log out?'
+    );
+
+    if (!confirmLogout) {
+        return;
+    }
+
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('currentRole');
+
+    window.location.href = '/index.html';
+}
     async handleSellForm(form) {
     try {
         if (!window.supabaseClient) {
@@ -551,38 +709,91 @@ class DashboardContentComponent extends HTMLElement {
         const phone = form.querySelector('#phone').value.trim();
         const address = form.querySelector('#address').value.trim();
 
-        const { data, error } = await window.supabaseClient
-            .from('users')
-            .update({
-                first_name: firstName,
-                last_name: lastName,
-                phone: phone,
-                address: address
-            })
-            .eq('email', currentUser.email)
-            .select()
-            .single();
+        const imageInput = this.querySelector('#profileImage');
+        const file = imageInput?.files[0];
+
+        let avatarUrl = currentUser.avatar || '';
+
+        // SUBIR NUEVA FOTO SI EL USUARIO SELECCIONÓ UNA
+        if (file) {
+
+            const userId = currentUser.userId || currentUser.id;
+
+            const fileExtension = file.name.split('.').pop();
+
+            const fileName =
+                `${userId}-${Date.now()}.${fileExtension}`;
+
+            const filePath = `profiles/${fileName}`;
+
+            const { error: uploadError } =
+                await window.supabaseClient
+                    .storage
+                    .from('avatars')
+                    .upload(filePath, file);
+
+            if (uploadError) {
+                throw uploadError;
+            }
+
+            // Obtener URL pública
+            const { data: publicUrlData } =
+                window.supabaseClient
+                    .storage
+                    .from('avatars')
+                    .getPublicUrl(filePath);
+
+            avatarUrl = publicUrlData.publicUrl;
+        }
+
+        // ACTUALIZAR USUARIO EN LA BASE DE DATOS
+        const { data, error } =
+            await window.supabaseClient
+                .from('users')
+                .update({
+                    first_name: firstName,
+                    last_name: lastName,
+                    phone: phone,
+                    address: address,
+                    avatar: avatarUrl
+                })
+                .eq('email', currentUser.email)
+                .select()
+                .single();
 
         if (error) {
             throw error;
         }
 
-        // Actualizar localStorage
+        // ACTUALIZAR LOCALSTORAGE
         const updatedUser = {
             ...currentUser,
             firstName: data.first_name,
             lastName: data.last_name,
-            name: `${data.first_name} ${data.last_name}`,
-            phone: data.phone,
-            address: data.address
+            name: `${data.first_name} ${data.last_name}`.trim(),
+            phone: data.phone || '',
+            address: data.address || '',
+            avatar: data.avatar || ''
         };
 
         localStorage.setItem(
             'currentUser',
             JSON.stringify(updatedUser)
         );
+        // Actualizar el header con la nueva información
+const header = document.querySelector('recomputech-header-auth');
 
-        // Actualizar datos del componente
+if (header) {
+    header.remove();
+    
+    const headerContainer = document.getElementById('headerContainer');
+
+    if (headerContainer) {
+        headerContainer.innerHTML =
+            '<recomputech-header-auth></recomputech-header-auth>';
+    }
+}
+
         this.userData = updatedUser;
 
         alert('Profile updated successfully!');
@@ -590,8 +801,12 @@ class DashboardContentComponent extends HTMLElement {
         console.log('Updated profile:', data);
 
     } catch (error) {
+
         console.error('Error updating profile:', error);
-        alert('Error updating profile: ' + error.message);
+
+        alert(
+            'Error updating profile: ' + error.message
+        );
     }
 }
 }
