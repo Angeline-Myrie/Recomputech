@@ -131,11 +131,19 @@ class DashboardContentComponent extends HTMLElement {
     loadSell() {
         this.innerHTML = `
             <div class="dashboard-section" data-aos="fade-up">
-                <!-- Section Header -->
-                <section class="section-header">
-                    <div class="header-content">
-                        <h1>Sell Your Products</h1>
-                        <p>List your refurbished technology and reach thousands of buyers</p>
+                <!-- Welcome Section -->
+                <section class="welcome-section" data-aos="fade-up">
+                    <div class="welcome-header">
+                        <div class="welcome-bg-elements" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none;">
+                            <div class="floating-circle" style="position: absolute; width: 120px; height: 120px; background: rgba(255,255,255,0.1); border-radius: 50%; top: 20%; left: 10%; animation: float 6s ease-in-out infinite;"></div>
+                            <div class="floating-circle" style="position: absolute; width: 80px; height: 80px; background: rgba(255,255,255,0.08); border-radius: 50%; top: 60%; right: 15%; animation: float 8s ease-in-out infinite reverse;"></div>
+                            <div class="floating-circle" style="position: absolute; width: 60px; height: 60px; background: rgba(255,255,255,0.06); border-radius: 50%; bottom: 20%; left: 20%; animation: float 7s ease-in-out infinite;"></div>
+                        </div>
+
+                        <div class="welcome-content">
+                            <h1>Sell Your Products</h1>
+                            <p>List your refurbished technology and reach thousands of buyers</p>
+                        </div>
                     </div>
                 </section>
 
@@ -293,11 +301,18 @@ class DashboardContentComponent extends HTMLElement {
     loadSettings() {
         this.innerHTML = `
             <div class="dashboard-section" data-aos="fade-up">
-                <!-- Section Header -->
-                <section class="section-header">
-                    <div class="header-content">
-                        <h1>Account Settings</h1>
-                        <p>Manage your profile and preferences</p>
+                <section class="welcome-section" data-aos="fade-up">
+                    <div class="welcome-header">
+                        <div class="welcome-bg-elements" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; pointer-events: none;">
+                            <div class="floating-circle" style="position: absolute; width: 120px; height: 120px; background: rgba(255,255,255,0.1); border-radius: 50%; top: 20%; left: 10%; animation: float 6s ease-in-out infinite;"></div>
+                            <div class="floating-circle" style="position: absolute; width: 80px; height: 80px; background: rgba(255,255,255,0.08); border-radius: 50%; top: 60%; right: 15%; animation: float 8s ease-in-out infinite reverse;"></div>
+                            <div class="floating-circle" style="position: absolute; width: 60px; height: 60px; background: rgba(255,255,255,0.06); border-radius: 50%; bottom: 20%; left: 20%; animation: float 7s ease-in-out infinite;"></div>
+                        </div>
+
+                        <div class="welcome-content">
+                            <h1 data-aos="fade-down" data-aos-delay="100">Account Settings</h1>
+                            <p data-aos="fade-in" data-aos-delay="300">Manage your profile and preferences.</p>
+                        </div>
                     </div>
                 </section>
 
@@ -458,17 +473,127 @@ class DashboardContentComponent extends HTMLElement {
         });
     }
 
-    handleSellForm(form) {
-        // Handle sell form submission
-        console.log('Sell form submitted');
-        // Add form processing logic here
-    }
+    async handleSellForm(form) {
+    try {
+        if (!window.supabaseClient) {
+            alert('Supabase is not configured.');
+            return;
+        }
 
-    handleProfileForm(form) {
-        // Handle profile form submission
-        console.log('Profile form submitted');
-        // Add form processing logic here
+        // Obtener el usuario que inició sesión
+        const currentUser = JSON.parse(
+            localStorage.getItem('currentUser')
+        );
+
+        if (!currentUser || !currentUser.userId) {
+            alert('You must be logged in to list a product.');
+            return;
+        }
+
+        // Obtener información del formulario
+        const name = form.querySelector('#productName').value.trim();
+        const category = form.querySelector('#productCategory').value;
+        const price = form.querySelector('#productPrice').value;
+        const description = form.querySelector('#productDescription').value.trim();
+
+        // Guardar el producto en Supabase
+        const { data, error } = await window.supabaseClient
+            .from('products')
+            .insert({
+                seller_id: currentUser.userId,
+                name: name,
+                category: category,
+                price: Number(price),
+                description: description,
+                status: 'available'
+            })
+            .select()
+            .single();
+
+        if (error) {
+            throw error;
+        }
+
+        alert('Product listed successfully!');
+
+        // Limpiar formulario
+        form.reset();
+
+        console.log('Product created:', data);
+
+        // Ir a My Products
+        window.location.hash = 'my-products';
+
+    } catch (error) {
+        console.error('Error creating product:', error);
+        alert('Error creating product: ' + error.message);
     }
+}
+
+   async handleProfileForm(form) {
+    try {
+        if (!window.supabaseClient) {
+            alert('Supabase is not configured.');
+            return;
+        }
+
+        const currentUser = JSON.parse(
+            localStorage.getItem('currentUser')
+        );
+
+        if (!currentUser) {
+            alert('You must be logged in.');
+            return;
+        }
+
+        const firstName = form.querySelector('#firstName').value.trim();
+        const lastName = form.querySelector('#lastName').value.trim();
+        const phone = form.querySelector('#phone').value.trim();
+        const address = form.querySelector('#address').value.trim();
+
+        const { data, error } = await window.supabaseClient
+            .from('users')
+            .update({
+                first_name: firstName,
+                last_name: lastName,
+                phone: phone,
+                address: address
+            })
+            .eq('email', currentUser.email)
+            .select()
+            .single();
+
+        if (error) {
+            throw error;
+        }
+
+        // Actualizar localStorage
+        const updatedUser = {
+            ...currentUser,
+            firstName: data.first_name,
+            lastName: data.last_name,
+            name: `${data.first_name} ${data.last_name}`,
+            phone: data.phone,
+            address: data.address
+        };
+
+        localStorage.setItem(
+            'currentUser',
+            JSON.stringify(updatedUser)
+        );
+
+        // Actualizar datos del componente
+        this.userData = updatedUser;
+
+        alert('Profile updated successfully!');
+
+        console.log('Updated profile:', data);
+
+    } catch (error) {
+        console.error('Error updating profile:', error);
+        alert('Error updating profile: ' + error.message);
+    }
+}
 }
 
 customElements.define('dashboard-content-component', DashboardContentComponent); 

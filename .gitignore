@@ -46,8 +46,6 @@ jspm_packages/
 # dotenv environment variables file
 .env
 
-# Supabase credentials (use js/supabase-config.example.js as template)
-js/supabase-config.js
 
 # IDE files
 .vscode/

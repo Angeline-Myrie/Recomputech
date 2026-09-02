@@ -21,18 +21,21 @@ const UsersService = {
     },
 
     toSessionUser(profile) {
-        return {
-            id: profile.id,
-            email: profile.email,
-            name: `${profile.first_name} ${profile.last_name}`.trim(),
-            firstName: profile.first_name,
-            lastName: profile.last_name,
-            role: profile.account_type,
-            accountType: profile.account_type,
-            termsAccepted: profile.terms_accepted,
-            avatar: profile.avatar || this.getDefaultAvatar(profile.account_type)
-        };
-    },
+    return {
+        id: profile.id,
+        userId: profile.id,
+        email: profile.email,
+        name: `${profile.first_name} ${profile.last_name}`.trim(),
+        firstName: profile.first_name,
+        lastName: profile.last_name,
+        role: profile.account_type,
+        accountType: profile.account_type,
+        termsAccepted: profile.terms_accepted,
+        phone: profile.phone || '',
+        address: profile.address || '',
+        avatar: profile.avatar || ''
+    };
+},
 
     getDefaultAvatar(accountType) {
         if (accountType === 'technician') {
@@ -75,6 +78,7 @@ const UsersService = {
         const meta = authUser.user_metadata || {};
         const supabase = this.getClient();
         const profilePayload = {
+            user_id: authUser.id,
             email,
             first_name: meta.first_name || '',
             last_name: meta.last_name || '',

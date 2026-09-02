@@ -28,7 +28,8 @@ class RecomputechHeaderAuth extends HTMLElement {
                     z-index: 1030;
                     background: rgba(255, 255, 255, 0.95);
                     backdrop-filter: blur(10px);
-                    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+                    border-bottom: none;
+                    box-shadow: 0 1px 0 rgba(15, 23, 42, 0.06);
                     transition: all 0.3s ease;
                 }
 
@@ -36,7 +37,8 @@ class RecomputechHeaderAuth extends HTMLElement {
                 :host-context([data-theme="dark"]),
                 :host-context(body.dark-mode) {
                     background: rgba(24, 31, 42, 0.95);
-                    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                    border-bottom: none;
+                    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
                 }
 
                 .recomputech-header-navbar {

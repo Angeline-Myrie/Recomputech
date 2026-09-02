@@ -6,6 +6,7 @@ class OverviewComponent extends HTMLElement {
             timeInProfile: 0,
             totalPurchases: 0,
             totalSales: 0,
+            totalProducts: 0,
             techniciansContacted: 0,
             totalSpent: 0,
             totalEarned: 0,
@@ -14,9 +15,9 @@ class OverviewComponent extends HTMLElement {
         };
     }
 
-    connectedCallback() {
+    async connectedCallback() {
         this.loadUserData();
-        this.loadUserStats();
+        await this.loadUserStats();
         this.render();
         this.setupEventListeners();
         this.initializeCharts();
@@ -29,13 +30,56 @@ class OverviewComponent extends HTMLElement {
         }
     }
 
-    loadUserStats() {
-        const registrationDate = this.userData?.createdAt || this.userData?.created_at;
+ async loadUserStats() {
+    try {
+        const currentUser = JSON.parse(
+            localStorage.getItem('currentUser')
+        );
+
+        // Calcular días desde el registro
+        const registrationDate =
+            currentUser?.createdAt || currentUser?.created_at;
+
         const today = new Date();
+
         this.stats.timeInProfile = registrationDate
-            ? Math.max(0, Math.floor((today - new Date(registrationDate)) / (1000 * 60 * 60 * 24)))
+            ? Math.max(
+                0,
+                Math.floor(
+                    (today - new Date(registrationDate)) /
+                    (1000 * 60 * 60 * 24)
+                )
+            )
             : 0;
+
+        // Verificar Supabase
+        if (!window.supabaseClient) {
+            console.error('Supabase client is not available.');
+            return;
+        }
+
+        // Verificar usuario
+        if (!currentUser || !currentUser.userId) {
+            console.error('No authenticated user found.');
+            return;
+        }
+
+        // Contar productos reales del usuario
+        const { count, error } = await window.supabaseClient
+            .from('products')
+            .select('*', { count: 'exact', head: true })
+            .eq('seller_id', currentUser.userId);
+
+        if (error) {
+            throw error;
+        }
+
+        this.stats.totalProducts = count || 0;
+
+    } catch (error) {
+        console.error('Error loading dashboard stats:', error);
     }
+}
 
     render() {
         this.innerHTML = `
@@ -65,19 +109,35 @@ class OverviewComponent extends HTMLElement {
                         
                         <!-- Animated stats preview -->
                         <div class="welcome-stats-preview" data-aos="fade-up" data-aos-delay="500">
+
                             <div class="stat-preview">
-                                <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.3rem;">${this.stats.totalPurchases}</div>
-                                <div style="font-size: 0.8rem; opacity: 0.8;">Purchases</div>
-                            </div>
-                            <div class="stat-preview">
-                                <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.3rem;">${this.stats.totalSales}</div>
-                                <div style="font-size: 0.8rem; opacity: 0.8;">Sales</div>
-                            </div>
-                            <div class="stat-preview">
-                                <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.3rem;">${this.stats.timeInProfile}</div>
-                                <div style="font-size: 0.8rem; opacity: 0.8;">Days</div>
-                            </div>
-                        </div>
+                            <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.3rem;">
+            ${this.stats.totalProducts}
+        </div>
+        <div style="font-size: 0.8rem; opacity: 0.8;">
+            Products
+        </div>
+    </div>
+
+    <div class="stat-preview">
+        <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.3rem;">
+            ${this.stats.totalPurchases}
+        </div>
+        <div style="font-size: 0.8rem; opacity: 0.8;">
+            Purchases
+        </div>
+    </div>
+
+    <div class="stat-preview">
+        <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.3rem;">
+            ${this.stats.totalSales}
+        </div>
+        <div style="font-size: 0.8rem; opacity: 0.8;">
+            Sales
+        </div>
+    </div>
+
+</div>
                     </div>
                 </div>
             </section>
@@ -131,14 +191,14 @@ class OverviewComponent extends HTMLElement {
                         <div class="col-lg-3 col-md-6 col-12 mb-4">
                             <div class="stat-card h-100">
                                 <div class="stat-header">
-                                    <h4>Technicians Contacted</h4>
+                                    <h4>My Products</h4>
                                 </div>
                                 <div class="stat-content">
-                                    <h3>${this.stats.techniciansContacted}</h3>
-                                    <p>Services requested</p>
+                                    <h3>${this.stats.totalProducts}</h3>
+                                    <p>Total Products listed</p>
                                 </div>
                                 <div class="stat-chart">
-                                    <canvas id="techniciansChart" width="200" height="100"></canvas>
+                                    <canvas id="productsChart" width="200" height="100"></canvas>
                                 </div>
                             </div>
                         </div>
