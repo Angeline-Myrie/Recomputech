@@ -91,6 +91,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     // Current mode
     let currentMode = 'login';
 
+    const requestedMode = new URLSearchParams(window.location.search).get('mode');
+
     // ========================================
     // TOGGLE BETWEEN LOGIN AND REGISTER
     // ========================================
@@ -115,6 +117,10 @@ document.addEventListener('DOMContentLoaded', async function() {
             currentMode = mode;
         });
     });
+
+    if (requestedMode === 'register') {
+        document.querySelector('.toggle-btn[data-mode="register"]').click();
+    }
 
     function switchToLogin() {
         // Update title and subtitle

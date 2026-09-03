@@ -415,6 +415,14 @@ class DashboardContentComponent extends HTMLElement {
                                 </div>
                             </div>
                         </div>
+                        <div class="col-12 mb-4">
+                            <div class="dashboard-card security-action-card" id="securityActionCard" hidden>
+                                <div class="card-header">
+                                    <h3><i class="fas fa-sliders-h"></i> Security Action</h3>
+                                </div>
+                                <div class="card-body" id="securityActionContent"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -543,39 +551,112 @@ this.addEventListener('click', (e) => {
     // Change Password
     if (e.target.closest('#changePasswordBtn')) {
         e.preventDefault();
-        this.handleChangePassword();
+        this.showSecurityAction('password');
     }
 
     // Notification Settings
     if (e.target.closest('#notificationSettingsBtn')) {
         e.preventDefault();
-        this.handleNotificationSettings();
+        this.showSecurityAction('notifications');
     }
 
     // Logout
     if (e.target.closest('#logoutBtn')) {
         e.preventDefault();
+        this.showSecurityAction('logout');
+    }
+
+    if (e.target.closest('#cancelSecurityAction')) {
+        this.hideSecurityAction();
+    }
+
+    if (e.target.closest('#toggleNotificationsBtn')) {
+        this.toggleNotifications();
+    }
+
+    if (e.target.closest('#confirmLogoutBtn')) {
         this.handleLogout();
     }
 
 });
+
+    this.addEventListener('submit', (e) => {
+        if (e.target.id === 'changePasswordForm') {
+            e.preventDefault();
+            this.handleChangePassword(e.target);
+        }
+    });
 }
 
-async handleChangePassword() {
+showSecurityAction(action) {
+    const card = this.querySelector('#securityActionCard');
+    const content = this.querySelector('#securityActionContent');
+    if (!card || !content) return;
+
+    const currentSetting = localStorage.getItem('notificationsEnabled') !== 'false';
+    const actions = {
+        password: `
+            <h4>Change Password</h4>
+            <p>Enter a new password for your account.</p>
+            <form id="changePasswordForm" class="security-action-form">
+                <label for="newPassword" class="form-label">New password</label>
+                <input type="password" class="form-control mb-3" id="newPassword" minlength="6" required>
+                <label for="confirmNewPassword" class="form-label">Confirm password</label>
+                <input type="password" class="form-control mb-3" id="confirmNewPassword" minlength="6" required>
+                <div class="security-action-buttons">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save Password</button>
+                    <button type="button" class="btn btn-outline-secondary" id="cancelSecurityAction">Cancel</button>
+                </div>
+            </form>
+        `,
+        notifications: `
+            <h4>Notification Settings</h4>
+            <p>Control whether you receive notifications from Recomputech.</p>
+            <p class="notification-status"><strong>Status:</strong> ${currentSetting ? 'Enabled' : 'Disabled'}</p>
+            <div class="security-action-buttons">
+                <button type="button" class="btn btn-primary" id="toggleNotificationsBtn">
+                    <i class="fas fa-bell"></i> Turn notifications ${currentSetting ? 'off' : 'on'}
+                </button>
+                <button type="button" class="btn btn-outline-secondary" id="cancelSecurityAction">Close</button>
+            </div>
+        `,
+        logout: `
+            <h4>Log Out</h4>
+            <p>Are you sure you want to log out of your Recomputech account?</p>
+            <div class="security-action-buttons">
+                <button type="button" class="btn btn-danger" id="confirmLogoutBtn"><i class="fas fa-sign-out-alt"></i> Confirm Logout</button>
+                <button type="button" class="btn btn-outline-secondary" id="cancelSecurityAction">Cancel</button>
+            </div>
+        `
+    };
+
+    content.innerHTML = actions[action];
+    card.hidden = false;
+    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+hideSecurityAction() {
+    const card = this.querySelector('#securityActionCard');
+    if (card) card.hidden = true;
+}
+
+async handleChangePassword(form) {
     try {
         if (!window.supabaseClient) {
-            alert('Supabase is not configured.');
+            this.showSecurityMessage('Supabase is not configured.', 'error');
             return;
         }
 
-        const newPassword = prompt('Enter your new password:');
-
-        if (!newPassword) {
-            return;
-        }
+        const newPassword = form.querySelector('#newPassword').value;
+        const confirmPassword = form.querySelector('#confirmNewPassword').value;
 
         if (newPassword.length < 6) {
-            alert('Password must be at least 6 characters long.');
+            this.showSecurityMessage('Password must be at least 6 characters long.', 'error');
+            return;
+        }
+
+        if (newPassword !== confirmPassword) {
+            this.showSecurityMessage('Passwords do not match.', 'error');
             return;
         }
 
@@ -587,49 +668,31 @@ async handleChangePassword() {
             throw error;
         }
 
-        alert('Password changed successfully!');
+        this.showSecurityMessage('Password changed successfully.', 'success');
 
     } catch (error) {
         console.error('Error changing password:', error);
-        alert('Error changing password: ' + error.message);
+        this.showSecurityMessage('Error changing password: ' + error.message, 'error');
     }
 }
 
-handleNotificationSettings() {
-    const currentSetting =
-        localStorage.getItem('notificationsEnabled') !== 'false';
-
-    const newSetting = confirm(
-        currentSetting
-            ? 'Notifications are currently ON.\n\nDo you want to turn them OFF?'
-            : 'Notifications are currently OFF.\n\nDo you want to turn them ON?'
-    );
-
-    localStorage.setItem(
-        'notificationsEnabled',
-        newSetting ? 'true' : 'false'
-    );
-
-    alert(
-        newSetting
-            ? 'Notifications enabled!'
-            : 'Notifications disabled!'
-    );
+toggleNotifications() {
+    const enabled = localStorage.getItem('notificationsEnabled') !== 'false';
+    localStorage.setItem('notificationsEnabled', enabled ? 'false' : 'true');
+    this.showSecurityAction('notifications');
 }
 
 handleLogout() {
-    const confirmLogout = confirm(
-        'Are you sure you want to log out?'
-    );
-
-    if (!confirmLogout) {
-        return;
-    }
-
     localStorage.removeItem('currentUser');
     localStorage.removeItem('currentRole');
 
     window.location.href = '/index.html';
+}
+
+showSecurityMessage(message, type) {
+    const content = this.querySelector('#securityActionContent');
+    if (!content) return;
+    content.innerHTML = `<div class="alert alert-${type === 'success' ? 'success' : 'danger'} mb-0">${message}</div>`;
 }
     async handleSellForm(form) {
     try {
