@@ -227,7 +227,7 @@ class OverviewComponent extends HTMLElement {
             <div class="container-fluid">
                 <div class="row justify-content-center">
                     <div class="col-lg-6 col-12 mb-4">
-                        <section class="activity-section" data-aos="fade-up" data-aos-delay="250" style="height: 100%;">
+                        <section class="activity-section" data-aos="fade-up" data-aos-delay="250">
                             <div class="card activity-card h-100">
                                 <div class="card-header">
                                     <h3><i class="fas fa-history"></i> Recent Activity</h3>
@@ -244,7 +244,7 @@ class OverviewComponent extends HTMLElement {
                         </section>
                     </div>
                     <div class="col-lg-6 col-12 mb-4">
-                        <section class="quick-actions-section" data-aos="fade-up" data-aos-delay="300" style="height: 100%;">
+                        <section class="quick-actions-section" data-aos="fade-up" data-aos-delay="300">
                             <div class="quick-actions-card h-100">
                                 <div class="card-header">
                                     <h3><i class="fas fa-bolt"></i> Quick Actions</h3>

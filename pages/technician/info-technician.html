@@ -295,7 +295,7 @@
                                 <i class="fas fa-eye"></i>
                                 View Profile
                             </button>
-                            <button class="btn btn-primary" onclick="showRegistrationModal()">
+                            <button class="btn btn-primary" onclick="showContactAccessModal()">
                                 <i class="fas fa-phone"></i>
                                 Contact
                             </button>
@@ -406,25 +406,25 @@
             renderTechnicians();
         }
 
-        function showRegistrationModal() {
+        function showContactAccessModal() {
             const modal = `
                 <div class="modal fade" id="registrationModal" tabindex="-1">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Register to Access Technician Services</h5>
+                                <h5 class="modal-title">Sign In to Contact a Technician</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                             </div>
                             <div class="modal-body">
-                                <p>To contact our technicians and view detailed pricing, please register for an account.</p>
+                                <p>Sign in or create an account before contacting one of our technicians.</p>
                                 <div class="text-center d-flex flex-column gap-2">
-                                    <a href="../../auth/auth.html" class="btn btn-primary">
+                                    <a href="../../auth/auth.html?mode=login" class="btn btn-primary">
+                                        <i class="fas fa-sign-in-alt"></i>
+                                        Sign In
+                                    </a>
+                                    <a href="../../auth/auth.html?mode=register" class="btn btn-outline-primary">
                                         <i class="fas fa-user-plus"></i>
                                         Register as User
-                                    </a>
-                                    <a href="../../auth/technician.html?mode=register" class="btn btn-outline-primary">
-                                        <i class="fas fa-tools"></i>
-                                        Become a Technician
                                     </a>
                                 </div>
                             </div>
