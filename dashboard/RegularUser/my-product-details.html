@@ -214,6 +214,42 @@
         .breadcrumb-custom a:hover {
             text-decoration: underline;
         }
+
+        .technical-specifications {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-top: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+
+        .technical-specifications h2 {
+            margin-bottom: 1.75rem;
+            color: var(--text-color);
+            font-size: 1.7rem;
+            font-weight: 700;
+        }
+
+        .specification-item {
+            height: 100%;
+            padding: 1.25rem;
+            border-radius: 12px;
+            background: var(--bg-light);
+        }
+
+        .specification-label {
+            display: block;
+            margin-bottom: 0.35rem;
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .specification-value {
+            display: block;
+            color: var(--text-color);
+            font-weight: 700;
+            overflow-wrap: anywhere;
+        }
     </style>
 </head>
 <body>
@@ -293,6 +329,11 @@
                             </div>
                         </div>
                     </div>
+
+                    <section class="technical-specifications" data-aos="fade-up" data-aos-delay="150">
+                        <h2><i class="fas fa-microchip" style="color: #218DA6; margin-right: 0.5rem;"></i>Technical Specifications</h2>
+                        <div class="row g-4" id="technicalSpecifications"></div>
+                    </section>
                     
                     <!-- Product Statistics -->
                     <div class="stats-section" data-aos="fade-up" data-aos-delay="200">
@@ -379,6 +420,31 @@
             document.getElementById('productId').textContent = `#${product.id}`;
             document.getElementById('productStatus').textContent = product.status;
             document.getElementById('product-breadcrumb').textContent = product.name;
+
+            const specifications = product.specifications || {};
+            const specificationLabels = {
+                processor: 'Processor',
+                ram: 'RAM',
+                storage: 'Storage',
+                graphics: 'Graphics',
+                os: 'OS',
+                ports: 'Ports',
+                warranty: 'Warranty'
+            };
+            const specificationsContainer = document.getElementById('technicalSpecifications');
+            const specificationEntries = Object.entries(specificationLabels)
+                .filter(([key]) => specifications[key])
+                .map(([key, label]) => `
+                    <div class="col-md-6 col-xl-3">
+                        <div class="specification-item">
+                            <span class="specification-label">${label}</span>
+                            <span class="specification-value">${specifications[key]}</span>
+                        </div>
+                    </div>
+                `).join('');
+            specificationsContainer.innerHTML = specificationEntries || `
+                <div class="col-12"><p class="text-muted mb-0">No technical specifications were added for this product.</p></div>
+            `;
             
             // Update status badge
             const statusBadge = document.getElementById('statusBadge');

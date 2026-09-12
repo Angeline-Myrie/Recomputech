@@ -1378,6 +1378,156 @@ dashboard-content-component {
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
+/* My Products cards follow the marketplace layout and keep a stable height. */
+.my-products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    align-items: stretch;
+}
+
+.my-products-grid .my-product-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 510px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: var(--card-bg);
+}
+
+.my-products-grid .product-image {
+    position: relative;
+    height: 210px;
+    flex-shrink: 0;
+    background: var(--card-bg);
+}
+
+.my-products-grid .product-image img {
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+    object-fit: contain;
+}
+
+.my-products-grid .product-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    background: var(--primary-color);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.my-products-grid .product-info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 1.25rem;
+}
+
+.my-products-grid .product-category {
+    margin-bottom: 0.4rem;
+    color: var(--primary-color);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.my-products-grid .product-title {
+    min-height: 2.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.my-products-grid .product-description {
+    display: -webkit-box;
+    min-height: 3.6rem;
+    margin-bottom: 0.9rem;
+    overflow: hidden;
+    color: var(--text-light);
+    font-size: 0.88rem;
+    line-height: 1.5;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.my-products-grid .product-price-container {
+    min-height: 2rem;
+    margin-bottom: 0.8rem;
+}
+
+.my-products-grid .product-price {
+    color: var(--primary-color);
+    font-size: 1.35rem;
+    font-weight: 800;
+}
+
+.my-product-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-height: 2.9rem;
+    margin-bottom: 1rem;
+    color: var(--text-light);
+    font-size: 0.78rem;
+}
+
+.my-product-details i {
+    width: 1rem;
+    margin-right: 0.35rem;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.my-products-grid .product-actions {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: auto;
+}
+
+.my-products-grid .btn-view-details,
+.my-products-grid .btn-edit-product {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.my-products-grid .btn-view-details {
+    flex: 1;
+    border: 0;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
+}
+
+.my-products-grid .btn-edit-product {
+    width: 44px;
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: var(--text-light);
+}
+
+.my-products-grid .btn-view-details:hover,
+.my-products-grid .btn-edit-product:hover {
+    transform: translateY(-2px);
+}
+
+@media (max-width: 576px) {
+    .my-products-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 .product-image {
     width: 100%;
     height: 200px;

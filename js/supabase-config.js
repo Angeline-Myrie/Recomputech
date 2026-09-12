@@ -1,9 +1,16 @@
 /**
- * Supabase configuration.
- * Replace the placeholders with your project values from:
- * Supabase Dashboard → Project Settings → API
+ * Supabase configuration
  */
+
 window.SUPABASE_CONFIG = {
     url: 'https://jmjltwfqxwvndfrzkbps.supabase.co',
-    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imptamx0d2ZxeHd2bmRmcnprYnBzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2NzY2MDIsImV4cCI6MjA5NzI1MjYwMn0.gjP9mO4iwA-9P57qqoF7cXV17qPARoEtMc1b19O4gtY'
+    anonKey: 'sb_publishable_cVgJNHXSekBFsKFSDBbMqg_j2X66H1u'
 };
+
+// Crear cliente de Supabase
+if (window.supabase && !window.supabaseClient) {
+    window.supabaseClient = window.supabase.createClient(
+        window.SUPABASE_CONFIG.url,
+        window.SUPABASE_CONFIG.anonKey
+    );
+}

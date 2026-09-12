@@ -1,6 +1,20 @@
 -- Recomputech Supabase setup for the `users` profile table
 -- Run this in Supabase Dashboard → SQL Editor
 
+-- Product specifications entered from the user dashboard
+alter table if exists public.products
+add column if not exists specifications jsonb not null default '{}'::jsonb;
+
+-- Public marketplace listings must be readable by the anon client.
+alter table if exists public.products enable row level security;
+
+drop policy if exists "Anyone can view marketplace products" on public.products;
+create policy "Anyone can view marketplace products"
+on public.products
+for select
+to anon, authenticated
+using (lower(coalesce(status, 'available')) not in ('sold', 'deleted', 'archived', 'rejected'));
+
 -- Optional: create the table if it does not exist yet
 create table if not exists public.users (
     id bigint generated always as identity primary key,

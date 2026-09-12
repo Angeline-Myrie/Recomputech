@@ -2,7 +2,7 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     // Product data with corrected paths
-    const products = [
+    let products = [
         {
             id: 'dell-3070',
             name: 'DELL OptiPlex 3070',
@@ -68,10 +68,101 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentProducts = [...products];
     let currentView = 'grid';
 
+    async function loadProductsFromSupabase() {
+
+    try {
+
+        if (!window.supabaseClient) {
+
+            console.error('Supabase client is not available');
+
+            return;
+        }
+
+
+        const { data, error } =
+            await window.supabaseClient
+                .from('products')
+                .select('*')
+                .eq('status', 'available');
+
+
+        if (error) {
+
+            throw error;
+
+        }
+
+
+        console.log(
+            'Products from Supabase:',
+            data
+        );
+
+
+        const supabaseProducts =
+            data.map(product => ({
+
+                id: product.id,
+
+                name: product.name,
+
+                description:
+                    product.description ||
+                    'No description available',
+
+                price:
+                    Number(product.price),
+
+                originalPrice:
+                    Number(product.price),
+
+                category:
+                    product.category,
+
+                image:
+                    product.image_url ||
+                    '../assets/images/placeholder.png',
+
+                rating: 5
+
+            }));
+
+
+        products = [
+
+            ...products,
+
+            ...supabaseProducts
+
+        ];
+
+
+        currentProducts = [...products];
+
+
+        loadProducts();
+
+        updateResultsCount();
+
+
+    } catch (error) {
+
+        console.error(
+            'Error loading products:',
+            error
+        );
+
+    }
+
+}
+
     // Initialize marketplace
-    loadProducts();
-    setupEventListeners();
-    updateResultsCount();
+   // Initialize marketplace
+
+setupEventListeners();
+
+loadProductsFromSupabase();
 
     function loadProducts() {
         const productsGrid = document.getElementById('productsGrid');

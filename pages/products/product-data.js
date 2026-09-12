@@ -1570,8 +1570,7 @@ function getProductsByCategory(category) {
 function getRelatedProducts(currentProduct, limit = 4) {
     const related = Object.values(PRODUCTS_DATABASE).filter(product => 
         product.id !== currentProduct.id && 
-        (product.category === currentProduct.category || 
-         product.tags.some(tag => currentProduct.tags.includes(tag)))
+        product.category === currentProduct.category
     );
     return related.slice(0, limit);
 }

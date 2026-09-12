@@ -271,11 +271,11 @@
                         </div>
                         
                         <div class="tech-actions">
-                            <button class="btn btn-outline-primary" onclick="showRegistrationModal()">
+                            <button class="btn btn-outline-primary" onclick="openTechnicianAction('${technician.id}')">
                                 <i class="fas fa-eye"></i>
                                 View Profile
                             </button>
-                            <button class="btn btn-primary" onclick="showContactAccessModal()">
+                            <button class="btn btn-primary" onclick="contactTechnician('${technician.id}')">
                                 <i class="fas fa-phone"></i>
                                 Contact
                             </button>
@@ -328,6 +328,68 @@
                 currentFilters.sortBy = e.target.value;
                 sortTechnicians();
             });
+        }
+
+        function isDashboardContext() {
+            if (new URLSearchParams(window.location.search).get('context') !== 'dashboard') {
+                return false;
+            }
+
+            try {
+                return Boolean(JSON.parse(localStorage.getItem('currentUser')));
+            } catch (error) {
+                return false;
+            }
+        }
+
+        function openTechnicianAction(technicianId) {
+            if (isDashboardContext()) {
+                window.location.href = `technician-detail.html?id=${encodeURIComponent(technicianId)}&context=dashboard`;
+                return;
+            }
+
+            window.location.href = '../../auth/auth.html?mode=login';
+        }
+
+        function contactTechnician(technicianId) {
+            if (!isDashboardContext()) {
+                window.location.href = '../../auth/auth.html?mode=login';
+                return;
+            }
+
+            const technician = getTechnicianById(technicianId);
+            if (!technician) return;
+
+            const contact = technician.contact;
+            const modal = `
+                <div class="modal fade" id="technicianContactModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title"><i class="fas fa-address-card text-primary me-2"></i>Contact ${technician.name}</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p class="text-muted">Choose how you would like to contact this technician.</p>
+                                <div class="d-grid gap-2">
+                                    <a class="btn btn-success" href="https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(`Hello ${technician.name}, I need help with a technology issue.`)}" target="_blank" rel="noopener">
+                                        <i class="fab fa-whatsapp me-2"></i>Contact on WhatsApp
+                                    </a>
+                                    <a class="btn btn-outline-primary" href="tel:${contact.phone.replace(/[^+\d]/g, '')}">
+                                        <i class="fas fa-phone me-2"></i>${contact.phone}
+                                    </a>
+                                    <a class="btn btn-outline-secondary" href="mailto:${contact.email}">
+                                        <i class="fas fa-envelope me-2"></i>${contact.email}
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+
+            document.getElementById('technicianContactModal')?.remove();
+            document.body.insertAdjacentHTML('beforeend', modal);
+            new bootstrap.Modal(document.getElementById('technicianContactModal')).show();
         }
 
         function applyFilters() {
