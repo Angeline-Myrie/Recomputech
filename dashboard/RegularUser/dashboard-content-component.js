@@ -74,6 +74,19 @@ class DashboardContentComponent extends HTMLElement {
                 this.loadExternalPage(url);
             }
         });
+
+        window.addEventListener('message', (event) => {
+            if (event.data?.type !== 'recomputech-add-to-cart' || !event.data.product) return;
+
+            const marketplaceFrame = this.querySelector('#external-page-frame');
+            if (marketplaceFrame && event.source !== marketplaceFrame.contentWindow) return;
+
+            const header = document.querySelector('recomputech-header-auth');
+            if (!header || typeof header.addToCart !== 'function') return;
+
+            header.addToCart(event.data.product);
+            header.handleCartClick();
+        });
     }
 
     loadPendingExternalPage() {
@@ -192,6 +205,39 @@ class DashboardContentComponent extends HTMLElement {
                                             <label for="productDescription" class="form-label">Description</label>
                                             <textarea class="form-control" id="productDescription" rows="4" required></textarea>
                                         </div>
+                                        <div class="product-specifications-form mb-3">
+                                            <h4 class="h5 mb-3"><i class="fas fa-microchip"></i> Technical Specifications</h4>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="productProcessor" class="form-label">Processor</label>
+                                                    <input type="text" class="form-control" id="productProcessor" placeholder="e.g. Intel Core i5-8500">
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="productRam" class="form-label">RAM</label>
+                                                    <input type="text" class="form-control" id="productRam" placeholder="e.g. 8GB DDR4">
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="productStorage" class="form-label">Storage</label>
+                                                    <input type="text" class="form-control" id="productStorage" placeholder="e.g. 256GB SSD">
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="productGraphics" class="form-label">Graphics</label>
+                                                    <input type="text" class="form-control" id="productGraphics" placeholder="e.g. Intel UHD Graphics 630">
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="productOs" class="form-label">Operating System</label>
+                                                    <input type="text" class="form-control" id="productOs" placeholder="e.g. Windows 10 Pro">
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="productPorts" class="form-label">Ports</label>
+                                                    <input type="text" class="form-control" id="productPorts" placeholder="e.g. USB 3.1, HDMI, Ethernet">
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="productWarranty" class="form-label">Warranty</label>
+                                                    <input type="text" class="form-control" id="productWarranty" placeholder="e.g. 6 months">
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="mb-3">
                                             <label for="productImages" class="form-label">Product Images</label>
                                             <input type="file" class="form-control" id="productImages" multiple accept="image/*">
@@ -281,21 +327,57 @@ class DashboardContentComponent extends HTMLElement {
                             <h3><i class="fas fa-shopping-cart"></i> Cart Items</h3>
                         </div>
                         <div class="card-body">
-                            <div class="cart-list" id="cartList">
-                                <div class="text-center py-5">
-                                    <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
-                                    <h5 class="text-muted">Your cart is empty</h5>
-                                    <p class="text-muted">Add some products to get started</p>
-                                    <button class="btn btn-primary" onclick="window.location.href='/pages/marketplace.html'">
-                                        <i class="fas fa-shopping-bag"></i> Browse Products
-                                    </button>
-                                </div>
-                            </div>
+                            <div class="cart-list" id="cartList"></div>
                         </div>
                     </div>
                 </div>
             </div>
         `;
+        this.renderDashboardCart();
+    }
+
+    renderDashboardCart() {
+        const cartList = this.querySelector('#cartList');
+        if (!cartList) return;
+
+        const cartItems = this.getCartItems();
+        if (!cartItems.length) {
+            cartList.innerHTML = `
+                <div class="text-center py-5">
+                    <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">Your cart is empty</h5>
+                    <p class="text-muted">Add some products to get started</p>
+                    <button class="btn btn-primary" data-section="marketplace">
+                        <i class="fas fa-shopping-bag"></i> Browse Products
+                    </button>
+                </div>`;
+            return;
+        }
+
+        const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        cartList.innerHTML = `
+            ${cartItems.map(item => `
+                <div class="cart-item d-flex align-items-center gap-3 border-bottom py-3">
+                    <img src="${item.image || item.image_url || ''}" alt="${item.name}" style="width:80px;height:65px;object-fit:contain;border-radius:8px;">
+                    <div class="flex-grow-1"><strong>${item.name}</strong><div>B/. ${item.price.toFixed(2)} x ${item.quantity}</div></div>
+                </div>`).join('')}
+            <div class="d-flex justify-content-between align-items-center mt-4">
+                <strong>Total: B/. ${total.toFixed(2)}</strong>
+                <button class="btn btn-primary" id="dashboardCheckoutBtn"><i class="fas fa-credit-card"></i> Continue to payment</button>
+            </div>`;
+
+        this.querySelector('#dashboardCheckoutBtn').addEventListener('click', () => {
+            this.loadExternalPage('../../pages/checkout.html');
+        });
+    }
+
+    getCartItems() {
+        const savedCart = JSON.parse(localStorage.getItem('recomputech-cart') || '[]');
+        return savedCart.map(item => ({
+            ...item,
+            quantity: Number(item.quantity || item.qty || 1),
+            price: Number(item.price || 0)
+        }));
     }
 
     loadSettings() {
@@ -497,7 +579,7 @@ class DashboardContentComponent extends HTMLElement {
     }
 
     loadTechnicians() {
-        this.loadExternalPage('../../pages/technician/info-technician.html');
+        this.loadExternalPage('../../pages/technician/info-technician.html?context=dashboard');
     }
 
    setupEventListeners() {
@@ -694,105 +776,135 @@ showSecurityMessage(message, type) {
     if (!content) return;
     content.innerHTML = `<div class="alert alert-${type === 'success' ? 'success' : 'danger'} mb-0">${message}</div>`;
 }
-    async handleSellForm(form) {
+
+    async handleProfileForm(form) {
     try {
-        if (!window.supabaseClient) {
-            alert('Supabase is not configured.');
-            return;
-        }
-
-        // Obtener el usuario que inició sesión
-        const currentUser = JSON.parse(
-            localStorage.getItem('currentUser')
-        );
-
-        if (!currentUser || !currentUser.userId) {
-            alert('You must be logged in to list a product.');
-            return;
-        }
-
-        // Obtener información del formulario
-        const name = form.querySelector('#productName').value.trim();
-        const category = form.querySelector('#productCategory').value;
-        const price = form.querySelector('#productPrice').value;
-        const description = form.querySelector('#productDescription').value.trim();
-
-        // Guardar el producto en Supabase
-        const { data, error } = await window.supabaseClient
-            .from('products')
-            .insert({
-                seller_id: currentUser.userId,
-                name: name,
-                category: category,
-                price: Number(price),
-                description: description,
-                status: 'available'
-            })
-            .select()
-            .single();
-
-        if (error) {
-            throw error;
-        }
-
-        alert('Product listed successfully!');
-
-        // Limpiar formulario
-        form.reset();
-
-        console.log('Product created:', data);
-
-        // Ir a My Products
-        window.location.hash = 'my-products';
-
-    } catch (error) {
-        console.error('Error creating product:', error);
-        alert('Error creating product: ' + error.message);
-    }
-}
-
-   async handleProfileForm(form) {
-    try {
-        if (!window.supabaseClient) {
-            alert('Supabase is not configured.');
-            return;
-        }
-
         const currentUser = JSON.parse(
             localStorage.getItem('currentUser')
         );
 
         if (!currentUser) {
-            alert('You must be logged in.');
+            alert('User information not found.');
             return;
         }
 
-        const firstName = form.querySelector('#firstName').value.trim();
-        const lastName = form.querySelector('#lastName').value.trim();
-        const phone = form.querySelector('#phone').value.trim();
-        const address = form.querySelector('#address').value.trim();
+        const firstName = form
+            .querySelector('#firstName')
+            .value
+            .trim();
 
-        const imageInput = this.querySelector('#profileImage');
-        const file = imageInput?.files[0];
+        const lastName = form
+            .querySelector('#lastName')
+            .value
+            .trim();
 
-        let avatarUrl = currentUser.avatar || '';
+        const email = form
+            .querySelector('#email')
+            .value
+            .trim();
 
-        // SUBIR NUEVA FOTO SI EL USUARIO SELECCIONÓ UNA
-        if (file) {
+        const phone = form
+            .querySelector('#phone')
+            .value
+            .trim();
 
-            const userId = currentUser.userId || currentUser.id;
+        const address = form
+            .querySelector('#address')
+            .value
+            .trim();
 
-            const fileExtension = file.name.split('.').pop();
+        // Actualizar datos locales
+        currentUser.firstName = firstName;
+        currentUser.lastName = lastName;
+        currentUser.email = email;
+        currentUser.phone = phone;
+        currentUser.address = address;
+
+        localStorage.setItem(
+            'currentUser',
+            JSON.stringify(currentUser)
+        );
+
+        // Actualizar datos del componente
+        this.userData = currentUser;
+
+        alert('Profile updated successfully!');
+
+    } catch (error) {
+
+        console.error(
+            'Error updating profile:',
+            error
+        );
+
+        alert(
+            'Error updating profile: ' +
+            error.message
+        );
+    }
+}
+   async handleSellForm(form) {
+    try {
+        if (!window.supabaseClient) {
+            alert('Supabase is not configured.');
+            return;
+        }
+
+        // Obtener el usuario autenticado de Supabase
+        const { data: authData, error: authError } =
+            await window.supabaseClient.auth.getUser();
+
+        if (authError || !authData?.user) {
+            alert('You must be logged in to list a product.');
+            return;
+        }
+
+        // UUID real de Supabase Auth
+        const userId = authData.user.id;
+
+        // Obtener información del formulario
+        const name = form.querySelector('#productName').value.trim();
+        const category = form.querySelector('#productCategory').value;
+        const price = form.querySelector('#productPrice').value;
+        const description = form
+            .querySelector('#productDescription')
+            .value
+            .trim();
+        const specifications = {
+            processor: form.querySelector('#productProcessor').value.trim(),
+            ram: form.querySelector('#productRam').value.trim(),
+            storage: form.querySelector('#productStorage').value.trim(),
+            graphics: form.querySelector('#productGraphics').value.trim(),
+            os: form.querySelector('#productOs').value.trim(),
+            ports: form.querySelector('#productPorts').value.trim(),
+            warranty: form.querySelector('#productWarranty').value.trim()
+        };
+
+        // Obtener imagen
+        const imageInput = form.querySelector('#productImages');
+        const files = imageInput?.files;
+
+        let imageUrl = '';
+
+        // Subir la primera imagen
+        if (files && files.length > 0) {
+
+            const file = files[0];
+
+            const fileExtension = file.name
+                .split('.')
+                .pop();
 
             const fileName =
                 `${userId}-${Date.now()}.${fileExtension}`;
 
-            const filePath = `profiles/${fileName}`;
+            const filePath =
+                `products/${fileName}`;
 
             const { error: uploadError } =
                 await window.supabaseClient
                     .storage
-                    .from('avatars')
+                    .from('product-images')
                     .upload(filePath, file);
 
             if (uploadError) {
@@ -803,24 +915,26 @@ showSecurityMessage(message, type) {
             const { data: publicUrlData } =
                 window.supabaseClient
                     .storage
-                    .from('avatars')
+                    .from('product-images')
                     .getPublicUrl(filePath);
 
-            avatarUrl = publicUrlData.publicUrl;
+            imageUrl = publicUrlData.publicUrl;
         }
 
-        // ACTUALIZAR USUARIO EN LA BASE DE DATOS
+        // Guardar producto
         const { data, error } =
             await window.supabaseClient
-                .from('users')
-                .update({
-                    first_name: firstName,
-                    last_name: lastName,
-                    phone: phone,
-                    address: address,
-                    avatar: avatarUrl
+                .from('products')
+                .insert({
+                    seller_id: userId,
+                    name: name,
+                    category: category,
+                    price: Number(price),
+                    description: description,
+                    specifications: specifications,
+                    image_url: imageUrl,
+                    status: 'available'
                 })
-                .eq('email', currentUser.email)
                 .select()
                 .single();
 
@@ -828,47 +942,26 @@ showSecurityMessage(message, type) {
             throw error;
         }
 
-        // ACTUALIZAR LOCALSTORAGE
-        const updatedUser = {
-            ...currentUser,
-            firstName: data.first_name,
-            lastName: data.last_name,
-            name: `${data.first_name} ${data.last_name}`.trim(),
-            phone: data.phone || '',
-            address: data.address || '',
-            avatar: data.avatar || ''
-        };
+        alert('Product listed successfully!');
 
-        localStorage.setItem(
-            'currentUser',
-            JSON.stringify(updatedUser)
-        );
-        // Actualizar el header con la nueva información
-const header = document.querySelector('recomputech-header-auth');
+        console.log('Product created:', data);
 
-if (header) {
-    header.remove();
-    
-    const headerContainer = document.getElementById('headerContainer');
+        // Limpiar formulario
+        form.reset();
 
-    if (headerContainer) {
-        headerContainer.innerHTML =
-            '<recomputech-header-auth></recomputech-header-auth>';
-    }
-}
-
-        this.userData = updatedUser;
-
-        alert('Profile updated successfully!');
-
-        console.log('Updated profile:', data);
+        // Ir a My Products
+        window.location.hash = 'my-products';
 
     } catch (error) {
 
-        console.error('Error updating profile:', error);
+        console.error(
+            'Error creating product:',
+            error
+        );
 
         alert(
-            'Error updating profile: ' + error.message
+            'Error creating product: ' +
+            error.message
         );
     }
 }

@@ -276,6 +276,39 @@
                                     <label class="form-label">Description *</label>
                                     <textarea class="form-control" id="productDescription" rows="4" placeholder="Describe your product in detail..." required></textarea>
                                 </div>
+                                <div class="form-section">
+                                    <h3 class="section-title"><i class="fas fa-microchip"></i> Technical Specifications</h3>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="productProcessor">Processor</label>
+                                            <input type="text" class="form-control" id="productProcessor" placeholder="e.g. Intel Core i5-8500">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="productRam">RAM</label>
+                                            <input type="text" class="form-control" id="productRam" placeholder="e.g. 8GB DDR4">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="productStorage">Storage</label>
+                                            <input type="text" class="form-control" id="productStorage" placeholder="e.g. 256GB SSD">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="productGraphics">Graphics</label>
+                                            <input type="text" class="form-control" id="productGraphics" placeholder="e.g. Intel UHD Graphics 630">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="productOs">Operating System</label>
+                                            <input type="text" class="form-control" id="productOs" placeholder="e.g. Windows 10 Pro">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="productPorts">Ports</label>
+                                            <input type="text" class="form-control" id="productPorts" placeholder="e.g. USB 3.1, HDMI, Ethernet">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="productWarranty">Warranty</label>
+                                            <input type="text" class="form-control" id="productWarranty" placeholder="e.g. 6 months">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             
                             <!-- Price and Status -->
@@ -393,6 +426,14 @@
             document.getElementById('productDescription').value = product.description;
             document.getElementById('productPrice').value = product.price;
             document.getElementById('productStatus').value = product.status;
+            const specifications = product.specifications || {};
+            document.getElementById('productProcessor').value = specifications.processor || '';
+            document.getElementById('productRam').value = specifications.ram || '';
+            document.getElementById('productStorage').value = specifications.storage || '';
+            document.getElementById('productGraphics').value = specifications.graphics || '';
+            document.getElementById('productOs').value = specifications.os || '';
+            document.getElementById('productPorts').value = specifications.ports || '';
+            document.getElementById('productWarranty').value = specifications.warranty || '';
             document.getElementById('product-breadcrumb').textContent = `Edit ${product.name}`;
             
             // Show current image
@@ -446,7 +487,8 @@
                 category: document.getElementById('productCategory').value,
                 description: document.getElementById('productDescription').value,
                 price: parseFloat(document.getElementById('productPrice').value),
-                status: document.getElementById('productStatus').value
+                status: document.getElementById('productStatus').value,
+                specifications: getSpecificationsFromForm()
             };
             
             // In a real application, this would be sent to the server
@@ -468,12 +510,25 @@
                 description: document.getElementById('productDescription').value,
                 price: parseFloat(document.getElementById('productPrice').value),
                 status: document.getElementById('productStatus').value,
+                specifications: getSpecificationsFromForm(),
                 image: JSON.parse(localStorage.getItem('editingProduct')).image,
                 date: JSON.parse(localStorage.getItem('editingProduct')).date
             };
             
             localStorage.setItem('selectedProduct', JSON.stringify(previewData));
             window.open('my-product-details.html', '_blank');
+        }
+
+        function getSpecificationsFromForm() {
+            return {
+                processor: document.getElementById('productProcessor').value.trim(),
+                ram: document.getElementById('productRam').value.trim(),
+                storage: document.getElementById('productStorage').value.trim(),
+                graphics: document.getElementById('productGraphics').value.trim(),
+                os: document.getElementById('productOs').value.trim(),
+                ports: document.getElementById('productPorts').value.trim(),
+                warranty: document.getElementById('productWarranty').value.trim()
+            };
         }
     </script>
 </body>
