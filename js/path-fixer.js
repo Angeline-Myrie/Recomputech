@@ -27,7 +27,7 @@
         images.forEach(img => {
             if (img.src.includes('assets/') && !img.src.startsWith('http')) {
                 const currentSrc = img.getAttribute('src');
-                if (!currentSrc.startsWith('/') && !currentSrc.startsWith('./')) {
+                if (basePath && !currentSrc.startsWith('/') && !currentSrc.startsWith('./')) {
                     img.src = basePath + '/' + currentSrc;
                 }
             }
