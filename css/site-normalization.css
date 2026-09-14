@@ -1,0 +1,440 @@
+/* Shared mobile visual scale for public pages */
+.mobile-slider-dots {
+    display: none;
+}
+
+@media (max-width: 767.98px) {
+    body {
+        font-size: 0.92rem;
+        line-height: 1.55;
+    }
+
+    main,
+    section,
+    article,
+    .page-content,
+    .content-section {
+        text-align: left;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    li,
+    label,
+    .form-text {
+        text-align: left;
+    }
+
+    h1,
+    .hero-title,
+    .aboutus-hero-title,
+    .services-hero-title,
+    .contact-hero-title,
+    .technician-hero-title {
+        font-size: 2.1rem;
+        line-height: 1.15;
+    }
+
+    h2,
+    .section-title,
+    .services-title {
+        font-size: 1.65rem;
+        line-height: 1.2;
+    }
+
+    .section-header,
+    .services-header {
+        text-align: left;
+    }
+
+    .section-subtitle {
+        max-width: 680px;
+        margin-left: 0;
+        margin-right: 0;
+        text-align: left;
+        font-size: 0.92rem;
+    }
+
+    #about .lead {
+        font-size: 0.95rem;
+        line-height: 1.55;
+    }
+
+    #about .about-features-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 0.45rem;
+        margin: 1.25rem 0;
+    }
+
+    #about .about-feature-card {
+        min-width: 0;
+        padding: 0.75rem 0.3rem;
+        border-radius: 10px;
+    }
+
+    #about .about-feature-icon {
+        width: 42px;
+        height: 42px;
+        margin-bottom: 0.55rem;
+        border-radius: 11px;
+        font-size: 1rem;
+    }
+
+    #about .about-feature-desc {
+        font-size: 0.68rem;
+        line-height: 1.25;
+        overflow-wrap: anywhere;
+    }
+
+    #services .container {
+        overflow: hidden;
+    }
+
+    #services .container > .row:not(.section-header) {
+        flex-wrap: nowrap;
+        margin-left: 0;
+        margin-right: 0;
+        animation: servicesCarousel 12s ease-in-out infinite;
+        will-change: transform;
+    }
+
+    #services .container > .row:not(.section-header) > [class*="col-"] {
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    #services .container > .row:not(.section-header) > [data-aos] {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #services .service-card {
+        min-height: 245px;
+        padding: 1.35rem 1rem;
+        border-radius: 14px;
+    }
+
+    #services .service-icon {
+        width: 58px;
+        height: 58px;
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+    }
+
+    #services .service-card h3 {
+        font-size: 1.15rem;
+        margin-bottom: 0.55rem;
+    }
+
+    #services .service-card p {
+        max-width: 270px;
+        margin-bottom: 0;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    /* Use one horizontal track so every stats card can be seen in sequence. */
+    .stats-section .container {
+        overflow: hidden;
+    }
+
+    .stats-section .row {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        width: auto !important;
+        height: auto !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        animation: statsCarousel 14s ease-in-out infinite !important;
+        will-change: transform;
+    }
+
+    .stats-section .row > [class*="col-"] {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        display: block !important;
+        flex: 0 0 100% !important;
+        max-width: 100% !important;
+        width: auto !important;
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+        opacity: 1 !important;
+        transform: none !important;
+        animation: none !important;
+    }
+
+    @keyframes statsCarousel {
+        0%, 20% {
+            transform: translateX(0);
+        }
+        27%, 47% {
+            transform: translateX(-100%);
+        }
+        54%, 74% {
+            transform: translateX(-200%);
+        }
+        81%, 95% {
+            transform: translateX(-300%);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+
+    @keyframes servicesCarousel {
+        0%, 20% {
+            transform: translateX(0);
+        }
+        27%, 47% {
+            transform: translateX(-100%);
+        }
+        54%, 74% {
+            transform: translateX(-200%);
+        }
+        81%, 95% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+
+    .btn,
+    button,
+    input,
+    select,
+    textarea {
+        font-size: 0.9rem;
+    }
+
+    .btn {
+        min-height: 40px;
+        padding: 0.6rem 0.85rem;
+    }
+
+    .card,
+    .product-card,
+    .service-card,
+    .tech-card,
+    .stat-card,
+    .contact-info-card,
+    .product-detail-card,
+    .checkout-card {
+        padding: 1rem;
+    }
+
+    img,
+    video,
+    iframe {
+        max-width: 100%;
+    }
+
+    .product-slider {
+        min-height: 0;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .product-card {
+        flex-basis: 240px;
+        min-width: 240px;
+        max-width: 240px;
+        height: 387px;
+        padding: 0;
+    }
+
+    .product-card .product-image {
+        height: 135px;
+        max-height: none;
+    }
+
+    .product-card .product-content {
+        padding: 0.85rem;
+    }
+
+    .product-card .product-title {
+        font-size: 1rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .product-card .product-description {
+        font-size: 0.88rem;
+        line-height: 1.45;
+        margin-bottom: 0.75rem;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+    }
+
+    .product-card .product-price,
+    .product-card .product-rating {
+        margin-bottom: 0.7rem;
+    }
+
+    .product-card .current-price {
+        font-size: 1.1rem;
+    }
+
+    .product-card .original-price {
+        font-size: 0.82rem;
+    }
+
+    .product-card .product-actions {
+        gap: 0.5rem;
+    }
+
+    .mobile-slider-dots {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.45rem;
+        margin-top: 0.75rem;
+    }
+
+    .mobile-slider-dot {
+        width: 8px;
+        height: 8px;
+        min-height: 0;
+        padding: 0;
+        border: 0;
+        border-radius: 50%;
+        background: rgba(33, 141, 166, 0.3);
+        cursor: pointer;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+
+    .mobile-slider-dot.active {
+        background: var(--primary-color);
+        transform: scale(1.35);
+    }
+
+    #services .container > .row:not(.section-header),
+    .stats-section .row {
+        animation: none !important;
+        transform: none !important;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 0.75rem;
+        padding: 0.5rem 0.75rem 0.75rem;
+    }
+
+    #services .container > .row:not(.section-header)::-webkit-scrollbar,
+    .stats-section .row::-webkit-scrollbar {
+        display: none;
+    }
+
+    #services .container > .row:not(.section-header) > [class*="col-"],
+    .stats-section .row > [class*="col-"] {
+        flex: 0 0 100% !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        scroll-snap-align: center;
+    }
+
+    .mobile-slider-dots {
+        display: flex;
+    }
+
+    .stats-section .stat-card,
+    .stats-section .stat-card h3,
+    .stats-section .stat-card p {
+        text-align: center !important;
+    }
+
+    #technicians .container {
+        overflow: hidden;
+    }
+
+    #technicians .technicians-row {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 0.75rem;
+        padding: 0.5rem 0.75rem 0.75rem;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    #technicians .technicians-row::-webkit-scrollbar {
+        display: none;
+    }
+
+    #technicians .technicians-row > [class*="col-"] {
+        flex: 0 0 86% !important;
+        width: 86% !important;
+        max-width: 86% !important;
+        padding: 0 !important;
+        scroll-snap-align: center;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    #technicians .tech-card {
+        height: 465px;
+        min-height: 465px;
+        padding: 1.25rem;
+        border-radius: 16px;
+    }
+
+    #technicians .tech-header {
+        margin-bottom: 1rem;
+    }
+
+    #technicians .tech-avatar-img {
+        width: 52px;
+        height: 52px;
+        border-radius: 12px;
+    }
+
+    #technicians .tech-info h4 {
+        font-size: 1.1rem;
+        margin-bottom: 0.4rem;
+    }
+
+    #technicians .tech-info p {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        min-height: 2.7rem;
+        margin-bottom: 0.85rem;
+        font-size: 0.88rem;
+        line-height: 1.5;
+    }
+
+    #technicians .tech-tags {
+        gap: 0.4rem;
+        margin-bottom: 1rem;
+    }
+
+    #technicians .tech-tags span {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.72rem;
+    }
+
+    #technicians .tech-stats {
+        margin-bottom: 1rem;
+        font-size: 0.8rem;
+    }
+
+    #technicians .tech-card .btn {
+        padding: 0.7rem;
+    }
+}

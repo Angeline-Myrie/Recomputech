@@ -3,70 +3,201 @@
 @import url('./dark-mode-variables.css');
 
 
-/* Hero Section */
+/* ================================
+   HERO SECTION - SERVICES
+================================ */
+
 .services-hero-section {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-    color: white;
+    background: linear-gradient(
+        135deg,
+        var(--primary-color) 0%,
+        var(--secondary-color) 100%
+    ) !important;
+
+    color: white !important;
+
     padding: 7rem 0 5rem 0;
+
     position: relative;
+
     overflow: hidden;
+
     border-radius: 0 0 30px 30px;
+
     transition: all 0.3s ease;
 }
 
-/* Dark Mode Hero Section */
-body.dark-mode .services-hero-section,
-[data-theme="dark"] .services-hero-section {
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-}
+
+/* Fondo decorativo */
 
 .services-hero-section::before {
     content: '';
+
     position: absolute;
+
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
-    opacity: 0.3;
-    border-radius: 0 0 30px 30px;
+
+    opacity: 0.15;
+
+    pointer-events: none;
+
+    z-index: 0;
 }
+
+
+/* Contenido del Hero */
 
 .services-hero-content {
     position: relative;
-    z-index: 2;
+
+    z-index: 1;
+
     text-align: center;
+
     padding-top: 2rem;
+
+    background: transparent !important;
 }
 
-.services-hero-badge {
-    display: inline-block;
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    padding: 0.75rem 2rem;
-    border-radius: 50px;
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 2rem;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    animation: pulse 2s infinite;
-    transition: all 0.3s ease;
-}
 
-/* Dark Mode Hero Badge */
-body.dark-mode .services-hero-badge,
-[data-theme="dark"] .services-hero-badge {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.2);
-}
+/* Título */
 
 .services-hero-title {
     font-size: 3.5rem;
+
     font-weight: 800;
+
     margin-bottom: 0;
-    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    transition: color 0.3s ease;
+
+    color: white !important;
+
+    background: transparent !important;
+
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+
+    animation: contactTitleFade 1s ease-out;
+}
+
+/* Professional Services Badge */
+
+.services-hero-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+    overflow: hidden;
+
+    padding: 0.8rem 2rem;
+    margin-bottom: 1.8rem;
+
+    border-radius: 50px;
+
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+
+    color: #ffffff !important;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    border: 1px solid rgba(255, 255, 255, 0.35);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.15),
+        inset 0 1px 1px rgba(255, 255, 255, 0.2);
+
+    animation: badgeFloat 3s ease-in-out infinite;
+
+    transition: all 0.3s ease;
+}
+
+
+/* Brillo que pasa sobre Professional Services */
+
+.services-hero-badge::before {
+    content: '';
+
+    position: absolute;
+
+    top: 0;
+    left: -100%;
+
+    width: 60%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.3),
+        transparent
+    );
+
+    transform: skewX(-25deg);
+
+    animation: badgeShine 4s infinite;
+
+    pointer-events: none;
+}
+
+
+/* Animación flotante */
+
+@keyframes badgeFloat {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+
+/* Animación del brillo */
+
+@keyframes badgeShine {
+    0% {
+        left: -100%;
+    }
+
+    60% {
+        left: 150%;
+    }
+
+    100% {
+        left: 150%;
+    }
+}
+
+
+/* Cualquier elemento dentro del hero */
+
+.services-hero-section h1,
+.services-hero-section h2,
+.services-hero-section h3,
+.services-hero-section p,
+.services-hero-section div {
+    background-color: transparent;
+}
+
+
+/* Dark Mode */
+
+body.dark-mode .services-hero-section,
+[data-theme="dark"] .services-hero-section {
+    background: linear-gradient(
+        135deg,
+        #1e293b 0%,
+        #0f172a 100%
+    ) !important;
 }
 
 /* Contact Section */
@@ -464,6 +595,354 @@ body.dark-mode .feature-tag:hover,
 .newsletter-content .btn:hover {
     background: #21cbf3;
     color: var(--primary-color);
+}
+
+/* ==========================================
+   FIND TECHNICIAN CTA
+========================================== */
+
+.technician-cta-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    max-width: 1100px;
+    margin: 4rem auto 3rem;
+
+    padding: 3.5rem 4rem;
+
+    overflow: hidden;
+
+    border-radius: 30px;
+
+    background: linear-gradient(
+        135deg,
+        #0096A7 0%,
+        #007a87 50%,
+        #006875 100%
+    );
+
+    color: white;
+
+    box-shadow:
+        0 20px 50px rgba(0, 122, 135, 0.25);
+
+    isolation: isolate;
+
+    transition: all 0.4s ease;
+
+    animation: ctaFadeUp 0.8s ease-out;
+}
+
+
+/* Efecto al pasar el mouse */
+
+.technician-cta-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow:
+        0 25px 60px rgba(0, 122, 135, 0.35);
+}
+
+
+/* Círculos decorativos */
+
+.technician-cta-card::before {
+    content: '';
+
+    position: absolute;
+
+    width: 280px;
+    height: 280px;
+
+    top: -140px;
+    right: -80px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.08);
+
+    z-index: -1;
+
+    animation: ctaCircleFloat 6s ease-in-out infinite;
+}
+
+
+.technician-cta-card::after {
+    content: '';
+
+    position: absolute;
+
+    width: 200px;
+    height: 200px;
+
+    bottom: -100px;
+    left: -50px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.06);
+
+    z-index: -1;
+
+    animation: ctaCircleFloat 7s ease-in-out infinite reverse;
+}
+
+
+/* ==========================================
+   CTA CONTENT
+========================================== */
+
+.technician-cta-card > div:first-child {
+    position: relative;
+
+    z-index: 2;
+
+    max-width: 650px;
+}
+
+
+.cta-title {
+    font-size: 2.4rem;
+
+    font-weight: 800;
+
+    line-height: 1.2;
+
+    color: #ffffff !important;
+
+    margin-bottom: 1rem;
+
+    text-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.15);
+
+    animation: ctaTextIn 0.9s ease-out;
+}
+
+
+.technician-cta-card p {
+    color: rgba(255, 255, 255, 0.9) !important;
+
+    font-size: 1.1rem;
+
+    line-height: 1.7;
+
+    margin-bottom: 1.8rem;
+
+    animation: ctaTextIn 1.1s ease-out;
+}
+
+
+/* ==========================================
+   CTA BUTTONS
+========================================== */
+
+.cta-actions {
+    display: flex;
+
+    align-items: center;
+
+    gap: 1rem;
+
+    flex-wrap: wrap;
+}
+
+
+.cta-actions .btn {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    padding: 0.9rem 1.8rem;
+
+    border-radius: 50px;
+
+    font-size: 1rem;
+
+    font-weight: 700;
+
+    color: #007a87;
+
+    background: #ffffff;
+
+    border: 2px solid #ffffff;
+
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.15);
+
+    transition: all 0.3s ease;
+}
+
+
+.cta-actions .btn:hover {
+    transform: translateY(-4px) scale(1.02);
+
+    background: #eafcff;
+
+    color: #006875;
+
+    box-shadow:
+        0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+
+/* ==========================================
+   TECHNICIAN ILLUSTRATION
+========================================== */
+
+.cta-visual {
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    flex: 0 0 220px;
+
+    z-index: 2;
+}
+
+
+.technician-illustration {
+    width: 160px;
+
+    height: 160px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    border: 2px solid rgba(255, 255, 255, 0.25);
+
+    color: #ffffff;
+
+    font-size: 4.5rem;
+
+    backdrop-filter: blur(10px);
+
+    -webkit-backdrop-filter: blur(10px);
+
+    box-shadow:
+        0 15px 35px rgba(0, 0, 0, 0.15),
+        inset 0 2px 5px rgba(255, 255, 255, 0.15);
+
+    animation: technicianFloat 3.5s ease-in-out infinite;
+}
+
+
+/* Brillo alrededor del icono */
+
+.technician-illustration::after {
+    content: '';
+
+    position: absolute;
+
+    width: 185px;
+
+    height: 185px;
+
+    border-radius: 50%;
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+
+    animation: technicianPulse 2.5s ease-in-out infinite;
+}
+
+
+/* ==========================================
+   ANIMATIONS
+========================================== */
+
+@keyframes ctaFadeUp {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(35px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0);
+    }
+
+}
+
+
+@keyframes ctaTextIn {
+
+    from {
+        opacity: 0;
+
+        transform: translateX(-25px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateX(0);
+    }
+
+}
+
+
+@keyframes technicianFloat {
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(0deg);
+    }
+
+    50% {
+        transform: translateY(-12px) rotate(2deg);
+    }
+
+}
+
+
+@keyframes technicianPulse {
+
+    0%,
+    100% {
+        transform: scale(0.95);
+
+        opacity: 0.4;
+    }
+
+    50% {
+        transform: scale(1.08);
+
+        opacity: 0.8;
+    }
+
+}
+
+
+@keyframes ctaCircleFloat {
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(-15px, 20px);
+    }
+
 }
 
 /* Responsive adjustments */
