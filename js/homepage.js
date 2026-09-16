@@ -19,6 +19,50 @@ document.addEventListener('DOMContentLoaded', function() {
             filterProducts(category);
         });
     });
+
+    initializeMobileSliders();
+
+    function initializeMobileSliders() {
+        const sliders = [
+            { section: '.stats-section', dots: '[data-slider-dots="stats"]' },
+            { section: '#services', dots: '[data-slider-dots="services"]' }
+        ];
+
+        sliders.forEach(({ section, dots: dotsSelector }) => {
+            const sectionElement = document.querySelector(section);
+            const track = sectionElement?.querySelector('.row');
+            const dots = document.querySelector(dotsSelector);
+            const slides = track ? [...track.children] : [];
+
+            if (!track || !dots || slides.length === 0) return;
+
+            slides.forEach((slide, index) => {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = 'mobile-slider-dot';
+                dot.setAttribute('aria-label', `Go to slide ${index + 1}`);
+                dot.addEventListener('click', () => {
+                    track.scrollTo({ left: slide.offsetLeft, behavior: 'smooth' });
+                });
+                dots.appendChild(dot);
+            });
+
+            const updateDots = () => {
+                const slideWidth = track.clientWidth || 1;
+                const activeIndex = Math.min(
+                    slides.length - 1,
+                    Math.max(0, Math.round(track.scrollLeft / slideWidth))
+                );
+                dots.querySelectorAll('.mobile-slider-dot').forEach((dot, index) => {
+                    dot.classList.toggle('active', index === activeIndex);
+                    dot.setAttribute('aria-current', index === activeIndex ? 'true' : 'false');
+                });
+            };
+
+            track.addEventListener('scroll', updateDots, { passive: true });
+            updateDots();
+        });
+    }
     
     function filterProducts(category) {
         const products = document.querySelectorAll('.product-card');

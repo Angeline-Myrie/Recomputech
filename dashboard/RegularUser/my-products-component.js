@@ -11,7 +11,7 @@
     this.setupEventListeners();
    }
 
-   async loadProducts() {
+  async loadProducts() {
     try {
         if (!window.supabaseClient) {
             console.error('Supabase client is not available.');
@@ -22,30 +22,47 @@
             localStorage.getItem('currentUser')
         );
 
-        if (!currentUser || !currentUser.userId) {
+        // Aceptar userId o id
+        const userId = currentUser?.userId || currentUser?.id;
+
+        console.log('Current user:', currentUser);
+        console.log('User ID being used:', userId);
+
+        if (!currentUser || !userId) {
             console.error('No logged-in user found.');
             return;
         }
 
         const { data, error } = await window.supabaseClient
-            .from('products')
-            .select('*')
-            .eq('seller_id', currentUser.userId)
-            .order('created_at', { ascending: false });
+    .from('products')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+console.log('ALL PRODUCTS FROM SUPABASE:', data);
+console.log('CURRENT USER ID:', userId);
+console.log(
+    'SELLER IDs:',
+    data?.map(product => product.seller_id)
+);
 
         if (error) {
             throw error;
         }
 
-        this.products = data.map(product => ({
+        console.log('Products loaded:', data);
+
+        this.products = (data || []).map(product => ({
             id: product.id,
             name: product.name,
-            description: product.description,
+            description: product.description || 'No description available.',
+            specifications: product.specifications || {},
             price: product.price,
             category: product.category,
-            image: product.image_url,
+            image: product.image_url || '../../assets/images/laptop.avif',
             status: product.status,
-            date: new Date(product.created_at).toLocaleDateString()
+            date: product.created_at
+                ? new Date(product.created_at).toLocaleDateString()
+                : ''
         }));
 
         this.filteredProducts = [...this.products];
@@ -144,76 +161,34 @@
                         <p style="color: #6c757d; margin: 0; font-size: 0.95rem;">Manage and monitor your product listings</p>
                     </div>
                     
-                    <div class="products-grid">
+                    <div class="products-grid my-products-grid">
                     ${this.filteredProducts.map(product => `
-                        <div class="product-card" data-aos="fade-up" data-aos-delay="${Math.random() * 300 + 100}" 
-                             style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 8px 25px rgba(0,0,0,0.1); transition: all 0.3s ease; border: 1px solid #e9ecef; position: relative;">
-                            
-                            <!-- Product Image -->
-                            <div class="product-image-container" style="position: relative; height: 200px; overflow: hidden; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
-                                <img src="${product.image}" alt="${product.name}" 
-                                     style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease;">
-                                <div class="image-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(33, 141, 166, 0.1) 0%, rgba(27, 110, 130, 0.1) 100%); opacity: 0; transition: opacity 0.3s ease;"></div>
-                                
-                                <!-- Status Badge on Image -->
-                                <div class="status-badge-image" style="position: absolute; top: 1rem; right: 1rem; z-index: 3;">
-                                    <span class="status-badge" style="padding: 0.4rem 1rem; border-radius: 20px; font-size: 0.85rem; font-weight: 600; background: ${product.status === 'active' ? 'rgba(40, 167, 69, 0.9)' : 'rgba(255, 193, 7, 0.9)'}; color: ${product.status === 'active' ? '#fff' : '#000'}; border: 1px solid ${product.status === 'active' ? '#28a745' : '#ffc107'}; backdrop-filter: blur(10px);">
-                                        ${product.status}
-                                    </span>
-                                </div>
-                                
-                                <!-- Price Badge on Image -->
-                                <div class="price-badge-image" style="position: absolute; bottom: 1rem; left: 1rem; z-index: 3;">
-                                    <span style="padding: 0.5rem 1rem; border-radius: 15px; font-size: 1.1rem; font-weight: 700; background: rgba(33, 141, 166, 0.9); color: white; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.2);">
-                                        B/. ${product.price}
-                                    </span>
-                                </div>
+                        <article class="product-card my-product-card" data-aos="fade-up" data-aos-delay="${Math.random() * 300 + 100}">
+                            <div class="product-image">
+                                <img src="${product.image}" alt="${product.name}" onerror="this.src='../../assets/images/laptop.avif';">
+                                <span class="product-badge">${product.status || 'Available'}</span>
                             </div>
-                            
-                            <!-- Product Header -->
-                            <div class="product-header" style="background: linear-gradient(135deg, #218DA6 0%, #1b6e82 100%); color: white; padding: 1.5rem; position: relative; overflow: hidden;">
-                                <div class="floating-circle" style="position: absolute; width: 60px; height: 60px; background: rgba(255,255,255,0.1); border-radius: 50%; top: 10%; right: 10%; animation: float 6s ease-in-out infinite;"></div>
-                                <h5 style="margin: 0; font-size: 1.3rem; font-weight: 600; position: relative; z-index: 2;">${product.name}</h5>
-                                <p style="margin: 0.5rem 0 0 0; font-size: 0.9rem; opacity: 0.9; position: relative; z-index: 2;">${product.description}</p>
-                            </div>
-                            
-                            <!-- Product Body -->
-                            <div class="product-body" style="padding: 1.5rem;">
-                                <div class="product-info" style="margin-bottom: 1.5rem;">
-                                    <div class="info-item" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; padding: 0.5rem 0; border-bottom: 1px solid #f8f9fa;">
-                                        <span style="color: #6c757d; font-weight: 500;">
-                                            <i class="fas fa-tag" style="margin-right: 0.5rem; color: #218DA6;"></i>Category:
-                                        </span>
-                                        <span style="color: #2c3e50; font-weight: 600;">${product.category}</span>
-                                    </div>
-                                    <div class="info-item" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; padding: 0.5rem 0; border-bottom: 1px solid #f8f9fa;">
-                                        <span style="color: #6c757d; font-weight: 500;">
-                                            <i class="fas fa-calendar" style="margin-right: 0.5rem; color: #218DA6;"></i>Listed:
-                                        </span>
-                                        <span style="color: #2c3e50; font-weight: 600;">${product.date}</span>
-                                    </div>
-                                    <div class="info-item" style="display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0;">
-                                        <span style="color: #6c757d; font-weight: 500;">
-                                            <i class="fas fa-hashtag" style="margin-right: 0.5rem; color: #218DA6;"></i>Product ID:
-                                        </span>
-                                        <span style="color: #218DA6; font-weight: 600;">#${product.id}</span>
-                                    </div>
+                            <div class="product-info">
+                                <div class="product-category">${product.category || 'Technology'}</div>
+                                <h3 class="product-title">${product.name}</h3>
+                                <p class="product-description">${product.description.substring(0, 100)}${product.description.length > 100 ? '...' : ''}</p>
+                                <div class="product-price-container">
+                                    <span class="product-price">B/. ${Number(product.price || 0).toFixed(2)}</span>
                                 </div>
-                                
-                                <div class="product-actions" style="display: flex; gap: 0.8rem;">
-                                    <button class="btn btn-primary" data-id="${product.id}" 
-                                            style="flex: 1; background: linear-gradient(135deg, #218DA6 0%, #1b6e82 100%); border: none; padding: 0.8rem; border-radius: 12px; color: white; font-weight: 600; transition: all 0.3s ease;">
-                                        <i class="fas fa-eye" style="margin-right: 0.5rem;"></i>
-                                        View Details
+                                <div class="my-product-details">
+                                    <span><i class="fas fa-calendar"></i> Listed ${product.date}</span>
+                                    <span><i class="fas fa-hashtag"></i> #${product.id}</span>
+                                </div>
+                                <div class="product-actions">
+                                    <button class="btn-view-details" data-id="${product.id}">
+                                        <i class="fas fa-eye"></i> View Details
                                     </button>
-                                    <button class="btn btn-outline-secondary" data-id="${product.id}" 
-                                            style="flex: 1; border: 2px solid #6c757d; background: transparent; padding: 0.8rem; border-radius: 12px; color: #6c757d; font-weight: 600; transition: all 0.3s ease;">
-                                        <i class="fas fa-edit" style="margin-right: 0.5rem;"></i>
-                                        Edit
+                                    <button class="btn-edit-product" data-id="${product.id}" aria-label="Edit ${product.name}">
+                                        <i class="fas fa-edit"></i>
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                        </article>
                     `).join('')}
                     </div>
                     
@@ -247,7 +222,7 @@
         });
         
         // Event listeners para botones View Details
-        this.querySelectorAll('.btn-primary[data-id]').forEach(btn => {
+        this.querySelectorAll('.btn-view-details[data-id]').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const productId = btn.getAttribute('data-id');
                 this.viewProductDetails(productId);
@@ -255,7 +230,7 @@
         });
         
         // Event listeners para botones Edit
-        this.querySelectorAll('.btn-outline-secondary[data-id]').forEach(btn => {
+        this.querySelectorAll('.btn-edit-product[data-id]').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const productId = btn.getAttribute('data-id');
                 this.editProduct(productId);

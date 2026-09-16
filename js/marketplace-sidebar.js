@@ -34,35 +34,35 @@
 
         const stickyTop = getStickyTop();
         const columnRect = column.getBoundingClientRect();
+        const sidebarHeight = sidebar.offsetHeight;
+        const isEmbedded = window.self !== window.top;
+        const footerTop = footer?.getBoundingClientRect().top ?? Number.POSITIVE_INFINITY;
 
-        if (columnRect.top <= stickyTop) {
-            const sidebarHeight = sidebar.offsetHeight;
-            const footerRect = footer?.getBoundingClientRect();
-            const footerTop = footerRect?.top ?? Number.POSITIVE_INFINITY;
+        if (columnRect.top > stickyTop) {
+            resetSidebar();
+            return;
+        }
 
-            if (footerTop <= stickyTop + sidebarHeight) {
-                sidebar.classList.remove('is-fixed');
-                sidebar.style.position = 'absolute';
-                sidebar.style.top = 'auto';
-                sidebar.style.right = '0';
-                sidebar.style.bottom = '0';
-                sidebar.style.left = '0';
-                sidebar.style.width = '100%';
-                sidebar.style.maxHeight = 'calc(100vh - ' + (stickyTop + 20) + 'px)';
-                column.style.minHeight = sidebarHeight + 'px';
-                return;
-            }
-
-            sidebar.style.position = '';
-            sidebar.classList.add('is-fixed');
-            sidebar.style.top = stickyTop + 'px';
-            sidebar.style.left = columnRect.left + 'px';
-            sidebar.style.width = columnRect.width + 'px';
+        if (!isEmbedded && footerTop <= stickyTop + sidebarHeight) {
+            sidebar.classList.remove('is-fixed');
+            sidebar.style.position = 'absolute';
+            sidebar.style.top = 'auto';
+            sidebar.style.right = '0';
+            sidebar.style.bottom = '0';
+            sidebar.style.left = '0';
+            sidebar.style.width = '100%';
             sidebar.style.maxHeight = 'calc(100vh - ' + (stickyTop + 20) + 'px)';
             column.style.minHeight = sidebarHeight + 'px';
-        } else {
-            resetSidebar();
+            return;
         }
+
+        sidebar.classList.add('is-fixed');
+        sidebar.style.position = 'fixed';
+        sidebar.style.top = stickyTop + 'px';
+        sidebar.style.left = columnRect.left + 'px';
+        sidebar.style.width = columnRect.width + 'px';
+        sidebar.style.maxHeight = 'calc(100vh - ' + (stickyTop + 20) + 'px)';
+        column.style.minHeight = sidebarHeight + 'px';
     }
 
     function onScrollOrResize() {
@@ -77,7 +77,6 @@
         sidebar = document.getElementById('sidebar');
         column = document.querySelector('.sidebar-column');
         footer = document.querySelector('recomputech-footer');
-
         if (!sidebar || !column) return;
 
         resetSidebar();

@@ -91,6 +91,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     // Current mode
     let currentMode = 'login';
 
+    const requestedMode = new URLSearchParams(window.location.search).get('mode');
+
     // ========================================
     // TOGGLE BETWEEN LOGIN AND REGISTER
     // ========================================
@@ -115,6 +117,10 @@ document.addEventListener('DOMContentLoaded', async function() {
             currentMode = mode;
         });
     });
+
+    if (requestedMode === 'register') {
+        document.querySelector('.toggle-btn[data-mode="register"]').click();
+    }
 
     function switchToLogin() {
         // Update title and subtitle
@@ -366,7 +372,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (user.role === 'technician') {
             window.location.href = '../dashboard/Technician/dashboard-technician.html';
         } else if (user.role === 'admin') {
-            window.location.href = '../dashboard/Admin/dashboard-admin.html';
+            window.location.href = '../dashboard/Technician/technician-applications.html';
         } else {
             window.location.href = '../dashboard/RegularUser/dashboard.html';
         }

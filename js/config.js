@@ -92,8 +92,8 @@ const CONFIG = {
                 // Auth directory
                 logoPath = '../assets/logos/logo-.png';
             } else {
-                // Fallback to absolute path
-                logoPath = '/assets/logos/logo-.png';
+                // Keep local file and root-based development paths relative
+                logoPath = 'assets/logos/logo-.png';
             }
         }
         

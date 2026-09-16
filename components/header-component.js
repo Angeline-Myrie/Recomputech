@@ -828,14 +828,32 @@ class HeaderComponent extends HTMLElement {
                     .recomputech-btn-primary {
                         padding: 6px 12px;
                         font-size: 0.9rem;
+                        white-space: nowrap;
                     }
 
-                    /* Hide cart, theme, and auth buttons on mobile */
-                    .recomputech-cart-icon,
+                    /* Keep theme and access actions visible beside the menu. */
                     .recomputech-btn-icon,
-                    .recomputech-btn-outline-primary,
-                    .recomputech-btn-primary {
+                    .recomputech-cart-icon {
                         display: none;
+                    }
+
+                    .recomputech-header-actions .recomputech-btn-icon {
+                        display: flex;
+                        width: 34px;
+                        height: 34px;
+                        padding: 0.45rem;
+                    }
+
+                    .recomputech-header-actions .recomputech-btn-primary {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 7px 9px;
+                        font-size: 0.78rem;
+                    }
+
+                    .recomputech-mobile-actions .recomputech-btn-primary {
+                        display: flex;
                     }
 
                     /* Only show hamburger menu on mobile */
@@ -858,6 +876,55 @@ class HeaderComponent extends HTMLElement {
                         font-size: 0.8rem;
                     }
                 }
+
+                @media (max-width: 400px) {
+                    .recomputech-navbar-container {
+                        padding-left: 12px;
+                        padding-right: 12px;
+                        gap: 0.5rem;
+                        min-width: 0;
+                    }
+
+                    .recomputech-navbar-brand,
+                    .recomputech-brand-text {
+                        min-width: 0;
+                    }
+
+                    .recomputech-logo {
+                        width: 28px;
+                        height: 28px;
+                    }
+
+                    .recomputech-brand-name {
+                        font-size: 0.95rem;
+                    }
+
+                    .recomputech-brand-tagline {
+                        display: none;
+                    }
+
+                    .recomputech-header-actions {
+                        gap: 0.2rem;
+                    }
+
+                    .recomputech-header-actions .recomputech-btn-icon {
+                        width: 30px;
+                        height: 30px;
+                        padding: 0.35rem;
+                    }
+
+                    .recomputech-header-actions .recomputech-btn-primary {
+                        padding-left: 5px;
+                        padding-right: 5px;
+                        font-size: 0.62rem;
+                    }
+
+                    .recomputech-navbar-toggler {
+                        width: 34px;
+                        height: 34px;
+                        padding: 0.35rem;
+                    }
+                }
             </style>
 
             <nav class="recomputech-header-navbar">
@@ -865,7 +932,7 @@ class HeaderComponent extends HTMLElement {
                     <div class="recomputech-navbar-container">
                         <!-- Logo Section -->
                         <a class="recomputech-navbar-brand" href="index.html">
-                            <img src="/assets/logos/logo-.png" alt="Logo" class="recomputech-logo recomputech-logo-small">
+                            <img id="header-logo" src="assets/logos/logo-.png" alt="Logo" class="recomputech-logo recomputech-logo-small">
                             <div class="recomputech-brand-text">
                                 <span class="recomputech-brand-name">Recomputech</span>
                                 <span class="recomputech-brand-tagline">Sustainable Technology</span>
@@ -930,7 +997,7 @@ class HeaderComponent extends HTMLElement {
                     
                     <ul class="recomputech-mobile-nav">
                         <li><a href="/index.html">Home</a></li>
-                        <li><a href="/pages/products.html">Products</a></li>
+                        <li><a href="/pages/marketplace.html">Marketplace</a></li>
                         <li><a href="/pages/Aboutus.html">About Us</a></li>
                         <li><a href="/pages/services.html">Services</a></li>
                         <li><a href="/contact.html">Contact</a></li>
@@ -941,7 +1008,6 @@ class HeaderComponent extends HTMLElement {
                             <i class="fas fa-shopping-cart recomputech-mobile-cart-icon"></i>
                             <span class="recomputech-mobile-cart-text">Shopping Cart (0)</span>
                         </div>
-                        <a href="/auth/auth.html" class="recomputech-btn-primary" style="width: 100%; text-align: center;">Login & Register</a>
                     </div>
                 </div>
             </div>
@@ -1147,7 +1213,7 @@ class HeaderComponent extends HTMLElement {
     }
 
     removeFromCart(productId) {
-        this.cartItems = this.cartItems.filter(item => item.id !== productId);
+        this.cartItems = this.cartItems.filter(item => String(item.id) !== String(productId));
         this.updateCartBadge();
         this.saveCartToStorage();
         this.renderCartItems();
@@ -1155,7 +1221,7 @@ class HeaderComponent extends HTMLElement {
     }
 
     updateQuantity(productId, newQuantity) {
-        const item = this.cartItems.find(item => item.id === productId);
+        const item = this.cartItems.find(item => String(item.id) === String(productId));
         if (item) {
             if (newQuantity <= 0) {
                 this.removeFromCart(productId);
