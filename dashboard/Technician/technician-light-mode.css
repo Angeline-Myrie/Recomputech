@@ -221,6 +221,30 @@ html {
     animation: fadeInUp 0.8s ease-out;
 }
 
+/* Keep sidebar text and icons readable over the brand background. */
+.dashboard-sidebar .user-avatar,
+.dashboard-sidebar .user-avatar i,
+.dashboard-sidebar .user-details h5,
+.dashboard-sidebar .user-role,
+.dashboard-sidebar .nav-link,
+.dashboard-sidebar .nav-link i,
+.dashboard-sidebar .nav-link span {
+    color: #ffffff !important;
+}
+
+.dashboard-sidebar .nav-link {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.dashboard-sidebar .nav-link:hover,
+.dashboard-sidebar .nav-link.active,
+.dashboard-sidebar .nav-link:hover i,
+.dashboard-sidebar .nav-link.active i,
+.dashboard-sidebar .nav-link:hover span,
+.dashboard-sidebar .nav-link.active span {
+    color: #ffffff !important;
+}
+
 /* Force light mode on all dashboard elements with animations */
 .dashboard-section {
     animation: fadeInUp 0.8s ease-out !important;
@@ -555,11 +579,12 @@ h1, h2, h3, h4, h5, h6, p, span, div {
 
 /* Force light mode on chart container */
 .chart-container {
+    width: min(100%, 1000px) !important;
     background-color: #ffffff !important;
     border: 2px solid #e5e7eb !important;
     border-radius: 0.5rem !important;
     padding: 1rem !important;
-    margin: 1rem 0 !important;
+    margin: 1.5rem auto !important;
     transition: all 0.3s ease !important;
     animation: fadeInUp 0.8s ease-out !important;
 }
