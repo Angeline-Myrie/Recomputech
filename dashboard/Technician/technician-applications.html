@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Technician Applications - Recomputech</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="../../css/styles.css"
+    >
+
+    <style>
+        :root {
+            --applications-primary: #218DA6;
+            --applications-secondary: #1b6e82;
+            --applications-ink: #1f2937;
+            --applications-muted: #64748b;
+            --applications-surface: #ffffff;
+            --applications-background: #f4f8fa;
+            --applications-border: #e2e8f0;
+            --applications-shadow: 0 10px 30px rgba(15, 70, 86, 0.08);
+        }
+
+        body {
+            min-height: 100vh;
+            margin: 0;
+            background: var(--applications-background);
+            color: var(--applications-ink);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .applications-page {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem 4rem;
+        }
+
+        .applications-hero {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 1.5rem;
+            padding: 2.25rem 2.5rem;
+            margin-bottom: 1.75rem;
+            border-radius: 1.25rem;
+            background: linear-gradient(135deg, var(--applications-primary), var(--applications-secondary));
+            color: #fff;
+            box-shadow: 0 16px 35px rgba(33, 141, 166, 0.2);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .applications-hero::after {
+            content: '';
+            position: absolute;
+            width: 230px;
+            height: 230px;
+            right: 6%;
+            bottom: -145px;
+            border: 35px solid rgba(255, 255, 255, 0.12);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .applications-hero-content,
+        .applications-hero .btn {
+            position: relative;
+            z-index: 1;
+        }
+
+        .applications-eyebrow {
+            margin-bottom: 0.5rem;
+            color: rgba(255, 255, 255, 0.78);
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .applications-hero h1 {
+            margin: 0;
+            font-size: clamp(1.8rem, 3vw, 2.65rem);
+            font-weight: 700;
+            letter-spacing: 0;
+        }
+
+        .applications-hero p {
+            margin: 0.5rem 0 0;
+            color: rgba(255, 255, 255, 0.84);
+        }
+
+        #refreshApplicationsBtn {
+            border: 1px solid rgba(255, 255, 255, 0.55);
+            color: #fff;
+            background: rgba(255, 255, 255, 0.12);
+            padding: 0.7rem 1rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        #refreshApplicationsBtn:hover {
+            background: #fff;
+            color: var(--applications-primary);
+        }
+
+        .applications-stat-card,
+        .applications-filter,
+        .applications-list-card {
+            border: 1px solid var(--applications-border) !important;
+            border-radius: 1rem !important;
+            background: var(--applications-surface) !important;
+            box-shadow: var(--applications-shadow) !important;
+        }
+
+        .applications-stat-card {
+            height: 100%;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .applications-stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 32px rgba(15, 70, 86, 0.12) !important;
+        }
+
+        .applications-stat-card .card-body {
+            padding: 1.25rem 1.4rem;
+        }
+
+        .applications-stat-label {
+            color: var(--applications-muted);
+            font-size: 0.78rem;
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+
+        .applications-stat-card h2 {
+            margin-top: 0.35rem;
+            color: var(--applications-ink);
+            font-size: 2rem;
+        }
+
+        .applications-stat-icon {
+            display: grid;
+            width: 2.75rem;
+            height: 2.75rem;
+            place-items: center;
+            border-radius: 0.8rem;
+            background: rgba(33, 141, 166, 0.1);
+            color: var(--applications-primary);
+        }
+
+        .applications-filter .card-body {
+            padding: 1.25rem 1.5rem;
+        }
+
+        .applications-filter label {
+            color: var(--applications-ink);
+            font-size: 0.9rem;
+        }
+
+        #statusFilter {
+            max-width: 360px;
+            border: 1px solid var(--applications-border);
+            border-radius: 0.7rem;
+            padding: 0.7rem 0.9rem;
+            color: var(--applications-ink);
+        }
+
+        #statusFilter:focus {
+            border-color: var(--applications-primary);
+            box-shadow: 0 0 0 0.2rem rgba(33, 141, 166, 0.15);
+        }
+
+        .applications-list-card .card-header {
+            border-bottom: 1px solid var(--applications-border);
+            background: transparent !important;
+            padding: 1.15rem 1.5rem;
+        }
+
+        .applications-list-card .card-header h5 {
+            color: var(--applications-ink);
+            font-weight: 700;
+        }
+
+        #applicationsContainer {
+            padding: 1.25rem 1.5rem 1.5rem;
+        }
+
+        #applicationsContainer > .border {
+            border: 1px solid var(--applications-border) !important;
+            border-left: 4px solid var(--applications-primary) !important;
+            border-radius: 0.85rem !important;
+            background: #fbfdfe;
+            padding: 1rem 1.15rem !important;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        #applicationsContainer > .border:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(15, 70, 86, 0.08);
+        }
+
+        #applicationsContainer .btn-primary {
+            border-color: var(--applications-primary);
+            background: var(--applications-primary);
+            font-weight: 600;
+        }
+
+        #applicationsContainer .btn-primary:hover {
+            border-color: var(--applications-secondary);
+            background: var(--applications-secondary);
+        }
+
+        .modal-content {
+            border: 0;
+            border-radius: 1rem;
+            box-shadow: 0 20px 50px rgba(15, 70, 86, 0.2);
+        }
+
+        .modal-header {
+            border-bottom: 1px solid var(--applications-border);
+            padding: 1.25rem 1.5rem;
+        }
+
+        .modal-title {
+            color: var(--applications-ink);
+            font-weight: 700;
+        }
+
+        @media (max-width: 640px) {
+            .applications-page {
+                padding: 1.5rem 1rem 2.5rem;
+            }
+
+            .applications-hero {
+                align-items: stretch;
+                flex-direction: column;
+                padding: 1.5rem;
+            }
+
+            #refreshApplicationsBtn {
+                align-self: flex-start;
+            }
+
+            #applicationsContainer,
+            .applications-list-card .card-header {
+                padding-right: 1rem;
+                padding-left: 1rem;
+            }
+        }
+    </style>
+
+</head>
+
+
+<body>
+
+    <recomputech-header-auth></recomputech-header-auth>
+
+    <main class="applications-page">
+
+        <!-- HEADER -->
+
+        <section class="applications-hero">
+
+            <div class="applications-hero-content">
+                <div class="applications-eyebrow">Administration</div>
+
+                <h1>
+                    Technician Applications
+                </h1>
+
+                <p>
+                    Review and manage technician applications.
+                </p>
+
+            </div>
+
+
+            <button
+                id="refreshApplicationsBtn"
+                class="btn"
+            >
+
+                <i class="fas fa-sync-alt"></i>
+
+                Refresh
+
+            </button>
+
+        </section>
+
+
+        <!-- STATS -->
+
+        <div class="row g-3 mb-4">
+
+            <div class="col-md-4">
+
+                <div class="card applications-stat-card">
+
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between">
+
+                            <div>
+
+                                <small class="applications-stat-label">
+                                    Pending
+                                </small>
+
+                                <h2
+                                    id="pendingCount"
+                                    class="fw-bold mb-0"
+                                >
+                                    0
+                                </h2>
+
+                            </div>
+
+                            <div class="applications-stat-icon">
+
+                                <i class="fas fa-clock"></i>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="card applications-stat-card">
+
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between">
+
+                            <div>
+
+                                <small class="applications-stat-label">
+                                    Approved
+                                </small>
+
+                                <h2
+                                    id="approvedCount"
+                                    class="fw-bold mb-0"
+                                >
+                                    0
+                                </h2>
+
+                            </div>
+
+                            <div class="applications-stat-icon">
+
+                                <i class="fas fa-check-circle"></i>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="col-md-4">
+
+                <div class="card applications-stat-card">
+
+                    <div class="card-body">
+
+                        <div class="d-flex justify-content-between">
+
+                            <div>
+
+                                <small class="applications-stat-label">
+                                    Rejected
+                                </small>
+
+                                <h2
+                                    id="rejectedCount"
+                                    class="fw-bold mb-0"
+                                >
+                                    0
+                                </h2>
+
+                            </div>
+
+                            <div class="applications-stat-icon">
+
+                                <i class="fas fa-times-circle"></i>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- FILTER -->
+
+        <section class="card applications-filter mb-4">
+
+            <div class="card-body">
+
+                <div class="row align-items-center">
+
+                    <div class="col-md-6">
+
+                        <label
+                            for="statusFilter"
+                            class="form-label fw-semibold"
+                        >
+                            Application Status
+                        </label>
+
+                        <select
+                            id="statusFilter"
+                            class="form-select"
+                        >
+
+                            <option value="pending">
+                                Pending Applications
+                            </option>
+
+                            <option value="approved">
+                                Approved Applications
+                            </option>
+
+                            <option value="rejected">
+                                Rejected Applications
+                            </option>
+
+                            <option value="all">
+                                All Applications
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- APPLICATIONS -->
+
+        <section class="card applications-list-card">
+
+            <div class="card-header bg-white py-3">
+
+                <h5 class="mb-0">
+                    Applications
+                </h5>
+
+            </div>
+
+
+            <div
+                id="applicationsContainer"
+                class="card-body"
+            >
+
+                <div class="text-center py-5">
+
+                    <div
+                        class="spinner-border text-primary"
+                        role="status"
+                    ></div>
+
+                    <p class="text-muted mt-3">
+                        Loading applications...
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- APPLICATION MODAL -->
+
+    <div
+        class="modal fade"
+        id="applicationModal"
+        tabindex="-1"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-dialog modal-xl modal-dialog-scrollable"
+        >
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h5
+                        class="modal-title"
+                        id="applicationModalTitle"
+                    >
+                        Technician Application
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                    ></button>
+
+                </div>
+
+
+                <div
+                    id="applicationModalBody"
+                    class="modal-body"
+                >
+
+                    Loading...
+
+                </div>
+
+
+                <div
+                    id="applicationModalFooter"
+                    class="modal-footer"
+                ></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- REJECTION MODAL -->
+
+    <div
+        class="modal fade"
+        id="rejectionModal"
+        tabindex="-1"
+        aria-hidden="true"
+    >
+
+        <div class="modal-dialog">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h5 class="modal-title">
+                        Reject Technician Application
+                    </h5>
+
+                    <button
+                        type="button"
+                        class="btn-close"
+                        data-bs-dismiss="modal"
+                    ></button>
+
+                </div>
+
+
+                <div class="modal-body">
+
+                    <p>
+                        Please provide a reason for rejecting
+                        this application.
+                    </p>
+
+                    <textarea
+                        id="rejectionReason"
+                        class="form-control"
+                        rows="5"
+                        placeholder="Explain why the application was rejected..."
+                    ></textarea>
+
+                </div>
+
+
+                <div class="modal-footer">
+
+                    <button
+                        type="button"
+                        class="btn btn-secondary"
+                        data-bs-dismiss="modal"
+                    >
+                        Cancel
+                    </button>
+
+                    <button
+                        type="button"
+                        id="confirmRejectBtn"
+                        class="btn btn-danger"
+                    >
+                        <i class="fas fa-times"></i>
+                        Reject Application
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- SCRIPTS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script src="../../js/supabase-config.js"></script>
+
+    <script src="../../js/supabase-client.js"></script>
+
+    <script src="../../components/header-component.js"></script>
+
+    <script src="../../components/header-auth-component.js"></script>
+
+    <script src="technician-applications.js"></script>
+
+</body>
+
+</html>

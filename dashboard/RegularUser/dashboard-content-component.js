@@ -360,14 +360,36 @@ class DashboardContentComponent extends HTMLElement {
                 <div class="cart-item d-flex align-items-center gap-3 border-bottom py-3">
                     <img src="${item.image || item.image_url || ''}" alt="${item.name}" style="width:80px;height:65px;object-fit:contain;border-radius:8px;">
                     <div class="flex-grow-1"><strong>${item.name}</strong><div>B/. ${item.price.toFixed(2)} x ${item.quantity}</div></div>
+                    <button class="btn btn-outline-danger btn-sm dashboard-cart-remove" data-product-id="${item.id}" type="button" aria-label="Remove ${item.name} from cart">
+                        <i class="fas fa-trash"></i>
+                    </button>
                 </div>`).join('')}
             <div class="d-flex justify-content-between align-items-center mt-4">
                 <strong>Total: B/. ${total.toFixed(2)}</strong>
                 <button class="btn btn-primary" id="dashboardCheckoutBtn"><i class="fas fa-credit-card"></i> Continue to payment</button>
             </div>`;
 
+        this.querySelectorAll('.dashboard-cart-remove').forEach(button => {
+            button.addEventListener('click', () => {
+                this.removeCartItem(button.dataset.productId);
+            });
+        });
+
         this.querySelector('#dashboardCheckoutBtn').addEventListener('click', () => {
             this.loadExternalPage('../../pages/checkout.html');
+        });
+    }
+
+    removeCartItem(productId) {
+        const cartItems = this.getCartItems().filter(item => String(item.id) !== String(productId));
+        localStorage.setItem('recomputech-cart', JSON.stringify(cartItems));
+        this.renderDashboardCart();
+        document.querySelectorAll('recomputech-header, recomputech-header-auth').forEach(header => {
+            if (typeof header.loadCartFromStorage === 'function') {
+                header.loadCartFromStorage();
+                header.renderCartItems();
+                header.renderMobileCartItems();
+            }
         });
     }
 
