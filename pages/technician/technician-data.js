@@ -146,6 +146,21 @@ const TECHNICIANS_DATA = [
     }
 ];
 
+const TECHNICIAN_CONTACTS = {
+    'tech-001': { email: 'david.martinez@recomputech.com', phone: '+507 6000-1001', whatsapp: '50760001001' },
+    'tech-002': { email: 'ana.rodriguez@recomputech.com', phone: '+507 6000-1002', whatsapp: '50760001002' },
+    'tech-003': { email: 'john.perez@recomputech.com', phone: '+507 6000-1003', whatsapp: '50760001003' },
+    'tech-004': { email: 'maria.gonzalez@recomputech.com', phone: '+507 6000-1004', whatsapp: '50760001004' },
+    'tech-005': { email: 'carlos.fernandez@recomputech.com', phone: '+507 6000-1005', whatsapp: '50760001005' },
+    'tech-006': { email: 'laura.torres@recomputech.com', phone: '+507 6000-1006', whatsapp: '50760001006' },
+    'tech-007': { email: 'roberto.silva@recomputech.com', phone: '+507 6000-1007', whatsapp: '50760001007' },
+    'tech-008': { email: 'sofia.morales@recomputech.com', phone: '+507 6000-1008', whatsapp: '50760001008' }
+};
+
+TECHNICIANS_DATA.forEach(technician => {
+    technician.contact = TECHNICIAN_CONTACTS[technician.id];
+});
+
 // Helper functions
 function getTechnicianById(id) {
     return TECHNICIANS_DATA.find(tech => tech.id === id);

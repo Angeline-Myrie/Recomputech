@@ -38,7 +38,7 @@
                     </div>
                     <div class="user-details">
                         <h5>Dashboard</h5>
-                        <p class="user-role">User Panel</p>
+                        <p class="user-role">Technician Panel</p>
                     </div>
                 </div>
                 <button id="sidebarToggleBtn" class="sidebar-toggle-btn" type="button" aria-label="Collapse navigation" title="Collapse navigation">
@@ -58,12 +58,6 @@
                         <a class="nav-link" href="#marketplace">
                             <i class="fas fa-dollar-sign"></i>
                             <span>Marketplace</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#technicians">
-                            <i class="fas fa-wrench"></i>
-                            <span>Technicians</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -102,11 +96,16 @@
                             <span>Settings</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="technician-applications.html">
+                            <i class="fas fa-user-check"></i>
+                            <span>Applications</span>
+                        </a>
+                    </li>
                 </ul>
             </nav>
         </aside>
 
-        <!-- Floating Toggle Button (visible when sidebar is collapsed) -->
         <button id="sidebarFloatingToggleBtn" class="sidebar-floating-toggle-btn" type="button" aria-label="Open navigation" title="Open navigation">
             <i class="fas fa-chevron-right"></i>
         </button>
@@ -130,6 +129,12 @@
     
     <!-- Config -->
     <script src="../../js/config.js"></script>
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../../js/supabase-config.js"></script>
+    <script src="../../js/supabase-client.js"></script>
+    <script src="../../js/users-service.js"></script>
     
     <!-- Path Fixer -->
     <script src="../../js/path-fixer.js"></script>
@@ -175,9 +180,6 @@
             }, 200);
         });
 
-        const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
-        const sidebarFloatingToggleBtn = document.getElementById('sidebarFloatingToggleBtn');
-
         function toggleSidebar() {
             const isMobile = window.innerWidth <= 768;
             if (isMobile) {
@@ -198,6 +200,8 @@
         }
 
         const sidebar = document.getElementById('dashboardSidebar');
+        const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
+        const sidebarFloatingToggleBtn = document.getElementById('sidebarFloatingToggleBtn');
         sidebarToggleBtn?.addEventListener('click', toggleSidebar);
         sidebarFloatingToggleBtn?.addEventListener('click', toggleSidebar);
 

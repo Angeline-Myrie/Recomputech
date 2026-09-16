@@ -1046,6 +1046,58 @@ body.dark-mode .hero-btn-outline:active,
 }
 
 @media (max-width: 576px) {
+    .hero-section {
+        margin-top: 30px;
+    }
+
+    .hero-section .row {
+        min-height: auto !important;
+        padding-top: 4rem;
+        padding-bottom: 1rem;
+    }
+
+    .hero-section h1 {
+        max-width: 340px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 2.1rem;
+        line-height: 1.12;
+    }
+
+    .hero-section .lead {
+        max-width: 340px;
+        margin-left: auto;
+        margin-right: auto;
+        font-size: 0.95rem;
+        line-height: 1.55;
+    }
+
+    .hero-section .d-flex.gap-3 {
+        align-items: stretch;
+        gap: 0.6rem !important;
+    }
+
+    .hero-section .d-flex.gap-3 .btn {
+        flex: 1 1 0;
+        min-width: 0;
+        padding: 0.75rem 0.35rem;
+        font-size: 0.78rem;
+        white-space: nowrap;
+    }
+
+    .hero-section .d-flex.gap-3 .btn i {
+        margin-right: 0.25rem !important;
+    }
+
+    .hero-image-container {
+        padding: 0.5rem 0 1rem;
+    }
+
+    .floating-card {
+        padding: 0.65rem;
+        font-size: 0.8rem;
+    }
+
     .stat-card {
         padding: 1.5rem 1rem;
     }
@@ -1084,23 +1136,72 @@ body.dark-mode .hero-btn-outline:active,
         padding: 1.5rem;
     }
     
+
+@media (max-width: 360px) {
+    .hero-section .d-flex.gap-3 {
+        flex-direction: column;
+    }
+
+    .hero-section .d-flex.gap-3 .btn {
+        width: 100%;
+    }
+}
     .contact-socials {
         justify-content: center;
     }
     
     /* Hero Section Responsive */
     .hero-section {
-        text-align: center;
-        padding-top: 100px;
+        text-align: left;
+        margin-top: 0;
+        padding-top: 67px;
+    }
+
+    .hero-section .row {
+        padding-top: 1rem;
+    }
+
+    html {
+        scrollbar-width: none;
+    }
+
+    html::-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+
+    .hero-section .col-lg-6:first-child {
+        text-align: left;
+    }
+
+    .hero-section h1,
+    .hero-section .lead {
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .hero-section .badge {
+        display: inline-block;
+        text-align: left;
     }
     
     .hero-section img {
-        margin-top: 2rem;
+        margin-top: 1rem;
     }
     
     .floating-card {
-        position: relative;
-        margin: 1rem 0;
+        position: absolute;
+        margin: 0;
+    }
+
+    .hero-image-container .card-1 {
+        top: 8%;
+        left: 4%;
+    }
+
+    .hero-image-container .card-2 {
+        right: 4%;
+        bottom: 8%;
     }
     
     /* Product Cards Responsive */
@@ -2052,3 +2153,113 @@ body.dark-mode .fw-lighter,
 .search-filter-container {
     animation: fadeIn 0.6s ease-out;
 } 
+
+/* Compact stats row on desktop and one-card carousel on phones */
+.stats-section .row {
+    position: relative;
+    z-index: 1;
+}
+
+.stats-section .stat-card {
+    min-height: 190px;
+    padding: 1.5rem 1rem;
+}
+
+.stats-section .stat-icon {
+    width: 58px;
+    height: 58px;
+    margin-bottom: 1rem;
+    border-radius: 16px;
+    font-size: 1.5rem;
+}
+
+.stats-section .stat-number {
+    font-size: 2rem;
+    margin-bottom: 0.35rem;
+}
+
+.stats-section .stat-text {
+    font-size: 0.95rem;
+}
+
+/* =========================================
+   STATS SLIDER - MOBILE
+========================================= */
+
+@media (max-width: 767.98px) {
+
+    .stats-section {
+        overflow: hidden;
+    }
+
+    .stats-section .container {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+
+    /* CONTENEDOR DESLIZABLE */
+    .stats-section .row {
+
+        display: flex;
+
+        flex-wrap: nowrap;
+
+        overflow-x: auto;
+
+        overflow-y: hidden;
+
+        scroll-snap-type: x mandatory;
+
+        scroll-behavior: smooth;
+
+        -webkit-overflow-scrolling: touch;
+
+        gap: 15px;
+
+        margin: 0;
+
+        padding: 10px 20px 20px;
+
+        scrollbar-width: none;
+
+        --bs-gutter-x: 0;
+        --bs-gutter-y: 0;
+    }
+
+
+    /* Ocultar scrollbar Chrome */
+    .stats-section .row::-webkit-scrollbar {
+        display: none;
+    }
+
+
+    /* CADA TARJETA */
+    .stats-section .row > [class*="col-"] {
+
+        flex: 0 0 85% !important;
+
+        width: 85% !important;
+
+        max-width: 85% !important;
+
+        padding: 0 !important;
+
+        scroll-snap-align: center;
+    }
+
+
+    /* TARJETA BONITA */
+    .stats-section .stat-card {
+
+        width: 100%;
+
+        min-height: 190px;
+
+        margin: 0 auto;
+
+        padding: 1.5rem 1rem;
+    }
+
+}

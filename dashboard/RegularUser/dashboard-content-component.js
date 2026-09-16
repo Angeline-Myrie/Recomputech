@@ -74,6 +74,19 @@ class DashboardContentComponent extends HTMLElement {
                 this.loadExternalPage(url);
             }
         });
+
+        window.addEventListener('message', (event) => {
+            if (event.data?.type !== 'recomputech-add-to-cart' || !event.data.product) return;
+
+            const marketplaceFrame = this.querySelector('#external-page-frame');
+            if (marketplaceFrame && event.source !== marketplaceFrame.contentWindow) return;
+
+            const header = document.querySelector('recomputech-header-auth');
+            if (!header || typeof header.addToCart !== 'function') return;
+
+            header.addToCart(event.data.product);
+            header.handleCartClick();
+        });
     }
 
     loadPendingExternalPage() {
@@ -192,6 +205,39 @@ class DashboardContentComponent extends HTMLElement {
                                             <label for="productDescription" class="form-label">Description</label>
                                             <textarea class="form-control" id="productDescription" rows="4" required></textarea>
                                         </div>
+                                        <div class="product-specifications-form mb-3">
+                                            <h4 class="h5 mb-3"><i class="fas fa-microchip"></i> Technical Specifications</h4>
+                                            <div class="row">
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="productProcessor" class="form-label">Processor</label>
+                                                    <input type="text" class="form-control" id="productProcessor" placeholder="e.g. Intel Core i5-8500">
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="productRam" class="form-label">RAM</label>
+                                                    <input type="text" class="form-control" id="productRam" placeholder="e.g. 8GB DDR4">
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="productStorage" class="form-label">Storage</label>
+                                                    <input type="text" class="form-control" id="productStorage" placeholder="e.g. 256GB SSD">
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="productGraphics" class="form-label">Graphics</label>
+                                                    <input type="text" class="form-control" id="productGraphics" placeholder="e.g. Intel UHD Graphics 630">
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="productOs" class="form-label">Operating System</label>
+                                                    <input type="text" class="form-control" id="productOs" placeholder="e.g. Windows 10 Pro">
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="productPorts" class="form-label">Ports</label>
+                                                    <input type="text" class="form-control" id="productPorts" placeholder="e.g. USB 3.1, HDMI, Ethernet">
+                                                </div>
+                                                <div class="col-md-6 mb-3">
+                                                    <label for="productWarranty" class="form-label">Warranty</label>
+                                                    <input type="text" class="form-control" id="productWarranty" placeholder="e.g. 6 months">
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="mb-3">
                                             <label for="productImages" class="form-label">Product Images</label>
                                             <input type="file" class="form-control" id="productImages" multiple accept="image/*">
@@ -281,21 +327,79 @@ class DashboardContentComponent extends HTMLElement {
                             <h3><i class="fas fa-shopping-cart"></i> Cart Items</h3>
                         </div>
                         <div class="card-body">
-                            <div class="cart-list" id="cartList">
-                                <div class="text-center py-5">
-                                    <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
-                                    <h5 class="text-muted">Your cart is empty</h5>
-                                    <p class="text-muted">Add some products to get started</p>
-                                    <button class="btn btn-primary" onclick="window.location.href='/pages/marketplace.html'">
-                                        <i class="fas fa-shopping-bag"></i> Browse Products
-                                    </button>
-                                </div>
-                            </div>
+                            <div class="cart-list" id="cartList"></div>
                         </div>
                     </div>
                 </div>
             </div>
         `;
+        this.renderDashboardCart();
+    }
+
+    renderDashboardCart() {
+        const cartList = this.querySelector('#cartList');
+        if (!cartList) return;
+
+        const cartItems = this.getCartItems();
+        if (!cartItems.length) {
+            cartList.innerHTML = `
+                <div class="text-center py-5">
+                    <i class="fas fa-shopping-cart fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">Your cart is empty</h5>
+                    <p class="text-muted">Add some products to get started</p>
+                    <button class="btn btn-primary" data-section="marketplace">
+                        <i class="fas fa-shopping-bag"></i> Browse Products
+                    </button>
+                </div>`;
+            return;
+        }
+
+        const total = cartItems.reduce((sum, item) => sum + item.price * item.quantity, 0);
+        cartList.innerHTML = `
+            ${cartItems.map(item => `
+                <div class="cart-item d-flex align-items-center gap-3 border-bottom py-3">
+                    <img src="${item.image || item.image_url || ''}" alt="${item.name}" style="width:80px;height:65px;object-fit:contain;border-radius:8px;">
+                    <div class="flex-grow-1"><strong>${item.name}</strong><div>B/. ${item.price.toFixed(2)} x ${item.quantity}</div></div>
+                    <button class="btn btn-outline-danger btn-sm dashboard-cart-remove" data-product-id="${item.id}" type="button" aria-label="Remove ${item.name} from cart">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>`).join('')}
+            <div class="d-flex justify-content-between align-items-center mt-4">
+                <strong>Total: B/. ${total.toFixed(2)}</strong>
+                <button class="btn btn-primary" id="dashboardCheckoutBtn"><i class="fas fa-credit-card"></i> Continue to payment</button>
+            </div>`;
+
+        this.querySelectorAll('.dashboard-cart-remove').forEach(button => {
+            button.addEventListener('click', () => {
+                this.removeCartItem(button.dataset.productId);
+            });
+        });
+
+        this.querySelector('#dashboardCheckoutBtn').addEventListener('click', () => {
+            this.loadExternalPage('../../pages/checkout.html');
+        });
+    }
+
+    removeCartItem(productId) {
+        const cartItems = this.getCartItems().filter(item => String(item.id) !== String(productId));
+        localStorage.setItem('recomputech-cart', JSON.stringify(cartItems));
+        this.renderDashboardCart();
+        document.querySelectorAll('recomputech-header, recomputech-header-auth').forEach(header => {
+            if (typeof header.loadCartFromStorage === 'function') {
+                header.loadCartFromStorage();
+                header.renderCartItems();
+                header.renderMobileCartItems();
+            }
+        });
+    }
+
+    getCartItems() {
+        const savedCart = JSON.parse(localStorage.getItem('recomputech-cart') || '[]');
+        return savedCart.map(item => ({
+            ...item,
+            quantity: Number(item.quantity || item.qty || 1),
+            price: Number(item.price || 0)
+        }));
     }
 
     loadSettings() {
@@ -324,7 +428,41 @@ class DashboardContentComponent extends HTMLElement {
                                     <h3><i class="fas fa-user"></i> Profile Information</h3>
                                 </div>
                                 <div class="card-body">
-                                    <form id="profileForm">
+
+    <!-- Profile Picture -->
+    <div class="text-center mb-4">
+        <div class="mb-3">
+            <img 
+                id="profilePreview"
+                src="${this.userData?.avatar || 'https://via.placeholder.com/120?text=User'}"
+                alt="Profile Picture"
+                style="
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    border: 4px solid #218DA6;
+                "
+            >
+        </div>
+
+        <label for="profileImage" class="btn btn-outline-primary">
+            <i class="fas fa-camera"></i> Choose Profile Picture
+        </label>
+
+        <input
+            type="file"
+            id="profileImage"
+            accept="image/*"
+            style="display: none;"
+        >
+
+        <p class="text-muted mt-2">
+            Upload a JPG or PNG image
+        </p>
+    </div>
+
+    <form id="profileForm">
                                         <div class="row">
                                             <div class="col-md-6 mb-3">
                                                 <label for="firstName" class="form-label">First Name</label>
@@ -360,16 +498,33 @@ class DashboardContentComponent extends HTMLElement {
                                     <h3><i class="fas fa-shield-alt"></i> Security</h3>
                                 </div>
                                 <div class="card-body">
-                                    <button class="btn btn-outline-primary w-100 mb-3">
+                                    <button 
+                                    type="button"
+                                    id="changePasswordBtn"
+                                    class="btn btn-outline-primary w-100 mb-3">
                                         <i class="fas fa-key"></i> Change Password
                                     </button>
-                                    <button class="btn btn-outline-secondary w-100 mb-3">
-                                        <i class="fas fa-bell"></i> Notification Settings
-                                    </button>
-                                    <button class="btn btn-outline-danger w-100">
-                                        <i class="fas fa-sign-out-alt"></i> Logout
-                                    </button>
+                                    <button 
+    type="button"
+    id="notificationSettingsBtn"
+    class="btn btn-outline-secondary w-100 mb-3">
+    <i class="fas fa-bell"></i> Notification Settings
+</button>
+                                    <button 
+    type="button"
+    id="logoutBtn"
+    class="btn btn-outline-danger w-100">
+    <i class="fas fa-sign-out-alt"></i> Logout
+</button>
                                 </div>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-4">
+                            <div class="dashboard-card security-action-card" id="securityActionCard" hidden>
+                                <div class="card-header">
+                                    <h3><i class="fas fa-sliders-h"></i> Security Action</h3>
+                                </div>
+                                <div class="card-body" id="securityActionContent"></div>
                             </div>
                         </div>
                     </div>
@@ -446,69 +601,364 @@ class DashboardContentComponent extends HTMLElement {
     }
 
     loadTechnicians() {
-        this.loadExternalPage('../../pages/technician/info-technician.html');
+        this.loadExternalPage('../../pages/technician/info-technician.html?context=dashboard');
     }
 
-    setupEventListeners() {
-        // Quick action buttons
-        this.addEventListener('click', (e) => {
-            if (e.target.closest('.quick-action-btn[data-section]')) {
-                e.preventDefault();
-                const section = e.target.closest('.quick-action-btn[data-section]').getAttribute('data-section');
-                this.currentSection = section;
-                window.location.hash = section;
-                this.loadSection();
-            }
-        });
+   setupEventListeners() {
 
-        // Form submissions
-        this.addEventListener('submit', (e) => {
-            if (e.target.id === 'sellForm') {
-                e.preventDefault();
-                this.handleSellForm(e.target);
-            } else if (e.target.id === 'profileForm') {
-                e.preventDefault();
-                this.handleProfileForm(e.target);
+    // Quick action buttons
+    this.addEventListener('click', (e) => {
+        if (e.target.closest('.quick-action-btn[data-section]')) {
+            e.preventDefault();
+
+            const section = e.target
+                .closest('.quick-action-btn[data-section]')
+                .getAttribute('data-section');
+
+            this.currentSection = section;
+            window.location.hash = section;
+            this.loadSection();
+        }
+    });
+
+    // Form submissions
+    this.addEventListener('submit', (e) => {
+        if (e.target.id === 'sellForm') {
+            e.preventDefault();
+            this.handleSellForm(e.target);
+
+        } else if (e.target.id === 'profileForm') {
+            e.preventDefault();
+            this.handleProfileForm(e.target);
+        }
+    });
+
+    // Profile image preview
+    this.addEventListener('change', (e) => {
+        if (e.target.id === 'profileImage') {
+
+            const file = e.target.files[0];
+
+            if (file) {
+                const preview = this.querySelector('#profilePreview');
+
+                if (preview) {
+                    preview.src = URL.createObjectURL(file);
+                }
             }
-        });
+        }
+    });
+
+    // Security buttons
+this.addEventListener('click', (e) => {
+
+    // Change Password
+    if (e.target.closest('#changePasswordBtn')) {
+        e.preventDefault();
+        this.showSecurityAction('password');
     }
 
-    async handleSellForm(form) {
+    // Notification Settings
+    if (e.target.closest('#notificationSettingsBtn')) {
+        e.preventDefault();
+        this.showSecurityAction('notifications');
+    }
+
+    // Logout
+    if (e.target.closest('#logoutBtn')) {
+        e.preventDefault();
+        this.showSecurityAction('logout');
+    }
+
+    if (e.target.closest('#cancelSecurityAction')) {
+        this.hideSecurityAction();
+    }
+
+    if (e.target.closest('#toggleNotificationsBtn')) {
+        this.toggleNotifications();
+    }
+
+    if (e.target.closest('#confirmLogoutBtn')) {
+        this.handleLogout();
+    }
+
+});
+
+    this.addEventListener('submit', (e) => {
+        if (e.target.id === 'changePasswordForm') {
+            e.preventDefault();
+            this.handleChangePassword(e.target);
+        }
+    });
+}
+
+showSecurityAction(action) {
+    const card = this.querySelector('#securityActionCard');
+    const content = this.querySelector('#securityActionContent');
+    if (!card || !content) return;
+
+    const currentSetting = localStorage.getItem('notificationsEnabled') !== 'false';
+    const actions = {
+        password: `
+            <h4>Change Password</h4>
+            <p>Enter a new password for your account.</p>
+            <form id="changePasswordForm" class="security-action-form">
+                <label for="newPassword" class="form-label">New password</label>
+                <input type="password" class="form-control mb-3" id="newPassword" minlength="6" required>
+                <label for="confirmNewPassword" class="form-label">Confirm password</label>
+                <input type="password" class="form-control mb-3" id="confirmNewPassword" minlength="6" required>
+                <div class="security-action-buttons">
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Save Password</button>
+                    <button type="button" class="btn btn-outline-secondary" id="cancelSecurityAction">Cancel</button>
+                </div>
+            </form>
+        `,
+        notifications: `
+            <h4>Notification Settings</h4>
+            <p>Control whether you receive notifications from Recomputech.</p>
+            <p class="notification-status"><strong>Status:</strong> ${currentSetting ? 'Enabled' : 'Disabled'}</p>
+            <div class="security-action-buttons">
+                <button type="button" class="btn btn-primary" id="toggleNotificationsBtn">
+                    <i class="fas fa-bell"></i> Turn notifications ${currentSetting ? 'off' : 'on'}
+                </button>
+                <button type="button" class="btn btn-outline-secondary" id="cancelSecurityAction">Close</button>
+            </div>
+        `,
+        logout: `
+            <h4>Log Out</h4>
+            <p>Are you sure you want to log out of your Recomputech account?</p>
+            <div class="security-action-buttons">
+                <button type="button" class="btn btn-danger" id="confirmLogoutBtn"><i class="fas fa-sign-out-alt"></i> Confirm Logout</button>
+                <button type="button" class="btn btn-outline-secondary" id="cancelSecurityAction">Cancel</button>
+            </div>
+        `
+    };
+
+    content.innerHTML = actions[action];
+    card.hidden = false;
+    card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+hideSecurityAction() {
+    const card = this.querySelector('#securityActionCard');
+    if (card) card.hidden = true;
+}
+
+async handleChangePassword(form) {
+    try {
+        if (!window.supabaseClient) {
+            this.showSecurityMessage('Supabase is not configured.', 'error');
+            return;
+        }
+
+        const newPassword = form.querySelector('#newPassword').value;
+        const confirmPassword = form.querySelector('#confirmNewPassword').value;
+
+        if (newPassword.length < 6) {
+            this.showSecurityMessage('Password must be at least 6 characters long.', 'error');
+            return;
+        }
+
+        if (newPassword !== confirmPassword) {
+            this.showSecurityMessage('Passwords do not match.', 'error');
+            return;
+        }
+
+        const { error } = await window.supabaseClient.auth.updateUser({
+            password: newPassword
+        });
+
+        if (error) {
+            throw error;
+        }
+
+        this.showSecurityMessage('Password changed successfully.', 'success');
+
+    } catch (error) {
+        console.error('Error changing password:', error);
+        this.showSecurityMessage('Error changing password: ' + error.message, 'error');
+    }
+}
+
+toggleNotifications() {
+    const enabled = localStorage.getItem('notificationsEnabled') !== 'false';
+    localStorage.setItem('notificationsEnabled', enabled ? 'false' : 'true');
+    this.showSecurityAction('notifications');
+}
+
+handleLogout() {
+    localStorage.removeItem('currentUser');
+    localStorage.removeItem('currentRole');
+
+    window.location.href = '/index.html';
+}
+
+showSecurityMessage(message, type) {
+    const content = this.querySelector('#securityActionContent');
+    if (!content) return;
+    content.innerHTML = `<div class="alert alert-${type === 'success' ? 'success' : 'danger'} mb-0">${message}</div>`;
+}
+
+    async handleProfileForm(form) {
+    try {
+        const currentUser = JSON.parse(
+            localStorage.getItem('currentUser')
+        );
+
+        if (!currentUser) {
+            alert('User information not found.');
+            return;
+        }
+
+        const firstName = form
+            .querySelector('#firstName')
+            .value
+            .trim();
+
+        const lastName = form
+            .querySelector('#lastName')
+            .value
+            .trim();
+
+        const email = form
+            .querySelector('#email')
+            .value
+            .trim();
+
+        const phone = form
+            .querySelector('#phone')
+            .value
+            .trim();
+
+        const address = form
+            .querySelector('#address')
+            .value
+            .trim();
+
+        // Actualizar datos locales
+        currentUser.firstName = firstName;
+        currentUser.lastName = lastName;
+        currentUser.email = email;
+        currentUser.phone = phone;
+        currentUser.address = address;
+
+        localStorage.setItem(
+            'currentUser',
+            JSON.stringify(currentUser)
+        );
+
+        // Actualizar datos del componente
+        this.userData = currentUser;
+
+        alert('Profile updated successfully!');
+
+    } catch (error) {
+
+        console.error(
+            'Error updating profile:',
+            error
+        );
+
+        alert(
+            'Error updating profile: ' +
+            error.message
+        );
+    }
+}
+   async handleSellForm(form) {
     try {
         if (!window.supabaseClient) {
             alert('Supabase is not configured.');
             return;
         }
 
-        // Obtener el usuario que inició sesión
-        const currentUser = JSON.parse(
-            localStorage.getItem('currentUser')
-        );
+        // Obtener el usuario autenticado de Supabase
+        const { data: authData, error: authError } =
+            await window.supabaseClient.auth.getUser();
 
-        if (!currentUser || !currentUser.userId) {
+        if (authError || !authData?.user) {
             alert('You must be logged in to list a product.');
             return;
         }
+
+        // UUID real de Supabase Auth
+        const userId = authData.user.id;
 
         // Obtener información del formulario
         const name = form.querySelector('#productName').value.trim();
         const category = form.querySelector('#productCategory').value;
         const price = form.querySelector('#productPrice').value;
-        const description = form.querySelector('#productDescription').value.trim();
+        const description = form
+            .querySelector('#productDescription')
+            .value
+            .trim();
+        const specifications = {
+            processor: form.querySelector('#productProcessor').value.trim(),
+            ram: form.querySelector('#productRam').value.trim(),
+            storage: form.querySelector('#productStorage').value.trim(),
+            graphics: form.querySelector('#productGraphics').value.trim(),
+            os: form.querySelector('#productOs').value.trim(),
+            ports: form.querySelector('#productPorts').value.trim(),
+            warranty: form.querySelector('#productWarranty').value.trim()
+        };
 
-        // Guardar el producto en Supabase
-        const { data, error } = await window.supabaseClient
-            .from('products')
-            .insert({
-                seller_id: currentUser.userId,
-                name: name,
-                category: category,
-                price: Number(price),
-                description: description,
-                status: 'available'
-            })
-            .select()
-            .single();
+        // Obtener imagen
+        const imageInput = form.querySelector('#productImages');
+        const files = imageInput?.files;
+
+        let imageUrl = '';
+
+        // Subir la primera imagen
+        if (files && files.length > 0) {
+
+            const file = files[0];
+
+            const fileExtension = file.name
+                .split('.')
+                .pop();
+
+            const fileName =
+                `${userId}-${Date.now()}.${fileExtension}`;
+
+            const filePath =
+                `products/${fileName}`;
+
+            const { error: uploadError } =
+                await window.supabaseClient
+                    .storage
+                    .from('product-images')
+                    .upload(filePath, file);
+
+            if (uploadError) {
+                throw uploadError;
+            }
+
+            // Obtener URL pública
+            const { data: publicUrlData } =
+                window.supabaseClient
+                    .storage
+                    .from('product-images')
+                    .getPublicUrl(filePath);
+
+            imageUrl = publicUrlData.publicUrl;
+        }
+
+        // Guardar producto
+        const { data, error } =
+            await window.supabaseClient
+                .from('products')
+                .insert({
+                    seller_id: userId,
+                    name: name,
+                    category: category,
+                    price: Number(price),
+                    description: description,
+                    specifications: specifications,
+                    image_url: imageUrl,
+                    status: 'available'
+                })
+                .select()
+                .single();
 
         if (error) {
             throw error;
@@ -516,82 +966,25 @@ class DashboardContentComponent extends HTMLElement {
 
         alert('Product listed successfully!');
 
+        console.log('Product created:', data);
+
         // Limpiar formulario
         form.reset();
-
-        console.log('Product created:', data);
 
         // Ir a My Products
         window.location.hash = 'my-products';
 
     } catch (error) {
-        console.error('Error creating product:', error);
-        alert('Error creating product: ' + error.message);
-    }
-}
 
-   async handleProfileForm(form) {
-    try {
-        if (!window.supabaseClient) {
-            alert('Supabase is not configured.');
-            return;
-        }
-
-        const currentUser = JSON.parse(
-            localStorage.getItem('currentUser')
+        console.error(
+            'Error creating product:',
+            error
         );
 
-        if (!currentUser) {
-            alert('You must be logged in.');
-            return;
-        }
-
-        const firstName = form.querySelector('#firstName').value.trim();
-        const lastName = form.querySelector('#lastName').value.trim();
-        const phone = form.querySelector('#phone').value.trim();
-        const address = form.querySelector('#address').value.trim();
-
-        const { data, error } = await window.supabaseClient
-            .from('users')
-            .update({
-                first_name: firstName,
-                last_name: lastName,
-                phone: phone,
-                address: address
-            })
-            .eq('email', currentUser.email)
-            .select()
-            .single();
-
-        if (error) {
-            throw error;
-        }
-
-        // Actualizar localStorage
-        const updatedUser = {
-            ...currentUser,
-            firstName: data.first_name,
-            lastName: data.last_name,
-            name: `${data.first_name} ${data.last_name}`,
-            phone: data.phone,
-            address: data.address
-        };
-
-        localStorage.setItem(
-            'currentUser',
-            JSON.stringify(updatedUser)
+        alert(
+            'Error creating product: ' +
+            error.message
         );
-
-        // Actualizar datos del componente
-        this.userData = updatedUser;
-
-        alert('Profile updated successfully!');
-
-        console.log('Updated profile:', data);
-
-    } catch (error) {
-        console.error('Error updating profile:', error);
-        alert('Error updating profile: ' + error.message);
     }
 }
 }

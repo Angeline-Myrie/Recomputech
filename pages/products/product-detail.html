@@ -23,6 +23,7 @@
     
     <!-- Swiper CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css">
+    <link rel="stylesheet" href="../../css/site-normalization.css">
     
     <style>
         body {
@@ -591,6 +592,11 @@
     
     <!-- Product Data -->
     <script src="product-data.js"></script>
+
+    <!-- Supabase for products published by users -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="../../js/supabase-config.js"></script>
+    <script src="../../js/supabase-client.js"></script>
     
     <!-- Product Detail Script -->
     <script>
@@ -628,14 +634,32 @@
                 if (header) header.style.display = 'none';
                 const footer = document.querySelector('recomputech-footer');
                 if (footer) footer.style.display = 'none';
-                document.documentElement.style.overflow = 'hidden';
-                document.body.style.overflow = 'hidden';
+                document.documentElement.style.overflowY = 'auto';
+                document.body.style.overflowY = 'auto';
+                document.body.style.minHeight = '100vh';
             }
         });
 
-        function loadProduct(productId) {
-            const product = getProductById(productId);
-            
+        async function loadProduct(productId) {
+            let product = getProductById(productId);
+            if (product) {
+                product.isCatalogProduct = true;
+            }
+
+            if (!product && window.supabaseClient) {
+                const { data, error } = await window.supabaseClient
+                    .from('products')
+                    .select('*')
+                    .eq('id', productId)
+                    .maybeSingle();
+
+                if (error) {
+                    console.error('Error loading user product details:', error);
+                } else if (data) {
+                    product = normalizeUserProduct(data);
+                }
+            }
+
             if (!product) {
                 showError();
                 return;
@@ -643,11 +667,36 @@
 
             currentProduct = product;
             renderProduct(product);
+
             loadRelatedProducts(product);
-            
-            // Hide loading, show content
+
             document.getElementById('loading').style.display = 'none';
             document.getElementById('product-content').style.display = 'block';
+        }
+
+        function normalizeUserProduct(product) {
+            const image = product.image_url || '../../assets/images/laptop.avif';
+            return {
+                ...product,
+                id: product.id,
+                price: Number(product.price || 0),
+                originalPrice: Number(product.price || 0),
+                images: [image],
+                specs: product.specifications || {},
+                features: [],
+                condition: product.condition || 'User listed product',
+                stock: product.status === 'sold' ? 0 : 1,
+                sku: `USER-${product.id}`,
+                seller: {
+                    name: 'Recomputech user',
+                    rating: 5,
+                    reviews: 0,
+                    verified: false,
+                    location: 'Panama'
+                },
+                discount: 0,
+                isCatalogProduct: false
+            };
         }
 
         function renderProduct(product) {
@@ -755,8 +804,25 @@
             });
         }
 
-        function loadRelatedProducts(currentProduct) {
-            const relatedProducts = getRelatedProducts(currentProduct, 4);
+        async function loadRelatedProducts(currentProduct) {
+            let relatedProducts = getRelatedProducts(currentProduct, 4);
+
+            if (!currentProduct.isCatalogProduct && window.supabaseClient && currentProduct.category) {
+                const { data, error } = await window.supabaseClient
+                    .from('products')
+                    .select('*')
+                    .eq('category', currentProduct.category)
+                    .neq('id', currentProduct.id)
+                    .order('created_at', { ascending: false })
+                    .limit(4);
+
+                if (!error && data) {
+                    relatedProducts = data
+                        .filter(product => !['sold', 'deleted', 'archived', 'rejected'].includes(String(product.status || '').toLowerCase()))
+                        .map(normalizeUserProduct);
+                }
+            }
+
             const relatedContainer = document.getElementById('related-products');
             relatedContainer.innerHTML = '';
 
@@ -766,7 +832,7 @@
                 productCard.onclick = () => navigateToProduct(product.id);
                 productCard.innerHTML = `
                     <div class="related-image">
-                        <img src="${product.images[1]}" alt="${product.name}" class="related-product-image" style="width:100%;height:160px;object-fit:contain;background:#fff;">
+                        <img src="${product.images[1] || product.images[0]}" alt="${product.name}" class="related-product-image" style="width:100%;height:160px;object-fit:contain;background:#fff;">
                     </div>
                     <div class="related-info">
                         <div class="related-name">${product.name}</div>

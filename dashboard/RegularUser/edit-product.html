@@ -175,6 +175,21 @@
         .breadcrumb-custom a:hover {
             text-decoration: underline;
         }
+
+        .btn-back {
+            background: transparent;
+            border: 2px solid #6c757d;
+            color: #6c757d;
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-back:hover {
+            background: #6c757d;
+            color: white;
+        }
         
         .status-toggle {
             display: flex;
@@ -219,10 +234,6 @@
             z-index: 5;
         }
 
-        /* Centrar contenido y ocultar sidebar en esta vista */
-        .dashboard-main { margin-left: 0 !important; }
-        #sidebar-container { display: none; }
-        
         .price-input {
             padding-left: 3rem !important;
         }
@@ -232,19 +243,42 @@
     <!-- Header Component -->
     <recomputech-header-auth></recomputech-header-auth>
     
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Sidebar -->
-            <div id="sidebar-container"></div>
-            
-            <!-- Main Content -->
-            <main class="dashboard-main">
+    <div class="dashboard-shell">
+        <aside class="dashboard-sidebar" id="dashboardSidebar">
+            <div class="sidebar-header">
+                <div class="user-info">
+                    <div class="user-avatar"><i class="fas fa-user"></i></div>
+                    <div class="user-details">
+                        <h5>Dashboard</h5>
+                        <p class="user-role">User Panel</p>
+                    </div>
+                </div>
+                <button id="sidebarToggleBtn" class="sidebar-toggle-btn" type="button" title="Hide menu" aria-label="Hide menu">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+            </div>
+            <nav class="sidebar-nav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a class="nav-link" href="dashboard.html#overview"><i class="fas fa-chart-line"></i><span>Overview</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="dashboard.html#marketplace"><i class="fas fa-dollar-sign"></i><span>Marketplace</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="dashboard.html#technicians"><i class="fas fa-wrench"></i><span>Technicians</span></a></li>
+                    <li class="nav-item"><a class="nav-link active" href="dashboard.html#my-products"><i class="fas fa-box"></i><span>My Products</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="dashboard.html#add-product"><i class="fas fa-plus-circle"></i><span>Add Product</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="dashboard.html#purchases"><i class="fas fa-shopping-bag"></i><span>Purchases</span></a></li>
+                    <li class="nav-item"><a class="nav-link" href="dashboard.html#settings"><i class="fas fa-cog"></i><span>Settings</span></a></li>
+                </ul>
+            </nav>
+        </aside>
+        <button id="sidebarFloatingToggleBtn" class="sidebar-floating-toggle-btn" type="button" title="Show menu" aria-label="Show menu">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <main class="dashboard-main">
                 <div class="edit-container">
-                    <!-- Breadcrumb -->
-                    <nav class="breadcrumb-custom" data-aos="fade-down">
-                        <a href="dashboard.html">Dashboard</a> / 
-                        <a href="dashboard.html#my-products">My Products</a> / 
-                        <span id="product-breadcrumb">Edit Product</span>
+                    <nav class="breadcrumb-custom" data-aos="fade-down" aria-label="Back navigation">
+                        <button class="btn btn-back" type="button" onclick="history.back()">
+                            <i class="fas fa-arrow-left"></i> Back
+                        </button>
                     </nav>
                     
                     <!-- Edit Form -->
@@ -275,6 +309,39 @@
                                 <div class="mb-3">
                                     <label class="form-label">Description *</label>
                                     <textarea class="form-control" id="productDescription" rows="4" placeholder="Describe your product in detail..." required></textarea>
+                                </div>
+                                <div class="form-section">
+                                    <h3 class="section-title"><i class="fas fa-microchip"></i> Technical Specifications</h3>
+                                    <div class="row">
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="productProcessor">Processor</label>
+                                            <input type="text" class="form-control" id="productProcessor" placeholder="e.g. Intel Core i5-8500">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="productRam">RAM</label>
+                                            <input type="text" class="form-control" id="productRam" placeholder="e.g. 8GB DDR4">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="productStorage">Storage</label>
+                                            <input type="text" class="form-control" id="productStorage" placeholder="e.g. 256GB SSD">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="productGraphics">Graphics</label>
+                                            <input type="text" class="form-control" id="productGraphics" placeholder="e.g. Intel UHD Graphics 630">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="productOs">Operating System</label>
+                                            <input type="text" class="form-control" id="productOs" placeholder="e.g. Windows 10 Pro">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="productPorts">Ports</label>
+                                            <input type="text" class="form-control" id="productPorts" placeholder="e.g. USB 3.1, HDMI, Ethernet">
+                                        </div>
+                                        <div class="col-md-6 mb-3">
+                                            <label class="form-label" for="productWarranty">Warranty</label>
+                                            <input type="text" class="form-control" id="productWarranty" placeholder="e.g. 6 months">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             
@@ -347,8 +414,7 @@
                         </form>
                     </div>
                 </div>
-            </main>
-        </div>
+        </main>
     </div>
     
     <!-- Scripts -->
@@ -371,6 +437,19 @@
             easing: 'ease-in-out',
             once: true
         });
+
+        const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
+        const sidebarFloatingToggleBtn = document.getElementById('sidebarFloatingToggleBtn');
+
+        function toggleSidebar() {
+            document.body.classList.toggle('sidebar-collapsed');
+            const isCollapsed = document.body.classList.contains('sidebar-collapsed');
+            const iconElement = sidebarToggleBtn.querySelector('i');
+            if (iconElement) iconElement.className = isCollapsed ? 'fas fa-chevron-right' : 'fas fa-chevron-left';
+        }
+
+        sidebarToggleBtn?.addEventListener('click', toggleSidebar);
+        sidebarFloatingToggleBtn?.addEventListener('click', toggleSidebar);
         
         // Load product for editing
         document.addEventListener('DOMContentLoaded', function() {
@@ -393,8 +472,14 @@
             document.getElementById('productDescription').value = product.description;
             document.getElementById('productPrice').value = product.price;
             document.getElementById('productStatus').value = product.status;
-            document.getElementById('product-breadcrumb').textContent = `Edit ${product.name}`;
-            
+            const specifications = product.specifications || {};
+            document.getElementById('productProcessor').value = specifications.processor || '';
+            document.getElementById('productRam').value = specifications.ram || '';
+            document.getElementById('productStorage').value = specifications.storage || '';
+            document.getElementById('productGraphics').value = specifications.graphics || '';
+            document.getElementById('productOs').value = specifications.os || '';
+            document.getElementById('productPorts').value = specifications.ports || '';
+            document.getElementById('productWarranty').value = specifications.warranty || '';
             // Show current image
             const currentImage = document.getElementById('currentImage');
             currentImage.src = product.image;
@@ -446,7 +531,8 @@
                 category: document.getElementById('productCategory').value,
                 description: document.getElementById('productDescription').value,
                 price: parseFloat(document.getElementById('productPrice').value),
-                status: document.getElementById('productStatus').value
+                status: document.getElementById('productStatus').value,
+                specifications: getSpecificationsFromForm()
             };
             
             // In a real application, this would be sent to the server
@@ -468,12 +554,25 @@
                 description: document.getElementById('productDescription').value,
                 price: parseFloat(document.getElementById('productPrice').value),
                 status: document.getElementById('productStatus').value,
+                specifications: getSpecificationsFromForm(),
                 image: JSON.parse(localStorage.getItem('editingProduct')).image,
                 date: JSON.parse(localStorage.getItem('editingProduct')).date
             };
             
             localStorage.setItem('selectedProduct', JSON.stringify(previewData));
             window.open('my-product-details.html', '_blank');
+        }
+
+        function getSpecificationsFromForm() {
+            return {
+                processor: document.getElementById('productProcessor').value.trim(),
+                ram: document.getElementById('productRam').value.trim(),
+                storage: document.getElementById('productStorage').value.trim(),
+                graphics: document.getElementById('productGraphics').value.trim(),
+                os: document.getElementById('productOs').value.trim(),
+                ports: document.getElementById('productPorts').value.trim(),
+                warranty: document.getElementById('productWarranty').value.trim()
+            };
         }
     </script>
 </body>

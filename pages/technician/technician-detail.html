@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technician Profile - Recomputech</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/technician.css">
+    <link rel="stylesheet" href="../../css/site-normalization.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        .technician-detail-page { min-height: 100vh; padding: 2rem 0 4rem; background: #f8fafc; }
+        .technician-detail-card { overflow: hidden; background: #fff; border-radius: 1rem; box-shadow: 0 12px 35px rgba(15, 23, 42, .1); }
+        .technician-detail-hero { padding: 2.5rem; color: #fff; background: linear-gradient(135deg, #176b87, #218da6); }
+        .technician-detail-avatar { width: 150px; height: 150px; object-fit: cover; border: 5px solid rgba(255, 255, 255, .8); }
+        .technician-detail-body { padding: 2rem 2.5rem; }
+        .detail-stat { height: 100%; padding: 1rem; border: 1px solid #e2e8f0; border-radius: .75rem; background: #f8fafc; }
+        .detail-stat i { color: #218da6; margin-right: .45rem; }
+        .detail-list { padding-left: 1.2rem; margin-bottom: 0; }
+        .detail-list li { margin-bottom: .55rem; }
+        .detail-tag { display: inline-block; padding: .4rem .75rem; margin: .2rem; color: #176b87; background: #e2f4f8; border-radius: 999px; font-size: .9rem; }
+        .technician-contact { margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; }
+        .technician-contact a { text-decoration: none; }
+        @media (max-width: 576px) { .technician-detail-hero, .technician-detail-body { padding: 1.5rem; } }
+    </style>
+</head>
+<body>
+    <main class="technician-detail-page">
+        <div class="container" id="technicianDetail"></div>
+    </main>
+
+    <script src="technician-data.js"></script>
+    <script>
+        (function renderTechnicianDetail() {
+            const params = new URLSearchParams(window.location.search);
+            const technicianId = params.get('id');
+            const isDashboardContext = params.get('context') === 'dashboard';
+            let currentUser = null;
+
+            try {
+                currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            } catch (error) {
+                currentUser = null;
+            }
+
+            if (!isDashboardContext || !currentUser) {
+                window.location.replace('../../auth/auth.html?mode=login');
+                return;
+            }
+
+            const technician = getTechnicianById(technicianId);
+            const container = document.getElementById('technicianDetail');
+            if (!technician) {
+                container.innerHTML = `
+                    <div class="text-center py-5">
+                        <i class="fas fa-user-slash fa-3x text-muted mb-3"></i>
+                        <h1>Technician not found</h1>
+                        <a class="btn btn-primary mt-3" href="info-technician.html?context=dashboard">Back to technicians</a>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="mb-3">
+                    <a class="btn btn-outline-secondary" href="info-technician.html?context=dashboard">
+                        <i class="fas fa-arrow-left"></i> Back to technicians
+                    </a>
+                </div>
+                <article class="technician-detail-card">
+                    <section class="technician-detail-hero">
+                        <div class="row align-items-center g-4">
+                            <div class="col-md-auto text-center">
+                                <img class="technician-detail-avatar rounded-circle" src="${technician.avatar}" alt="${technician.name}">
+                            </div>
+                            <div class="col">
+                                <span class="badge bg-light text-dark mb-2">${technician.status.toUpperCase()}</span>
+                                <h1 class="mb-2">${technician.name}</h1>
+                                <p class="lead mb-0">${technician.specialty}</p>
+                            </div>
+                        </div>
+                    </section>
+                    <section class="technician-detail-body">
+                        <div class="row g-3 mb-4">
+                            <div class="col-sm-6 col-lg-3"><div class="detail-stat"><i class="fas fa-star"></i><strong>${technician.rating}</strong><div>Rating</div></div></div>
+                            <div class="col-sm-6 col-lg-3"><div class="detail-stat"><i class="fas fa-briefcase"></i><strong>${technician.experience} years</strong><div>Experience</div></div></div>
+                            <div class="col-sm-6 col-lg-3"><div class="detail-stat"><i class="fas fa-tools"></i><strong>${technician.completedJobs}+</strong><div>Jobs completed</div></div></div>
+                            <div class="col-sm-6 col-lg-3"><div class="detail-stat"><i class="fas fa-clock"></i><strong>${technician.avgResponseTime}</strong><div>Response time</div></div></div>
+                        </div>
+                        <div class="row g-4">
+                            <div class="col-lg-7">
+                                <h2>About this technician</h2>
+                                <p>${technician.description}</p>
+                                <h3 class="h5 mt-4">Skills</h3>
+                                <div>${technician.skills.map(skill => `<span class="detail-tag">${skill}</span>`).join('')}</div>
+                            </div>
+                            <div class="col-lg-5">
+                                <h2>Professional details</h2>
+                                <ul class="detail-list">
+                                    <li><strong>Location:</strong> ${technician.location}</li>
+                                    <li><strong>Availability:</strong> ${technician.availability}</li>
+                                    <li><strong>Hourly rate:</strong> $${technician.hourlyRate}/hour</li>
+                                    <li><strong>Languages:</strong> ${technician.languages.join(', ')}</li>
+                                </ul>
+                                <h3 class="h5 mt-4">Certifications</h3>
+                                <ul class="detail-list">${technician.certifications.map(certification => `<li>${certification}</li>`).join('')}</ul>
+                            </div>
+                        </div>
+                        <div class="technician-contact">
+                            <h2>Contact this technician</h2>
+                            <div class="row g-2 align-items-center">
+                                <div class="col-md-4"><a href="https://wa.me/${technician.contact.whatsapp}?text=${encodeURIComponent(`Hello ${technician.name}, I need help with a technology issue.`)}" target="_blank" rel="noopener" class="btn btn-success w-100"><i class="fab fa-whatsapp"></i> WhatsApp</a></div>
+                                <div class="col-md-4"><a href="tel:${technician.contact.phone.replace(/[^+\d]/g, '')}" class="btn btn-outline-primary w-100"><i class="fas fa-phone"></i> Call</a></div>
+                                <div class="col-md-4"><a href="mailto:${technician.contact.email}" class="btn btn-outline-secondary w-100"><i class="fas fa-envelope"></i> Email</a></div>
+                            </div>
+                            <p class="small text-muted mt-3 mb-0">${technician.contact.email} · ${technician.contact.phone}</p>
+                        </div>
+                    </section>
+                </article>
+            `;
+        })();
+    </script>
+</body>
+</html>

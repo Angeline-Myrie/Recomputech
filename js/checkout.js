@@ -1,7 +1,16 @@
 // --- Utilidades para obtener el carrito desde localStorage (o simulado) ---
 function getCartItems() {
-    const items = localStorage.getItem('cartItems');
-    return items ? JSON.parse(items) : [];
+    const legacyItems = localStorage.getItem('cartItems');
+    const dashboardItems = localStorage.getItem('recomputech-cart');
+    const items = legacyItems || dashboardItems;
+
+    if (!items) return [];
+
+    return JSON.parse(items).map(item => ({
+        ...item,
+        qty: Number(item.qty || item.quantity || 1),
+        price: Number(item.price || 0)
+    }));
 }
 
 function getCartTotal(cartItems) {
@@ -23,7 +32,7 @@ function renderCartSummary() {
         const div = document.createElement('div');
         div.className = 'cart-item-inspiration';
         div.innerHTML = `
-            <img src="${item.image}" alt="${item.name}">
+            <img src="${item.image || item.image_url || ''}" alt="${item.name}">
             <div class="cart-item-details-inspiration">
                 <div class="cart-item-title-inspiration">${item.name}</div>
                 <div class="cart-item-qty-inspiration">Cantidad: ${item.qty || 1}</div>
@@ -50,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (!validateCardForm()) return;
         setTimeout(() => {
             localStorage.removeItem('cartItems');
+            localStorage.removeItem('recomputech-cart');
             form.style.display = 'none';
             confirmationScreen.classList.add('active');
         }, 900);

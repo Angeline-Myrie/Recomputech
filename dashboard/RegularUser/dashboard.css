@@ -1254,6 +1254,49 @@ dashboard-content-component {
     margin-bottom: 2rem;
 }
 
+.security-action-card[hidden] {
+    display: none;
+}
+
+.security-action-card {
+    border: 2px solid rgba(33, 141, 166, 0.25);
+    animation: fadeIn 0.35s ease-out;
+}
+
+.security-action-card .card-body {
+    background: #f8fafc;
+}
+
+.security-action-card h4 {
+    color: #218DA6;
+    margin-bottom: 0.5rem;
+}
+
+.security-action-card p {
+    color: #64748b;
+}
+
+.security-action-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.security-action-buttons .btn {
+    min-width: 150px;
+}
+
+@media (max-width: 576px) {
+    .security-action-buttons {
+        flex-direction: column;
+    }
+
+    .security-action-buttons .btn {
+        width: 100%;
+    }
+}
+
 .card-header {
     background: linear-gradient(135deg, #218DA6 0%, #1b6e82 100%);
     color: white;
@@ -1333,6 +1376,156 @@ dashboard-content-component {
 .product-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* My Products cards follow the marketplace layout and keep a stable height. */
+.my-products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    align-items: stretch;
+}
+
+.my-products-grid .my-product-card {
+    display: flex;
+    flex-direction: column;
+    min-height: 510px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background: var(--card-bg);
+}
+
+.my-products-grid .product-image {
+    position: relative;
+    height: 210px;
+    flex-shrink: 0;
+    background: var(--card-bg);
+}
+
+.my-products-grid .product-image img {
+    width: 100%;
+    height: 100%;
+    padding: 12px;
+    object-fit: contain;
+}
+
+.my-products-grid .product-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    background: var(--primary-color);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+
+.my-products-grid .product-info {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 1.25rem;
+}
+
+.my-products-grid .product-category {
+    margin-bottom: 0.4rem;
+    color: var(--primary-color);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.my-products-grid .product-title {
+    min-height: 2.8rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.my-products-grid .product-description {
+    display: -webkit-box;
+    min-height: 3.6rem;
+    margin-bottom: 0.9rem;
+    overflow: hidden;
+    color: var(--text-light);
+    font-size: 0.88rem;
+    line-height: 1.5;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+}
+
+.my-products-grid .product-price-container {
+    min-height: 2rem;
+    margin-bottom: 0.8rem;
+}
+
+.my-products-grid .product-price {
+    color: var(--primary-color);
+    font-size: 1.35rem;
+    font-weight: 800;
+}
+
+.my-product-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    min-height: 2.9rem;
+    margin-bottom: 1rem;
+    color: var(--text-light);
+    font-size: 0.78rem;
+}
+
+.my-product-details i {
+    width: 1rem;
+    margin-right: 0.35rem;
+    color: var(--primary-color);
+    text-align: center;
+}
+
+.my-products-grid .product-actions {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: auto;
+}
+
+.my-products-grid .btn-view-details,
+.my-products-grid .btn-edit-product {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.my-products-grid .btn-view-details {
+    flex: 1;
+    border: 0;
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: #fff;
+}
+
+.my-products-grid .btn-edit-product {
+    width: 44px;
+    border: 1px solid var(--border-color);
+    background: transparent;
+    color: var(--text-light);
+}
+
+.my-products-grid .btn-view-details:hover,
+.my-products-grid .btn-edit-product:hover {
+    transform: translateY(-2px);
+}
+
+@media (max-width: 576px) {
+    .my-products-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 .product-image {
@@ -1420,7 +1613,7 @@ dashboard-content-component {
     overflow: hidden;
     background: linear-gradient(135deg, #218DA6 0%, #1b6e82 50%, #155a6b 100%);
     color: white;
-    border-radius: 0 !important;
+    border-radius: 0 0 28px 28px !important;
     max-width: none !important;
     width: 100% !important;
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
@@ -1441,6 +1634,32 @@ dashboard-content-component {
     z-index: 1;
 }
 
+.welcome-section::after {
+    content: '';
+    position: absolute;
+    width: 180px;
+    height: 180px;
+    right: 8%;
+    bottom: -90px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.12);
+    box-shadow: -360px -70px 0 -45px rgba(255, 255, 255, 0.1), -120px 60px 0 -60px rgba(255, 255, 255, 0.14);
+    animation: dashboard-bubbles 14s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 1;
+}
+
+@keyframes dashboard-bubbles {
+    0%, 100% { transform: translate3d(0, 10px, 0); }
+    50% { transform: translate3d(-18px, -28px, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .welcome-section::after {
+        animation: none;
+    }
+}
+
 .welcome-header {
     display: flex;
     flex-direction: column;
@@ -1448,7 +1667,7 @@ dashboard-content-component {
     justify-content: center;
     min-height: 200px;
     padding: 3rem 2rem;
-    border-radius: 0 !important;
+    border-radius: 0 0 24px 24px !important;
     margin-bottom: 0;
     width: 100%;
     position: relative;
@@ -1779,7 +1998,7 @@ dashboard-content-component {
 /* Activity & Quick Actions */
 .activity-section,
 .quick-actions-section {
-    margin: 3rem 0 !important;
+    margin: 3rem 0 1rem !important;
 }
 
 .activity-card,
@@ -1789,7 +2008,8 @@ dashboard-content-component {
     overflow: hidden;
     box-shadow: 0 8px 25px rgba(0,0,0,0.1);
     border: 3px solid #e9ecef;
-    height: 100%;
+    height: auto;
+    min-height: 100%;
     position: relative;
 }
 
@@ -1945,10 +2165,15 @@ dashboard-content-component {
     margin-bottom: 3rem !important;
 }
 
+.activity-section,
+.quick-actions-section {
+    margin-bottom: 1rem !important;
+}
+
 /* Container fluid spacing */
 .container-fluid {
     padding: 0 2rem;
-    margin: 3rem 0;
+    margin: 2rem 0;
 }
 
 /* Row spacing */
@@ -1964,7 +2189,7 @@ dashboard-content-component {
 .col-lg-6,
 .col-lg-12,
 .col-12 {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 /* Responsive Design */

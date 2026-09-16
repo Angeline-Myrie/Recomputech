@@ -273,35 +273,76 @@ class FooterComponent extends HTMLElement {
 
                 @media (max-width: 767.98px) {
                     .recomputech-footer {
-                        padding: 2rem 0 1rem 0;
+                        padding: 1.5rem 0 0.75rem 0;
                     }
 
                     .recomputech-footer-widgets {
                         grid-template-columns: 1fr;
-                        gap: 2rem;
+                        gap: 1.25rem;
+                    }
+
+                    .recomputech-footer-widgets > .recomputech-footer-widget:nth-child(2),
+                    .recomputech-footer-widgets > .recomputech-footer-widget:nth-child(3),
+                    .recomputech-footer-widgets > .recomputech-footer-widget:first-child .recomputech-social-links {
+                        display: none;
+                    }
+
+                    .recomputech-footer-widget h4 {
+                        font-size: 1rem;
+                        margin-bottom: 0.9rem;
+                    }
+
+                    .recomputech-footer-widget p {
+                        font-size: 0.85rem;
+                        line-height: 1.45;
+                        margin-bottom: 0.6rem;
+                    }
+
+                    .recomputech-contact-info {
+                        gap: 0.65rem;
+                    }
+
+                    .recomputech-contact-item {
+                        font-size: 0.82rem;
+                    }
+
+                    .recomputech-newsletter-section p {
+                        margin-top: 0.9rem;
+                    }
+
+                    .recomputech-newsletter-form {
+                        flex-direction: row;
+                        gap: 0.4rem;
+                        margin-top: 0.5rem;
+                    }
+
+                    .recomputech-newsletter-input,
+                    .recomputech-newsletter-btn {
+                        padding: 0.6rem 0.7rem;
+                        font-size: 0.8rem;
+                    }
+
+                    .recomputech-newsletter-btn {
+                        white-space: nowrap;
                     }
 
                     .recomputech-footer-bottom {
-                        flex-direction: column;
-                        gap: 1rem;
+                        padding-top: 0.85rem;
+                        margin-top: 0.85rem;
                         text-align: center;
                     }
 
                     .recomputech-footer-bottom-left {
-                        flex-direction: column;
-                        gap: 1rem;
+                        display: block;
                     }
 
-                    .recomputech-footer-links {
-                        justify-content: center;
+                    .recomputech-footer-links,
+                    .recomputech-payment-methods {
+                        display: none;
                     }
 
-                    .recomputech-newsletter-form {
-                        flex-direction: column;
-                    }
-
-                    .recomputech-social-links {
-                        justify-content: center;
+                    .recomputech-copyright {
+                        font-size: 0.75rem;
                     }
 
                     .recomputech-footer-container {
@@ -311,17 +352,8 @@ class FooterComponent extends HTMLElement {
                 }
 
                 @media (max-width: 575.98px) {
-                    .recomputech-footer-widget h4 {
-                        font-size: 1.1rem;
-                    }
-
                     .recomputech-footer-bottom-left {
                         gap: 0.5rem;
-                    }
-
-                    .recomputech-footer-links {
-                        flex-wrap: wrap;
-                        gap: 1rem;
                     }
 
                     .recomputech-footer-container {
