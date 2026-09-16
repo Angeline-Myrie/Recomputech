@@ -368,7 +368,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         if (user.role === 'technician') {
             window.location.href = '../dashboard/Technician/dashboard-technician.html';
         } else if (user.role === 'admin') {
-            window.location.href = '../dashboard/Admin/dashboard-admin.html';
+            window.location.href = '../dashboard/Technician/technician-applications.html';
         } else {
             window.location.href = '../dashboard/RegularUser/dashboard.html';
         }

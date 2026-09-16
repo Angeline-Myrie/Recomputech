@@ -1213,7 +1213,7 @@ class HeaderComponent extends HTMLElement {
     }
 
     removeFromCart(productId) {
-        this.cartItems = this.cartItems.filter(item => item.id !== productId);
+        this.cartItems = this.cartItems.filter(item => String(item.id) !== String(productId));
         this.updateCartBadge();
         this.saveCartToStorage();
         this.renderCartItems();
@@ -1221,7 +1221,7 @@ class HeaderComponent extends HTMLElement {
     }
 
     updateQuantity(productId, newQuantity) {
-        const item = this.cartItems.find(item => item.id === productId);
+        const item = this.cartItems.find(item => String(item.id) === String(productId));
         if (item) {
             if (newQuantity <= 0) {
                 this.removeFromCart(productId);
