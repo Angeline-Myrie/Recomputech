@@ -23,7 +23,8 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../../css/styles.css">
-    <link rel="stylesheet" href="../RegularUser/dashboard.css">
+    <link rel="stylesheet" href="technician-dashboard.css">
+    <link rel="stylesheet" href="technician-light-mode.css">
 </head>
 <body>
     <!-- Header Components -->
@@ -40,7 +41,7 @@
                         <p class="user-role">Technician Panel</p>
                     </div>
                 </div>
-                <button id="sidebarToggleBtn" class="sidebar-toggle-btn" type="button" title="Hide menu" aria-label="Hide menu">
+                <button id="sidebarToggleBtn" class="sidebar-toggle-btn" type="button" aria-label="Collapse navigation" title="Collapse navigation">
                     <i class="fas fa-chevron-left"></i>
                 </button>
             </div>
@@ -78,6 +79,18 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="#requests">
+                            <i class="fas fa-inbox"></i>
+                            <span>View Requests</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">
+                            <i class="fas fa-envelope"></i>
+                            <span>Contact Clients</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="#settings">
                             <i class="fas fa-cog"></i>
                             <span>Settings</span>
@@ -93,13 +106,14 @@
             </nav>
         </aside>
 
-        <button id="sidebarFloatingToggleBtn" class="sidebar-floating-toggle-btn" type="button" title="Show menu" aria-label="Show menu">
+        <button id="sidebarFloatingToggleBtn" class="sidebar-floating-toggle-btn" type="button" aria-label="Open navigation" title="Open navigation">
             <i class="fas fa-chevron-right"></i>
         </button>
-    
+
         <div class="dashboard-main">
             <main class="main-content">
-                <dashboard-content-component></dashboard-content-component>
+                <!-- Dynamic Dashboard Component -->
+                <technician-dashboard-content></technician-dashboard-content>
             </main>
         </div>
     </div>
@@ -138,11 +152,9 @@
     <script src="../../components/footer-component.js"></script>
     
     <!-- Dashboard Components -->
-    <script src="../RegularUser/overview-component.js"></script>
-    <script src="../RegularUser/purchases-component.js"></script>
-    <script src="../RegularUser/my-products-component.js"></script>
-    <script src="../RegularUser/my-purchases-component.js"></script>
-    <script src="../RegularUser/dashboard-content-component.js"></script>
+    <script src="technician-dashboard-content.js"></script>
+    <script src="technician-my-products-component.js"></script>
+    <script src="technician-purchases-component.js"></script>
     
     <!-- Initialize AOS -->
     <script>
@@ -152,20 +164,58 @@
             once: true
         });
         
-        const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
-        const sidebarFloatingToggleBtn = document.getElementById('sidebarFloatingToggleBtn');
+        // Ensure light mode is applied by default for technician dashboard
+        document.addEventListener('DOMContentLoaded', function() {
+            // Force light mode for technician dashboard
+            document.documentElement.removeAttribute('data-theme');
+            document.documentElement.classList.remove('dark-mode');
+            document.body.classList.remove('dark-mode');
+            localStorage.setItem('theme', 'light');
+            
+            // Apply theme after a short delay
+            setTimeout(() => {
+                if (window.darkModeManager) {
+                    window.darkModeManager.forceThemeApplication();
+                }
+            }, 200);
+        });
 
         function toggleSidebar() {
+            const isMobile = window.innerWidth <= 768;
+            if (isMobile) {
+                const isVisible = sidebar.classList.toggle('show');
+                const iconElement = sidebarFloatingToggleBtn?.querySelector('i');
+                if (iconElement) {
+                    iconElement.className = isVisible ? 'fas fa-chevron-left' : 'fas fa-chevron-right';
+                }
+                return;
+            }
+
             document.body.classList.toggle('sidebar-collapsed');
             const isCollapsed = document.body.classList.contains('sidebar-collapsed');
-            const iconElement = sidebarToggleBtn.querySelector('i');
+            const iconElement = sidebarToggleBtn?.querySelector('i');
             if (iconElement) {
                 iconElement.className = isCollapsed ? 'fas fa-chevron-right' : 'fas fa-chevron-left';
             }
         }
 
+        const sidebar = document.getElementById('dashboardSidebar');
+        const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
+        const sidebarFloatingToggleBtn = document.getElementById('sidebarFloatingToggleBtn');
         sidebarToggleBtn?.addEventListener('click', toggleSidebar);
         sidebarFloatingToggleBtn?.addEventListener('click', toggleSidebar);
+
+        document.querySelectorAll('.dashboard-sidebar .nav-link').forEach((link) => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    sidebar.classList.remove('show');
+                    const iconElement = sidebarFloatingToggleBtn?.querySelector('i');
+                    if (iconElement) {
+                        iconElement.className = 'fas fa-chevron-right';
+                    }
+                }
+            });
+        });
     </script>
 </body>
 </html> 

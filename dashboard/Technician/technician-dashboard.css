@@ -70,12 +70,241 @@
 }
 
 /* Main Layout */
+.dashboard-shell {
+    display: flex;
+    align-items: flex-start;
+    min-height: calc(100vh - 90px);
+    padding-top: 90px;
+    background-color: var(--bg-light);
+}
+
+.dashboard-main {
+    flex: 1;
+    min-width: 0;
+    min-height: 100vh;
+    margin-left: 280px;
+    width: calc(100vw - 280px);
+    background-color: var(--bg-light);
+    overflow-x: hidden;
+    transition: margin-left 0.3s ease;
+}
+
+.main-content {
+    width: 100%;
+    margin-top: 0;
+    padding: 0 2rem 3rem;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.sidebar-toggle-btn,
+.sidebar-floating-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: 0;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.sidebar-toggle-btn:hover,
+.sidebar-floating-toggle-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+}
+
+.sidebar-floating-toggle-btn {
+    position: fixed;
+    left: 10px;
+    top: 110px;
+    z-index: 25;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-60px);
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    box-shadow: 0 4px 12px rgba(33, 141, 166, 0.25);
+}
+
+body.sidebar-collapsed .dashboard-sidebar {
+    transform: translateX(-100%);
+}
+
+body.sidebar-collapsed .dashboard-main {
+    margin-left: 0;
+    width: 100vw;
+}
+
+body.sidebar-collapsed .sidebar-floating-toggle-btn {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
 .dashboard-section {
     padding: 2rem 0;
-    margin-top: 70px;
+    margin-top: 1rem;
     background-color: var(--bg-color);
     color: var(--text-color);
     animation: fadeInUp 0.8s ease-out;
+}
+
+.technician-welcome {
+    margin: 0 0 2.5rem;
+    overflow: hidden;
+    background: linear-gradient(135deg, #218da6 0%, #1b6e82 50%, #155a6b 100%);
+    color: #fff;
+    border: 3px solid #218da6;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.technician-welcome::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+    animation: shimmer 3s infinite;
+    pointer-events: none;
+}
+
+.technician-welcome-header {
+    min-height: 430px;
+    padding: 2.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.technician-welcome-content {
+    width: 100%;
+    max-width: 1100px;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.technician-welcome-content h1 {
+    color: #fff !important;
+    font-size: 3rem;
+    font-weight: 800;
+    margin: 0 0 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.technician-welcome-content h1 strong,
+.technician-welcome-user strong,
+.technician-stat-preview span {
+    color: #fff !important;
+}
+
+.technician-welcome-content p {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 0.9rem 1.25rem;
+    color: #e0f7fa !important;
+    font-size: 1.15rem;
+    line-height: 1.4;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.technician-welcome-content p strong {
+    color: #fff !important;
+}
+
+.technician-welcome-user {
+    margin-top: 1.25rem;
+}
+
+.technician-welcome-user strong,
+.technician-stat-preview {
+    color: #fff;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.technician-welcome-user strong {
+    display: inline-block;
+    padding: 0.5rem 1.1rem;
+    border-radius: 20px;
+    font-size: 1rem;
+}
+
+.technician-welcome-stats {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.technician-stat-preview {
+    min-width: 145px;
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.technician-stat-preview strong {
+    color: #fff !important;
+    font-size: 1.35rem;
+}
+
+.technician-stat-preview span {
+    color: #e0f7fa !important;
+    font-size: 0.8rem;
+}
+
+.technician-welcome-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    animation: float 7s ease-in-out infinite;
+}
+
+.technician-welcome-circle-large {
+    width: 135px;
+    height: 135px;
+    top: 12%;
+    left: 10%;
+}
+
+.technician-welcome-circle-medium {
+    width: 82px;
+    height: 82px;
+    right: 14%;
+    bottom: 15%;
+    opacity: 0.75;
+    animation-delay: -2s;
+}
+
+.technician-welcome-circle-small {
+    width: 58px;
+    height: 58px;
+    left: 22%;
+    bottom: 16%;
+    opacity: 0.6;
+    animation-delay: -4s;
 }
 
 .section-header {
@@ -484,6 +713,82 @@
 }
 
 /* Contact Info */
+.client-directory-tools {
+    margin-bottom: 1rem;
+}
+
+.technician-client-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.technician-client-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.9rem;
+    background: var(--bg-light);
+    border: 1px solid var(--card-border);
+    border-radius: 0.65rem;
+}
+
+.technician-client-card[hidden],
+.request-item[hidden] {
+    display: none;
+}
+
+.technician-client-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    flex: 0 0 38px;
+    border-radius: 50%;
+    background: rgba(33, 141, 166, 0.13);
+    color: var(--primary-color);
+}
+
+.technician-client-details {
+    min-width: 0;
+    flex: 1;
+}
+
+.technician-client-details h4 {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 0.95rem;
+}
+
+.technician-client-details p,
+.technician-client-details small {
+    display: block;
+    overflow: hidden;
+    margin: 0.2rem 0 0;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.request-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.request-header-row h3 {
+    flex: 1;
+}
+
+.request-header-row .form-select {
+    width: auto;
+    min-width: 145px;
+    color: var(--text-color);
+}
+
 .contact-info .form-label {
     color: var(--text-color);
     font-weight: 600;
@@ -708,6 +1013,93 @@
 }
 
 /* Service Stats */
+.stats-chart {
+    position: relative;
+    height: 315px;
+    width: 100%;
+}
+
+.stats-chart-toolbar {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.stats-chart-toolbar strong {
+    display: block;
+    margin-top: 0.15rem;
+    color: var(--text-color);
+    font-size: 1.6rem;
+    line-height: 1.1;
+}
+
+.stats-chart-label {
+    display: block;
+    color: var(--text-muted);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+}
+
+.stats-chart-period {
+    padding: 0.35rem 0.65rem;
+    border: 1px solid rgba(33, 141, 166, 0.2);
+    border-radius: 999px;
+    color: var(--primary-color);
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.stats-chart canvas {
+    display: block;
+    height: 245px !important;
+    width: 100% !important;
+}
+
+.stats-chart-empty {
+    position: absolute;
+    right: 1rem;
+    bottom: 0.25rem;
+    left: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    text-align: center;
+}
+
+.stats-chart-empty i {
+    color: var(--primary-color);
+}
+
+.stats-chart-empty strong {
+    color: var(--text-light);
+}
+
+.stats-chart-empty span {
+    color: var(--text-muted);
+}
+
+.stats-chart-empty.is-hidden {
+    display: none;
+}
+
+.stats-chart-empty span::before {
+    content: '\2022';
+    margin-right: 0.4rem;
+}
+
+.stats-chart-message {
+    margin: 0.75rem 0 0;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    text-align: center;
+}
+
 .service-stats {
     display: flex;
     flex-direction: column;
@@ -997,19 +1389,425 @@
 
 /* Chart Container */
 .chart-container {
+    width: min(100%, 1000px);
     background: var(--card-bg);
     border: 2px solid var(--card-border);
     border-radius: 0.5rem;
     padding: 1rem;
-    margin: 1rem 0;
+    margin: 1.5rem auto;
     transition: all 0.3s ease;
     animation: fadeInUp 0.8s ease-out;
+}
+
+.chart-container canvas {
+    display: block;
+    width: 100% !important;
 }
 
 .chart-container:hover {
     border-color: var(--primary-color);
     box-shadow: 0 10px 25px rgba(33, 141, 166, 0.1);
     transform: translateY(-3px);
+}
+
+.technician-page-section,
+.technician-my-products,
+.technician-purchases {
+    width: 100%;
+}
+
+.technician-page-banner {
+    margin-bottom: 0;
+}
+
+.technician-settings-hero {
+    width: 100%;
+    margin: 0 !important;
+    overflow: hidden;
+    background: linear-gradient(135deg, #218da6 0%, #1b6e82 50%, #155a6b 100%);
+    color: #fff;
+    border: 3px solid #218da6;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.technician-settings-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+    animation: shimmer 3s infinite;
+    pointer-events: none;
+}
+
+.technician-settings-hero-header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    padding: 3rem 2rem;
+    overflow: hidden;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.technician-settings-hero-content {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0 2rem;
+    text-align: center;
+}
+
+.technician-settings-hero-content h1 {
+    margin: 0 0 1.5rem;
+    padding-bottom: 1rem;
+    color: #fff;
+    border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1.1;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.technician-settings-hero-content p {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 1rem;
+    color: #e0f7fa;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    font-size: 1.2rem;
+    line-height: 1.4;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.technician-settings-hero-circle {
+    position: absolute;
+    z-index: 1;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.technician-settings-hero-circle-large {
+    width: 145px;
+    height: 145px;
+    top: 12%;
+    left: 10%;
+}
+
+.technician-settings-hero-circle-medium {
+    width: 95px;
+    height: 95px;
+    right: 10%;
+    bottom: 14%;
+}
+
+.technician-settings-hero-circle-small {
+    width: 70px;
+    height: 70px;
+    right: 25%;
+    top: 45%;
+}
+
+.technician-dashboard-panel {
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 2rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 0.75rem;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.technician-settings-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+    align-items: start;
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.technician-security-panel .technician-panel-header {
+    margin-bottom: 1.25rem;
+}
+
+.technician-settings-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.technician-settings-actions .btn {
+    text-align: left;
+}
+
+.technician-notification-panel {
+    max-width: 1100px;
+    margin-top: 1.5rem;
+}
+
+.technician-notification-panel[hidden] {
+    display: none;
+}
+
+.technician-setting-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    background: var(--bg-light);
+    border: 1px solid var(--card-border);
+    border-radius: 0.6rem;
+    cursor: pointer;
+}
+
+.technician-setting-toggle span {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.technician-setting-toggle strong {
+    color: var(--text-color);
+}
+
+.technician-setting-toggle small {
+    color: var(--text-muted);
+}
+
+.technician-setting-toggle input {
+    width: 1.15rem;
+    height: 1.15rem;
+    accent-color: var(--primary-color);
+}
+
+.technician-panel-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.technician-panel-header h2 {
+    margin: 0 0 0.35rem;
+    color: var(--text-color);
+    font-size: 1.45rem;
+}
+
+.technician-panel-header p {
+    margin: 0;
+    color: var(--text-muted);
+}
+
+.technician-product-card {
+    height: 100%;
+    overflow: hidden;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 0.65rem;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+}
+
+.technician-product-card img {
+    display: block;
+    width: 100%;
+    height: 175px;
+    object-fit: cover;
+}
+
+.technician-product-card h3 {
+    margin: 0;
+    color: var(--text-color);
+    font-size: 1.1rem;
+}
+
+.technician-product-card p {
+    min-height: 48px;
+    margin: 0.8rem 0;
+    color: var(--text-muted);
+}
+
+.technician-product-card small {
+    display: block;
+    margin-top: 0.75rem;
+    color: var(--text-muted);
+}
+
+.technician-empty-state {
+    padding: 3rem 1rem;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.technician-empty-state i {
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    font-size: 2.5rem;
+}
+
+.technician-empty-state h3 {
+    color: var(--text-color);
+}
+
+@media (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+    }
+
+    .dashboard-shell {
+        width: 100%;
+        min-height: calc(100vh - 90px);
+    }
+
+    .dashboard-sidebar {
+        width: min(280px, calc(100vw - 48px));
+        max-width: calc(100vw - 48px);
+    }
+
+    .dashboard-main,
+    .main-content,
+    .dashboard-section,
+    .content-container {
+        max-width: 100%;
+    }
+
+    .main-content {
+        padding: 0 0.75rem 2rem;
+    }
+
+    .dashboard-section {
+        padding: 1rem 0;
+    }
+
+    .technician-welcome {
+        margin-bottom: 1.25rem;
+    }
+
+    .technician-page-banner .technician-welcome-header {
+        min-height: 260px;
+    }
+
+    .technician-welcome-header {
+        min-height: 390px;
+        padding: 1.5rem 0.75rem;
+    }
+
+    .technician-welcome-content h1 {
+        font-size: clamp(1.8rem, 8vw, 2.2rem);
+        line-height: 1.15;
+    }
+
+    .technician-welcome-content p {
+        width: 100%;
+        font-size: 0.95rem;
+    }
+
+    .technician-welcome-stats {
+        gap: 0.6rem;
+    }
+
+    .technician-stat-preview {
+        flex: 1 1 120px;
+        min-width: 0;
+        padding: 0.7rem 0.5rem;
+    }
+
+    .technician-dashboard-panel {
+        width: 100%;
+        padding: 1rem;
+        overflow: hidden;
+    }
+
+    .technician-panel-header h2 {
+        font-size: 1.2rem;
+    }
+
+    .technician-panel-header .btn {
+        width: 100%;
+    }
+
+    .technician-product-card p {
+        min-height: 0;
+    }
+
+    .technician-dashboard-panel .table-responsive {
+        max-width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .technician-dashboard-panel table {
+        min-width: 620px;
+    }
+
+    .technician-dashboard-panel form .btn {
+        width: 100%;
+    }
+
+    .technician-dashboard-panel .form-control,
+    .technician-dashboard-panel .form-select {
+        min-height: 44px;
+    }
+
+    .technician-dashboard-panel {
+        padding: 1.25rem;
+    }
+
+    .technician-settings-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .technician-settings-hero-header {
+        min-height: 200px;
+        padding: 2rem 1rem;
+    }
+
+    .technician-settings-hero-content {
+        padding: 0 0.5rem;
+    }
+
+    .technician-settings-hero-content h1 {
+        font-size: 2.2rem;
+    }
+
+    .technician-settings-hero-content p {
+        font-size: 1rem;
+    }
+
+    .technician-panel-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .request-header-row {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .request-header-row .form-select {
+        width: 100%;
+    }
+
+    .technician-client-card {
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
+
+    .technician-client-card .client-contact-btn {
+        width: 100%;
+        margin-left: 46px;
+    }
 }
 
 /* Loading Animation */
@@ -1021,8 +1819,56 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .dashboard-sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    .dashboard-sidebar.show {
+        transform: translateX(0);
+    }
+
+    .dashboard-main {
+        margin-left: 0;
+        width: 100vw;
+    }
+
+    .main-content {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .sidebar-floating-toggle-btn {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(0);
+    }
+
+    .dashboard-sidebar.show ~ .sidebar-floating-toggle-btn {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
     .header-content h1 {
         font-size: 2rem;
+    }
+
+    .technician-welcome-header {
+        min-height: 390px;
+        padding: 1.5rem 0.75rem;
+    }
+
+    .technician-welcome-content {
+        padding: 0 0.5rem;
+    }
+
+    .technician-welcome-content h1 {
+        font-size: clamp(1.8rem, 8vw, 2.2rem);
+    }
+
+    .technician-welcome-content p {
+        font-size: 1rem;
     }
     
     .stat-card {
@@ -1058,3 +1904,68 @@
         transform: none;
     }
 } 
+
+@media (max-width: 480px) {
+    .main-content {
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+    }
+
+    .sidebar-header {
+        padding: 1.25rem 1rem;
+    }
+
+    .nav-link {
+        padding: 0.85rem 1rem;
+        gap: 0.75rem;
+    }
+
+    .technician-page-banner .technician-welcome-header {
+        min-height: 230px;
+    }
+
+    .technician-welcome-header {
+        min-height: 360px;
+    }
+
+    .technician-welcome-content h1 {
+        font-size: 1.75rem;
+    }
+
+    .technician-welcome-stats {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .technician-stat-preview {
+        flex: 0 1 auto;
+    }
+
+    .technician-dashboard-panel {
+        padding: 0.85rem;
+        border-radius: 0.5rem;
+    }
+
+    .technician-product-card img {
+        height: 155px;
+    }
+
+    .stats-chart {
+        height: 275px;
+    }
+
+    .stats-chart canvas {
+        height: 205px !important;
+    }
+
+    .stats-chart-toolbar strong {
+        font-size: 1.35rem;
+    }
+
+    .stats-chart-empty {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.15rem;
+        text-align: left;
+    }
+}

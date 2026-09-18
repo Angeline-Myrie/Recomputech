@@ -915,11 +915,13 @@ body {
     position: relative;
 }
 
-/* Desktop: sidebar pegado al scroll (refuerzo JS con .is-fixed) */
-@media (min-width: 1201px) {
+/* Desktop: keep the category sidebar visible while browsing products. */
+@media (min-width: 992px) {
     .sidebar {
+    position: sticky;
+    top: 16px;
         width: 100%;
-        max-height: calc(100vh - 120px);
+    max-height: calc(100vh - 32px);
     }
 
     .sidebar.is-fixed {
