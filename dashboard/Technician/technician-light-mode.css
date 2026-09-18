@@ -409,6 +409,78 @@ html {
     z-index: 1 !important;
 }
 
+/* Keep the Settings cards and their headings fully rounded and readable. */
+.technician-settings-hero,
+.technician-settings-card,
+.technician-notification-panel {
+    border-radius: 1rem !important;
+    overflow: hidden !important;
+}
+
+.technician-settings-card > .card-header,
+.technician-notification-panel > .card-header {
+    border-radius: 0.85rem 0.85rem 0 0 !important;
+    color: #ffffff !important;
+}
+
+.technician-settings-card > .card-header h3,
+.technician-settings-card > .card-header h3 i,
+.technician-notification-panel > .card-header h3,
+.technician-notification-panel > .card-header h3 i {
+    color: #ffffff !important;
+}
+
+.technician-settings-card > .card-header h3 {
+    white-space: normal;
+    line-height: 1.35;
+}
+
+.technician-settings-hero-content h1,
+.technician-settings-hero-content p {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+.technician-settings-hero-content h1 {
+    background: none !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Match the clean card proportions used by the regular user Settings view. */
+.technician-settings-grid {
+    max-width: 1200px !important;
+    gap: 1.5rem !important;
+}
+
+.technician-settings-card,
+.technician-notification-panel {
+    border: 1px solid #e9ecef !important;
+    border-radius: 15px !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    padding: 0 !important;
+    transform: none;
+}
+
+.technician-settings-card:hover,
+.technician-notification-panel:hover {
+    transform: none !important;
+    border-color: #e9ecef !important;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+}
+
+.technician-settings-card > .card-header,
+.technician-notification-panel > .card-header {
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding: 1.5rem 2rem !important;
+    width: 100% !important;
+}
+
+.technician-settings-card > .card-body,
+.technician-notification-panel > .card-body {
+    padding: 2rem !important;
+}
+
 /* Force light mode on form elements */
 .form-control,
 .form-select,
@@ -612,6 +684,17 @@ h1, h2, h3, h4, h5, h6, p, span, div {
     animation: fadeInUp 1s ease-out 0.4s both !important;
 }
 
+.dashboard-section .section-header .header-content h1,
+.dashboard-section .section-header .header-content p {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+.dashboard-section .section-header .header-content h1 {
+    background: none !important;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
 /* Performance metrics animations */
 .metric-item {
     animation: fadeInUp 0.6s ease-out !important;
@@ -641,5 +724,63 @@ h1, h2, h3, h4, h5, h6, p, span, div {
     .activity-item:hover,
     .quick-action-btn:hover {
         transform: none !important;
+    }
+}
+
+/* Keep the Technician dashboard calm and consistent with the regular dashboard. */
+.technician-page-section .dashboard-card,
+.technician-page-section .stat-card,
+.technician-page-section .activity-item,
+.technician-page-section .quick-action-btn {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease !important;
+}
+
+.technician-page-section .dashboard-card:hover,
+.technician-page-section .stat-card:hover {
+    transform: translateY(-2px) !important;
+}
+
+.technician-page-section .activity-item:hover,
+.technician-page-section .quick-action-btn:hover {
+    transform: translateX(4px) !important;
+}
+
+.technician-page-section .activity-item:hover .activity-icon,
+.technician-page-section .quick-action-btn:hover i,
+.technician-page-section .metric-item:hover h4 {
+    transform: none !important;
+    animation: none !important;
+}
+
+.technician-page-section .card-header::before,
+.technician-page-section .quick-action-btn::before {
+    animation: none !important;
+}
+
+@media (max-width: 768px) {
+    .dashboard-main {
+        width: 100% !important;
+    }
+
+    .technician-welcome-header {
+        min-height: 280px !important;
+    }
+
+    .technician-page-section .dashboard-card:hover,
+    .technician-page-section .stat-card:hover,
+    .technician-page-section .activity-item:hover,
+    .technician-page-section .quick-action-btn:hover {
+        transform: none !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .technician-page-section *,
+    .technician-page-section *::before,
+    .technician-page-section *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
     }
 }
