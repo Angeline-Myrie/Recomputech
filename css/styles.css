@@ -1076,6 +1076,44 @@ body.dark-mode .filter-actions .btn:hover {
     box-shadow: 0 4px 16px rgba(33,203,243,0.13);
 }
 
+/* =========================================
+   MOBILE HORIZONTAL OVERFLOW FIX
+   ========================================= */
+
+@media (max-width: 767.98px) {
+
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden !important;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+    }
+
+    .container,
+    .container-fluid {
+        max-width: 100%;
+    }
+
+    img,
+    video,
+    iframe {
+        max-width: 100%;
+    }
+
+    .row {
+        --bs-gutter-x: 1.5rem;
+    }
+
+    section {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+}
 
 
 
