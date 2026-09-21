@@ -44,15 +44,11 @@ class DarkModeManager {
         // Aplicar inmediatamente al documento y body
         document.documentElement.setAttribute('data-theme', savedTheme);
         document.documentElement.classList.toggle('dark-mode', savedTheme === 'dark');
+        document.documentElement.classList.toggle('light-mode', savedTheme !== 'dark');
         document.body.setAttribute('data-theme', savedTheme);
         document.body.classList.toggle('dark-mode', savedTheme === 'dark');
+        document.body.classList.toggle('light-mode', savedTheme !== 'dark');
         
-        // Aplicar a todos los elementos existentes
-        const allElements = document.querySelectorAll('*');
-        allElements.forEach(element => {
-            element.classList.toggle('dark-mode', savedTheme === 'dark');
-            element.setAttribute('data-theme', savedTheme);
-        });
     }
 
     setTheme(theme) {
@@ -65,12 +61,14 @@ class DarkModeManager {
         // Aplicar al documento
         root.setAttribute('data-theme', theme);
         root.classList.toggle('dark-mode', theme === 'dark');
+        root.classList.toggle('light-mode', theme !== 'dark');
         root.style.colorScheme = theme === 'dark' ? 'dark' : 'light';
         
         // Aplicar al body
         if (body) {
             body.setAttribute('data-theme', theme);
             body.classList.toggle('dark-mode', theme === 'dark');
+            body.classList.toggle('light-mode', theme !== 'dark');
             body.style.backgroundColor = 'var(--bg-color)';
             body.style.color = 'var(--text-color)';
         }
@@ -105,7 +103,6 @@ class DarkModeManager {
         allElements.forEach(element => {
             // Aplicar a elementos con clase theme-aware
             if (element.classList && element.classList.contains('theme-aware')) {
-                element.classList.toggle('dark-mode', theme === 'dark');
                 element.setAttribute('data-theme', theme);
             }
             
@@ -138,11 +135,6 @@ class DarkModeManager {
                 component.classList.toggle('dark-mode', theme === 'dark');
                 component.setAttribute('data-theme', theme);
                 
-                // Aplicar también al shadow root
-                if (component.shadowRoot) {
-                    component.shadowRoot.classList.toggle('dark-mode', theme === 'dark');
-                    component.shadowRoot.setAttribute('data-theme', theme);
-                }
             }
         });
 
@@ -251,19 +243,20 @@ class DarkModeManager {
     applyThemeToElement(element) {
         // Aplicar tema a un elemento específico
         if (element.classList && element.classList.contains('theme-aware')) {
-            element.classList.toggle('dark-mode', this.currentTheme === 'dark');
             element.setAttribute('data-theme', this.currentTheme);
         }
         
         // Aplicar a componentes web
         if (element.shadowRoot) {
             element.classList.toggle('dark-mode', this.currentTheme === 'dark');
+            element.classList.toggle('light-mode', this.currentTheme !== 'dark');
             element.setAttribute('data-theme', this.currentTheme);
         }
 
         // Aplicar a componentes web específicos
         if (element.tagName && ['RECOMPUTECH-HEADER', 'RECOMPUTECH-HEADER-AUTH', 'RECOMPUTECH-HEADER-AUTH-TECHNICIAN'].includes(element.tagName)) {
             element.classList.toggle('dark-mode', this.currentTheme === 'dark');
+            element.classList.toggle('light-mode', this.currentTheme !== 'dark');
             element.setAttribute('data-theme', this.currentTheme);
             
             // Actualizar íconos si el componente tiene el método
@@ -277,7 +270,6 @@ class DarkModeManager {
         // Aplicar tema a elementos que ya existen en el DOM
         const themeAwareElements = document.querySelectorAll('.theme-aware');
         themeAwareElements.forEach(element => {
-            element.classList.toggle('dark-mode', this.currentTheme === 'dark');
             element.setAttribute('data-theme', this.currentTheme);
         });
 
@@ -296,12 +288,6 @@ class DarkModeManager {
 
     // Método para forzar la aplicación del tema a todos los elementos
     forceThemeApplication() {
-        const allElements = document.querySelectorAll('*');
-        allElements.forEach(element => {
-            element.classList.toggle('dark-mode', this.currentTheme === 'dark');
-            element.setAttribute('data-theme', this.currentTheme);
-        });
-
         // Aplicar específicamente a componentes web
         const webComponents = document.querySelectorAll('recomputech-header, recomputech-header-auth, recomputech-header-auth-technician');
         webComponents.forEach(component => {

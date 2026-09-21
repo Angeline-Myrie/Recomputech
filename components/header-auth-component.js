@@ -1523,6 +1523,11 @@ class RecomputechHeaderAuth extends HTMLElement {
 
     // Theme functionality
     toggleTheme() {
+        if (window.darkModeManager) {
+            window.darkModeManager.toggleTheme();
+            return;
+        }
+
         const isDark = document.documentElement.classList.contains('dark-mode');
         
         if (isDark) {

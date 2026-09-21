@@ -248,6 +248,30 @@ body.dark-mode .btn-secondary,
     --tech-avatar-bg: #218DA6;
 }
 
+/* Mantener el contenido normal integrado con el fondo oscuro. */
+[data-theme="dark"] body,
+[data-theme="dark"] main,
+[data-theme="dark"] section,
+[data-theme="dark"] article,
+[data-theme="dark"] .container,
+[data-theme="dark"] .container-fluid {
+    color: var(--text-color);
+}
+
+[data-theme="dark"] p,
+[data-theme="dark"] li,
+[data-theme="dark"] label,
+[data-theme="dark"] small,
+[data-theme="dark"] .text-body,
+[data-theme="dark"] .text-muted {
+    color: var(--text-light) !important;
+}
+
+[data-theme="dark"] i:not(.text-success):not(.text-warning):not(.text-danger),
+[data-theme="dark"] svg:not(.text-success):not(.text-warning):not(.text-danger) {
+    color: currentColor;
+}
+
 /* Clases de utilidad para dark mode */
 .dark-mode {
     /* Aplicar automáticamente las variables de dark mode */

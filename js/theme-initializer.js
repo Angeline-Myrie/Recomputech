@@ -12,19 +12,17 @@
     // Aplicar inmediatamente al documento
     document.documentElement.setAttribute('data-theme', savedTheme);
     document.documentElement.classList.toggle('dark-mode', savedTheme === 'dark');
+    document.documentElement.classList.toggle('light-mode', savedTheme !== 'dark');
     
     // Aplicar al body si ya existe
     if (document.body) {
         document.body.setAttribute('data-theme', savedTheme);
         document.body.classList.toggle('dark-mode', savedTheme === 'dark');
+        document.body.classList.toggle('light-mode', savedTheme !== 'dark');
     }
     
-    // Aplicar a todos los elementos existentes
-    const allElements = document.querySelectorAll('*');
-    allElements.forEach(element => {
-        element.classList.toggle('dark-mode', savedTheme === 'dark');
-        element.setAttribute('data-theme', savedTheme);
-    });
+        // Evitar aplicar la clase dark-mode a textos, iconos y elementos internos
+        console.log('Theme initialized immediately:', savedTheme);
     
     console.log('Theme initialized immediately:', savedTheme);
 })();
