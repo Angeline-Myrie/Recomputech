@@ -15,6 +15,7 @@
 
     function resetSidebar() {
         if (!sidebar || !column) return;
+        if (!DESKTOP_MQ.matches && sidebar.classList.contains('active')) return;
         sidebar.classList.remove('is-fixed');
         sidebar.style.position = '';
         sidebar.style.top = '';

@@ -1072,3 +1072,759 @@ body.dark-mode .feature-tag:hover,
         align-items: center;
     }
 }
+
+/* =========================================================
+   SERVICES - MOBILE HERO OPTIMIZATION
+   ========================================================= */
+
+@media (max-width: 576px) {
+
+    /* ---------- HERO GENERAL ---------- */
+
+    .services-hero-section {
+        padding: 28px 16px 24px !important;
+        border-radius: 0 0 18px 18px;
+        min-height: auto;
+    }
+
+    .services-hero-content {
+        padding-top: 0;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    /* ---------- BADGE ---------- */
+
+    .services-hero-badge {
+        font-size: 0.72rem;
+        padding: 0.4rem 0.9rem;
+        margin-bottom: 0.8rem;
+        letter-spacing: 0.5px;
+        border-radius: 30px;
+    }
+
+    /* ---------- TITULO PRINCIPAL ---------- */
+
+    .services-hero-title {
+        font-size: 1.8rem !important;
+        line-height: 1.15;
+        font-weight: 800;
+        margin: 0 auto;
+        max-width: 340px;
+        text-align: center;
+    }
+
+    /* ---------- ELEMENTOS DEL HERO ---------- */
+
+    .services-hero-section p {
+        font-size: 0.9rem;
+        line-height: 1.45;
+        margin-bottom: 0.8rem;
+    }
+
+    .services-hero-section .btn {
+        padding: 0.6rem 1.1rem;
+        font-size: 0.85rem;
+        border-radius: 12px;
+    }
+
+    /* ---------- EVITAR ESPACIOS VACIOS ---------- */
+
+    .services-hero-section .container,
+    .services-hero-section .container-fluid {
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+    /* ---------- SERVICIOS: ACERCAR LA INFORMACIÓN ---------- */
+
+    #services {
+        margin-top: -18px;
+        border-radius: 20px 20px 0 0;
+        padding-top: 1.5rem;
+        padding-bottom: 2rem;
+    }
+
+    .section-header {
+        margin-bottom: 1.5rem;
+    }
+
+    .section-badge {
+        font-size: 0.7rem;
+        padding: 0.35rem 0.8rem;
+        margin-bottom: 0.6rem;
+    }
+
+    .section-title {
+        font-size: 1.65rem;
+        line-height: 1.2;
+        margin-bottom: 0.5rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.85rem;
+        line-height: 1.45;
+        max-width: 330px;
+    }
+
+    /* ---------- TARJETAS ---------- */
+
+    .modern-service-card,
+    .service-card {
+        padding: 20px 15px;
+        border-radius: 16px;
+    }
+
+    .service-icon-wrapper {
+        width: 58px;
+        height: 58px;
+        font-size: 1.45rem;
+        margin-bottom: 15px;
+    }
+
+    .service-icon {
+        width: 75px;
+        height: 75px;
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+    }
+
+    .service-title,
+    .service-card h3 {
+        font-size: 1.05rem;
+        line-height: 1.25;
+        margin-bottom: 8px;
+    }
+
+    .service-description,
+    .service-card p {
+        font-size: 0.82rem;
+        line-height: 1.45;
+    }
+
+    .service-features {
+        gap: 5px;
+        margin-top: 10px;
+    }
+
+    .feature-tag {
+        font-size: 0.68rem;
+        padding: 4px 8px;
+    }
+
+    /* ---------- CTA TECNICIAN ---------- */
+
+    .technician-cta-card {
+        margin: 2rem 12px 1.5rem;
+        padding: 1.8rem 1.2rem;
+        border-radius: 20px;
+    }
+
+    .cta-title {
+        font-size: 1.6rem;
+        line-height: 1.2;
+        margin-bottom: 0.7rem;
+    }
+
+    .technician-cta-card p {
+        font-size: 0.88rem;
+        line-height: 1.5;
+        margin-bottom: 1.2rem;
+    }
+
+    .cta-actions {
+        gap: 0.6rem;
+    }
+
+    .cta-actions .btn {
+        padding: 0.7rem 1.1rem;
+        font-size: 0.82rem;
+    }
+
+    .cta-visual {
+        margin-top: 1.2rem;
+    }
+
+    .technician-illustration {
+        width: 90px;
+        height: 90px;
+        font-size: 2.3rem;
+    }
+
+    .technician-illustration::after {
+        width: 105px;
+        height: 105px;
+    }
+}
+
+
+/* =========================================================
+   TELEFONOS PEQUEÑOS
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .services-hero-section {
+        padding: 24px 14px 20px !important;
+    }
+
+    .services-hero-badge {
+        font-size: 0.68rem;
+        padding: 0.35rem 0.75rem;
+    }
+
+    .services-hero-title {
+        font-size: 1.6rem !important;
+        max-width: 300px;
+    }
+
+    .services-hero-section p {
+        font-size: 0.84rem;
+    }
+
+    #services {
+        margin-top: -14px;
+        padding-top: 1.2rem;
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    .section-subtitle {
+        font-size: 0.8rem;
+    }
+
+    .modern-service-card,
+    .service-card {
+        padding: 17px 13px;
+    }
+}
+/* =========================================================
+   SERVICES - AJUSTES FINALES PARA TELEFONO
+   ========================================================= */
+
+@media (max-width: 576px) {
+
+    /* =====================================================
+       HERO - MÁS ALTO Y COMPLETO
+       ===================================================== */
+
+    .services-hero-section {
+        padding: 55px 18px 50px !important;
+        min-height: 320px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: visible !important;
+    }
+
+    .services-hero-content {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
+        width: 100%;
+        max-width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .services-hero-badge {
+        font-size: 0.75rem;
+        padding: 0.45rem 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .services-hero-title {
+        font-size: 2rem !important;
+        line-height: 1.2;
+        max-width: 350px;
+        margin: 0 auto 1rem !important;
+        text-align: center;
+    }
+
+    .services-hero-section p {
+        font-size: 0.9rem;
+        line-height: 1.5;
+        max-width: 340px;
+        margin: 0 auto 1.2rem;
+        text-align: center;
+    }
+
+    .services-hero-section .btn {
+        padding: 0.7rem 1.25rem;
+        font-size: 0.85rem;
+    }
+
+
+    /* =====================================================
+       SECCIÓN DE SERVICIOS
+       ===================================================== */
+
+    #services {
+        margin-top: -15px;
+        padding-top: 2rem;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 22px 22px 0 0;
+    }
+
+
+    /* =====================================================
+       HEADER DE SERVICIOS
+       ===================================================== */
+
+    .section-header {
+        margin-bottom: 1.5rem;
+        padding: 0 5px;
+    }
+
+    .section-title {
+        font-size: 1.65rem;
+        line-height: 1.2;
+    }
+
+    .section-subtitle {
+        font-size: 0.84rem;
+        line-height: 1.45;
+        max-width: 330px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    /* =====================================================
+       2 TARJETAS POR FILA
+       ===================================================== */
+
+    #services .row {
+        margin-left: -6px;
+        margin-right: -6px;
+    }
+
+    #services .col,
+    #services [class*="col-"] {
+        width: 50%;
+        flex: 0 0 50%;
+        padding-left: 6px;
+        padding-right: 6px;
+    }
+
+
+    /* =====================================================
+       TARJETAS - BORDE DE COLOR
+       ===================================================== */
+
+    .modern-service-card,
+    .service-card {
+        width: 100%;
+        min-height: 100% !important;
+        height: 100%;
+        padding: 18px 10px !important;
+        border-radius: 16px;
+
+        /* Borde de color */
+        border: 2px solid rgba(0, 123, 255, 0.35) !important;
+
+        /* Separación visual */
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+
+        background: #ffffff;
+    }
+
+    /* Efecto de color un poco más fuerte al tocar */
+    .modern-service-card:active,
+    .service-card:active {
+        border-color: rgba(0, 123, 255, 0.7) !important;
+    }
+
+
+    /* =====================================================
+       ICONOS
+       ===================================================== */
+
+    .service-icon-wrapper {
+        width: 52px;
+        height: 52px;
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+    }
+
+    .service-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+        margin-bottom: 0.8rem;
+    }
+
+
+    /* =====================================================
+       TEXTO DE LAS TARJETAS
+       ===================================================== */
+
+    .service-title,
+    .service-card h3 {
+        font-size: 0.95rem;
+        line-height: 1.25;
+        margin-bottom: 7px;
+    }
+
+    .service-description,
+    .service-card p {
+        font-size: 0.75rem;
+        line-height: 1.4;
+        margin-bottom: 8px;
+    }
+
+    .service-features {
+        gap: 4px;
+        margin-top: 8px;
+    }
+
+    .feature-tag {
+        font-size: 0.6rem;
+        padding: 3px 6px;
+    }
+
+
+    /* =====================================================
+       EVITAR QUE LAS TARJETAS SE VEAN DEMASIADO PEQUEÑAS
+       ===================================================== */
+
+    .modern-service-card .service-icon-wrapper,
+    .service-card .service-icon {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+}
+
+
+/* =========================================================
+   TELEFONOS MUY PEQUEÑOS
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .services-hero-section {
+        padding: 48px 15px 45px !important;
+        min-height: 300px;
+    }
+
+    .services-hero-title {
+        font-size: 1.75rem !important;
+    }
+
+    #services .col,
+    #services [class*="col-"] {
+        padding-left: 5px;
+        padding-right: 5px;
+    }
+
+    .modern-service-card,
+    .service-card {
+        padding: 16px 8px !important;
+    }
+
+    .service-title,
+    .service-card h3 {
+        font-size: 0.88rem;
+    }
+
+    .service-description,
+    .service-card p {
+        font-size: 0.7rem;
+    }
+}
+
+/* =========================================================
+   SERVICES - MOBILE FINAL LAYOUT
+   ========================================================= */
+
+@media (max-width: 576px) {
+
+    /* =====================================================
+       HERO
+       ===================================================== */
+
+    .services-hero-section {
+        padding: 55px 18px 50px !important;
+        min-height: 320px !important;
+        height: auto !important;
+        overflow: visible !important;
+        display: flex;
+        align-items: center;
+    }
+
+    .services-hero-section .container {
+        width: 100%;
+        padding: 0;
+    }
+
+    .services-hero-section .row {
+        width: 100%;
+        margin: 0;
+    }
+
+    .services-hero-section .col-lg-8 {
+        width: 100%;
+        padding: 0;
+    }
+
+    .services-hero-content {
+        width: 100%;
+        padding: 0 !important;
+        margin: 0 auto;
+    }
+
+    .services-hero-badge {
+        font-size: 0.75rem !important;
+        padding: 0.45rem 1rem !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .services-hero-title {
+        font-size: 2rem !important;
+        line-height: 1.2 !important;
+        text-align: center !important;
+        margin: 0 auto !important;
+        max-width: 340px;
+    }
+
+
+    /* =====================================================
+       SECCIÓN PRINCIPAL
+       ===================================================== */
+
+    .services-main-section {
+        padding-top: 2rem !important;
+        padding-bottom: 2rem !important;
+    }
+
+    .services-main-section > .container {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+
+    /* =====================================================
+       TITULO DE SERVICIOS
+       ===================================================== */
+
+    .services-main-section .section-header {
+        margin-bottom: 1.5rem !important;
+    }
+
+    .services-main-section .section-title {
+        font-size: 1.6rem !important;
+        line-height: 1.2;
+    }
+
+    .services-main-section .section-subtitle {
+        font-size: 0.82rem !important;
+        line-height: 1.45;
+        max-width: 330px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+
+    /* =====================================================
+       IMPORTANTE: 2 TARJETAS POR FILA
+       ===================================================== */
+
+    .services-main-section .row.g-4 {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        margin-left: -5px !important;
+        margin-right: -5px !important;
+    }
+
+    .services-main-section .row.g-4 > [class*="col-"] {
+        width: 50% !important;
+        flex: 0 0 50% !important;
+        max-width: 50% !important;
+
+        padding-left: 5px !important;
+        padding-right: 5px !important;
+        margin-bottom: 10px;
+    }
+
+
+/* =====================================================
+   TARJETAS - MISMO TAMAÑO EN TODAS
+   ===================================================== */
+
+.services-main-section .modern-service-card {
+    width: 100% !important;
+    height: 235px !important;
+    min-height: 235px !important;
+    max-height: 235px !important;
+
+    padding: 16px 10px !important;
+
+    border: 2px solid rgba(0, 123, 255, 0.35) !important;
+    border-radius: 16px !important;
+
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+
+    background: #ffffff;
+
+    overflow: hidden !important;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =====================================================
+   CONTENIDO DE LA TARJETA
+   ===================================================== */
+
+.services-main-section .service-content {
+    width: 100%;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    flex: 1;
+    min-height: 0;
+}
+
+
+/* =====================================================
+   ICONO
+   ===================================================== */
+
+.services-main-section .service-icon-wrapper {
+    width: 48px !important;
+    height: 48px !important;
+    min-width: 48px;
+    min-height: 48px;
+
+    margin: 0 auto 9px !important;
+
+    font-size: 1.15rem !important;
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+   TITULO
+   ===================================================== */
+
+.services-main-section .service-title {
+    font-size: 0.88rem !important;
+    line-height: 1.2 !important;
+
+    margin-bottom: 6px !important;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+   DESCRIPCION - SE CORTA SI ES MUY LARGA
+   ===================================================== */
+
+.services-main-section .service-description {
+    font-size: 0.68rem !important;
+    line-height: 1.35 !important;
+
+    margin-bottom: 7px !important;
+
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+
+    /* Máximo 4 líneas */
+    -webkit-line-clamp: 4;
+
+    overflow: hidden;
+
+    flex-shrink: 0;
+}
+
+
+/* =====================================================
+   ETIQUETAS
+   ===================================================== */
+
+.services-main-section .service-features {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    gap: 3px;
+    margin-top: auto;
+
+    max-height: 38px;
+    overflow: hidden;
+}
+
+.services-main-section .feature-tag {
+    font-size: 0.55rem !important;
+    line-height: 1.15;
+
+    padding: 3px 5px !important;
+
+    border-radius: 7px;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   TELEFONOS MUY PEQUEÑOS
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .services-hero-section {
+        min-height: 300px !important;
+        padding: 48px 14px 45px !important;
+    }
+
+    .services-hero-title {
+        font-size: 1.75rem !important;
+    }
+
+    .services-main-section > .container {
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+
+    .services-main-section .row.g-4 > [class*="col-"] {
+        padding-left: 4px !important;
+        padding-right: 4px !important;
+    }
+
+    .services-main-section .modern-service-card {
+        min-height: 250px !important;
+        padding: 15px 8px !important;
+    }
+
+    .services-main-section .service-title {
+        font-size: 0.84rem !important;
+    }
+
+    .services-main-section .service-description {
+        font-size: 0.67rem !important;
+    }
+
+    .services-main-section .feature-tag {
+        font-size: 0.55rem !important;
+        padding: 3px 5px !important;
+    }
+}|
