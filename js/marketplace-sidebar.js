@@ -2,7 +2,7 @@
  * Mantiene el sidebar del marketplace visible al hacer scroll en los productos.
  */
 (function () {
-    const DESKTOP_MQ = window.matchMedia('(min-width: 1201px)');
+    const DESKTOP_MQ = window.matchMedia('(min-width: 992px)');
 
     let sidebar = null;
     let column = null;
@@ -15,6 +15,7 @@
 
     function resetSidebar() {
         if (!sidebar || !column) return;
+        if (!DESKTOP_MQ.matches && sidebar.classList.contains('active')) return;
         sidebar.classList.remove('is-fixed');
         sidebar.style.position = '';
         sidebar.style.top = '';

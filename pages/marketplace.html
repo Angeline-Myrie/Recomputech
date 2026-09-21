@@ -23,8 +23,8 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/marketplace.css">
     <link rel="stylesheet" href="../css/site-normalization.css">
+    <link rel="stylesheet" href="../css/marketplace.css">
     
     <!-- Theme Initializer - Apply theme immediately -->
     <script src="../js/theme-initializer.js"></script>
@@ -51,8 +51,9 @@
     </section>
 
     <!-- Mobile Filter Toggle -->
-    <button class="mobile-filter-toggle" onclick="toggleSidebar()" style="display: none;">
+    <button class="mobile-filter-toggle" type="button" onclick="toggleSidebar()" aria-label="Open filters" aria-expanded="false">
         <i class="fas fa-filter"></i>
+        <span>Filters</span>
     </button>
 
     <!-- Sidebar Overlay -->
@@ -159,7 +160,7 @@
                         </div>
 
                         <!-- Apply Button -->
-                        <button class="apply-filters" onclick="applyFilters()">
+                        <button class="apply-filters" type="button" onclick="applyFilters(); closeSidebar();">
                             <i class="fas fa-check"></i>
                             Apply Filters
                         </button>
@@ -669,30 +670,38 @@ function formatProductCategory(category) {
         function toggleSidebar() {
             const sidebar = document.querySelector('.sidebar');
             const overlay = document.querySelector('.sidebar-overlay');
+            const toggleButton = document.querySelector('.mobile-filter-toggle');
             
             sidebar.classList.toggle('active');
             overlay.classList.toggle('active');
+            if (sidebar.classList.contains('active')) {
+                sidebar.style.setProperty('position', 'fixed', 'important');
+                sidebar.style.setProperty('top', '0', 'important');
+                sidebar.style.setProperty('right', 'auto', 'important');
+                sidebar.style.setProperty('bottom', 'auto', 'important');
+                sidebar.style.setProperty('left', '0', 'important');
+            } else {
+                clearMobileSidebarPosition(sidebar);
+            }
+            toggleButton.setAttribute('aria-expanded', sidebar.classList.contains('active'));
         }
 
         function closeSidebar() {
             const sidebar = document.querySelector('.sidebar');
             const overlay = document.querySelector('.sidebar-overlay');
+            const toggleButton = document.querySelector('.mobile-filter-toggle');
             
             sidebar.classList.remove('active');
             overlay.classList.remove('active');
+            clearMobileSidebarPosition(sidebar);
+            toggleButton.setAttribute('aria-expanded', 'false');
         }
 
-        // Close sidebar when clicking outside on mobile
-        document.addEventListener('click', function(e) {
-            if (window.innerWidth <= 1200) {
-                const sidebar = document.querySelector('.sidebar');
-                const toggleBtn = document.querySelector('.mobile-filter-toggle');
-                
-                if (!sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
-                    closeSidebar();
-                }
-            }
-        });
+        function clearMobileSidebarPosition(sidebar) {
+            ['position', 'top', 'right', 'bottom', 'left'].forEach(property => {
+                sidebar.style.removeProperty(property);
+            });
+        }
 
         // Si está embebido en el dashboard (iframe), ocultar su propio footer para evitar doble footer
         if (window.self !== window.top) {
