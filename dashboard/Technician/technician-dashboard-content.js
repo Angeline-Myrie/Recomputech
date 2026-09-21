@@ -227,6 +227,39 @@ class TechnicianDashboardContent extends HTMLElement {
                     <section class="dashboard-card technician-settings-card">
                         <div class="card-header"><h3><i class="fas fa-user"></i> Profile Information</h3></div>
                         <div class="card-body">
+                        
+                         <!-- Profile Picture -->
+    <div class="text-center mb-4">
+        <div class="mb-3">
+            <img 
+                id="profilePreview"
+                src="${this.userData?.avatar || 'https://via.placeholder.com/120?text=User'}"
+                alt="Profile Picture"
+                style="
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    border: 4px solid #218DA6;
+                "
+            >
+        </div>
+
+        <label for="profileImage" class="btn btn-outline-primary">
+            <i class="fas fa-camera"></i> Choose Profile Picture
+        </label>
+
+        <input
+            type="file"
+            id="profileImage"
+            accept="image/*"
+            style="display: none;"
+        >
+
+        <p class="text-muted mt-2">
+            Upload a JPG or PNG image
+        </p>
+    </div>
                             <form id="technicianProfileForm">
                                 <div class="row g-3">
                                     <div class="col-md-6"><label for="technicianFirstName" class="form-label">First Name</label><input id="technicianFirstName" class="form-control" value="${this.userData?.firstName || ''}" required></div>
